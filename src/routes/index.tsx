@@ -79,7 +79,7 @@ function Section({ id, eyebrow, title, children }: { id?: string; eyebrow: strin
       <div className="mx-auto max-w-7xl">
         <div className="max-w-3xl mb-16">
           <div className="text-xs uppercase tracking-[0.2em] text-accent mb-4">{eyebrow}</div>
-          <h2 className="font-display text-4xl md:text-6xl leading-[1.05] text-gradient">{title}</h2>
+          <h2 className="font-display text-4xl md:text-6xl leading-[1.15] text-gradient">{title}</h2>
         </div>
         {children}
       </div>
