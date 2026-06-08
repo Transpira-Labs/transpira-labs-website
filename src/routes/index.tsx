@@ -53,9 +53,10 @@ function Hero() {
             <span className="size-1.5 rounded-full bg-accent animate-pulse" />
             Reinforcement learning for the physical economy
           </div>
-          <h1 className="mt-8 font-display text-5xl md:text-7xl lg:text-[5.5rem] leading-[1.1] text-gradient">
-            Teaching machines to run<br />the world's supply chains.
+          <h1 className="mt-8 font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[1.05] tracking-tight text-gradient text-balance">
+            Teaching machines to run the world's supply chains.
           </h1>
+
           <p className="mt-8 max-w-2xl text-lg text-muted-foreground leading-relaxed">
             Classhopper Tech trains autonomous decision systems that learn to plan, route, and optimize global logistics — turning brittle pipelines into adaptive, self-improving networks.
           </p>
@@ -79,7 +80,7 @@ function Section({ id, eyebrow, title, children }: { id?: string; eyebrow: strin
       <div className="mx-auto max-w-7xl">
         <div className="max-w-3xl mb-16">
           <div className="text-xs uppercase tracking-[0.2em] text-accent mb-4">{eyebrow}</div>
-          <h2 className="font-display text-4xl md:text-6xl leading-[1.15] text-gradient">{title}</h2>
+          <h2 className="font-display text-[clamp(2rem,5vw,4rem)] leading-[1.1] tracking-tight text-gradient text-balance">{title}</h2>
         </div>
         {children}
       </div>
@@ -155,7 +156,7 @@ function CTA() {
   return (
     <section id="contact" className="relative py-40 px-6">
       <div className="mx-auto max-w-4xl text-center">
-        <h2 className="font-display text-5xl md:text-7xl leading-[1.1] text-gradient">
+        <h2 className="font-display text-[clamp(2.25rem,6vw,4.5rem)] leading-[1.05] tracking-tight text-gradient text-balance">
           Let's build the autonomous supply chain.
         </h2>
         <p className="mt-6 text-muted-foreground max-w-xl mx-auto">
