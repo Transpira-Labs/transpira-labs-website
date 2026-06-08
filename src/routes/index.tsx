@@ -53,7 +53,7 @@ function Hero() {
             <span className="size-1.5 rounded-full bg-accent animate-pulse" />
             Reinforcement learning for the physical economy
           </div>
-          <h1 className="mt-8 font-display text-5xl md:text-7xl lg:text-[5.5rem] leading-[0.95] text-gradient">
+          <h1 className="mt-8 font-display text-5xl md:text-7xl lg:text-[5.5rem] leading-[1.1] text-gradient">
             Teaching machines to run<br />the world's supply chains.
           </h1>
           <p className="mt-8 max-w-2xl text-lg text-muted-foreground leading-relaxed">
