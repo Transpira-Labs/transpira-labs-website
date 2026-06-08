@@ -1,29 +1,205 @@
 import { createFileRoute } from "@tanstack/react-router";
+import starryBg from "@/assets/starry-night.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your App" },
-      { name: "description", content: "Replace this with a one-sentence description of your app." },
-      { property: "og:title", content: "Your App" },
-      { property: "og:description", content: "Replace this with a one-sentence description of your app." },
+      { title: "Classhopper Tech — Reinforcement Learning for Supply Chains" },
+      { name: "description", content: "Classhopper Tech builds reinforcement learning systems that turn complex supply chains into autonomous, self-optimizing networks." },
+      { property: "og:title", content: "Classhopper Tech — RL for Supply Chains" },
+      { property: "og:description", content: "Reinforcement learning systems that turn complex supply chains into autonomous, self-optimizing networks." },
+      { property: "og:type", content: "website" },
     ],
   }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
+function Nav() {
+  return (
+    <header className="fixed top-0 inset-x-0 z-50">
+      <div className="mx-auto max-w-7xl px-6 py-5 flex items-center justify-between">
+        <a href="/" className="flex items-center gap-2 text-foreground">
+          <div className="size-7 rounded-md bg-foreground/10 backdrop-blur border border-white/15 grid place-items-center">
+            <div className="size-2 rounded-sm bg-accent" />
+          </div>
+          <span className="font-display text-xl">Classhopper</span>
+        </a>
+        <nav className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
+          <a href="#platform" className="hover:text-foreground transition">Platform</a>
+          <a href="#applications" className="hover:text-foreground transition">Applications</a>
+          <a href="#research" className="hover:text-foreground transition">Research</a>
+          <a href="#company" className="hover:text-foreground transition">Company</a>
+        </nav>
+        <a href="#contact" className="text-sm rounded-full px-4 py-2 bg-foreground text-primary-foreground hover:bg-foreground/90 transition">
+          Get in touch
+        </a>
+      </div>
+    </header>
+  );
+}
+
+function Hero() {
+  return (
+    <section className="relative min-h-[100svh] overflow-hidden">
+      <div className="absolute inset-0">
+        <img src={starryBg} alt="" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/30 to-background" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_var(--background)_85%)]" />
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-6 pt-44 pb-32">
+        <div className="max-w-4xl">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 backdrop-blur px-3 py-1 text-xs text-muted-foreground">
+            <span className="size-1.5 rounded-full bg-accent animate-pulse" />
+            Reinforcement learning for the physical economy
+          </div>
+          <h1 className="mt-8 font-display text-5xl md:text-7xl lg:text-[5.5rem] leading-[0.95] text-gradient">
+            Teaching machines to run<br />the world's supply chains.
+          </h1>
+          <p className="mt-8 max-w-2xl text-lg text-muted-foreground leading-relaxed">
+            Classhopper Tech trains autonomous decision systems that learn to plan, route, and optimize global logistics — turning brittle pipelines into adaptive, self-improving networks.
+          </p>
+          <div className="mt-10 flex flex-wrap items-center gap-3">
+            <a href="#platform" className="rounded-full px-5 py-3 bg-foreground text-primary-foreground text-sm hover:bg-foreground/90 transition">
+              Explore the platform
+            </a>
+            <a href="#research" className="rounded-full px-5 py-3 border border-white/15 bg-white/5 backdrop-blur text-sm text-foreground hover:bg-white/10 transition">
+              Read our research →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Section({ id, eyebrow, title, children }: { id?: string; eyebrow: string; title: string; children: React.ReactNode }) {
+  return (
+    <section id={id} className="relative py-32 px-6">
+      <div className="mx-auto max-w-7xl">
+        <div className="max-w-3xl mb-16">
+          <div className="text-xs uppercase tracking-[0.2em] text-accent mb-4">{eyebrow}</div>
+          <h2 className="font-display text-4xl md:text-6xl leading-[1.05] text-gradient">{title}</h2>
+        </div>
+        {children}
+      </div>
+    </section>
+  );
+}
+
+function Platform() {
+  const features = [
+    { title: "Simulated environments", body: "High-fidelity digital twins of warehouses, fleets, and trade lanes where agents learn from billions of synthetic interactions." },
+    { title: "Self-improving policies", body: "RL agents that continuously refine routing, inventory, and scheduling decisions against live operational data." },
+    { title: "Safe deployment", body: "Constraint-aware training and human-in-the-loop guardrails ensure agents respect SLAs, cost ceilings, and physical limits." },
+  ];
+  return (
+    <Section id="platform" eyebrow="Platform" title="An RL foundation built for operations.">
+      <div className="grid md:grid-cols-3 gap-5">
+        {features.map((f) => (
+          <div key={f.title} className="rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur p-7 hover:bg-white/[0.05] transition">
+            <div className="size-9 rounded-lg bg-accent/15 border border-accent/20 grid place-items-center mb-6">
+              <div className="size-2 rounded-sm bg-accent" />
+            </div>
+            <h3 className="font-display text-2xl mb-3">{f.title}</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">{f.body}</p>
+          </div>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+function Applications() {
+  const apps = [
+    { k: "01", t: "Network optimization", d: "Multi-echelon inventory and lane planning across global networks." },
+    { k: "02", t: "Dynamic routing", d: "Real-time dispatch and re-routing under disruption and demand shocks." },
+    { k: "03", t: "Procurement agents", d: "Autonomous sourcing strategies that adapt to price, lead time, and risk." },
+    { k: "04", t: "Warehouse orchestration", d: "Coordinated task allocation across humans, robots, and equipment." },
+  ];
+  return (
+    <Section id="applications" eyebrow="Applications" title="Built for the messy reality of supply chains.">
+      <div className="grid md:grid-cols-2 gap-px bg-white/10 rounded-2xl overflow-hidden border border-white/10">
+        {apps.map((a) => (
+          <div key={a.k} className="bg-background p-10 hover:bg-white/[0.02] transition">
+            <div className="text-xs text-muted-foreground font-mono mb-4">{a.k}</div>
+            <h3 className="font-display text-3xl mb-3">{a.t}</h3>
+            <p className="text-muted-foreground leading-relaxed">{a.d}</p>
+          </div>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+function Research() {
+  return (
+    <Section id="research" eyebrow="Research" title="Pushing the frontier of decision intelligence.">
+      <div className="grid md:grid-cols-3 gap-8 text-sm">
+        {[
+          { t: "Offline-to-online RL", d: "Bridging historical operational data with live policy improvement." },
+          { t: "Hierarchical agents", d: "Composing strategic, tactical, and execution-level controllers." },
+          { t: "World models for logistics", d: "Learning predictive simulators of demand, capacity, and disruption." },
+        ].map((r) => (
+          <div key={r.t} className="border-t border-white/10 pt-6">
+            <h3 className="font-display text-xl mb-2">{r.t}</h3>
+            <p className="text-muted-foreground leading-relaxed">{r.d}</p>
+          </div>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+function CTA() {
+  return (
+    <section id="contact" className="relative py-40 px-6">
+      <div className="mx-auto max-w-4xl text-center">
+        <h2 className="font-display text-5xl md:text-7xl leading-[1.0] text-gradient">
+          Let's build the autonomous supply chain.
+        </h2>
+        <p className="mt-6 text-muted-foreground max-w-xl mx-auto">
+          We partner with operators, manufacturers, and logistics leaders ready to deploy learning systems at scale.
+        </p>
+        <a href="mailto:hello@classhopper.tech" className="inline-block mt-10 rounded-full px-6 py-3 bg-foreground text-primary-foreground text-sm hover:bg-foreground/90 transition">
+          hello@classhopper.tech
+        </a>
+      </div>
+    </section>
+  );
+}
+
+function Footer() {
+  return (
+    <footer id="company" className="border-t border-white/10 px-6 py-10">
+      <div className="mx-auto max-w-7xl flex flex-col md:flex-row justify-between gap-4 text-sm text-muted-foreground">
+        <div className="flex items-center gap-2">
+          <div className="size-5 rounded-md bg-foreground/10 border border-white/15 grid place-items-center">
+            <div className="size-1.5 rounded-sm bg-accent" />
+          </div>
+          <span className="font-display text-foreground">Classhopper Tech</span>
+          <span className="ml-3">© {new Date().getFullYear()}</span>
+        </div>
+        <div className="flex gap-6">
+          <a href="#" className="hover:text-foreground transition">Careers</a>
+          <a href="#" className="hover:text-foreground transition">Privacy</a>
+          <a href="#" className="hover:text-foreground transition">Terms</a>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <main className="relative">
+      <Nav />
+      <Hero />
+      <Platform />
+      <Applications />
+      <Research />
+      <CTA />
+      <Footer />
+    </main>
   );
 }
