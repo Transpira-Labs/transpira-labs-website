@@ -29,7 +29,7 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-display: "Source Serif 4", ui-serif, Georgia, serif;
 }
 
 :root {
@@ -77,7 +77,6 @@
   .font-display {
     font-family: var(--font-display);
     font-weight: 400;
-    letter-spacing: -0.02em;
   }
   .text-gradient {
     background: linear-gradient(180deg, oklch(0.99 0.01 250) 0%, oklch(0.75 0.06 250) 100%);
