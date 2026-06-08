@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import starryBg from "@/assets/starry-night.jpg";
+import mountainsBg from "@/assets/mountains.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -19,7 +19,7 @@ function Nav() {
     <header className="fixed top-0 inset-x-0 z-50">
       <div className="mx-auto max-w-7xl px-6 py-5 flex items-center justify-between">
         <a href="/" className="flex items-center gap-2 text-foreground">
-          <div className="size-7 rounded-md bg-foreground/10 backdrop-blur border border-white/15 grid place-items-center">
+          <div className="size-7 rounded-md bg-foreground/5 backdrop-blur border border-foreground/15 grid place-items-center">
             <div className="size-2 rounded-sm bg-accent" />
           </div>
           <span className="font-display text-xl">Classhopper</span>
@@ -30,7 +30,7 @@ function Nav() {
           <a href="#research" className="hover:text-foreground transition">Research</a>
           <a href="#company" className="hover:text-foreground transition">Company</a>
         </nav>
-        <a href="#contact" className="text-sm rounded-full px-4 py-2 bg-foreground text-primary-foreground hover:bg-foreground/90 transition">
+        <a href="#contact" className="text-sm rounded-full px-4 py-2 bg-primary text-primary-foreground hover:bg-primary/90 transition">
           Get in touch
         </a>
       </div>
@@ -42,14 +42,14 @@ function Hero() {
   return (
     <section className="relative min-h-[100svh] overflow-hidden">
       <div className="absolute inset-0">
-        <img src={starryBg} alt="" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/30 to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_var(--background)_85%)]" />
+        <img src={mountainsBg.url} alt="" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/40 to-background" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_var(--background)_90%)]" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-6 pt-44 pb-32">
         <div className="max-w-4xl">
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 backdrop-blur px-3 py-1 text-xs text-muted-foreground">
+          <div className="inline-flex items-center gap-2 rounded-full border border-foreground/15 bg-background/60 backdrop-blur px-3 py-1 text-xs text-muted-foreground">
             <span className="size-1.5 rounded-full bg-accent animate-pulse" />
             Reinforcement learning for the physical economy
           </div>
@@ -60,10 +60,10 @@ function Hero() {
             Classhopper Tech trains autonomous decision systems that learn to plan, route, and optimize global logistics — turning brittle pipelines into adaptive, self-improving networks.
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-3">
-            <a href="#platform" className="rounded-full px-5 py-3 bg-foreground text-primary-foreground text-sm hover:bg-foreground/90 transition">
+            <a href="#platform" className="rounded-full px-5 py-3 bg-primary text-primary-foreground text-sm hover:bg-primary/90 transition">
               Explore the platform
             </a>
-            <a href="#research" className="rounded-full px-5 py-3 border border-white/15 bg-white/5 backdrop-blur text-sm text-foreground hover:bg-white/10 transition">
+            <a href="#research" className="rounded-full px-5 py-3 border border-foreground/15 bg-background/60 backdrop-blur text-sm text-foreground hover:bg-background/80 transition">
               Read our research →
             </a>
           </div>
@@ -97,8 +97,8 @@ function Platform() {
     <Section id="platform" eyebrow="Platform" title="An RL foundation built for operations.">
       <div className="grid md:grid-cols-3 gap-5">
         {features.map((f) => (
-          <div key={f.title} className="rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur p-7 hover:bg-white/[0.05] transition">
-            <div className="size-9 rounded-lg bg-accent/15 border border-accent/20 grid place-items-center mb-6">
+          <div key={f.title} className="rounded-2xl border border-foreground/10 bg-foreground/[0.02] backdrop-blur p-7 hover:bg-foreground/[0.04] transition">
+            <div className="size-9 rounded-lg bg-accent/15 border border-accent/25 grid place-items-center mb-6">
               <div className="size-2 rounded-sm bg-accent" />
             </div>
             <h3 className="font-display text-2xl mb-3">{f.title}</h3>
@@ -119,9 +119,9 @@ function Applications() {
   ];
   return (
     <Section id="applications" eyebrow="Applications" title="Built for the messy reality of supply chains.">
-      <div className="grid md:grid-cols-2 gap-px bg-white/10 rounded-2xl overflow-hidden border border-white/10">
+      <div className="grid md:grid-cols-2 gap-px bg-foreground/10 rounded-2xl overflow-hidden border border-foreground/10">
         {apps.map((a) => (
-          <div key={a.k} className="bg-background p-10 hover:bg-white/[0.02] transition">
+          <div key={a.k} className="bg-background p-10 hover:bg-foreground/[0.02] transition">
             <div className="text-xs text-muted-foreground font-mono mb-4">{a.k}</div>
             <h3 className="font-display text-3xl mb-3">{a.t}</h3>
             <p className="text-muted-foreground leading-relaxed">{a.d}</p>
@@ -141,7 +141,7 @@ function Research() {
           { t: "Hierarchical agents", d: "Composing strategic, tactical, and execution-level controllers." },
           { t: "World models for logistics", d: "Learning predictive simulators of demand, capacity, and disruption." },
         ].map((r) => (
-          <div key={r.t} className="border-t border-white/10 pt-6">
+          <div key={r.t} className="border-t border-foreground/15 pt-6">
             <h3 className="font-display text-xl mb-2">{r.t}</h3>
             <p className="text-muted-foreground leading-relaxed">{r.d}</p>
           </div>
@@ -161,7 +161,7 @@ function CTA() {
         <p className="mt-6 text-muted-foreground max-w-xl mx-auto">
           We partner with operators, manufacturers, and logistics leaders ready to deploy learning systems at scale.
         </p>
-        <a href="mailto:hello@classhopper.tech" className="inline-block mt-10 rounded-full px-6 py-3 bg-foreground text-primary-foreground text-sm hover:bg-foreground/90 transition">
+        <a href="mailto:hello@classhopper.tech" className="inline-block mt-10 rounded-full px-6 py-3 bg-primary text-primary-foreground text-sm hover:bg-primary/90 transition">
           hello@classhopper.tech
         </a>
       </div>
@@ -171,10 +171,10 @@ function CTA() {
 
 function Footer() {
   return (
-    <footer id="company" className="border-t border-white/10 px-6 py-10">
+    <footer id="company" className="border-t border-foreground/15 px-6 py-10">
       <div className="mx-auto max-w-7xl flex flex-col md:flex-row justify-between gap-4 text-sm text-muted-foreground">
         <div className="flex items-center gap-2">
-          <div className="size-5 rounded-md bg-foreground/10 border border-white/15 grid place-items-center">
+          <div className="size-5 rounded-md bg-foreground/5 border border-foreground/15 grid place-items-center">
             <div className="size-1.5 rounded-sm bg-accent" />
           </div>
           <span className="font-display text-foreground">Classhopper Tech</span>
