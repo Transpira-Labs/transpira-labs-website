@@ -155,7 +155,7 @@ function CTA() {
   return (
     <section id="contact" className="relative py-40 px-6">
       <div className="mx-auto max-w-4xl text-center">
-        <h2 className="font-display text-5xl md:text-7xl leading-[1.0] text-gradient">
+        <h2 className="font-display text-5xl md:text-7xl leading-[1.1] text-gradient">
           Let's build the autonomous supply chain.
         </h2>
         <p className="mt-6 text-muted-foreground max-w-xl mx-auto">
