@@ -89,7 +89,7 @@ function Environments() {
     { id: "ENV-016", env: "bench-xs-004 · req-compat", stack: "Py/JS", diff: 1.0 },
   ];
   return (
-    <section id="environments" className="relative py-24 px-6">
+    <section id="environments" className="relative py-24 px-6 bg-background/40 border-t border-foreground/10">
       <div className="mx-auto max-w-7xl">
         
         <h2 className="font-display text-[clamp(2rem,4.5vw,3.5rem)] leading-tight tracking-tight text-gradient mb-12 max-w-3xl">
