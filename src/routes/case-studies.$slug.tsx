@@ -251,7 +251,7 @@ function CaseStudyPage() {
 
             <div className="mt-16 pt-8 border-t border-foreground/10 flex flex-wrap items-center justify-between gap-4">
               <Link to="/case-studies" className="text-sm text-muted-foreground hover:text-foreground transition">← All Case Studies</Link>
-              <a href="mailto:hello@classhopper.tech" className="rounded-full px-5 py-2.5 bg-primary text-primary-foreground text-sm hover:bg-primary/90 transition">
+              <a href="mailto:adikrish6824@gmail.com" className="rounded-full px-5 py-2.5 bg-primary text-primary-foreground text-sm hover:bg-primary/90 transition">
                 Request Access
               </a>
             </div>

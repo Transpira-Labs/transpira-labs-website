@@ -113,7 +113,7 @@ export function SiteFooter() {
           <Link to="/case-studies" className="hover:text-foreground transition">Case Studies</Link>
           <Link to="/about" className="hover:text-foreground transition">About</Link>
           <Link to="/privacy" className="hover:text-foreground transition">Privacy</Link>
-          <a href="mailto:hello@classhopper.tech" className="hover:text-foreground transition">Contact</a>
+          <a href="mailto:adikrish6824@gmail.com" className="hover:text-foreground transition">Contact</a>
         </div>
       </div>
     </footer>
