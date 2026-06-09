@@ -23,7 +23,7 @@ function Hero() {
           Train on real problems
         </h1>
         <p className="mt-8 max-w-2xl mx-auto text-lg text-muted-foreground leading-relaxed">
-          We're an AI lab building hyper-realistic reinforcement learning environments, and delivering them to frontier labs training the next generation of agents.
+          We're an AI Lab building reinforcement learning environments that mirror realistic workflows, using them to train the next generation of agents.
         </p>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
           <a href="#environments" className="rounded-full px-5 py-3 bg-primary text-primary-foreground text-sm hover:bg-primary/90 transition">
