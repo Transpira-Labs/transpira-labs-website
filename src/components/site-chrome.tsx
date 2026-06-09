@@ -87,8 +87,8 @@ export function ScrollBackground() {
     <div className="fixed inset-0 z-0 pointer-events-none">
       <img src={mountainsBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
       <img ref={caveRef} src={cavesBg} alt="" className="absolute inset-0 w-full h-full object-cover" style={{ opacity: 0, willChange: "opacity" }} />
-      <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/55 to-background/75" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,transparent_0%,oklch(0.96_0.018_82_/_0.25)_50%,oklch(0.96_0.018_82_/_0.55)_100%)]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/65 to-background/85" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,transparent_0%,oklch(0.96_0.018_82_/_0.40)_50%,oklch(0.96_0.018_82_/_0.70)_100%)]" />
     </div>
   );
 }
