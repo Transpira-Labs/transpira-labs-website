@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import mountainsBg from "@/assets/mountains.jpg.asset.json";
+import cavesBg from "@/assets/caves.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
