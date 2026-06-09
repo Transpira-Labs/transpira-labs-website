@@ -45,7 +45,6 @@ function Features() {
   return (
     <section id="platform" className="relative py-24 px-6">
       <div className="mx-auto max-w-7xl">
-        <SectionNumber n="02" />
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {features.map((f) => (
             <div key={f.title} className="rounded-2xl border border-foreground/15 bg-card backdrop-blur-md p-7 hover:bg-background/95 transition shadow-sm">
