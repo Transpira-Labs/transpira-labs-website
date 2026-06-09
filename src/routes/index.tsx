@@ -226,15 +226,16 @@ function CTA() {
 function Footer() {
   return (
     <footer id="company" className="border-t border-foreground/15 px-6 py-10">
-      <div className="mx-auto max-w-7xl flex flex-col md:flex-row justify-between gap-4 text-sm text-muted-foreground">
-        <div className="flex items-center gap-2">
+      <div className="mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-muted-foreground items-center">
+        <div className="flex items-center gap-2 justify-center md:justify-start">
           <div className="size-5 rounded-md bg-foreground/5 border border-foreground/15 grid place-items-center">
             <div className="size-1.5 rounded-sm bg-accent" />
           </div>
           <span className="font-display text-foreground">Classhopper Tech</span>
           <span className="ml-3">© {new Date().getFullYear()}</span>
         </div>
-        <div className="flex gap-6">
+        <div className="text-center text-foreground/70">Backed by Christopher Klaus</div>
+        <div className="flex gap-6 justify-center md:justify-end">
           <a href="#" className="hover:text-foreground transition">Careers</a>
           <a href="#" className="hover:text-foreground transition">Privacy</a>
           <a href="#" className="hover:text-foreground transition">Terms</a>
