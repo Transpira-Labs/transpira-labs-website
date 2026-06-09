@@ -2,6 +2,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import mountainsBg from "@/assets/mountains.jpg";
 import cavesBg from "@/assets/caves.jpg";
+import classhopperLogo from "@/assets/classhopper-logo.jpeg.asset.json";
 
 export function SiteNav() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -19,9 +20,8 @@ export function SiteNav() {
           }}
           className="flex items-center gap-2 text-foreground"
         >
-          <div className="size-7 rounded-md bg-foreground grid place-items-center shadow-sm">
-            <div className="size-2 rounded-sm bg-background" />
-          </div>
+          <img src={classhopperLogo.url} alt="Classhopper logo" className="size-7 rounded-md object-cover shadow-sm" />
+
           <span className="font-display text-xl">Classhopper</span>
         </Link>
         <nav className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
