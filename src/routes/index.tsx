@@ -48,30 +48,32 @@ function Nav() {
 }
 
 function ScrollBackground() {
-  const [progress, setProgress] = useState(0);
+  const caveRef = useRef<HTMLImageElement>(null);
   useEffect(() => {
-    const onScroll = () => {
+    let raf = 0;
+    const update = () => {
+      raf = 0;
       const max = document.documentElement.scrollHeight - window.innerHeight;
-      setProgress(max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0);
+      const p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+      if (caveRef.current) caveRef.current.style.opacity = String(p);
     };
-    onScroll();
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    update();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
     };
   }, []);
   return (
     <div className="fixed inset-0 z-0 pointer-events-none">
       <img src={mountainsBg.url} alt="" className="absolute inset-0 w-full h-full object-cover" />
-      <img
-        src={cavesBg.url}
-        alt=""
-        className="absolute inset-0 w-full h-full object-cover transition-opacity duration-200"
-        style={{ opacity: progress }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/40 to-background/70" />
+      <img ref={caveRef} src={cavesBg.url} alt="" className="absolute inset-0 w-full h-full object-cover" style={{ opacity: 0 }} />
+      <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/30 to-background/50" />
     </div>
   );
 }
