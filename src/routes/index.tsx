@@ -176,9 +176,9 @@ function Research() {
           { t: "Hierarchical agents", d: "Composing strategic, tactical, and execution-level controllers." },
           { t: "World models for logistics", d: "Learning predictive simulators of demand, capacity, and disruption." },
         ].map((r) => (
-          <div key={r.t} className="border-t border-foreground/15 pt-6">
-            <h3 className="font-display text-xl mb-2">{r.t}</h3>
-            <p className="text-muted-foreground leading-relaxed">{r.d}</p>
+          <div key={r.t} className="rounded-2xl border border-foreground/15 bg-background/85 backdrop-blur-md p-6 shadow-sm">
+            <h3 className="font-display text-xl mb-2 text-foreground">{r.t}</h3>
+            <p className="text-foreground/80 leading-relaxed">{r.d}</p>
           </div>
         ))}
       </div>
