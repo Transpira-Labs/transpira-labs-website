@@ -70,9 +70,6 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
-  body {
-    background-color: var(--color-background);
-  }
   html {
     scroll-behavior: smooth;
   }
