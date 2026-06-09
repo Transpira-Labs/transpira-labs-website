@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import mountainsBg from "@/assets/mountains.jpg.asset.json";
 import cavesBg from "@/assets/caves.jpg.asset.json";
 
@@ -48,30 +48,32 @@ function Nav() {
 }
 
 function ScrollBackground() {
-  const [progress, setProgress] = useState(0);
+  const caveRef = useRef<HTMLImageElement>(null);
   useEffect(() => {
-    const onScroll = () => {
+    let raf = 0;
+    const update = () => {
+      raf = 0;
       const max = document.documentElement.scrollHeight - window.innerHeight;
-      setProgress(max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0);
+      const p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+      if (caveRef.current) caveRef.current.style.opacity = String(p);
     };
-    onScroll();
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    update();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
     };
   }, []);
   return (
     <div className="fixed inset-0 z-0 pointer-events-none">
       <img src={mountainsBg.url} alt="" className="absolute inset-0 w-full h-full object-cover" />
-      <img
-        src={cavesBg.url}
-        alt=""
-        className="absolute inset-0 w-full h-full object-cover transition-opacity duration-200"
-        style={{ opacity: progress }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/40 to-background/70" />
+      <img ref={caveRef} src={cavesBg.url} alt="" className="absolute inset-0 w-full h-full object-cover" style={{ opacity: 0 }} />
+      <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/30 to-background/50" />
     </div>
   );
 }
@@ -130,12 +132,12 @@ function Platform() {
     <Section id="platform" eyebrow="Platform" title="An RL foundation built for operations.">
       <div className="grid md:grid-cols-3 gap-5">
         {features.map((f) => (
-          <div key={f.title} className="rounded-2xl border border-foreground/10 bg-foreground/[0.02] backdrop-blur p-7 hover:bg-foreground/[0.04] transition">
+          <div key={f.title} className="rounded-2xl border border-foreground/15 bg-background/85 backdrop-blur-md p-7 hover:bg-background/95 transition shadow-sm">
             <div className="size-9 rounded-lg bg-accent/15 border border-accent/25 grid place-items-center mb-6">
               <div className="size-2 rounded-sm bg-accent" />
             </div>
-            <h3 className="font-display text-2xl mb-3">{f.title}</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">{f.body}</p>
+            <h3 className="font-display text-2xl mb-3 text-foreground">{f.title}</h3>
+            <p className="text-sm text-foreground/80 leading-relaxed">{f.body}</p>
           </div>
         ))}
       </div>
@@ -152,12 +154,12 @@ function Applications() {
   ];
   return (
     <Section id="applications" eyebrow="Applications" title="Built for the messy reality of supply chains.">
-      <div className="grid md:grid-cols-2 gap-px bg-foreground/10 rounded-2xl overflow-hidden border border-foreground/10">
+      <div className="grid md:grid-cols-2 gap-px bg-foreground/10 rounded-2xl overflow-hidden border border-foreground/15 backdrop-blur-md shadow-sm">
         {apps.map((a) => (
-          <div key={a.k} className="bg-background p-10 hover:bg-foreground/[0.02] transition">
-            <div className="text-xs text-muted-foreground font-mono mb-4">{a.k}</div>
-            <h3 className="font-display text-3xl mb-3">{a.t}</h3>
-            <p className="text-muted-foreground leading-relaxed">{a.d}</p>
+          <div key={a.k} className="bg-background/90 p-10 hover:bg-background transition">
+            <div className="text-xs text-foreground/60 font-mono mb-4">{a.k}</div>
+            <h3 className="font-display text-3xl mb-3 text-foreground">{a.t}</h3>
+            <p className="text-foreground/80 leading-relaxed">{a.d}</p>
           </div>
         ))}
       </div>
@@ -174,9 +176,9 @@ function Research() {
           { t: "Hierarchical agents", d: "Composing strategic, tactical, and execution-level controllers." },
           { t: "World models for logistics", d: "Learning predictive simulators of demand, capacity, and disruption." },
         ].map((r) => (
-          <div key={r.t} className="border-t border-foreground/15 pt-6">
-            <h3 className="font-display text-xl mb-2">{r.t}</h3>
-            <p className="text-muted-foreground leading-relaxed">{r.d}</p>
+          <div key={r.t} className="rounded-2xl border border-foreground/15 bg-background/85 backdrop-blur-md p-6 shadow-sm">
+            <h3 className="font-display text-xl mb-2 text-foreground">{r.t}</h3>
+            <p className="text-foreground/80 leading-relaxed">{r.d}</p>
           </div>
         ))}
       </div>
