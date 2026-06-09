@@ -17,9 +17,8 @@ export const Route = createFileRoute("/")({
 
 function Hero() {
   return (
-    <section className="relative pt-36 pb-24 px-6">
-      <div className="mx-auto max-w-7xl text-center">
-        <div className="text-xs font-mono tracking-[0.2em] text-foreground/50 mb-6 uppercase">An AI Lab</div>
+    <section className="relative min-h-screen flex items-center px-6">
+      <div className="mx-auto max-w-7xl text-center w-full">
         <h1 className="font-display text-[clamp(2.75rem,6.5vw,5rem)] leading-[1.02] tracking-tight text-gradient text-balance">
           Train on real problems
         </h1>
@@ -35,6 +34,7 @@ function Hero() {
     </section>
   );
 }
+
 
 function Features() {
   const features = [
