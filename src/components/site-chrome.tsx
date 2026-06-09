@@ -112,6 +112,7 @@ export function SiteFooter() {
         <div className="flex gap-6 justify-center md:justify-end">
           <Link to="/case-studies" className="hover:text-foreground transition">Case Studies</Link>
           <Link to="/about" className="hover:text-foreground transition">About</Link>
+          <Link to="/privacy" className="hover:text-foreground transition">Privacy</Link>
           <a href="mailto:hello@classhopper.tech" className="hover:text-foreground transition">Contact</a>
         </div>
       </div>
