@@ -4,10 +4,10 @@ import { SiteNav, ScrollBackground, SiteFooter } from "@/components/site-chrome"
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Classhopper — Train on Real Problems" },
-      { name: "description", content: "Classhopper builds hyper-realistic reinforcement learning environments that simulate real-world software tasks. Train agents on problems that actually matter." },
-      { property: "og:title", content: "Classhopper — Train on Real Problems" },
-      { property: "og:description", content: "Hyper-realistic RL environments simulating real-world scenarios for training capable agents." },
+      { title: "Classhopper — An AI Lab Building Real-World RL Environments" },
+      { name: "description", content: "Classhopper is an AI lab building hyper-realistic reinforcement learning environments. We've delivered high-quality environments to frontier labs training the next generation of agents." },
+      { property: "og:title", content: "Classhopper — An AI Lab Building Real-World RL Environments" },
+      { property: "og:description", content: "An AI lab delivering hyper-realistic RL environments to frontier labs." },
       { property: "og:type", content: "website" },
     ],
   }),
