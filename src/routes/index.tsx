@@ -143,7 +143,7 @@ function Environments() {
 
 function CTA() {
   return (
-    <section id="contact" className="relative py-32 px-6">
+    <section id="contact" className="relative py-32 px-6 bg-background/60 border-t border-foreground/10">
       <div className="mx-auto max-w-5xl">
         
         <h2 className="font-display text-[clamp(2.25rem,5.5vw,4.5rem)] leading-[1.05] tracking-tight text-gradient text-balance max-w-4xl">
