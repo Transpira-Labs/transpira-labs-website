@@ -17,7 +17,7 @@ export const Route = createFileRoute("/case-studies/$slug")({
   component: CaseStudyPage,
   notFoundComponent: () => (
     <>
-      <ScrollBackground />
+      <SolidBackground />
       <main className="relative z-10">
         <SiteNav />
         <section className="px-6 pt-44 pb-32 text-center">
@@ -53,7 +53,7 @@ function P({ children }: { children: React.ReactNode }) {
 function CaseStudyPage() {
   return (
     <>
-      <ScrollBackground />
+      <SolidBackground />
       <main className="relative z-10">
         <SiteNav />
 
