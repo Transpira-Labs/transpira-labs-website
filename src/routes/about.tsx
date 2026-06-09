@@ -4,10 +4,10 @@ import { SiteNav, SolidBackground, SiteFooter } from "@/components/site-chrome";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About Us — Classhopper" },
-      { name: "description", content: "Classhopper builds hyper-realistic reinforcement learning environments for training capable AI agents on real-world software tasks." },
-      { property: "og:title", content: "About Us — Classhopper" },
-      { property: "og:description", content: "We build the environments that teach agents to solve real engineering problems." },
+      { title: "About — Classhopper AI Lab" },
+      { name: "description", content: "Classhopper is an AI lab building hyper-realistic reinforcement learning environments and delivering them to frontier labs." },
+      { property: "og:title", content: "About — Classhopper AI Lab" },
+      { property: "og:description", content: "An AI lab building the environments that teach agents to solve real engineering problems — already in use at frontier labs." },
     ],
   }),
   component: AboutPage,
