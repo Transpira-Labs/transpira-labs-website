@@ -132,12 +132,12 @@ function Platform() {
     <Section id="platform" eyebrow="Platform" title="An RL foundation built for operations.">
       <div className="grid md:grid-cols-3 gap-5">
         {features.map((f) => (
-          <div key={f.title} className="rounded-2xl border border-foreground/10 bg-foreground/[0.02] backdrop-blur p-7 hover:bg-foreground/[0.04] transition">
+          <div key={f.title} className="rounded-2xl border border-foreground/15 bg-background/85 backdrop-blur-md p-7 hover:bg-background/95 transition shadow-sm">
             <div className="size-9 rounded-lg bg-accent/15 border border-accent/25 grid place-items-center mb-6">
               <div className="size-2 rounded-sm bg-accent" />
             </div>
-            <h3 className="font-display text-2xl mb-3">{f.title}</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">{f.body}</p>
+            <h3 className="font-display text-2xl mb-3 text-foreground">{f.title}</h3>
+            <p className="text-sm text-foreground/80 leading-relaxed">{f.body}</p>
           </div>
         ))}
       </div>
