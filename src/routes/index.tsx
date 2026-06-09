@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav, ScrollBackground, SiteFooter } from "@/components/site-chrome";
-import hudLogo from "@/assets/hudlogo.png.asset.json";
-import undockedLogo from "@/assets/undocked.avif.asset.json";
+import hudLogo from "@/assets/hudlogo.png";
+import undockedLogo from "@/assets/undockedlgoo.avif";
 
 function Partners() {
   return (
@@ -12,10 +12,10 @@ function Partners() {
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <a href="https://hud.ai/" target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-foreground/15 bg-card backdrop-blur-md p-12 flex items-center justify-center shadow-sm min-h-[180px] hover:bg-background/95 transition">
-            <img src={hudLogo.url} alt="hud" className="max-h-20 w-auto object-contain" />
+            <img src={hudLogo} alt="hud" className="max-h-20 w-auto object-contain" />
           </a>
           <a href="https://www.undocked.net/" target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-foreground/15 bg-foreground backdrop-blur-md p-12 flex items-center justify-center shadow-sm min-h-[180px] hover:bg-foreground/90 transition">
-            <img src={undockedLogo.url} alt="Undocked" className="max-h-20 w-auto object-contain" />
+            <img src={undockedLogo} alt="Undocked" className="max-h-20 w-auto object-contain" />
           </a>
         </div>
       </div>
