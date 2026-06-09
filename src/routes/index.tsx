@@ -71,9 +71,6 @@ function Features() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {features.map((f) => (
             <div key={f.title} className="rounded-2xl border border-foreground/15 bg-card backdrop-blur-md p-7 hover:bg-background/95 transition shadow-sm">
-              <div className="size-10 rounded-lg bg-accent/15 border border-accent/25 grid place-items-center mb-6">
-                <div className="size-2.5 rounded-sm bg-accent" />
-              </div>
               <h3 className="font-display text-xl mb-3 text-foreground">{f.title}</h3>
               <p className="text-sm text-foreground/75 leading-relaxed">{f.body}</p>
             </div>
