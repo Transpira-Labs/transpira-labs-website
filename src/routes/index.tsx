@@ -44,7 +44,7 @@ function Features() {
     { title: "RL Integration", body: "First-class support for reinforcement learning pipelines. Gymnasium-compatible API with step, reset, and observe." },
   ];
   return (
-    <section id="platform" className="relative py-24 px-6">
+    <section id="platform" className="relative py-24 px-6 bg-background/20 border-t border-foreground/10">
       <div className="mx-auto max-w-7xl">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {features.map((f) => (
