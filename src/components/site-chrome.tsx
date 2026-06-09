@@ -7,7 +7,7 @@ export function SiteNav() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const isHome = pathname === "/";
   return (
-    <header className="fixed top-0 inset-x-0 z-50 bg-background/90 backdrop-blur-sm border-b border-foreground/10">
+    <header className="fixed top-0 inset-x-0 z-50 bg-background/87 backdrop-blur-sm border-b border-foreground/10">
       <div className="mx-auto max-w-7xl px-6 py-5 flex items-center justify-between">
         <Link
           to="/"
