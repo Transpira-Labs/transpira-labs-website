@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
-import mountainsBg from "@/assets/mountains.jpg.asset.json";
-import cavesBg from "@/assets/caves.jpg.asset.json";
+import mountainsBg from "@/assets/mountains.jpg";
+import cavesBg from "@/assets/caves.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -28,7 +28,7 @@ function Nav() {
           }}
           className="flex items-center gap-2 text-foreground"
         >
-          <div className="size-7 rounded-md bg-foreground/5 backdrop-blur border border-foreground/15 grid place-items-center">
+          <div className="size-7 rounded-md bg-background/80 backdrop-blur border border-foreground/15 grid place-items-center shadow-sm">
             <div className="size-2 rounded-sm bg-accent" />
           </div>
           <span className="font-display text-xl">Classhopper</span>
@@ -51,16 +51,34 @@ function ScrollBackground() {
   const caveRef = useRef<HTMLImageElement>(null);
   useEffect(() => {
     let raf = 0;
-    const update = () => {
-      raf = 0;
+    let currentOpacity = 0;
+    let targetOpacity = 0;
+
+    const getScrollProgress = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
-      const p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
-      if (caveRef.current) caveRef.current.style.opacity = String(p);
+      return max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
     };
+
+    const update = () => {
+      const delta = targetOpacity - currentOpacity;
+      if (Math.abs(delta) < 0.001) {
+        currentOpacity = targetOpacity;
+        raf = 0;
+      } else {
+        currentOpacity += delta * 0.18;
+        raf = requestAnimationFrame(update);
+      }
+      if (caveRef.current) caveRef.current.style.opacity = String(currentOpacity);
+    };
+
     const onScroll = () => {
+      targetOpacity = getScrollProgress();
       if (!raf) raf = requestAnimationFrame(update);
     };
-    update();
+
+    currentOpacity = getScrollProgress();
+    targetOpacity = currentOpacity;
+    if (caveRef.current) caveRef.current.style.opacity = String(currentOpacity);
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     return () => {
@@ -71,9 +89,10 @@ function ScrollBackground() {
   }, []);
   return (
     <div className="fixed inset-0 z-0 pointer-events-none">
-      <img src={mountainsBg.url} alt="" className="absolute inset-0 w-full h-full object-cover" />
-      <img ref={caveRef} src={cavesBg.url} alt="" className="absolute inset-0 w-full h-full object-cover" style={{ opacity: 0 }} />
-      <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/30 to-background/50" />
+      <img src={mountainsBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
+      <img ref={caveRef} src={cavesBg} alt="" className="absolute inset-0 w-full h-full object-cover" style={{ opacity: 0, willChange: "opacity" }} />
+      <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/55 to-background/75" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,transparent_0%,oklch(0.96_0.018_82_/_0.25)_50%,oklch(0.96_0.018_82_/_0.55)_100%)]" />
     </div>
   );
 }
@@ -83,7 +102,7 @@ function Hero() {
     <section className="relative min-h-[100svh] overflow-hidden">
       <div className="relative mx-auto max-w-7xl px-6 pt-44 pb-32">
         <div className="max-w-4xl">
-          <div className="inline-flex items-center gap-2 rounded-full border border-foreground/15 bg-background/60 backdrop-blur px-3 py-1 text-xs text-muted-foreground">
+          <div className="inline-flex items-center gap-2 rounded-full border border-foreground/15 bg-background/85 backdrop-blur px-3 py-1 text-xs text-muted-foreground shadow-sm">
             <span className="size-1.5 rounded-full bg-accent animate-pulse" />
             Reinforcement learning for the physical economy
           </div>
@@ -98,7 +117,7 @@ function Hero() {
             <a href="#platform" className="rounded-full px-5 py-3 bg-primary text-primary-foreground text-sm hover:bg-primary/90 transition">
               Explore the platform
             </a>
-            <a href="#research" className="rounded-full px-5 py-3 border border-foreground/15 bg-background/60 backdrop-blur text-sm text-foreground hover:bg-background/80 transition">
+            <a href="#research" className="rounded-full px-5 py-3 border border-foreground/15 bg-background/85 backdrop-blur text-sm text-foreground hover:bg-background/95 transition">
               Read our research →
             </a>
           </div>
@@ -132,7 +151,7 @@ function Platform() {
     <Section id="platform" eyebrow="Platform" title="An RL foundation built for operations.">
       <div className="grid md:grid-cols-3 gap-5">
         {features.map((f) => (
-          <div key={f.title} className="rounded-2xl border border-foreground/15 bg-background/85 backdrop-blur-md p-7 hover:bg-background/95 transition shadow-sm">
+          <div key={f.title} className="rounded-2xl border border-foreground/15 bg-card backdrop-blur-md p-7 hover:bg-background/95 transition shadow-sm">
             <div className="size-9 rounded-lg bg-accent/15 border border-accent/25 grid place-items-center mb-6">
               <div className="size-2 rounded-sm bg-accent" />
             </div>
@@ -156,7 +175,7 @@ function Applications() {
     <Section id="applications" eyebrow="Applications" title="Built for the messy reality of supply chains.">
       <div className="grid md:grid-cols-2 gap-px bg-foreground/10 rounded-2xl overflow-hidden border border-foreground/15 backdrop-blur-md shadow-sm">
         {apps.map((a) => (
-          <div key={a.k} className="bg-background/90 p-10 hover:bg-background transition">
+          <div key={a.k} className="bg-card p-10 hover:bg-background transition">
             <div className="text-xs text-foreground/60 font-mono mb-4">{a.k}</div>
             <h3 className="font-display text-3xl mb-3 text-foreground">{a.t}</h3>
             <p className="text-foreground/80 leading-relaxed">{a.d}</p>
@@ -176,7 +195,7 @@ function Research() {
           { t: "Hierarchical agents", d: "Composing strategic, tactical, and execution-level controllers." },
           { t: "World models for logistics", d: "Learning predictive simulators of demand, capacity, and disruption." },
         ].map((r) => (
-          <div key={r.t} className="rounded-2xl border border-foreground/15 bg-background/85 backdrop-blur-md p-6 shadow-sm">
+          <div key={r.t} className="rounded-2xl border border-foreground/15 bg-card backdrop-blur-md p-6 shadow-sm">
             <h3 className="font-display text-xl mb-2 text-foreground">{r.t}</h3>
             <p className="text-foreground/80 leading-relaxed">{r.d}</p>
           </div>
