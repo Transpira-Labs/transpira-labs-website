@@ -19,11 +19,12 @@ function Hero() {
   return (
     <section className="relative pt-36 pb-24 px-6">
       <div className="mx-auto max-w-7xl text-center">
+        <div className="text-xs font-mono tracking-[0.2em] text-foreground/50 mb-6 uppercase">An AI Lab</div>
         <h1 className="font-display text-[clamp(2.75rem,6.5vw,5rem)] leading-[1.02] tracking-tight text-gradient text-balance">
           Train on real problems
         </h1>
-        <p className="mt-8 max-w-xl mx-auto text-lg text-muted-foreground leading-relaxed">
-          Hyper-realistic RL environments that simulate real-world scenarios. Train agents on tasks that actually matter.
+        <p className="mt-8 max-w-2xl mx-auto text-lg text-muted-foreground leading-relaxed">
+          We're an AI lab building hyper-realistic reinforcement learning environments — and delivering them to frontier labs training the next generation of agents.
         </p>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
           <a href="#environments" className="rounded-full px-5 py-3 bg-primary text-primary-foreground text-sm hover:bg-primary/90 transition">
