@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import mountainsBg from "@/assets/mountains.jpg.asset.json";
+import cavesBg from "@/assets/caves.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -38,15 +40,38 @@ function Nav() {
   );
 }
 
+function ScrollBackground() {
+  const [progress, setProgress] = useState(0);
+  useEffect(() => {
+    const onScroll = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      setProgress(max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+  return (
+    <div className="fixed inset-0 -z-10 pointer-events-none">
+      <img src={mountainsBg.url} alt="" className="absolute inset-0 w-full h-full object-cover" />
+      <img
+        src={cavesBg.url}
+        alt=""
+        className="absolute inset-0 w-full h-full object-cover transition-opacity duration-200"
+        style={{ opacity: progress }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/40 to-background/70" />
+    </div>
+  );
+}
+
 function Hero() {
   return (
     <section className="relative min-h-[100svh] overflow-hidden">
-      <div className="absolute inset-0">
-        <img src={mountainsBg.url} alt="" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/40 to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_var(--background)_90%)]" />
-      </div>
-
       <div className="relative mx-auto max-w-7xl px-6 pt-44 pb-32">
         <div className="max-w-4xl">
           <div className="inline-flex items-center gap-2 rounded-full border border-foreground/15 bg-background/60 backdrop-blur px-3 py-1 text-xs text-muted-foreground">
@@ -194,6 +219,7 @@ function Footer() {
 function Index() {
   return (
     <main className="relative">
+      <ScrollBackground />
       <Nav />
       <Hero />
       <Platform />
