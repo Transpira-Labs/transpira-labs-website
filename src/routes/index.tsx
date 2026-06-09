@@ -11,12 +11,12 @@ function Partners() {
           Partners
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div className="rounded-2xl border border-foreground/15 bg-card backdrop-blur-md p-12 flex items-center justify-center shadow-sm min-h-[180px]">
+          <a href="https://hud.ai/" target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-foreground/15 bg-card backdrop-blur-md p-12 flex items-center justify-center shadow-sm min-h-[180px] hover:bg-background/95 transition">
             <img src={hudLogo.url} alt="hud" className="max-h-20 w-auto object-contain" />
-          </div>
-          <div className="rounded-2xl border border-foreground/15 bg-foreground backdrop-blur-md p-12 flex items-center justify-center shadow-sm min-h-[180px]">
+          </a>
+          <a href="https://www.undocked.net/" target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-foreground/15 bg-foreground backdrop-blur-md p-12 flex items-center justify-center shadow-sm min-h-[180px] hover:bg-foreground/90 transition">
             <img src={undockedLogo.url} alt="Undocked" className="max-h-20 w-auto object-contain" />
-          </div>
+          </a>
         </div>
       </div>
     </section>
