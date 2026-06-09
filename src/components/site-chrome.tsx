@@ -2,6 +2,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import mountainsBg from "@/assets/mountains.jpg";
 import cavesBg from "@/assets/caves.jpg";
+import classhopperLogo from "@/assets/classhopper-logo.jpeg.asset.json";
 
 export function SiteNav() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
