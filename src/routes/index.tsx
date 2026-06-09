@@ -20,7 +20,14 @@ function Nav() {
   return (
     <header className="fixed top-0 inset-x-0 z-50">
       <div className="mx-auto max-w-7xl px-6 py-5 flex items-center justify-between">
-        <a href="/" className="flex items-center gap-2 text-foreground">
+        <a
+          href="#top"
+          onClick={(e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+          className="flex items-center gap-2 text-foreground"
+        >
           <div className="size-7 rounded-md bg-foreground/5 backdrop-blur border border-foreground/15 grid place-items-center">
             <div className="size-2 rounded-sm bg-accent" />
           </div>
@@ -56,7 +63,7 @@ function ScrollBackground() {
     };
   }, []);
   return (
-    <div className="fixed inset-0 -z-10 pointer-events-none">
+    <div className="fixed inset-0 z-0 pointer-events-none">
       <img src={mountainsBg.url} alt="" className="absolute inset-0 w-full h-full object-cover" />
       <img
         src={cavesBg.url}
@@ -218,15 +225,17 @@ function Footer() {
 
 function Index() {
   return (
-    <main className="relative">
+    <>
       <ScrollBackground />
-      <Nav />
-      <Hero />
-      <Platform />
-      <Applications />
-      <Research />
-      <CTA />
-      <Footer />
-    </main>
+      <main className="relative z-10">
+        <Nav />
+        <Hero />
+        <Platform />
+        <Applications />
+        <Research />
+        <CTA />
+        <Footer />
+      </main>
+    </>
   );
 }
