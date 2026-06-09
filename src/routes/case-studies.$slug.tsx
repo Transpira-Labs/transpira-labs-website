@@ -67,7 +67,7 @@ function CaseStudyPage() {
               <a href="https://www.hud.ai/" target="_blank" rel="noreferrer" className="text-accent hover:underline">HUD</a>{" "}
               Reinforcement Learning Platform
             </p>
-            <div className="mt-6 flex flex-wrap gap-2 justify-center">
+            <div className="mt-6 flex flex-wrap gap-2">
               {["Reinforcement Learning", "Code Generation", "HUD Platform", "GRPO"].map((t) => (
                 <span key={t} className="text-xs rounded-full border border-foreground/15 bg-background/70 px-3 py-1 text-foreground/70">{t}</span>
               ))}
