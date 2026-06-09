@@ -99,7 +99,7 @@ export function ScrollBackground() {
 
 export function SiteFooter() {
   return (
-    <footer id="company" className="border-t border-foreground/15 px-6 py-10 bg-background/90">
+    <footer id="company" className="border-t border-foreground/15 px-6 py-10 bg-background/87">
       <div className="mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-muted-foreground items-center">
         <div className="flex items-center gap-2 justify-center md:justify-start">
           <div className="size-5 rounded-md bg-foreground/5 border border-foreground/15 grid place-items-center">
