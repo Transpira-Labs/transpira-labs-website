@@ -18,64 +18,17 @@ export const Route = createFileRoute("/")({
 function Hero() {
   return (
     <section className="relative pt-36 pb-24 px-6">
-      <div className="mx-auto max-w-7xl">
-        <SectionNumber n="01" />
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <div>
-            <h1 className="font-display text-[clamp(2.75rem,6.5vw,5rem)] leading-[1.02] tracking-tight text-gradient text-balance">
-              Train on real problems
-            </h1>
-            <p className="mt-8 max-w-xl text-lg text-muted-foreground leading-relaxed">
-              Hyper-realistic RL environments that simulate real-world scenarios. Train agents on tasks that actually matter.
-            </p>
-            <div className="mt-10 flex flex-wrap items-center gap-3">
-              <a href="#environments" className="rounded-full px-5 py-3 bg-primary text-primary-foreground text-sm hover:bg-primary/90 transition">
-                View environments
-              </a>
-              <span className="inline-flex items-center gap-2 rounded-full border border-foreground/15 bg-background/85 backdrop-blur px-4 py-2 text-xs font-mono text-muted-foreground">
-                <span className="size-1.5 rounded-full bg-accent animate-pulse" />
-                v2.4.0 stable
-              </span>
-            </div>
-          </div>
-
-          <div className="relative">
-            <div className="rounded-2xl border border-foreground/15 bg-[oklch(0.18_0.01_240)] shadow-xl overflow-hidden">
-              <div className="flex items-center gap-2 px-4 py-3 border-b border-white/10">
-                <div className="flex gap-1.5">
-                  <span className="size-3 rounded-full bg-[#ff5f56]" />
-                  <span className="size-3 rounded-full bg-[#ffbd2e]" />
-                  <span className="size-3 rounded-full bg-[#27c93f]" />
-                </div>
-                <span className="ml-3 text-xs font-mono text-white/50">agent_session.py</span>
-              </div>
-              <pre className="px-5 py-5 text-[13px] font-mono leading-relaxed text-white/85 overflow-x-auto">
-<span className="text-white/40">{`> `}</span>agent.observe()
-{`  `}heap: <span className="text-[#7dd3fc]">142MB</span> | gc_cycles: <span className="text-[#7dd3fc]">3</span>
-{`  `}test_status: <span className="text-[#f87171]">FAILING (2/47)</span>
-
-<span className="text-white/40">{`> `}</span>agent.act(<span className="text-[#fcd34d]">"fix_haversine"</span>)
-{`  `}reward: <span className="text-[#4ade80]">+0.84</span>  step: <span className="text-[#7dd3fc]">127/1280</span>
-
-<span className="text-white/40">{`> `}</span>env.evaluate()
-{`  `}tests_passing: <span className="text-[#4ade80]">47/47 ✓</span>
-              </pre>
-              <div className="grid grid-cols-3 border-t border-white/10 text-xs font-mono">
-                <div className="px-4 py-3 border-r border-white/10">
-                  <div className="text-white/40 text-[10px] uppercase tracking-wider">Reward</div>
-                  <div className="text-[#4ade80] mt-1">+0.84</div>
-                </div>
-                <div className="px-4 py-3 border-r border-white/10">
-                  <div className="text-white/40 text-[10px] uppercase tracking-wider">Step</div>
-                  <div className="text-white mt-1">127</div>
-                </div>
-                <div className="px-4 py-3">
-                  <div className="text-white/40 text-[10px] uppercase tracking-wider">Heap</div>
-                  <div className="text-white mt-1">142MB</div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div className="mx-auto max-w-7xl text-center">
+        <h1 className="font-display text-[clamp(2.75rem,6.5vw,5rem)] leading-[1.02] tracking-tight text-gradient text-balance">
+          Train on real problems
+        </h1>
+        <p className="mt-8 max-w-xl mx-auto text-lg text-muted-foreground leading-relaxed">
+          Hyper-realistic RL environments that simulate real-world scenarios. Train agents on tasks that actually matter.
+        </p>
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+          <a href="#environments" className="rounded-full px-5 py-3 bg-primary text-primary-foreground text-sm hover:bg-primary/90 transition">
+            View environments
+          </a>
         </div>
       </div>
     </section>
