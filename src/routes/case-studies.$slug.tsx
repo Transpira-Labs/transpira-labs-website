@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { SiteNav, ScrollBackground, SiteFooter } from "@/components/site-chrome";
+import { SiteNav, SolidBackground, SiteFooter } from "@/components/site-chrome";
 
 export const Route = createFileRoute("/case-studies/$slug")({
   head: ({ params }) => ({
@@ -17,7 +17,7 @@ export const Route = createFileRoute("/case-studies/$slug")({
   component: CaseStudyPage,
   notFoundComponent: () => (
     <>
-      <ScrollBackground />
+      <SolidBackground />
       <main className="relative z-10">
         <SiteNav />
         <section className="px-6 pt-44 pb-32 text-center">
@@ -53,7 +53,7 @@ function P({ children }: { children: React.ReactNode }) {
 function CaseStudyPage() {
   return (
     <>
-      <ScrollBackground />
+      <SolidBackground />
       <main className="relative z-10">
         <SiteNav />
 

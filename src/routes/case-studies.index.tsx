@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { SiteNav, ScrollBackground, SiteFooter } from "@/components/site-chrome";
+import { SiteNav, SolidBackground, SiteFooter } from "@/components/site-chrome";
 
 export const Route = createFileRoute("/case-studies/")({
   head: () => ({
@@ -25,7 +25,7 @@ function CaseStudiesIndex() {
   ];
   return (
     <>
-      <ScrollBackground />
+      <SolidBackground />
       <main className="relative z-10">
         <SiteNav />
         <section className="px-6 pt-36 pb-16">
