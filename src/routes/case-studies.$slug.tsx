@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { SiteNav, ScrollBackground, SiteFooter } from "@/components/site-chrome";
+import { SiteNav, SolidBackground, SiteFooter } from "@/components/site-chrome";
 
 export const Route = createFileRoute("/case-studies/$slug")({
   head: ({ params }) => ({
