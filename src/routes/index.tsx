@@ -219,6 +219,7 @@ function Footer() {
 function Index() {
   return (
     <main className="relative">
+      <ScrollBackground />
       <Nav />
       <Hero />
       <Platform />
