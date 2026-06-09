@@ -14,7 +14,7 @@ function Partners() {
           <div className="rounded-2xl border border-foreground/15 bg-card backdrop-blur-md p-12 flex items-center justify-center shadow-sm min-h-[180px]">
             <img src={hudLogo.url} alt="hud" className="max-h-20 w-auto object-contain" />
           </div>
-          <div className="rounded-2xl border border-foreground/15 bg-card backdrop-blur-md p-12 flex items-center justify-center shadow-sm min-h-[180px]">
+          <div className="rounded-2xl border border-foreground/15 bg-foreground backdrop-blur-md p-12 flex items-center justify-center shadow-sm min-h-[180px]">
             <img src={undockedLogo.url} alt="Undocked" className="max-h-20 w-auto object-contain" />
           </div>
         </div>
