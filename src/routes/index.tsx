@@ -6,10 +6,10 @@ import cavesBg from "@/assets/caves.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Classhopper Tech — Reinforcement Learning for Supply Chains" },
-      { name: "description", content: "Classhopper Tech builds reinforcement learning systems that turn complex supply chains into autonomous, self-optimizing networks." },
-      { property: "og:title", content: "Classhopper Tech — RL for Supply Chains" },
-      { property: "og:description", content: "Reinforcement learning systems that turn complex supply chains into autonomous, self-optimizing networks." },
+      { title: "Holtzman — Hyper-realistic RL Environments" },
+      { name: "description", content: "Holtzman builds hyper-realistic reinforcement learning environments that simulate real-world software tasks. Train agents on problems that actually matter." },
+      { property: "og:title", content: "Holtzman — Train on Real Problems" },
+      { property: "og:description", content: "Hyper-realistic RL environments simulating real-world scenarios for training capable agents." },
       { property: "og:type", content: "website" },
     ],
   }),
@@ -31,16 +31,16 @@ function Nav() {
           <div className="size-7 rounded-md bg-background/80 backdrop-blur border border-foreground/15 grid place-items-center shadow-sm">
             <div className="size-2 rounded-sm bg-accent" />
           </div>
-          <span className="font-display text-xl">Classhopper</span>
+          <span className="font-display text-xl">Holtzman</span>
         </a>
         <nav className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
           <a href="#platform" className="hover:text-foreground transition">Platform</a>
-          <a href="#applications" className="hover:text-foreground transition">Applications</a>
+          <a href="#environments" className="hover:text-foreground transition">Environments</a>
           <a href="#research" className="hover:text-foreground transition">Research</a>
           <a href="#company" className="hover:text-foreground transition">Company</a>
         </nav>
         <a href="#contact" className="text-sm rounded-full px-4 py-2 bg-primary text-primary-foreground hover:bg-primary/90 transition">
-          Get in touch
+          Request access
         </a>
       </div>
     </header>
@@ -104,22 +104,49 @@ function Hero() {
         <div className="max-w-4xl">
           <div className="inline-flex items-center gap-2 rounded-full border border-foreground/15 bg-background/85 backdrop-blur px-3 py-1 text-xs text-muted-foreground shadow-sm">
             <span className="size-1.5 rounded-full bg-accent animate-pulse" />
-            Reinforcement learning for the physical economy
+            01 — v2.4.0 stable
           </div>
           <h1 className="mt-8 font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[1.05] tracking-tight text-gradient text-balance">
-            Teaching machines to run the world's supply chains.
+            Train on real problems.
           </h1>
 
           <p className="mt-8 max-w-2xl text-lg text-muted-foreground leading-relaxed">
-            Classhopper Tech trains autonomous decision systems that learn to plan, route, and optimize global logistics — turning brittle pipelines into adaptive, self-improving networks.
+            Hyper-realistic RL environments that simulate real-world scenarios. Train agents on tasks that actually matter.
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-3">
-            <a href="#platform" className="rounded-full px-5 py-3 bg-primary text-primary-foreground text-sm hover:bg-primary/90 transition">
-              Explore the platform
+            <a href="#environments" className="rounded-full px-5 py-3 bg-primary text-primary-foreground text-sm hover:bg-primary/90 transition">
+              View environments
             </a>
             <a href="#research" className="rounded-full px-5 py-3 border border-foreground/15 bg-background/85 backdrop-blur text-sm text-foreground hover:bg-background/95 transition">
-              Read our research →
+              Read the paper →
             </a>
+          </div>
+
+          <div className="mt-14 max-w-2xl rounded-2xl border border-foreground/15 bg-background/90 backdrop-blur-md shadow-sm overflow-hidden">
+            <div className="flex items-center justify-between px-5 py-3 border-b border-foreground/10 text-xs font-mono text-foreground/60">
+              <span>agent_session.py</span>
+              <div className="flex gap-1.5">
+                <span className="size-2 rounded-full bg-foreground/20" />
+                <span className="size-2 rounded-full bg-foreground/20" />
+                <span className="size-2 rounded-full bg-accent" />
+              </div>
+            </div>
+            <pre className="px-5 py-4 text-xs md:text-sm font-mono text-foreground leading-relaxed overflow-x-auto">
+{`> agent.observe()
+  heap: 142MB | gc_cycles: 3
+  test_status: FAILING (2/47)
+
+> agent.act("fix_haversine")
+  reward: +0.84   step: 127/1280
+
+> env.evaluate()
+  tests_passing: 47/47 ✓`}
+            </pre>
+            <div className="grid grid-cols-3 gap-px bg-foreground/10 border-t border-foreground/10 text-xs font-mono">
+              <div className="bg-background/80 px-4 py-3"><span className="text-foreground/60">reward</span> <span className="text-foreground">+0.84</span></div>
+              <div className="bg-background/80 px-4 py-3"><span className="text-foreground/60">step</span> <span className="text-foreground">127</span></div>
+              <div className="bg-background/80 px-4 py-3"><span className="text-foreground/60">heap</span> <span className="text-foreground">142MB</span></div>
+            </div>
           </div>
         </div>
       </div>
@@ -143,13 +170,14 @@ function Section({ id, eyebrow, title, children }: { id?: string; eyebrow: strin
 
 function Platform() {
   const features = [
-    { title: "Simulated environments", body: "High-fidelity digital twins of warehouses, fleets, and trade lanes where agents learn from billions of synthetic interactions." },
-    { title: "Self-improving policies", body: "RL agents that continuously refine routing, inventory, and scheduling decisions against live operational data." },
-    { title: "Safe deployment", body: "Constraint-aware training and human-in-the-loop guardrails ensure agents respect SLAs, cost ceilings, and physical limits." },
+    { title: "Task simulation", body: "Realistic environments that go beyond toy problems. Real systems, real complexity, real feedback." },
+    { title: "Configurable chaos", body: "Inject realistic bugs, edge cases, and failure modes. Control difficulty and complexity at every level." },
+    { title: "Real rewards", body: "Dense, meaningful reward signals derived from test results, code quality metrics, and runtime behavior." },
+    { title: "RL integration", body: "First-class support for reinforcement learning pipelines. Gymnasium-compatible API with step, reset, and observe." },
   ];
   return (
-    <Section id="platform" eyebrow="Platform" title="An RL foundation built for operations.">
-      <div className="grid md:grid-cols-3 gap-5">
+    <Section id="platform" eyebrow="02 — Platform" title="An RL foundation built for real software.">
+      <div className="grid md:grid-cols-2 gap-5">
         {features.map((f) => (
           <div key={f.title} className="rounded-2xl border border-foreground/15 bg-card backdrop-blur-md p-7 hover:bg-background/95 transition shadow-sm">
             <div className="size-9 rounded-lg bg-accent/15 border border-accent/25 grid place-items-center mb-6">
@@ -164,23 +192,73 @@ function Platform() {
   );
 }
 
-function Applications() {
-  const apps = [
-    { k: "01", t: "Network optimization", d: "Multi-echelon inventory and lane planning across global networks." },
-    { k: "02", t: "Dynamic routing", d: "Real-time dispatch and re-routing under disruption and demand shocks." },
-    { k: "03", t: "Procurement agents", d: "Autonomous sourcing strategies that adapt to price, lead time, and risk." },
-    { k: "04", t: "Warehouse orchestration", d: "Coordinated task allocation across humans, robots, and equipment." },
+function Environments() {
+  const stats = [
+    { k: "44", t: "Backend bugs" },
+    { k: "35", t: "Frontend bugs" },
+    { k: "21", t: "Cross-stack" },
+    { k: "25", t: "Benchmarks" },
+  ];
+  const rows = [
+    { id: "ENV-001", env: "be-bug-001 · distance-calc", stack: "Py", diff: 0.3 },
+    { id: "ENV-002", env: "be-bug-005 · crud-operations", stack: "Py", diff: 0.5 },
+    { id: "ENV-003", env: "fe-bug-001 · utility-format", stack: "JS", diff: 0.2 },
+    { id: "ENV-004", env: "fe-bug-012 · stripe-payment", stack: "JS", diff: 0.7 },
+    { id: "ENV-005", env: "xs-bug-001 · field-mismatch", stack: "Py/JS", diff: 0.6 },
+    { id: "ENV-006", env: "be-bug-016 · async-patterns", stack: "Py", diff: 0.8 },
+    { id: "ENV-007", env: "fe-bug-020 · component-logic", stack: "JS", diff: 0.4 },
+    { id: "ENV-008", env: "be-bug-023 · schema-defs", stack: "Py", diff: 0.3 },
+    { id: "ENV-009", env: "xs-bug-008 · api-contract", stack: "Py/JS", diff: 0.9 },
+    { id: "ENV-010", env: "bench-be-003 · service-layer", stack: "Py", diff: 0.6 },
+    { id: "ENV-011", env: "fe-bug-028 · data-display", stack: "JS", diff: 0.4 },
+    { id: "ENV-012", env: "be-bug-031 · joins-commits", stack: "Py", diff: 0.7 },
+    { id: "ENV-013", env: "xs-bug-015 · http-methods", stack: "Py/JS", diff: 0.8 },
+    { id: "ENV-014", env: "bench-fe-007 · validation", stack: "JS", diff: 0.5 },
+    { id: "ENV-015", env: "be-bug-042 · route-response", stack: "Py", diff: 0.6 },
+    { id: "ENV-016", env: "bench-xs-004 · req-compat", stack: "Py/JS", diff: 1.0 },
   ];
   return (
-    <Section id="applications" eyebrow="Applications" title="Built for the messy reality of supply chains.">
-      <div className="grid md:grid-cols-2 gap-px bg-foreground/10 rounded-2xl overflow-hidden border border-foreground/15 backdrop-blur-md shadow-sm">
-        {apps.map((a) => (
-          <div key={a.k} className="bg-card p-10 hover:bg-background transition">
-            <div className="text-xs text-foreground/60 font-mono mb-4">{a.k}</div>
-            <h3 className="font-display text-3xl mb-3 text-foreground">{a.t}</h3>
-            <p className="text-foreground/80 leading-relaxed">{a.d}</p>
+    <Section id="environments" eyebrow="03 — Environments" title="Software tasks environment.">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-foreground/10 rounded-2xl overflow-hidden border border-foreground/15 backdrop-blur-md shadow-sm mb-8">
+        {stats.map((s) => (
+          <div key={s.t} className="bg-card p-6">
+            <div className="font-display text-3xl text-foreground">{s.k}</div>
+            <div className="text-xs text-foreground/60 mt-1">{s.t}</div>
           </div>
         ))}
+      </div>
+      <div className="rounded-2xl border border-foreground/15 bg-card backdrop-blur-md overflow-hidden shadow-sm">
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm font-mono">
+            <thead className="text-xs uppercase tracking-wider text-foreground/60 border-b border-foreground/10">
+              <tr>
+                <th className="text-left px-5 py-3">ID</th>
+                <th className="text-left px-5 py-3">Environment</th>
+                <th className="text-left px-5 py-3">Stack</th>
+                <th className="text-right px-5 py-3">Difficulty</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((r) => (
+                <tr key={r.id} className="border-b border-foreground/5 last:border-0 hover:bg-background/60 transition">
+                  <td className="px-5 py-3 text-foreground/60">{r.id}</td>
+                  <td className="px-5 py-3 text-foreground">{r.env}</td>
+                  <td className="px-5 py-3">
+                    <span className="inline-block rounded-md border border-foreground/15 bg-background/70 px-2 py-0.5 text-xs">{r.stack}</span>
+                  </td>
+                  <td className="px-5 py-3 text-right">
+                    <div className="inline-flex items-center gap-2">
+                      <div className="h-1.5 w-20 rounded-full bg-foreground/10 overflow-hidden">
+                        <div className="h-full bg-accent" style={{ width: `${r.diff * 100}%` }} />
+                      </div>
+                      <span className="text-foreground tabular-nums w-8 text-right">{r.diff.toFixed(1)}</span>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </Section>
   );
@@ -188,12 +266,12 @@ function Applications() {
 
 function Research() {
   return (
-    <Section id="research" eyebrow="Research" title="Pushing the frontier of decision intelligence.">
+    <Section id="research" eyebrow="Research" title="Pushing the frontier of agent training.">
       <div className="grid md:grid-cols-3 gap-8 text-sm">
         {[
-          { t: "Offline-to-online RL", d: "Bridging historical operational data with live policy improvement." },
-          { t: "Hierarchical agents", d: "Composing strategic, tactical, and execution-level controllers." },
-          { t: "World models for logistics", d: "Learning predictive simulators of demand, capacity, and disruption." },
+          { t: "Realistic bug injection", d: "Synthesized faults grounded in real production failure modes, not synthetic puzzles." },
+          { t: "Dense reward design", d: "Reward signals from tests, runtime behavior, and code quality — not just final answers." },
+          { t: "Cross-stack reasoning", d: "Environments that span backend, frontend, and API contracts to test full-system competence." },
         ].map((r) => (
           <div key={r.t} className="rounded-2xl border border-foreground/15 bg-card backdrop-blur-md p-6 shadow-sm">
             <h3 className="font-display text-xl mb-2 text-foreground">{r.t}</h3>
@@ -209,15 +287,18 @@ function CTA() {
   return (
     <section id="contact" className="relative py-40 px-6">
       <div className="mx-auto max-w-4xl text-center">
+        <div className="text-xs uppercase tracking-[0.2em] text-accent mb-6">04</div>
         <h2 className="font-display text-[clamp(2.25rem,6vw,4.5rem)] leading-[1.05] tracking-tight text-gradient text-balance">
-          Let's build the autonomous supply chain.
+          Stop training on static benchmarks. Start training on the real world.
         </h2>
-        <p className="mt-6 text-muted-foreground max-w-xl mx-auto">
-          We partner with operators, manufacturers, and logistics leaders ready to deploy learning systems at scale.
-        </p>
-        <a href="mailto:hello@classhopper.tech" className="inline-block mt-10 rounded-full px-6 py-3 bg-primary text-primary-foreground text-sm hover:bg-primary/90 transition">
-          hello@classhopper.tech
-        </a>
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+          <a href="mailto:hello@holtzman.xyz" className="rounded-full px-6 py-3 bg-primary text-primary-foreground text-sm hover:bg-primary/90 transition">
+            Request access
+          </a>
+          <a href="#research" className="rounded-full px-6 py-3 border border-foreground/15 bg-background/85 backdrop-blur text-sm text-foreground hover:bg-background/95 transition">
+            Read the paper →
+          </a>
+        </div>
       </div>
     </section>
   );
@@ -231,7 +312,7 @@ function Footer() {
           <div className="size-5 rounded-md bg-foreground/5 border border-foreground/15 grid place-items-center">
             <div className="size-1.5 rounded-sm bg-accent" />
           </div>
-          <span className="font-display text-foreground">Classhopper Tech</span>
+          <span className="font-display text-foreground">Holtzman</span>
           <span className="ml-3">© {new Date().getFullYear()}</span>
         </div>
         <div className="text-center text-foreground/70">Backed by Christopher Klaus</div>
@@ -253,7 +334,7 @@ function Index() {
         <Nav />
         <Hero />
         <Platform />
-        <Applications />
+        <Environments />
         <Research />
         <CTA />
         <Footer />
