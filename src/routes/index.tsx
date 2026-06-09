@@ -1,5 +1,27 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav, ScrollBackground, SiteFooter } from "@/components/site-chrome";
+import hudLogo from "@/assets/hudlogo.png.asset.json";
+import undockedLogo from "@/assets/undocked.avif.asset.json";
+
+function Partners() {
+  return (
+    <section id="partners" className="relative py-24 px-6 bg-background/50 border-t border-foreground/10">
+      <div className="mx-auto max-w-7xl">
+        <h2 className="font-display text-[clamp(2rem,4.5vw,3.5rem)] leading-tight tracking-tight text-gradient mb-12 max-w-3xl">
+          Partners
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="rounded-2xl border border-foreground/15 bg-card backdrop-blur-md p-12 flex items-center justify-center shadow-sm min-h-[180px]">
+            <img src={hudLogo.url} alt="hud" className="max-h-20 w-auto object-contain" />
+          </div>
+          <div className="rounded-2xl border border-foreground/15 bg-card backdrop-blur-md p-12 flex items-center justify-center shadow-sm min-h-[180px]">
+            <img src={undockedLogo.url} alt="Undocked" className="max-h-20 w-auto object-contain" />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -171,6 +193,7 @@ function Index() {
         <Hero />
         <Features />
         <Environments />
+        <Partners />
         <CTA />
         <SiteFooter />
       </main>
