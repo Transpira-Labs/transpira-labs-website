@@ -17,9 +17,8 @@ export const Route = createFileRoute("/")({
 
 function Hero() {
   return (
-    <section className="relative pt-36 pb-24 px-6">
-      <div className="mx-auto max-w-7xl text-center">
-        <div className="text-xs font-mono tracking-[0.2em] text-foreground/50 mb-6 uppercase">An AI Lab</div>
+    <section className="relative min-h-screen flex items-center px-6">
+      <div className="mx-auto max-w-7xl text-center w-full">
         <h1 className="font-display text-[clamp(2.75rem,6.5vw,5rem)] leading-[1.02] tracking-tight text-gradient text-balance">
           Train on real problems
         </h1>
@@ -36,6 +35,7 @@ function Hero() {
   );
 }
 
+
 function Features() {
   const features = [
     { title: "Task Simulation", body: "Realistic environments that go beyond toy problems. Real systems, real complexity, real feedback." },
@@ -44,7 +44,7 @@ function Features() {
     { title: "RL Integration", body: "First-class support for reinforcement learning pipelines. Gymnasium-compatible API with step, reset, and observe." },
   ];
   return (
-    <section id="platform" className="relative py-24 px-6">
+    <section id="platform" className="relative py-24 px-6 bg-background/20 border-t border-foreground/10">
       <div className="mx-auto max-w-7xl">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {features.map((f) => (
@@ -89,7 +89,7 @@ function Environments() {
     { id: "ENV-016", env: "bench-xs-004 · req-compat", stack: "Py/JS", diff: 1.0 },
   ];
   return (
-    <section id="environments" className="relative py-24 px-6">
+    <section id="environments" className="relative py-24 px-6 bg-background/40 border-t border-foreground/10">
       <div className="mx-auto max-w-7xl">
         
         <h2 className="font-display text-[clamp(2rem,4.5vw,3.5rem)] leading-tight tracking-tight text-gradient mb-12 max-w-3xl">
@@ -143,7 +143,7 @@ function Environments() {
 
 function CTA() {
   return (
-    <section id="contact" className="relative py-32 px-6">
+    <section id="contact" className="relative py-32 px-6 bg-background/60 border-t border-foreground/10">
       <div className="mx-auto max-w-5xl">
         
         <h2 className="font-display text-[clamp(2.25rem,5.5vw,4.5rem)] leading-[1.05] tracking-tight text-gradient text-balance max-w-4xl">
