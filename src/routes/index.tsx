@@ -14,9 +14,6 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-function SectionNumber({ n }: { n: string }) {
-  return <div className="text-xs font-mono tracking-[0.2em] text-foreground/50 mb-8">{n}</div>;
-}
 
 function Hero() {
   return (
