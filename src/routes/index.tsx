@@ -193,6 +193,7 @@ function Index() {
         <Hero />
         <Features />
         <Environments />
+        <Partners />
         <CTA />
         <SiteFooter />
       </main>
