@@ -172,7 +172,7 @@ function CTA() {
           Stop training on static benchmarks. Start training on the real world.
         </h2>
         <div className="mt-10 flex flex-wrap items-center gap-3">
-          <a href="mailto:hello@classhopper.tech" className="rounded-full px-6 py-3 bg-primary text-primary-foreground text-sm hover:bg-primary/90 transition">
+          <a href="mailto:adikrish6824@gmail.com" className="rounded-full px-6 py-3 bg-primary text-primary-foreground text-sm hover:bg-primary/90 transition">
             Request Access
           </a>
           <Link to="/case-studies/classhopper-set" className="rounded-full px-6 py-3 border border-foreground/15 bg-background/85 backdrop-blur text-sm text-foreground hover:bg-background/95 transition">

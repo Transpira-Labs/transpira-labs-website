@@ -34,8 +34,8 @@ function AboutPage() {
             <p className="mt-6 text-lg text-foreground/85 leading-relaxed">
               We partner with research teams pushing agents toward real-world competence. If that sounds like you, we'd love to talk.
             </p>
-            <a href="mailto:hello@classhopper.tech" className="mt-10 inline-block rounded-full px-6 py-3 bg-primary text-primary-foreground text-sm hover:bg-primary/90 transition">
-              hello@classhopper.tech
+            <a href="mailto:adikrish6824@gmail.com" className="mt-10 inline-block rounded-full px-6 py-3 bg-primary text-primary-foreground text-sm hover:bg-primary/90 transition">
+              adikrish6824@gmail.com
             </a>
           </div>
         </section>
