@@ -90,7 +90,7 @@ function Environments() {
   return (
     <section id="environments" className="relative py-24 px-6">
       <div className="mx-auto max-w-7xl">
-        <SectionNumber n="03" />
+        
         <h2 className="font-display text-[clamp(2rem,4.5vw,3.5rem)] leading-tight tracking-tight text-gradient mb-12 max-w-3xl">
           Software Tasks Environment
         </h2>
@@ -144,7 +144,7 @@ function CTA() {
   return (
     <section id="contact" className="relative py-32 px-6">
       <div className="mx-auto max-w-5xl">
-        <SectionNumber n="04" />
+        
         <h2 className="font-display text-[clamp(2.25rem,5.5vw,4.5rem)] leading-[1.05] tracking-tight text-gradient text-balance max-w-4xl">
           Stop training on static benchmarks. Start training on the real world.
         </h2>
