@@ -218,15 +218,17 @@ function Footer() {
 
 function Index() {
   return (
-    <main className="relative">
+    <>
       <ScrollBackground />
-      <Nav />
-      <Hero />
-      <Platform />
-      <Applications />
-      <Research />
-      <CTA />
-      <Footer />
-    </main>
+      <main className="relative z-10">
+        <Nav />
+        <Hero />
+        <Platform />
+        <Applications />
+        <Research />
+        <CTA />
+        <Footer />
+      </main>
+    </>
   );
 }
