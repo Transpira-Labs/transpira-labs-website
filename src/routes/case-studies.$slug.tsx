@@ -58,10 +58,7 @@ function CaseStudyPage() {
         <SiteNav />
 
         <article className="px-6 pt-36 pb-24">
-          <div className="mx-auto max-w-3xl">
-            <Link to="/case-studies" className="text-sm text-muted-foreground hover:text-foreground transition inline-flex items-center gap-1 mb-8">
-              ← All Case Studies
-            </Link>
+          <div className="mx-auto max-w-3xl text-center">
             <h1 className="font-display text-[clamp(2.25rem,5.5vw,4rem)] leading-[1.05] tracking-tight text-gradient text-balance">
               Classhopper Set
             </h1>
@@ -70,7 +67,7 @@ function CaseStudyPage() {
               <a href="https://www.hud.ai/" target="_blank" rel="noreferrer" className="text-accent hover:underline">HUD</a>{" "}
               Reinforcement Learning Platform
             </p>
-            <div className="mt-6 flex flex-wrap gap-2">
+            <div className="mt-6 flex flex-wrap gap-2 justify-center">
               {["Reinforcement Learning", "Code Generation", "HUD Platform", "GRPO"].map((t) => (
                 <span key={t} className="text-xs rounded-full border border-foreground/15 bg-background/70 px-3 py-1 text-foreground/70">{t}</span>
               ))}
