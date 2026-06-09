@@ -108,7 +108,7 @@ export function SiteFooter() {
           <span className="font-display text-foreground">Classhopper</span>
           <span className="ml-3">© {new Date().getFullYear()}</span>
         </div>
-        <div className="text-center text-foreground/70">Backed by Christopher Klaus</div>
+        <div className="text-center text-foreground/70">Backed by <a href="https://fusen.world/" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground transition">Christopher Klaus</a></div>
         <div className="flex gap-6 justify-center md:justify-end">
           <Link to="/case-studies" className="hover:text-foreground transition">Case Studies</Link>
           <Link to="/about" className="hover:text-foreground transition">About</Link>
