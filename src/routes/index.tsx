@@ -1,7 +1,4 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useRef } from "react";
-import mountainsBg from "@/assets/mountains.jpg";
-import cavesBg from "@/assets/caves.jpg";
 import { SiteNav, ScrollBackground, SiteFooter } from "@/components/site-chrome";
 
 export const Route = createFileRoute("/")({
@@ -216,8 +213,6 @@ function CTA() {
 }
 
 function Index() {
-  // Keep imports referenced so bundler tree-shakes correctly even if unused directly
-  void mountainsBg; void cavesBg;
   return (
     <>
       <ScrollBackground />
