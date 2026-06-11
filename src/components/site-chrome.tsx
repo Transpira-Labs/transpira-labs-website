@@ -22,7 +22,7 @@ export function SiteNav() {
         >
           <img src={transpiraLogo} alt="Transpira logo" className="size-7 rounded-md object-cover shadow-sm" />
 
-          <span className="font-display text-xl">Transpira</span>
+          <span className="font-display text-2xl font-bold">Transpira</span>
         </Link>
         <nav className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
           <Link to="/" className="hover:text-foreground transition" activeOptions={{ exact: true }} activeProps={{ className: "text-foreground" }}>
