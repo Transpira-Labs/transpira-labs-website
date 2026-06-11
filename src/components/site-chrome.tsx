@@ -8,7 +8,7 @@ export function SiteNav() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const isHome = pathname === "/";
   return (
-    <header className="fixed top-0 inset-x-0 z-50 bg-[oklch(0.10_0.008_240/0.85)] backdrop-blur-md border-b border-white/5">
+    <header className="fixed top-0 inset-x-0 z-50 bg-background/84 backdrop-blur-sm border-b border-foreground/10">
       <div className="mx-auto max-w-7xl px-6 py-5 flex items-center justify-between">
         <Link
           to="/"
@@ -21,6 +21,7 @@ export function SiteNav() {
           className="flex items-center gap-2 text-foreground"
         >
           <img src={transpiraLogo} alt="Transpira logo" className="size-7 rounded-md object-cover shadow-sm" />
+
           <span className="font-display text-2xl font-bold">Transpira</span>
         </Link>
         <nav className="hidden md:flex items-center gap-8 text-base font-medium text-muted-foreground">
@@ -34,10 +35,7 @@ export function SiteNav() {
             About Us
           </Link>
         </nav>
-        <a
-          href={isHome ? "#contact" : "/#contact"}
-          className="text-base font-semibold rounded-full px-4 py-2 border border-accent/60 text-accent bg-transparent hover:bg-accent/10 transition"
-        >
+        <a href={isHome ? "#contact" : "/#contact"} className="text-base font-semibold rounded-full px-4 py-2 bg-primary text-primary-foreground hover:bg-primary/90 transition">
           Request Access
         </a>
       </div>
@@ -91,30 +89,26 @@ export function ScrollBackground() {
   }, []);
   return (
     <div className="fixed inset-0 z-0 pointer-events-none">
-      <img src={mountainsBg} alt="" className="absolute inset-0 w-full h-full object-cover opacity-40" />
-      <img ref={caveRef} src={cavesBg} alt="" className="absolute inset-0 w-full h-full object-cover opacity-0" style={{ willChange: "opacity" }} />
-      <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/85 to-background" />
+      <img src={mountainsBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
+      <img ref={caveRef} src={cavesBg} alt="" className="absolute inset-0 w-full h-full object-cover" style={{ opacity: 0, willChange: "opacity" }} />
+      <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/65 to-background/85" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,transparent_0%,oklch(0.96_0.018_82_/_0.40)_50%,oklch(0.96_0.018_82_/_0.70)_100%)]" />
     </div>
   );
 }
 
 export function SiteFooter() {
   return (
-    <footer id="company" className="border-t border-white/8 px-6 py-10 bg-background">
+    <footer id="company" className="border-t border-foreground/15 px-6 py-10 bg-background/84">
       <div className="mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-muted-foreground items-center">
         <div className="flex items-center gap-2 justify-center md:justify-start">
-          <div className="size-5 rounded-md bg-white/5 border border-white/10 grid place-items-center overflow-hidden">
+          <div className="size-5 rounded-md bg-foreground/5 border border-foreground/15 grid place-items-center overflow-hidden">
             <img src={transpiraLogo} alt="" className="size-4 rounded-sm object-cover" />
           </div>
-          <span className="font-display text-foreground/80">Transpira Labs</span>
-          <span className="ml-3 text-foreground/35">© {new Date().getFullYear()}</span>
+          <span className="font-display text-foreground">Transpira Labs</span>
+          <span className="ml-3">© {new Date().getFullYear()}</span>
         </div>
-        <div className="text-center text-foreground/35">
-          Backed by{" "}
-          <a href="https://fusen.world/" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground transition">
-            Christopher Klaus
-          </a>
-        </div>
+        <div className="text-center text-foreground/70">Backed by <a href="https://fusen.world/" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground transition">Christopher Klaus</a></div>
         <div className="flex gap-6 justify-center md:justify-end">
           <Link to="/case-studies" className="hover:text-foreground transition">Case Studies</Link>
           <Link to="/about" className="hover:text-foreground transition">About</Link>
