@@ -18,7 +18,7 @@ function CaseStudiesIndex() {
     {
       slug: "transpira-set",
       eyebrow: "RL Fine-Tuning",
-      title: "Transpira Set",
+      title: "Classhopper Set",
       desc: "Fine-tuning GPT OSS 120B on 100 real-world bug-fixing tasks using GRPO, yielding +13% improvement on best@10 and fewer steps per task.",
       tags: ["Reinforcement Learning", "Code Generation", "HUD Platform"],
     },
