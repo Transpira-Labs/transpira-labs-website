@@ -68,10 +68,12 @@
   html, body {
     color: var(--color-foreground);
     font-family: var(--font-sans);
+    font-weight: 500;
     -webkit-font-smoothing: antialiased;
   }
   html {
     scroll-behavior: smooth;
+    font-size: 1.0625rem;
   }
 }
 
