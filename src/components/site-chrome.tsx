@@ -105,7 +105,7 @@ export function SiteFooter() {
           <div className="size-5 rounded-md bg-foreground/5 border border-foreground/15 grid place-items-center overflow-hidden">
             <img src={transpiraLogo} alt="" className="size-4 rounded-sm object-cover" />
           </div>
-          <span className="font-display text-foreground">Transpira</span>
+          <span className="font-display text-foreground">Transpira Labs</span>
           <span className="ml-3">© {new Date().getFullYear()}</span>
         </div>
         <div className="text-center text-foreground/70">Backed by <a href="https://fusen.world/" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground transition">Christopher Klaus</a></div>
