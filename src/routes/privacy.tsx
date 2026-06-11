@@ -4,10 +4,10 @@ import { SiteNav, SiteFooter } from "@/components/site-chrome";
 export const Route = createFileRoute("/privacy")({
   head: () => ({
     meta: [
-      { title: "Privacy Policy — Classhopper" },
-      { name: "description", content: "Classhopper privacy policy." },
-      { property: "og:title", content: "Privacy Policy — Classhopper" },
-      { property: "og:description", content: "Classhopper privacy policy." },
+      { title: "Privacy Policy — Transpira" },
+      { name: "description", content: "Transpira privacy policy." },
+      { property: "og:title", content: "Privacy Policy — Transpira" },
+      { property: "og:description", content: "Transpira privacy policy." },
     ],
   }),
   component: PrivacyPage,
@@ -30,7 +30,7 @@ function PrivacyPage() {
             <section>
               <h2 className="font-display text-xl mb-3 text-foreground">1. Introduction</h2>
               <p>
-                Classhopper ("we", "us", or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or interact with our services.
+                Transpira ("we", "us", or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or interact with our services.
               </p>
             </section>
 

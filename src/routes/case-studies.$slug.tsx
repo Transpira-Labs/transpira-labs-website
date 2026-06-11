@@ -4,14 +4,14 @@ import { SiteNav, SolidBackground, SiteFooter } from "@/components/site-chrome";
 export const Route = createFileRoute("/case-studies/$slug")({
   head: ({ params }) => ({
     meta: [
-      { title: params?.slug === "classhopper-set" ? "Classhopper Set — Fine-Tuning GPT OSS 120B" : "Case Study — Classhopper" },
+      { title: params?.slug === "transpira-set" ? "Transpira Set — Fine-Tuning GPT OSS 120B" : "Case Study — Transpira" },
       { name: "description", content: "Fine-tuning GPT OSS 120B for coding tasks using the HUD reinforcement learning platform — +13% Best@10 improvement on real-world bugs." },
-      { property: "og:title", content: "Classhopper Set — Fine-Tuning GPT OSS 120B" },
+      { property: "og:title", content: "Transpira Set — Fine-Tuning GPT OSS 120B" },
       { property: "og:description", content: "GRPO training on 100 real-world bug-fixing tasks: +13% Best@10, +8% Pass@1, 4 fewer steps per task." },
     ],
   }),
   loader: ({ params }) => {
-    if (params.slug !== "classhopper-set") throw notFound();
+    if (params.slug !== "transpira-set") throw notFound();
     return { slug: params.slug };
   },
   component: CaseStudyPage,
@@ -60,7 +60,7 @@ function CaseStudyPage() {
         <article className="px-6 pt-36 pb-24">
           <div className="mx-auto max-w-3xl">
             <h1 className="font-display text-[clamp(2.25rem,5.5vw,4rem)] leading-[1.05] tracking-tight text-gradient text-balance text-center">
-              Classhopper Set
+              Transpira Set
             </h1>
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
               Fine-Tuning GPT OSS 120B for Coding Tasks Using the{" "}
@@ -81,7 +81,7 @@ function CaseStudyPage() {
 
             <H2>1. Environment Creation</H2>
             <P>
-              We started with Classhopper, one of our older production apps. It's an Airbnb-style service for discovering and booking classes near you. The codebase was pre-AI era: functional, deployed, but messy. Perfect for realistic coding challenges.
+              We started with Transpira, one of our older production apps. It's an Airbnb-style service for discovering and booking classes near you. The codebase was pre-AI era: functional, deployed, but messy. Perfect for realistic coding challenges.
             </P>
             <P>
               We merged frontend and backend into a single monorepo, verified builds and tests passed, and confirmed it was stable enough for automated evaluation.
@@ -90,7 +90,7 @@ function CaseStudyPage() {
               We then connected it using HUD's coding environment template. The template handles the heavy lifting of environment creation — it ships with a Dockerfile, a grading harness, and a task runner, so you don't need to build any of that infrastructure yourself. Out of the box, it gives the agent two built-in tools: a bash tool for running shell commands, and an editor tool for viewing, creating, and editing files. These are the only tools the agent gets: no web access, no special APIs, just a terminal and a file editor — the same primitives a human developer would use.
             </P>
             <P>
-              To connect our codebase, we forked the template and set the <code className="font-mono text-sm bg-background/80 px-1.5 py-0.5 rounded">REPO_URL</code> build argument in the Dockerfile to point at our Classhopper monorepo. The template clones this repo into the container at build time and wires it into the task runner automatically.
+              To connect our codebase, we forked the template and set the <code className="font-mono text-sm bg-background/80 px-1.5 py-0.5 rounded">REPO_URL</code> build argument in the Dockerfile to point at our Transpira monorepo. The template clones this repo into the container at build time and wires it into the task runner automatically.
             </P>
 
             <H2>2. Task Creation</H2>
@@ -110,7 +110,7 @@ function CaseStudyPage() {
               <div className="text-xs uppercase tracking-wider text-foreground/50 mb-3">Example bug prompt</div>
               <p className="mb-3">"You will be working on a task for project. The repository has already been cloned in <span className="text-accent">/home/ubuntu/project</span>."</p>
               <p className="mb-3">Use the tools provided to complete the following task:</p>
-              <p className="mb-3">Fix the course visibility toggle bug in the ClassHopper backend.</p>
+              <p className="mb-3">Fix the course visibility toggle bug in the Transpira backend.</p>
               <p className="mb-3">The "make all courses visible" endpoint for instructors does the opposite of what it should. After calling <span className="text-accent">PUT /instructors/&#123;id&#125;/courses/visible</span>, all courses become hidden instead of visible.</p>
               <p>You MUST edit the relevant file(s) to fix the bug. Do not just describe the fix."</p>
             </div>
@@ -187,7 +187,7 @@ function CaseStudyPage() {
             <H2>5. Results</H2>
             <H3>Evaluation Setup</H3>
             <P>
-              We benchmarked this newly trained model on 50 unseen tasks: 25 new Classhopper tasks and 25 from ScheduleHero, a completely separate app. The out-of-domain eval on ScheduleHero was key to confirming the model gained real coding skill, not just Classhopper memorization.
+              We benchmarked this newly trained model on 50 unseen tasks: 25 new Transpira tasks and 25 from ScheduleHero, a completely separate app. The out-of-domain eval on ScheduleHero was key to confirming the model gained real coding skill, not just Transpira memorization.
             </P>
 
             <H3>Performance</H3>
@@ -224,7 +224,7 @@ function CaseStudyPage() {
                   </tbody>
                 </table>
               </div>
-              <div className="px-5 py-3 text-xs text-foreground/60 border-t border-foreground/10">Table 2: Benchmark results on classhopper-benchv1 (25 held-out tasks)</div>
+              <div className="px-5 py-3 text-xs text-foreground/60 border-t border-foreground/10">Table 2: Benchmark results on transpira-benchv1 (25 held-out tasks)</div>
             </div>
 
             <H3>Key Takeaways</H3>

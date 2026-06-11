@@ -4,9 +4,9 @@ import { SiteNav, SolidBackground, SiteFooter } from "@/components/site-chrome";
 export const Route = createFileRoute("/case-studies/")({
   head: () => ({
     meta: [
-      { title: "Case Studies — Classhopper" },
-      { name: "description", content: "Real-world projects demonstrating how Classhopper approaches hard reinforcement learning and code-generation problems." },
-      { property: "og:title", content: "Case Studies — Classhopper" },
+      { title: "Case Studies — Transpira" },
+      { name: "description", content: "Real-world projects demonstrating how Transpira approaches hard reinforcement learning and code-generation problems." },
+      { property: "og:title", content: "Case Studies — Transpira" },
       { property: "og:description", content: "Real-world projects demonstrating how we approach hard engineering problems." },
     ],
   }),
@@ -16,9 +16,9 @@ export const Route = createFileRoute("/case-studies/")({
 function CaseStudiesIndex() {
   const studies = [
     {
-      slug: "classhopper-set",
+      slug: "transpira-set",
       eyebrow: "RL Fine-Tuning",
-      title: "Classhopper Set",
+      title: "Transpira Set",
       desc: "Fine-tuning GPT OSS 120B on 100 real-world bug-fixing tasks using GRPO, yielding +13% improvement on best@10 and fewer steps per task.",
       tags: ["Reinforcement Learning", "Code Generation", "HUD Platform"],
     },

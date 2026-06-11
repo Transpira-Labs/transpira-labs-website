@@ -26,9 +26,9 @@ function Partners() {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Classhopper — An AI Lab Building Real-World RL Environments" },
-      { name: "description", content: "Classhopper is an AI lab building hyper-realistic reinforcement learning environments. We've delivered high-quality environments to frontier labs training the next generation of agents." },
-      { property: "og:title", content: "Classhopper — An AI Lab Building Real-World RL Environments" },
+      { title: "Transpira — An AI Lab Building Real-World RL Environments" },
+      { name: "description", content: "Transpira is an AI lab building hyper-realistic reinforcement learning environments. We've delivered high-quality environments to frontier labs training the next generation of agents." },
+      { property: "og:title", content: "Transpira — An AI Lab Building Real-World RL Environments" },
       { property: "og:description", content: "An AI lab delivering hyper-realistic RL environments to frontier labs." },
       { property: "og:type", content: "website" },
     ],
@@ -172,7 +172,7 @@ function CTA() {
           <a href="mailto:adikrish6824@gmail.com" className="rounded-full px-6 py-3 bg-primary text-primary-foreground text-sm hover:bg-primary/90 transition">
             Request Access
           </a>
-          <Link to="/case-studies/classhopper-set" className="rounded-full px-6 py-3 border border-foreground/15 bg-background/85 backdrop-blur text-sm text-foreground hover:bg-background/95 transition">
+          <Link to="/case-studies/transpira-set" className="rounded-full px-6 py-3 border border-foreground/15 bg-background/85 backdrop-blur text-sm text-foreground hover:bg-background/95 transition">
             Read the Paper →
           </Link>
         </div>
