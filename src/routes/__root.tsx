@@ -11,7 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import classhopperLogo from "@/assets/classhopper.jpeg";
+import transpiraLogo from "@/assets/classhopper.jpeg";
 
 function NotFoundComponent() {
   return (
@@ -78,11 +78,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Classhopper Labs" },
+      { title: "Transpira Labs" },
       { name: "description", content: "Reinforcement learning systems for autonomous supply chains." },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:title", content: "Classhopper Labs" },
-      { name: "twitter:title", content: "Classhopper Labs" },
+      { property: "og:title", content: "Transpira Labs" },
+      { name: "twitter:title", content: "Transpira Labs" },
       { property: "og:description", content: "Reinforcement learning systems for autonomous supply chains." },
       { name: "twitter:description", content: "Reinforcement learning systems for autonomous supply chains." },
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/a73e3d12-8ebe-4453-bacb-dd3a8f654eb9/id-preview-a7587f50--f2c1dc09-3734-4c04-b543-a893855cd830.lovable.app-1781040999083.png" },
@@ -91,7 +91,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", type: "image/jpeg", href: classhopperLogo },
+      { rel: "icon", type: "image/jpeg", href: transpiraLogo },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {

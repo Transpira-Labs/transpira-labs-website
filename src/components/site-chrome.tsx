@@ -2,7 +2,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import mountainsBg from "@/assets/mountains.jpg";
 import cavesBg from "@/assets/caves.jpg";
-import classhopperLogo from "@/assets/classhopper.jpeg";
+import transpiraLogo from "@/assets/classhopper.jpeg";
 
 export function SiteNav() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -20,9 +20,9 @@ export function SiteNav() {
           }}
           className="flex items-center gap-2 text-foreground"
         >
-          <img src={classhopperLogo} alt="Classhopper logo" className="size-7 rounded-md object-cover shadow-sm" />
+          <img src={transpiraLogo} alt="Transpira logo" className="size-7 rounded-md object-cover shadow-sm" />
 
-          <span className="font-display text-xl">Classhopper</span>
+          <span className="font-display text-xl">Transpira</span>
         </Link>
         <nav className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
           <Link to="/" className="hover:text-foreground transition" activeOptions={{ exact: true }} activeProps={{ className: "text-foreground" }}>
@@ -103,9 +103,9 @@ export function SiteFooter() {
       <div className="mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-muted-foreground items-center">
         <div className="flex items-center gap-2 justify-center md:justify-start">
           <div className="size-5 rounded-md bg-foreground/5 border border-foreground/15 grid place-items-center overflow-hidden">
-            <img src={classhopperLogo} alt="" className="size-4 rounded-sm object-cover" />
+            <img src={transpiraLogo} alt="" className="size-4 rounded-sm object-cover" />
           </div>
-          <span className="font-display text-foreground">Classhopper</span>
+          <span className="font-display text-foreground">Transpira</span>
           <span className="ml-3">© {new Date().getFullYear()}</span>
         </div>
         <div className="text-center text-foreground/70">Backed by <a href="https://fusen.world/" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground transition">Christopher Klaus</a></div>
