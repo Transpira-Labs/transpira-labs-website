@@ -24,7 +24,7 @@ export function SiteNav() {
 
           <span className="font-display text-2xl font-bold">Transpira</span>
         </Link>
-        <nav className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
+        <nav className="hidden md:flex items-center gap-8 text-base font-medium text-muted-foreground">
           <Link to="/" className="hover:text-foreground transition" activeOptions={{ exact: true }} activeProps={{ className: "text-foreground" }}>
             Home
           </Link>
@@ -35,7 +35,7 @@ export function SiteNav() {
             About Us
           </Link>
         </nav>
-        <a href={isHome ? "#contact" : "/#contact"} className="text-sm rounded-full px-4 py-2 bg-primary text-primary-foreground hover:bg-primary/90 transition">
+        <a href={isHome ? "#contact" : "/#contact"} className="text-base font-semibold rounded-full px-4 py-2 bg-primary text-primary-foreground hover:bg-primary/90 transition">
           Request Access
         </a>
       </div>
