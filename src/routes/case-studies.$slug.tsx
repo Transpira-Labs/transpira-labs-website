@@ -4,7 +4,7 @@ import { SiteNav, SolidBackground, SiteFooter } from "@/components/site-chrome";
 export const Route = createFileRoute("/case-studies/$slug")({
   head: ({ params }) => ({
     meta: [
-      { title: params?.slug === "transpira-set" ? "Transpira Set — Fine-Tuning GPT OSS 120B" : "Case Study — Transpira" },
+      { title: params?.slug === "transpira-set" ? "Classhopper Set — Fine-Tuning GPT OSS 120B" : "Case Study — Transpira" },
       { name: "description", content: "Fine-tuning GPT OSS 120B for coding tasks using the HUD reinforcement learning platform — +13% Best@10 improvement on real-world bugs." },
       { property: "og:title", content: "Transpira Set — Fine-Tuning GPT OSS 120B" },
       { property: "og:description", content: "GRPO training on 100 real-world bug-fixing tasks: +13% Best@10, +8% Pass@1, 4 fewer steps per task." },
