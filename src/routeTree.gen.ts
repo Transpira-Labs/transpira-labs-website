@@ -13,6 +13,8 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CaseStudiesIndexRouteImport } from './routes/case-studies.index'
+import { Route as CaseStudiesBuildRouteImport } from './routes/case-studies.build'
+import { Route as CaseStudiesBenchceptionRouteImport } from './routes/case-studies.benchception'
 import { Route as CaseStudiesSlugRouteImport } from './routes/case-studies.$slug'
 
 const PrivacyRoute = PrivacyRouteImport.update({
@@ -35,6 +37,16 @@ const CaseStudiesIndexRoute = CaseStudiesIndexRouteImport.update({
   path: '/case-studies/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CaseStudiesBuildRoute = CaseStudiesBuildRouteImport.update({
+  id: '/case-studies/build',
+  path: '/case-studies/build',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CaseStudiesBenchceptionRoute = CaseStudiesBenchceptionRouteImport.update({
+  id: '/case-studies/benchception',
+  path: '/case-studies/benchception',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CaseStudiesSlugRoute = CaseStudiesSlugRouteImport.update({
   id: '/case-studies/$slug',
   path: '/case-studies/$slug',
@@ -46,6 +58,8 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/privacy': typeof PrivacyRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
+  '/case-studies/benchception': typeof CaseStudiesBenchceptionRoute
+  '/case-studies/build': typeof CaseStudiesBuildRoute
   '/case-studies/': typeof CaseStudiesIndexRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +67,8 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/privacy': typeof PrivacyRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
+  '/case-studies/benchception': typeof CaseStudiesBenchceptionRoute
+  '/case-studies/build': typeof CaseStudiesBuildRoute
   '/case-studies': typeof CaseStudiesIndexRoute
 }
 export interface FileRoutesById {
@@ -61,6 +77,8 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/privacy': typeof PrivacyRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
+  '/case-studies/benchception': typeof CaseStudiesBenchceptionRoute
+  '/case-studies/build': typeof CaseStudiesBuildRoute
   '/case-studies/': typeof CaseStudiesIndexRoute
 }
 export interface FileRouteTypes {
@@ -70,15 +88,26 @@ export interface FileRouteTypes {
     | '/about'
     | '/privacy'
     | '/case-studies/$slug'
+    | '/case-studies/benchception'
+    | '/case-studies/build'
     | '/case-studies/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/privacy' | '/case-studies/$slug' | '/case-studies'
+  to:
+    | '/'
+    | '/about'
+    | '/privacy'
+    | '/case-studies/$slug'
+    | '/case-studies/benchception'
+    | '/case-studies/build'
+    | '/case-studies'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/privacy'
     | '/case-studies/$slug'
+    | '/case-studies/benchception'
+    | '/case-studies/build'
     | '/case-studies/'
   fileRoutesById: FileRoutesById
 }
@@ -87,6 +116,8 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   PrivacyRoute: typeof PrivacyRoute
   CaseStudiesSlugRoute: typeof CaseStudiesSlugRoute
+  CaseStudiesBenchceptionRoute: typeof CaseStudiesBenchceptionRoute
+  CaseStudiesBuildRoute: typeof CaseStudiesBuildRoute
   CaseStudiesIndexRoute: typeof CaseStudiesIndexRoute
 }
 
@@ -120,6 +151,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CaseStudiesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/case-studies/build': {
+      id: '/case-studies/build'
+      path: '/case-studies/build'
+      fullPath: '/case-studies/build'
+      preLoaderRoute: typeof CaseStudiesBuildRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/case-studies/benchception': {
+      id: '/case-studies/benchception'
+      path: '/case-studies/benchception'
+      fullPath: '/case-studies/benchception'
+      preLoaderRoute: typeof CaseStudiesBenchceptionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/case-studies/$slug': {
       id: '/case-studies/$slug'
       path: '/case-studies/$slug'
@@ -135,6 +180,8 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   PrivacyRoute: PrivacyRoute,
   CaseStudiesSlugRoute: CaseStudiesSlugRoute,
+  CaseStudiesBenchceptionRoute: CaseStudiesBenchceptionRoute,
+  CaseStudiesBuildRoute: CaseStudiesBuildRoute,
   CaseStudiesIndexRoute: CaseStudiesIndexRoute,
 }
 export const routeTree = rootRouteImport

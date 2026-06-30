@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import type { CSSProperties } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import {
   SiteNav,
   SolidBackground,
@@ -10,6 +10,9 @@ import {
   CONTACT_EMAIL,
 } from "@/components/site-chrome";
 import supplyFloor from "@/assets/supply-floor.jpg";
+import buildCanvas from "@/assets/build-canvas.png";
+import buildRunTrain from "@/assets/build-run-train.png";
+import buildDashboard from "@/assets/build-dashboard.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -73,14 +76,8 @@ function SupplyNetwork() {
   );
 }
 
-/* The dark hero fills the screen and stays pinned (fixed) while the light page
-   below slides up over it — the flip happens after the three stats. */
+/* The dark hero fills the screen; the light page below flips in beneath it. */
 function HeroScreen() {
-  const stats = [
-    { v: "44", l: "Hand-verified supply tasks" },
-    { v: "100+", l: "RL tasks delivered" },
-    { v: "+13%", l: "Best@10 gain — case study" },
-  ];
   return (
     <section className="relative min-h-screen flex flex-col overflow-hidden bg-[var(--hero)]">
       {/* Cinematic supply-floor backdrop. */}
@@ -139,21 +136,90 @@ function HeroScreen() {
           </div>
         </div>
       </div>
+    </section>
+  );
+}
 
-      {/* Stats pinned to the bottom of the dark screen — the last thing before the flip. */}
-      <div className="relative z-10 border-t border-white/15">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="grid grid-cols-3 divide-x divide-white/10">
-            {stats.map((s, i) => (
-              <div key={s.l} className="rise py-6 sm:py-7 pr-3 pl-4 first:pl-0" style={{ "--rise-delay": `${400 + i * 90}ms` } as CSSProperties}>
-                <div className="font-display text-2xl sm:text-3xl text-white tabular-nums">{s.v}</div>
-                <div className="mt-1.5 font-mono text-[0.6rem] sm:text-[0.68rem] uppercase tracking-wider text-white/55 leading-tight">{s.l}</div>
-              </div>
-            ))}
+/* Screenshot placeholder with browser chrome. Drop a real screenshot in by
+   replacing the inner placeholder <div> with an <img>:
+     import platformLibrary from "@/assets/platform-library.png";
+     <ImageFrame url="platform.transpiralabs.com" label="Benchmark library">
+       <img src={platformLibrary} alt="Benchmark library" className="block w-full" />
+     </ImageFrame>
+   When children are present, the placeholder is hidden automatically. */
+function ImageFrame({
+  url,
+  label,
+  children,
+}: {
+  url: string;
+  label: string;
+  children?: ReactNode;
+}) {
+  return (
+    <div className="overflow-hidden rounded-2xl border border-border bg-card soft-shadow">
+      <div className="flex items-center gap-1.5 border-b border-border bg-secondary/60 px-4 py-2.5">
+        <span className="size-2.5 rounded-full bg-foreground/12" />
+        <span className="size-2.5 rounded-full bg-foreground/12" />
+        <span className="size-2.5 rounded-full bg-foreground/12" />
+        <span className="ml-3 truncate font-mono text-[0.65rem] text-muted-foreground">{url}</span>
+      </div>
+      {children ?? (
+        <div
+          className="relative grid aspect-[16/10] place-items-center bg-secondary"
+          style={{
+            backgroundImage:
+              "linear-gradient(oklch(0.225 0.013 262 / 0.04) 1px, transparent 1px), linear-gradient(90deg, oklch(0.225 0.013 262 / 0.04) 1px, transparent 1px)",
+            backgroundSize: "28px 28px",
+          }}
+        >
+          <div className="text-center">
+            <div className="mx-auto mb-3 grid size-11 place-items-center rounded-xl border border-dashed border-input text-muted-foreground">
+              <svg viewBox="0 0 24 24" className="size-5" fill="none" aria-hidden="true">
+                <rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" strokeWidth="1.5" />
+                <circle cx="8.5" cy="9.5" r="1.5" fill="currentColor" />
+                <path d="M4 17l5-5 4 4 3-3 4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
+            <div className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-muted-foreground">{label}</div>
+            <div className="mt-1 text-[0.7rem] text-muted-foreground/70">Screenshot coming soon</div>
           </div>
         </div>
-      </div>
-    </section>
+      )}
+    </div>
+  );
+}
+
+function FeatureRow({
+  flip,
+  kicker,
+  title,
+  body,
+  imgUrl,
+  imgLabel,
+  img,
+}: {
+  flip?: boolean;
+  kicker: string;
+  title: string;
+  body: string;
+  imgUrl: string;
+  imgLabel: string;
+  img?: string;
+}) {
+  return (
+    <div className="grid items-center gap-8 md:grid-cols-2 lg:gap-14">
+      <Reveal className={flip ? "md:order-2" : undefined}>
+        <ImageFrame url={imgUrl} label={imgLabel}>
+          {img ? <img src={img} alt={imgLabel} className="block w-full" /> : undefined}
+        </ImageFrame>
+      </Reveal>
+      <Reveal delay={100} className={flip ? "md:order-1" : undefined}>
+        <div className="eyebrow">{kicker}</div>
+        <h4 className="mt-3 font-display text-[clamp(1.3rem,2.2vw,1.65rem)] tracking-tight text-foreground">{title}</h4>
+        <p className="mt-3 text-muted-foreground leading-relaxed">{body}</p>
+      </Reveal>
+    </div>
   );
 }
 
@@ -163,15 +229,43 @@ function Efforts() {
       name: "Platform",
       href: PLATFORM_URL,
       tag: "platform.transpiralabs.com",
-      body: "Where we author, evaluate, and quality-check benchmark tasks — running them against frontier models and reviewing every trace.",
+      intro:
+        "Where we author, evaluate, and quality-check every benchmark task — running them against frontier models and reviewing every trace by hand before it ships.",
+      features: [
+        {
+          kicker: "Pipeline & analytics",
+          title: "Track every task from draft to done.",
+          body: "Watch work move through the pipeline — created, evaluated against Sonnet and Opus, reviewed, completed — with per-model scores, run status, and spend in one view.",
+          imgLabel: "Pipeline analytics",
+          img: buildDashboard,
+        },
+      ],
     },
     {
       name: "Build",
       href: BUILD_URL,
       tag: "build.transpiralabs.com",
-      body: "An experiment in composing reinforcement-learning environments from blocks: describe each step in plain language, build and test it, no code.",
+      intro:
+        "An experiment in composing reinforcement-learning environments from blocks. Describe each step in plain language, then build, run, and test it — no code.",
+      features: [
+        {
+          kicker: "Block canvas",
+          title: "Compose an environment from blocks.",
+          body: "Lay out an environment as a chain of blocks — a tool, a check, a branch — each described in plain language and wired to the next. No engineering required.",
+          imgLabel: "Block canvas",
+          img: buildCanvas,
+        },
+        {
+          kicker: "Live run",
+          title: "Run, test, and tune in place.",
+          body: "Send an agent through the environment you composed and watch it resolve, retry, and recover in real time — then adjust the reward signal and run it again.",
+          imgLabel: "Live run",
+          img: buildRunTrain,
+        },
+      ],
     },
   ];
+
   return (
     <section className="relative px-6 py-24 border-t border-border">
       <div className="mx-auto max-w-6xl">
@@ -181,25 +275,45 @@ function Efforts() {
             How we build and study these environments.
           </h2>
         </Reveal>
-        <div className="mt-12 grid md:grid-cols-2 gap-5">
-          {efforts.map((p, i) => (
-            <Reveal key={p.name} delay={i * 100}>
-              <a
-                href={p.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group block h-full rounded-2xl border border-border bg-card p-8 transition-all duration-300 hover:border-accent/50 hover:-translate-y-0.5"
-              >
-                <div className="flex items-center justify-between">
-                  <h3 className="font-display text-xl text-foreground">{p.name}</h3>
-                  <svg viewBox="0 0 16 16" className="size-4 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent" fill="none" aria-hidden="true">
-                    <path d="M5 11 L11 5 M6 5 H11 V10" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
+
+        <div className="mt-16 space-y-20">
+          {efforts.map((p) => (
+            <div key={p.name}>
+              <Reveal>
+                <div className="flex flex-col gap-5 border-b border-border pb-8 md:flex-row md:items-end md:justify-between">
+                  <div className="max-w-2xl">
+                    <h3 className="font-display text-[clamp(1.55rem,2.8vw,2.1rem)] tracking-tight text-foreground">{p.name}</h3>
+                    <p className="mt-3 text-muted-foreground leading-relaxed">{p.intro}</p>
+                  </div>
+                  <a
+                    href={p.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex shrink-0 items-center gap-2 self-start rounded-full border border-border px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-accent/50 hover:bg-secondary md:self-auto"
+                  >
+                    <span className="font-mono text-xs text-foreground/70 group-hover:text-foreground">{p.tag}</span>
+                    <svg viewBox="0 0 16 16" className="size-4 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent" fill="none" aria-hidden="true">
+                      <path d="M5 11 L11 5 M6 5 H11 V10" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </a>
                 </div>
-                <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{p.body}</p>
-                <div className="mt-6 font-mono text-xs text-foreground/55">{p.tag}</div>
-              </a>
-            </Reveal>
+              </Reveal>
+
+              <div className="mt-12 space-y-14">
+                {p.features.map((f, i) => (
+                  <FeatureRow
+                    key={f.kicker}
+                    flip={i % 2 === 1}
+                    kicker={f.kicker}
+                    title={f.title}
+                    body={f.body}
+                    imgUrl={p.tag}
+                    imgLabel={f.imgLabel}
+                    img={f.img}
+                  />
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       </div>

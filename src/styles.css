@@ -43,19 +43,19 @@
   --card-foreground: oklch(0.225 0.013 262);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.225 0.013 262);
-  --primary: oklch(0.5 0.2 262);
+  --primary: oklch(0.48 0.12 262);
   --primary-foreground: oklch(0.99 0.004 250);
   --secondary: oklch(0.955 0.004 250);
   --secondary-foreground: oklch(0.225 0.013 262);
   --muted: oklch(0.955 0.004 250);
   --muted-foreground: oklch(0.5 0.018 260);
-  --accent: oklch(0.5 0.2 262);
+  --accent: oklch(0.48 0.12 262);
   --accent-foreground: oklch(0.99 0.004 250);
   --destructive: oklch(0.6 0.2 25);
   --destructive-foreground: oklch(0.99 0.004 250);
   --border: oklch(0.225 0.013 262 / 0.12);
   --input: oklch(0.225 0.013 262 / 0.16);
-  --ring: oklch(0.5 0.2 262 / 0.45);
+  --ring: oklch(0.48 0.12 262 / 0.45);
 }
 
 @layer base {
@@ -75,7 +75,7 @@
     font-size: 16px;
   }
   ::selection {
-    background: oklch(0.5 0.2 262 / 0.16);
+    background: oklch(0.48 0.12 262 / 0.16);
   }
 }
 
