@@ -77,7 +77,7 @@ function PrivacyPage() {
             <section>
               <h2 className="font-display text-xl mb-3 text-foreground">6. Your Rights</h2>
               <p>
-                Depending on your jurisdiction, you may have the right to access, correct, delete, or restrict the processing of your personal information. To exercise these rights, please contact us at adikrish6824@gmail.com.
+                Depending on your jurisdiction, you may have the right to access, correct, delete, or restrict the processing of your personal information. To exercise these rights, please contact us at adi@transpiralabs.com.
               </p>
             </section>
 
@@ -99,8 +99,8 @@ function PrivacyPage() {
               <h2 className="font-display text-xl mb-3 text-foreground">9. Contact Us</h2>
               <p>
                 If you have any questions or concerns about this Privacy Policy, please contact us at{" "}
-                <a href="mailto:adikrish6824@gmail.com" className="text-foreground hover:underline">
-                  adikrish6824@gmail.com
+                <a href="mailto:adi@transpiralabs.com" className="text-foreground hover:underline">
+                  adi@transpiralabs.com
                 </a>.
               </p>
             </section>

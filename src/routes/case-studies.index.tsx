@@ -30,9 +30,9 @@ function CaseStudiesIndex() {
         <SiteNav />
         <section className="px-6 pt-36 pb-16">
           <div className="mx-auto max-w-7xl">
-            <div className="text-xs font-mono tracking-[0.2em] text-foreground/50 mb-8">01</div>
-            <h1 className="font-display text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.05] tracking-tight text-gradient text-balance max-w-4xl">
-              Case Studies
+            <div className="eyebrow">Research</div>
+            <h1 className="mt-5 font-display text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.05] tracking-tight text-foreground text-balance max-w-4xl">
+              Research &amp; case studies
             </h1>
             <p className="mt-6 max-w-2xl text-lg text-muted-foreground leading-relaxed">
               Real-world projects demonstrating how we approach hard engineering problems.

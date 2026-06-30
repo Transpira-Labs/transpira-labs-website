@@ -29,36 +29,33 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
   --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Source Serif 4", ui-serif, Georgia, serif;
+  --font-display: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
 }
 
 :root {
   --radius: 0.75rem;
-  /* Warm alpine palette with enough contrast to sit over photo backgrounds. */
-  --background: oklch(0.96 0.018 82);
-  --foreground: oklch(0.16 0.035 58);
-  --card: oklch(0.99 0.01 82 / 0.9);
-  --card-foreground: oklch(0.16 0.035 58);
-  --popover: oklch(0.98 0.01 80);
-  --popover-foreground: oklch(0.16 0.035 58);
-  --primary: oklch(0.2 0.04 58);
-  --primary-foreground: oklch(0.98 0.01 80);
-  --secondary: oklch(0.92 0.02 75);
-  --secondary-foreground: oklch(0.2 0.04 58);
-  --muted: oklch(0.92 0.015 75);
-  --muted-foreground: oklch(0.32 0.04 62);
-  --accent: oklch(0.56 0.15 52);
-  --accent-foreground: oklch(0.98 0.01 80);
+  /* Light theme for the page body; the hero is a dark island handled in markup. */
+  --hero: oklch(0.16 0.014 264);
+  --background: oklch(0.985 0.002 250);
+  --foreground: oklch(0.225 0.013 262);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.225 0.013 262);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.225 0.013 262);
+  --primary: oklch(0.5 0.2 262);
+  --primary-foreground: oklch(0.99 0.004 250);
+  --secondary: oklch(0.955 0.004 250);
+  --secondary-foreground: oklch(0.225 0.013 262);
+  --muted: oklch(0.955 0.004 250);
+  --muted-foreground: oklch(0.5 0.018 260);
+  --accent: oklch(0.5 0.2 262);
+  --accent-foreground: oklch(0.99 0.004 250);
   --destructive: oklch(0.6 0.2 25);
-  --destructive-foreground: oklch(0.98 0.01 80);
-  --border: oklch(0.16 0.035 58 / 0.16);
-  --input: oklch(0.16 0.035 58 / 0.18);
-  --ring: oklch(0.56 0.15 52 / 0.5);
-}
-
-.dark {
-  --background: oklch(0.96 0.018 82);
-  --foreground: oklch(0.16 0.035 58);
+  --destructive-foreground: oklch(0.99 0.004 250);
+  --border: oklch(0.225 0.013 262 / 0.12);
+  --input: oklch(0.225 0.013 262 / 0.16);
+  --ring: oklch(0.5 0.2 262 / 0.45);
 }
 
 @layer base {
@@ -67,32 +64,128 @@
   }
   html, body {
     color: var(--color-foreground);
+    background: var(--color-background);
     font-family: var(--font-sans);
-    font-weight: 500;
+    font-weight: 400;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
   html {
     scroll-behavior: smooth;
-    font-size: 1.0625rem;
+    font-size: 16px;
+  }
+  ::selection {
+    background: oklch(0.5 0.2 262 / 0.16);
   }
 }
 
 @layer utilities {
   .font-display {
     font-family: var(--font-display);
-    font-weight: 400;
+    font-weight: 600;
+    letter-spacing: -0.015em;
   }
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+  /* Kept for compatibility with existing routes. */
   .text-gradient {
-    background: linear-gradient(180deg, oklch(0.14 0.035 58) 0%, oklch(0.28 0.08 54) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    filter: drop-shadow(0 1px 10px oklch(0.98 0.01 80 / 0.55));
-    padding-bottom: 0.15em;
-    display: inline-block;
+    color: var(--foreground);
   }
-  .glow-ring {
-    box-shadow: 0 0 0 1px oklch(0.22 0.025 60 / 0.08), 0 20px 60px -20px oklch(0.55 0.12 55 / 0.35);
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .soft-shadow {
+    box-shadow: 0 1px 2px oklch(0.225 0.013 262 / 0.05), 0 12px 32px -22px oklch(0.225 0.013 262 / 0.3);
+  }
+
+  /* ---- Supply-chain network signature (light) ---- */
+  .net-edge {
+    fill: none;
+    stroke: oklch(0.225 0.013 262 / 0.16);
+    stroke-width: 1;
+  }
+  .net-flow {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    stroke-dasharray: 3 13;
+    animation: net-flow 1.5s linear infinite;
+  }
+  .net-node {
+    fill: var(--card);
+    stroke: oklch(0.225 0.013 262 / 0.45);
+    stroke-width: 1.25;
+  }
+  .net-node-live {
+    fill: var(--accent);
+    stroke: none;
+  }
+  .net-halo {
+    fill: var(--accent);
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: net-halo 2.6s ease-in-out infinite;
+  }
+  .net-label {
+    fill: var(--muted-foreground);
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.16em;
+  }
+  @keyframes net-flow {
+    to { stroke-dashoffset: -16; }
+  }
+  @keyframes net-halo {
+    0%, 100% { opacity: 0.08; transform: scale(1); }
+    50% { opacity: 0.22; transform: scale(1.55); }
+  }
+
+  /* ---- Scroll-reveal ---- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .rise {
+    opacity: 0;
+    transform: translateY(14px);
+    animation: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: var(--rise-delay, 0ms);
+  }
+  @keyframes rise {
+    to { opacity: 1; transform: none; }
+  }
+
+  /* Nav drops back in when it returns over the light body. */
+  .animate-nav-in {
+    animation: nav-in 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  @keyframes nav-in {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .net-flow, .net-halo, .rise, .animate-nav-in {
+      animation: none;
+    }
+    .rise, .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
   }
 }
-
