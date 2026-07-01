@@ -30,7 +30,7 @@ function PrivacyPage() {
             <section>
               <h2 className="font-display text-xl mb-3 text-foreground">1. Introduction</h2>
               <p>
-                Transpira ("we", "us", or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or interact with our services.
+                Classhopper Technologies Inc. ("we", "us", or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or interact with our services.
               </p>
             </section>
 

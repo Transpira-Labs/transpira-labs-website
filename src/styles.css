@@ -169,17 +169,8 @@
     to { opacity: 1; transform: none; }
   }
 
-  /* Nav drops back in when it returns over the light body. */
-  .animate-nav-in {
-    animation: nav-in 0.34s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  @keyframes nav-in {
-    from { transform: translateY(-100%); }
-    to { transform: translateY(0); }
-  }
-
   @media (prefers-reduced-motion: reduce) {
-    .net-flow, .net-halo, .rise, .animate-nav-in {
+    .net-flow, .net-halo, .rise {
       animation: none;
     }
     .rise, .reveal {

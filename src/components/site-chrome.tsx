@@ -47,6 +47,51 @@ export function Reveal({ children, delay = 0, className = "" }: { children: Reac
   );
 }
 
+/* The inner bar — shared by the transparent hero nav and the solid sticky nav. */
+function NavBar({ isHome, overHero }: { isHome: boolean; overHero: boolean }) {
+  const brand = overHero ? "text-white" : "text-foreground";
+  const link = overHero ? "text-white/75 hover:text-white" : "text-muted-foreground hover:text-foreground";
+  return (
+    <div className="mx-auto max-w-6xl px-6 h-16 flex items-center justify-between">
+      <Link
+        to="/"
+        onClick={(e) => {
+          if (isHome) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }
+        }}
+        className={`flex items-center gap-2.5 transition-colors ${brand}`}
+      >
+        <img src={transpiraLogo} alt="Transpira logo" className="size-7 rounded-md object-cover" />
+        <span className="font-display text-lg font-semibold tracking-tight">Transpira</span>
+      </Link>
+
+      <nav className="hidden md:flex items-center gap-7 text-sm">
+        <Link to="/case-studies" className={`transition-colors ${link}`}>
+          Research
+        </Link>
+        <Link to="/about" className={`transition-colors ${link}`}>
+          About
+        </Link>
+        <a href={PLATFORM_URL} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-1 transition-colors ${link}`}>
+          Platform <ExternalArrow />
+        </a>
+        <a href={BUILD_URL} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-1 transition-colors ${link}`}>
+          Build <ExternalArrow />
+        </a>
+      </nav>
+
+      <a
+        href={`mailto:${CONTACT_EMAIL}`}
+        className="text-sm font-medium rounded-full px-4 py-1.5 bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
+      >
+        Get in touch
+      </a>
+    </div>
+  );
+}
+
 export function SiteNav() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const isHome = pathname === "/";
@@ -67,55 +112,26 @@ export function SiteNav() {
   }, []);
   const heroPassed = vh > 0 && y > vh - 110;
   // On the homepage the nav sits at the top of the dark hero and scrolls away
-  // with the page (absolute), then drops back in (fixed, solid) on the light body.
-  const fixedMode = !isHome || heroPassed;
-  const overHero = isHome && !heroPassed;
-  const brand = overHero ? "text-white" : "text-foreground";
-  const link = overHero ? "text-white/75 hover:text-white" : "text-muted-foreground hover:text-foreground";
+  // with the page (absolute), then the solid sticky nav slides in on the light body.
+  // The sticky nav is always mounted so it can transition *out* smoothly when
+  // scrolling back up, rather than snapping away.
+  const showSticky = !isHome || heroPassed;
   return (
-    <header
-      className={`${fixedMode ? "fixed animate-nav-in" : "absolute"} top-0 inset-x-0 z-50 ${
-        overHero ? "bg-transparent border-b border-transparent" : "bg-background/80 backdrop-blur-md border-b border-border"
-      }`}
-    >
-      <div className="mx-auto max-w-6xl px-6 h-16 flex items-center justify-between">
-        <Link
-          to="/"
-          onClick={(e) => {
-            if (isHome) {
-              e.preventDefault();
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }
-          }}
-          className={`flex items-center gap-2.5 transition-colors ${brand}`}
-        >
-          <img src={transpiraLogo} alt="Transpira logo" className="size-7 rounded-md object-cover" />
-          <span className="font-display text-lg font-semibold tracking-tight">Transpira</span>
-        </Link>
-
-        <nav className="hidden md:flex items-center gap-7 text-sm">
-          <Link to="/case-studies" className={`transition-colors ${link}`}>
-            Research
-          </Link>
-          <Link to="/about" className={`transition-colors ${link}`}>
-            About
-          </Link>
-          <a href={PLATFORM_URL} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-1 transition-colors ${link}`}>
-            Platform <ExternalArrow />
-          </a>
-          <a href={BUILD_URL} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-1 transition-colors ${link}`}>
-            Build <ExternalArrow />
-          </a>
-        </nav>
-
-        <a
-          href={`mailto:${CONTACT_EMAIL}`}
-          className="text-sm font-medium rounded-full px-4 py-1.5 bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
-        >
-          Get in touch
-        </a>
-      </div>
-    </header>
+    <>
+      {isHome && (
+        <header className="absolute top-0 inset-x-0 z-50 bg-transparent">
+          <NavBar isHome overHero />
+        </header>
+      )}
+      <header
+        className={`fixed top-0 inset-x-0 z-50 bg-background/80 backdrop-blur-md border-b border-border transition-all duration-300 ease-out will-change-transform ${
+          showSticky ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0 pointer-events-none"
+        }`}
+        aria-hidden={showSticky ? undefined : true}
+      >
+        <NavBar isHome={isHome} overHero={false} />
+      </header>
+    </>
   );
 }
 
