@@ -12,4 +12,10 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  // Force-enable the Nitro deploy plugin outside the Lovable sandbox (e.g. on
+  // Vercel's build machines) and target Vercel's Build Output API. Without an
+  // explicit `nitro` option the wrapper skips Nitro entirely off-platform, which
+  // would produce no deployable server output. Inside the Lovable sandbox the
+  // wrapper still overrides this back to the Cloudflare preset.
+  nitro: { preset: "vercel" },
 });
