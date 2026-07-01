@@ -4,10 +4,10 @@ import { SiteNav, SolidBackground, SiteFooter, PLATFORM_URL, BUILD_URL, CONTACT_
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — Transpira AI Lab" },
+      { title: "About | Transpira AI Lab" },
       { name: "description", content: "Transpira is an AI lab building hyper-realistic reinforcement learning environments and delivering them to frontier labs." },
-      { property: "og:title", content: "About — Transpira AI Lab" },
-      { property: "og:description", content: "An AI lab building the environments that teach agents to solve real engineering problems — already in use at frontier labs." },
+      { property: "og:title", content: "About | Transpira AI Lab" },
+      { property: "og:description", content: "An AI lab building the environments that teach agents to solve real engineering problems, already in use at frontier labs." },
     ],
   }),
   component: AboutPage,
@@ -26,7 +26,7 @@ function AboutPage() {
               An AI research lab for real-world agents
             </h1>
             <p className="mt-8 text-lg text-foreground/85 leading-relaxed">
-              Transpira builds hyper-realistic reinforcement-learning environments and benchmarks that train and evaluate AI agents on real operational work. Static benchmarks plateau quickly — the frontier of agent capability now depends on the quality of the worlds we train them in.
+              Transpira builds hyper-realistic reinforcement-learning environments and benchmarks that train and evaluate AI agents on real operational work. Static benchmarks plateau quickly. The frontier of agent capability now depends on the quality of the worlds we train them in.
             </p>
             <p className="mt-6 text-lg text-foreground/85 leading-relaxed">
               Our focus is the supply chain: multi-tier networks where one decision depends on the state of dozens of others, and where progress demands real tool-use and multi-step reasoning. We design environments with dense reward signals grounded in real business logic, and we've delivered high-quality environments to frontier labs.

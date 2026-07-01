@@ -4,9 +4,9 @@ import { SiteNav, SolidBackground, SiteFooter } from "@/components/site-chrome";
 export const Route = createFileRoute("/case-studies/")({
   head: () => ({
     meta: [
-      { title: "Case Studies — Transpira" },
+      { title: "Case Studies | Transpira" },
       { name: "description", content: "Real-world projects demonstrating how Transpira approaches hard reinforcement learning and code-generation problems." },
-      { property: "og:title", content: "Case Studies — Transpira" },
+      { property: "og:title", content: "Case Studies | Transpira" },
       { property: "og:description", content: "Real-world projects demonstrating how we approach hard engineering problems." },
     ],
   }),
@@ -19,14 +19,14 @@ function CaseStudiesIndex() {
       slug: "benchception",
       eyebrow: "Internal R&D",
       title: "Benchception",
-      desc: "Which frontier model is best at building RL environments? We make environment-authoring the thing under test — models compete by teaching, judged on a held-out Supply Chain Bench.",
+      desc: "Which frontier model is best at building RL environments? We make environment-authoring the thing under test: models compete by teaching, judged on a held-out Supply Chain Bench.",
       tags: ["Environment Authoring", "Evaluation", "Supply Chain"],
     },
     {
       slug: "build",
       eyebrow: "Product",
       title: "Build",
-      desc: "A Scratch-style, block-based builder for RL environments. Snap blocks together, describe each in plain language, then check, build, run, and train — no code, JSON, or CLI.",
+      desc: "A Scratch-style, block-based builder for RL environments. Snap blocks together, describe each in plain language, then check, build, run, and train, no code, JSON, or CLI.",
       tags: ["No-code", "Environment Authoring", "HUD"],
     },
     {

@@ -6,10 +6,10 @@ import buildRunTrain from "@/assets/build-run-train.png";
 export const Route = createFileRoute("/case-studies/build")({
   head: () => ({
     meta: [
-      { title: "Build — No-code RL Environments — Transpira" },
-      { name: "description", content: "Build is Transpira's Scratch-style, block-based builder for reinforcement-learning environments. Snap blocks together, describe each in plain language, check it, and ship a real HUD environment you can run and train on — no code." },
-      { property: "og:title", content: "Build — No-code RL Environments — Transpira" },
-      { property: "og:description", content: "Snap blocks together, describe each in plain language, and ship a real RL environment on HUD — no code." },
+      { title: "Build: No-code RL Environments | Transpira" },
+      { name: "description", content: "Build is Transpira's Scratch-style, block-based builder for reinforcement-learning environments. Snap blocks together, describe each in plain language, check it, and ship a real HUD environment you can run and train on, no code." },
+      { property: "og:title", content: "Build: No-code RL Environments | Transpira" },
+      { property: "og:description", content: "Snap blocks together, describe each in plain language, and ship a real RL environment on HUD, no code." },
     ],
   }),
   component: BuildCaseStudy,
@@ -75,8 +75,8 @@ function P({ children }: { children: React.ReactNode }) {
 }
 
 const BLOCKS = [
-  { name: "Environment", body: "The world the agent works in — the setting, the data it can touch, and the rules of the game." },
-  { name: "Tool", body: "A function the agent can call. Give it a goal, its inputs, and what it returns — all in plain language." },
+  { name: "Environment", body: "The world the agent works in: the setting, the data it can touch, and the rules of the game." },
+  { name: "Tool", body: "A function the agent can call. Give it a goal, its inputs, and what it returns, all in plain language." },
   { name: "Task", body: "A prompt plus a rubric: Good and Bad answers nested in a Scoring block that becomes the reward signal." },
   { name: "Train", body: "How the policy learns. Left on auto, a model picks a fitting RL framework for the environment you built." },
 ];
@@ -104,7 +104,7 @@ function BuildCaseStudy() {
             </h1>
             <p className="mt-5 text-[20px] leading-[1.5] text-foreground/80">
               Build is a Scratch-style, block-based builder for reinforcement-learning environments. Snap blocks
-              together, describe each in plain language, and ship a real environment you can run and train on — no code,
+              together, describe each in plain language, and ship a real environment you can run and train on, no code,
               JSON, or CLI.
             </p>
             <div className="mt-6 inline-flex items-center gap-2.5 rounded-full border border-accent/30 bg-accent/[0.06] px-4 py-2 text-[13px] font-medium text-foreground">
@@ -113,7 +113,7 @@ function BuildCaseStudy() {
                 <path d="M16 5h2.5a1.5 1.5 0 0 1 0 5H16M8 5H5.5a1.5 1.5 0 0 0 0 5H8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                 <path d="M10 13.5h4M12 11v3.5m-2.5 5.5h5l-.5-3h-4l-.5 3Z" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-              1st place — HUD × Y Combinator Frontier/RL RSI Environments Hackathon
+              1st place: HUD × Y Combinator Frontier/RL RSI Environments Hackathon
             </div>
             <div className="mt-7 flex flex-wrap items-center gap-3">
               <a
@@ -131,7 +131,7 @@ function BuildCaseStudy() {
           <ImageSlot
             src={buildCanvas}
             label="Canvas overview"
-            caption="An environment open on the Build canvas — here, SupChain-Bench. The block tray sits on the left; on the right, an Environment block, a Taskset of Tasks (each with a Question and a Scoring group of Good and Bad answers), and a column of Tool blocks — every one describing its goal, what goes in, and what comes out in plain language."
+            caption="An environment open on the Build canvas: here, SupChain-Bench. The block tray sits on the left; on the right, an Environment block, a Taskset of Tasks (each with a Question and a Scoring group of Good and Bad answers), and a column of Tool blocks, every one describing its goal, what goes in, and what comes out in plain language."
           />
 
           {/* WHY BLOCKS */}
@@ -140,7 +140,7 @@ function BuildCaseStudy() {
               A good RL environment is hard to write and easy to get subtly wrong. Build turns authoring into something
               you can see and reason about: every part of the environment is a labelled block, and the whole thing reads
               like a description rather than a config file. Under the hood, those blocks compile to real HUD environment
-              code — but no one has to touch it.
+              code, but no one has to touch it.
             </P>
             <P>
               Build took <strong className="text-foreground">first place</strong> at the HUD × Y Combinator Frontier/RL
@@ -173,7 +173,7 @@ function BuildCaseStudy() {
 
             <Step n="01" title="Start from a template or a blank canvas">
               <P>
-                Open Build and either start a new environment or fork one of the ready-made templates — SupChain-Bench,
+                Open Build and either start a new environment or fork one of the ready-made templates: SupChain-Bench,
                 Wordle Solver, Math Word Problems, or Support Ticket Triage. Templates are complete, runnable
                 environments, so you can see how a finished one is wired before changing anything.
               </P>
@@ -187,7 +187,7 @@ function BuildCaseStudy() {
                 in place.
               </P>
               <P>
-                Everything is described in words, not code — a tool's goal, its inputs and returns, a task's prompt, the
+                Everything is described in words, not code: a tool's goal, its inputs and returns, a task's prompt, the
                 answers that should score well or poorly. That plain-language description is the entire specification.
               </P>
             </Step>
@@ -195,34 +195,34 @@ function BuildCaseStudy() {
             <Step n="03" title="Check it">
               <P>
                 Before building anything, run <em>Check it</em>. It reads the live environment and returns a friendly
-                checklist of what still needs fixing — missing pieces, empty rubrics, tools nothing references — separated
+                checklist of what still needs fixing (missing pieces, empty rubrics, tools nothing references), separated
                 into errors that block a build and warnings worth a look. Nothing is generated yet; it just tells you
                 whether the environment is ready.
               </P>
             </Step>
 
-            <Step n="04" title="Build it — compile and deploy to HUD">
+            <Step n="04" title="Build it: compile and deploy to HUD">
               <P>
-                Hit <em>Build it</em> and the blocks compile into a real HUD reinforcement-learning environment — the
-                tools, the task prompts, and the rubric-based reward — and deploy. A live modal tracks the compile and
+                Hit <em>Build it</em> and the blocks compile into a real HUD reinforcement-learning environment (the
+                tools, the task prompts, and the rubric-based reward) and deploy. A live modal tracks the compile and
                 container build; the occasional generation hiccup is retried automatically rather than handed back to you.
               </P>
             </Step>
 
             <Step n="05" title="Run a baseline, then train">
               <P>
-                With the environment live, run every task on HUD across a spanning set of models — Haiku 4.5, Sonnet 4.6,
-                and Opus 4.8 — a few attempts each. The results tell you whether the environment is any good:
+                With the environment live, run every task on HUD across a spanning set of models (Haiku 4.5, Sonnet 4.6,
+                and Opus 4.8), a few attempts each. The results tell you whether the environment is any good:
                 <strong className="text-foreground"> solvable</strong> (a strong model can actually do it) and
                 <strong className="text-foreground"> discriminating</strong> (it separates weak models from strong ones).
                 Once it's both, fork a base model from the same screen and start an RL run against the reward you
-                described in blocks — closing the loop from a plain-language idea to a measurably better model.
+                described in blocks, closing the loop from a plain-language idea to a measurably better model.
               </P>
               <ImageSlot
                 src={buildRunTrain}
                 ratio="740 / 430"
                 label="Run and train"
-                caption="From one screen: launch a run of every task in the deployed taskset on HUD across Haiku 4.5, Sonnet 4.6, and Opus 4.8 — then fork a base model (qwen3-14b) into a trainable one and start an RL run on the tasks you defined. Rollouts and inference both route through HUD."
+                caption="From one screen: launch a run of every task in the deployed taskset on HUD across Haiku 4.5, Sonnet 4.6, and Opus 4.8, then fork a base model (qwen3-14b) into a trainable one and start an RL run on the tasks you defined. Rollouts and inference both route through HUD."
               />
             </Step>
           </section>
@@ -234,7 +234,7 @@ function BuildCaseStudy() {
               Blocks become a canonical spec, then real code
             </h2>
             <P>
-              Every block tree projects into a normalized intermediate representation — the canonical description of the
+              Every block tree projects into a normalized intermediate representation: the canonical description of the
               environment. That representation is what gets checked, compiled to HUD SDK code, and deployed. Because the
               spec is consistent and human-readable, the same environment is auditable by a person and buildable by a
               machine, with nothing lost in translation.

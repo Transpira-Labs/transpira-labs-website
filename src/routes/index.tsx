@@ -17,9 +17,9 @@ import buildDashboard from "@/assets/build-dashboard.png";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Transpira — Reinforcement Learning for the Supply Chain" },
+      { title: "Transpira: Reinforcement Learning for the Supply Chain" },
       { name: "description", content: "Transpira is an AI research lab building hyper-realistic reinforcement-learning environments and benchmarks that train and evaluate agents on real operational work, with a focus on the supply chain." },
-      { property: "og:title", content: "Transpira — Reinforcement Learning for the Supply Chain" },
+      { property: "og:title", content: "Transpira: Reinforcement Learning for the Supply Chain" },
       { property: "og:description", content: "An AI research lab building reinforcement-learning environments for supply-chain and operations agents." },
       { property: "og:type", content: "website" },
     ],
@@ -114,7 +114,7 @@ function HeroScreen() {
               style={{ "--rise-delay": "200ms" } as CSSProperties}
             >
               Transpira builds hyper-realistic environments and benchmarks that train and evaluate AI agents on real
-              operational work — from three-tier logistics networks to production systems. Already delivered to frontier
+              operational work, from three-tier logistics networks to production systems. Already delivered to frontier
               labs.
             </p>
             <div className="rise mt-8 flex flex-wrap items-center gap-3" style={{ "--rise-delay": "300ms" } as CSSProperties}>
@@ -230,12 +230,12 @@ function Efforts() {
       href: PLATFORM_URL,
       tag: "platform.transpiralabs.com",
       intro:
-        "Where we author, evaluate, and quality-check every benchmark task — running them against frontier models and reviewing every trace by hand before it ships.",
+        "Where we author, evaluate, and quality-check every benchmark task, running them against frontier models and reviewing every trace by hand before it ships.",
       features: [
         {
           kicker: "Pipeline & analytics",
           title: "Track every task from draft to done.",
-          body: "Watch work move through the pipeline — created, evaluated against Sonnet and Opus, reviewed, completed — with per-model scores, run status, and spend in one view.",
+          body: "Watch work move through the pipeline (created, evaluated against Sonnet and Opus, reviewed, completed) with per-model scores, run status, and spend in one view.",
           imgLabel: "Pipeline analytics",
           img: buildDashboard,
         },
@@ -246,19 +246,19 @@ function Efforts() {
       href: BUILD_URL,
       tag: "build.transpiralabs.com",
       intro:
-        "An experiment in composing reinforcement-learning environments from blocks. Describe each step in plain language, then build, run, and test it — no code.",
+        "An experiment in composing reinforcement-learning environments from blocks. Describe each step in plain language, then build, run, and test it, no code.",
       features: [
         {
           kicker: "Block canvas",
           title: "Compose an environment from blocks.",
-          body: "Lay out an environment as a chain of blocks — a tool, a check, a branch — each described in plain language and wired to the next. No engineering required.",
+          body: "Lay out an environment as a chain of blocks (a tool, a check, a branch) each described in plain language and wired to the next. No engineering required.",
           imgLabel: "Block canvas",
           img: buildCanvas,
         },
         {
           kicker: "Live run",
           title: "Run, test, and tune in place.",
-          body: "Send an agent through the environment you composed and watch it resolve, retry, and recover in real time — then adjust the reward signal and run it again.",
+          body: "Send an agent through the environment you composed and watch it resolve, retry, and recover in real time, then adjust the reward signal and run it again.",
           imgLabel: "Live run",
           img: buildRunTrain,
         },
@@ -336,12 +336,12 @@ function Focus() {
         </Reveal>
 
         <Reveal delay={120}>
-          <div className="eyebrow">Focus — Supply Chain</div>
+          <div className="eyebrow">Focus: Supply Chain</div>
           <h2 className="mt-4 font-display text-[clamp(1.85rem,3.4vw,2.75rem)] tracking-tight text-foreground leading-[1.1]">
             The supply chain is where reasoning gets real.
           </h2>
           <p className="mt-6 text-muted-foreground leading-relaxed">
-            Real operations run on multi-tier networks — trade, fulfillment, warehouse — where one decision depends on
+            Real operations run on multi-tier networks (trade, fulfillment, warehouse) where one decision depends on
             the state of dozens of others. To act, an agent has to call the right tools, chain them under conditional
             logic, and recover from cancellations and errors.
           </p>
@@ -353,7 +353,7 @@ function Focus() {
             </div>
             <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
               Building on the SupChain-Bench supply-chain benchmark, we hand-verified a set of 44 tasks confirmed to be
-              reasonably solvable by an agent — a cleaner signal for training and evaluation.
+              reasonably solvable by an agent, a cleaner signal for training and evaluation.
             </p>
             <div className="mt-5 flex items-center gap-6">
               {[

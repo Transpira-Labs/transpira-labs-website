@@ -5,9 +5,9 @@ import { SiteNav, SolidBackground, SiteFooter } from "@/components/site-chrome";
 export const Route = createFileRoute("/case-studies/benchception")({
   head: () => ({
     meta: [
-      { title: "Benchception — Transpira" },
+      { title: "Benchception | Transpira" },
       { name: "description", content: "Benchception makes environment-authoring the thing under test: frontier models compete not by answering, but by teaching. A held-out Supply Chain Bench decides who built the better RL environment." },
-      { property: "og:title", content: "Benchception — Transpira" },
+      { property: "og:title", content: "Benchception | Transpira" },
       { property: "og:description", content: "Which frontier model is best at building RL environments? Benchception makes authoring the thing under test." },
     ],
   }),

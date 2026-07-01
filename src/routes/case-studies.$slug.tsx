@@ -4,9 +4,9 @@ import { SiteNav, SolidBackground, SiteFooter } from "@/components/site-chrome";
 export const Route = createFileRoute("/case-studies/$slug")({
   head: ({ params }) => ({
     meta: [
-      { title: params?.slug === "transpira-set" ? "Classhopper Set — Fine-Tuning GPT OSS 120B" : "Case Study — Transpira" },
-      { name: "description", content: "Fine-tuning GPT OSS 120B for coding tasks using the HUD reinforcement learning platform — +13% Best@10 improvement on real-world bugs." },
-      { property: "og:title", content: "Classhopper Set — Fine-Tuning GPT OSS 120B" },
+      { title: params?.slug === "transpira-set" ? "Classhopper Set: Fine-Tuning GPT OSS 120B" : "Case Study | Transpira" },
+      { name: "description", content: "Fine-tuning GPT OSS 120B for coding tasks using the HUD reinforcement learning platform: +13% Best@10 improvement on real-world bugs." },
+      { property: "og:title", content: "Classhopper Set: Fine-Tuning GPT OSS 120B" },
       { property: "og:description", content: "GRPO training on 100 real-world bug-fixing tasks: +13% Best@10, +8% Pass@1, 4 fewer steps per task." },
     ],
   }),
@@ -87,7 +87,7 @@ function CaseStudyPage() {
               We merged frontend and backend into a single monorepo, verified builds and tests passed, and confirmed it was stable enough for automated evaluation.
             </P>
             <P>
-              We then connected it using HUD's coding environment template. The template handles the heavy lifting of environment creation — it ships with a Dockerfile, a grading harness, and a task runner, so you don't need to build any of that infrastructure yourself. Out of the box, it gives the agent two built-in tools: a bash tool for running shell commands, and an editor tool for viewing, creating, and editing files. These are the only tools the agent gets: no web access, no special APIs, just a terminal and a file editor — the same primitives a human developer would use.
+              We then connected it using HUD's coding environment template. The template handles the heavy lifting of environment creation: it ships with a Dockerfile, a grading harness, and a task runner, so you don't need to build any of that infrastructure yourself. Out of the box, it gives the agent two built-in tools: a bash tool for running shell commands, and an editor tool for viewing, creating, and editing files. These are the only tools the agent gets: no web access, no special APIs, just a terminal and a file editor, the same primitives a human developer would use.
             </P>
             <P>
               To connect our codebase, we forked the template and set the <code className="font-mono text-sm bg-background/80 px-1.5 py-0.5 rounded">REPO_URL</code> build argument in the Dockerfile to point at our Classhopper monorepo. The template clones this repo into the container at build time and wires it into the task runner automatically.
@@ -181,7 +181,7 @@ function CaseStudyPage() {
 
             <H3>Training Run</H3>
             <P>
-              We ran GRPO training on a HUD fork of GPT OSS 120B, investing ~10 hours and 600 credits over 20 training steps. The model's policy showed a clear shift, with pass rates climbing steadily throughout the run. While you might notice performance dips at checkpoints #5 and #11, these weren't regressions — they were simply the result of a more difficult distribution of tasks in those specific evaluations. Overall, the trajectory remained strong.
+              We ran GRPO training on a HUD fork of GPT OSS 120B, investing ~10 hours and 600 credits over 20 training steps. The model's policy showed a clear shift, with pass rates climbing steadily throughout the run. While you might notice performance dips at checkpoints #5 and #11, these weren't regressions: they were simply the result of a more difficult distribution of tasks in those specific evaluations. Overall, the trajectory remained strong.
             </P>
 
             <H2>5. Results</H2>

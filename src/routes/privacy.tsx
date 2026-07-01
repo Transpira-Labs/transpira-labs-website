@@ -4,9 +4,9 @@ import { SiteNav, SiteFooter } from "@/components/site-chrome";
 export const Route = createFileRoute("/privacy")({
   head: () => ({
     meta: [
-      { title: "Privacy Policy — Transpira" },
+      { title: "Privacy Policy | Transpira" },
       { name: "description", content: "Transpira privacy policy." },
-      { property: "og:title", content: "Privacy Policy — Transpira" },
+      { property: "og:title", content: "Privacy Policy | Transpira" },
       { property: "og:description", content: "Transpira privacy policy." },
     ],
   }),

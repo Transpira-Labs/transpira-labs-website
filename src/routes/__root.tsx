@@ -79,7 +79,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Transpira Labs" },
-      { name: "description", content: "Transpira is an AI research lab building reinforcement-learning environments and benchmarks that train and evaluate agents on real-world work — with a focus on the supply chain." },
+      { name: "description", content: "Transpira is an AI research lab building reinforcement-learning environments and benchmarks that train and evaluate agents on real-world work, with a focus on the supply chain." },
       { name: "twitter:card", content: "summary_large_image" },
       { property: "og:title", content: "Transpira Labs" },
       { name: "twitter:title", content: "Transpira Labs" },
