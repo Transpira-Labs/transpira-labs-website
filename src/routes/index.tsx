@@ -27,52 +27,33 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-/* The signature: a three-tier supply network (Trade → Fulfillment → Warehouse),
-   with orders flowing along the routes — the world our environments simulate. */
-function SupplyNetwork() {
-  const L = [
-    { x: 64, y: 72 },
-    { x: 64, y: 190 },
-    { x: 64, y: 308 },
-  ];
-  const M = [
-    { x: 230, y: 131 },
-    { x: 230, y: 249 },
-  ];
-  const R = [
-    { x: 396, y: 72 },
-    { x: 396, y: 190 },
-    { x: 396, y: 308 },
-  ];
-  const edges: [{ x: number; y: number }, { x: number; y: number }][] = [
-    [L[0], M[0]], [L[1], M[0]], [L[1], M[1]], [L[2], M[1]],
-    [M[0], R[0]], [M[0], R[1]], [M[1], R[1]], [M[1], R[2]],
-  ];
-  const d = (a: { x: number; y: number }, b: { x: number; y: number }) => `M${a.x} ${a.y} L${b.x} ${b.y}`;
+/* Verified task counts per track in SupChain-Bench Verified (288 instances total). */
+const TRACKS = [
+  { label: "QA · reasoning", sub: "single / multiple / true-false", value: 217 },
+  { label: "Tool · SOP", sub: "deterministic step-by-step", value: 33 },
+  { label: "Tool · No-SOP", sub: "minimal instruction", value: 19 },
+  { label: "Tool · ReAct", sub: "think / act / observe", value: 19 },
+];
 
+/* A horizontal bar chart of verified tasks by track. One measure across tracks,
+   so a single accent hue carries magnitude; the labels carry identity. */
+function TrackChart() {
+  const max = Math.max(...TRACKS.map((t) => t.value));
   return (
-    <svg viewBox="0 0 460 380" className="w-full h-auto" role="img" aria-label="A three-tier supply-chain network: trade, fulfillment, and warehouse nodes connected by order flows.">
-      {edges.map((e, i) => (
-        <path key={`b${i}`} className="net-edge" d={d(e[0], e[1])} />
+    <div className="flex flex-col gap-[18px]">
+      {TRACKS.map((t) => (
+        <div key={t.label} title={`${t.label}: ${t.value} verified`}>
+          <div className="flex items-baseline justify-between gap-3">
+            <span className="text-[0.85rem] font-medium text-foreground">{t.label}</span>
+            <span className="font-mono text-[0.78rem] tabular-nums text-foreground">{t.value}</span>
+          </div>
+          <div className="mt-2 h-2.5 w-full overflow-hidden rounded-full bg-secondary">
+            <div className="h-full rounded-full bg-accent" style={{ width: `${(t.value / max) * 100}%` }} />
+          </div>
+          <div className="mt-1 font-mono text-[0.6rem] uppercase tracking-wider text-muted-foreground/70">{t.sub}</div>
+        </div>
       ))}
-      {edges.map((e, i) => (
-        <path key={`f${i}`} className="net-flow" d={d(e[0], e[1])} style={{ animationDelay: `${-i * 0.19}s` }} />
-      ))}
-
-      {M.map((n, i) => (
-        <g key={`m${i}`}>
-          <circle className="net-halo" cx={n.x} cy={n.y} r="9" style={{ animationDelay: `${i * 0.9}s` }} />
-          <circle className="net-node-live" cx={n.x} cy={n.y} r="5" />
-        </g>
-      ))}
-      {[...L, ...R].map((n, i) => (
-        <circle key={`o${i}`} className="net-node" cx={n.x} cy={n.y} r="5" />
-      ))}
-
-      <text className="net-label" x="64" y="352" textAnchor="middle">TRADE</text>
-      <text className="net-label" x="230" y="352" textAnchor="middle">FULFILLMENT</text>
-      <text className="net-label" x="396" y="352" textAnchor="middle">WAREHOUSE</text>
-    </svg>
+    </div>
   );
 }
 
@@ -327,11 +308,16 @@ function Focus() {
       <div className="mx-auto max-w-6xl grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         <Reveal>
           <div className="rounded-2xl border border-border bg-card p-6 sm:p-9 soft-shadow">
-            <div className="flex items-center justify-between mb-5">
-              <span className="eyebrow">Order flow · live</span>
-              <span className="font-mono text-[0.7rem] text-muted-foreground">3-tier</span>
+            <div className="flex items-center justify-between mb-6">
+              <span className="eyebrow">Verified by track</span>
+              <span className="font-mono text-[0.7rem] text-muted-foreground">288 total</span>
             </div>
-            <SupplyNetwork />
+            <TrackChart />
+            <div className="mt-6 flex items-center justify-between border-t border-border pt-4 font-mono text-[0.62rem] uppercase tracking-wider text-muted-foreground">
+              <span>217 QA</span>
+              <span>71 tool</span>
+              <span>2 environments</span>
+            </div>
           </div>
         </Reveal>
 
@@ -346,20 +332,25 @@ function Focus() {
             logic, and recover from cancellations and errors.
           </p>
 
-          <div className="mt-8 rounded-2xl border border-border bg-card p-6">
+          <Link
+            to="/case-studies/sc-bench"
+            className="group mt-8 block rounded-2xl border border-border bg-card p-6 transition hover:border-accent/40 hover:bg-background/95"
+          >
             <div className="flex items-center justify-between">
-              <h3 className="font-display text-lg text-foreground">SupChain-Bench Verified</h3>
+              <h3 className="font-display text-lg text-foreground group-hover:underline underline-offset-4 decoration-foreground/30">
+                SupChain-Bench Verified
+              </h3>
               <span className="font-mono text-[0.65rem] uppercase tracking-wider text-accent">Research Effort</span>
             </div>
             <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-              Building on the SupChain-Bench supply-chain benchmark, we hand-verified a set of 44 tasks confirmed to be
-              reasonably solvable by an agent, a cleaner signal for training and evaluation.
+              Building on the SupChain-Bench supply-chain benchmark, we audited all 326 items through the real graders and
+              kept the 288 that are gold-correct and fairly gradable, a clean, held-out signal for training and evaluation.
             </p>
             <div className="mt-5 flex items-center gap-6">
               {[
-                { v: "44", l: "Tasks" },
-                { v: "By hand", l: "Verified" },
-                { v: "3-tier", l: "Network" },
+                { v: "288", l: "Verified" },
+                { v: "326", l: "Audited" },
+                { v: "76", l: "Excluded" },
               ].map((s) => (
                 <div key={s.l}>
                   <div className="font-display text-lg text-foreground">{s.v}</div>
@@ -367,11 +358,11 @@ function Focus() {
                 </div>
               ))}
             </div>
-            <div className="mt-5 inline-flex items-center gap-1.5 font-mono text-xs text-muted-foreground">
-              <span className="size-1.5 rounded-full bg-accent" />
-              Case study coming soon
+            <div className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-accent">
+              Read the case study
+              <span className="transition-transform group-hover:translate-x-0.5">→</span>
             </div>
-          </div>
+          </Link>
         </Reveal>
       </div>
     </section>
