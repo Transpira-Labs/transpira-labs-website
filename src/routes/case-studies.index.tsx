@@ -5,9 +5,16 @@ export const Route = createFileRoute("/case-studies/")({
   head: () => ({
     meta: [
       { title: "Case Studies | Transpira" },
-      { name: "description", content: "Real-world projects demonstrating how Transpira approaches hard reinforcement learning and code-generation problems." },
+      {
+        name: "description",
+        content:
+          "Real-world projects demonstrating how Transpira approaches hard reinforcement learning and code-generation problems.",
+      },
       { property: "og:title", content: "Case Studies | Transpira" },
-      { property: "og:description", content: "Real-world projects demonstrating how we approach hard engineering problems." },
+      {
+        property: "og:description",
+        content: "Real-world projects demonstrating how we approach hard engineering problems.",
+      },
     ],
   }),
   component: CaseStudiesIndex,
@@ -21,6 +28,13 @@ function CaseStudiesIndex() {
       title: "Benchception",
       desc: "Which frontier model is best at building RL environments? We make environment-authoring the thing under test: models compete by teaching, judged on a held-out Supply Chain Bench.",
       tags: ["Environment Authoring", "Evaluation", "Supply Chain"],
+    },
+    {
+      slug: "sc-bench",
+      eyebrow: "Internal R&D",
+      title: "SupChain-Bench Verified",
+      desc: "A held-out benchmark is only as trustworthy as its ground truth. We audited all 326 items through the real graders, excluded every landmine, and packaged the survivors as two deployable HUD v6 environments.",
+      tags: ["Benchmark Verification", "Evaluation", "HUD v6"],
     },
     {
       slug: "build",
@@ -49,7 +63,12 @@ function CaseStudiesIndex() {
       <p className="text-foreground/80 leading-relaxed mb-6">{s.desc}</p>
       <div className="flex flex-wrap gap-2">
         {s.tags.map((t) => (
-          <span key={t} className="text-xs rounded-full border border-foreground/15 bg-background/70 px-3 py-1 text-foreground/70">{t}</span>
+          <span
+            key={t}
+            className="text-xs rounded-full border border-foreground/15 bg-background/70 px-3 py-1 text-foreground/70"
+          >
+            {t}
+          </span>
         ))}
       </div>
     </>
@@ -78,12 +97,21 @@ function CaseStudiesIndex() {
                 <Link key={s.slug} to="/case-studies/benchception" className={cardClass}>
                   {cardInner(s)}
                 </Link>
+              ) : s.slug === "sc-bench" ? (
+                <Link key={s.slug} to="/case-studies/sc-bench" className={cardClass}>
+                  {cardInner(s)}
+                </Link>
               ) : s.slug === "build" ? (
                 <Link key={s.slug} to="/case-studies/build" className={cardClass}>
                   {cardInner(s)}
                 </Link>
               ) : (
-                <Link key={s.slug} to="/case-studies/$slug" params={{ slug: s.slug }} className={cardClass}>
+                <Link
+                  key={s.slug}
+                  to="/case-studies/$slug"
+                  params={{ slug: s.slug }}
+                  className={cardClass}
+                >
                   {cardInner(s)}
                 </Link>
               ),
