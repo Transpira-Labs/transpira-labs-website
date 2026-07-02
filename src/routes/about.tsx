@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { SiteNav, SolidBackground, SiteFooter, PLATFORM_URL, BUILD_URL, CONTACT_EMAIL } from "@/components/site-chrome";
+import { SiteNav, SolidBackground, SiteFooter, PLATFORM_URL, BUILD_URL, CAL_URL } from "@/components/site-chrome";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -39,8 +39,8 @@ function AboutPage() {
             <p className="mt-6 text-lg text-foreground/85 leading-relaxed">
               We partner with research teams pushing agents toward real-world competence. If that sounds like you, we'd love to talk.
             </p>
-            <a href={`mailto:${CONTACT_EMAIL}`} className="mt-10 inline-block rounded-full px-6 py-3 bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity">
-              {CONTACT_EMAIL}
+            <a href={CAL_URL} target="_blank" rel="noopener noreferrer" className="mt-10 inline-block rounded-full px-6 py-3 bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity">
+              Get in touch
             </a>
           </div>
         </section>

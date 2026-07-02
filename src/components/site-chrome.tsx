@@ -5,6 +5,7 @@ import transpiraLogo from "@/assets/classhopper.jpeg";
 export const PLATFORM_URL = "https://platform.transpiralabs.com";
 export const BUILD_URL = "https://build.transpiralabs.com";
 export const CONTACT_EMAIL = "adi@transpiralabs.com";
+export const CAL_URL = "https://cal.com/adi-krish";
 
 function ExternalArrow() {
   return (
@@ -83,7 +84,9 @@ function NavBar({ isHome, overHero }: { isHome: boolean; overHero: boolean }) {
       </nav>
 
       <a
-        href={`mailto:${CONTACT_EMAIL}`}
+        href={CAL_URL}
+        target="_blank"
+        rel="noopener noreferrer"
         className="text-sm font-medium rounded-full px-4 py-1.5 bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
       >
         Get in touch
@@ -171,13 +174,20 @@ export function SiteFooter() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-x-12 gap-y-2.5 text-sm">
-            <a href={PLATFORM_URL} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">Platform</a>
-            <Link to="/case-studies" className="text-muted-foreground hover:text-foreground transition-colors">Research</Link>
-            <a href={BUILD_URL} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">Build</a>
-            <Link to="/about" className="text-muted-foreground hover:text-foreground transition-colors">About</Link>
-            <a href={`mailto:${CONTACT_EMAIL}`} className="text-muted-foreground hover:text-foreground transition-colors">Contact</a>
-            <Link to="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">Privacy</Link>
+          <div className="flex flex-col gap-8 sm:flex-row sm:gap-16">
+            <div className="flex flex-col gap-2.5 text-sm">
+              <div className="mb-1 font-mono text-[0.7rem] uppercase tracking-[0.14em] text-foreground/45">Explore</div>
+              <a href={PLATFORM_URL} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">Platform</a>
+              <a href={BUILD_URL} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">Build</a>
+              <Link to="/case-studies" className="text-muted-foreground hover:text-foreground transition-colors">Research</Link>
+              <Link to="/about" className="text-muted-foreground hover:text-foreground transition-colors">About</Link>
+              <Link to="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">Privacy</Link>
+            </div>
+            <div className="flex flex-col gap-2.5 text-sm">
+              <div className="mb-1 font-mono text-[0.7rem] uppercase tracking-[0.14em] text-foreground/45">Contact</div>
+              <a href={CAL_URL} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">Schedule a demo</a>
+              <a href={`mailto:${CONTACT_EMAIL}`} className="text-muted-foreground hover:text-foreground transition-colors">{CONTACT_EMAIL}</a>
+            </div>
           </div>
         </div>
 

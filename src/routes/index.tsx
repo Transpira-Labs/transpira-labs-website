@@ -8,6 +8,7 @@ import {
   PLATFORM_URL,
   BUILD_URL,
   CONTACT_EMAIL,
+  CAL_URL,
 } from "@/components/site-chrome";
 import supplyFloor from "@/assets/supply-floor.jpg";
 import buildCanvas from "@/assets/build-canvas.png";
@@ -373,15 +374,33 @@ function CTA() {
   return (
     <section className="relative px-6 py-28 border-t border-border">
       <Reveal>
-        <div className="mx-auto max-w-6xl flex flex-col md:flex-row md:items-end md:justify-between gap-8">
-          <h2 className="font-display text-[clamp(2rem,4.2vw,3.4rem)] leading-[1.06] tracking-tight text-foreground text-balance max-w-2xl">
-            Training agents for real-world operations?
-          </h2>
+        <div className="mx-auto max-w-6xl flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+          <div className="max-w-2xl">
+            <h2 className="font-display text-[clamp(2rem,4.2vw,3.4rem)] leading-[1.06] tracking-tight text-foreground text-balance">
+              Training agents for real-world operations?
+            </h2>
+            <p className="mt-4 text-muted-foreground leading-relaxed">
+              Book a 30-minute demo to see the platform in action, or email us at{" "}
+              <a
+                href={`mailto:${CONTACT_EMAIL}`}
+                className="text-accent underline underline-offset-2 hover:opacity-80"
+              >
+                {CONTACT_EMAIL}
+              </a>
+              .
+            </p>
+          </div>
           <div className="flex flex-wrap items-center gap-3 shrink-0">
             <a
-              href={`mailto:${CONTACT_EMAIL}`}
-              className="rounded-full px-6 py-3 bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
+              href={CAL_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full px-6 py-3 bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
             >
+              <svg viewBox="0 0 24 24" className="size-4" fill="none" aria-hidden="true">
+                <rect x="3" y="4.5" width="18" height="16" rx="2.5" stroke="currentColor" strokeWidth="1.6" />
+                <path d="M3 9h18M8 2.5v4M16 2.5v4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+              </svg>
               Get in touch
             </a>
             <Link
