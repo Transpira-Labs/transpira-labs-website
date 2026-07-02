@@ -173,7 +173,7 @@ function BenchceptionPage() {
               <Callout symbol="!">
                 <strong className="text-foreground">No contamination.</strong> The golden environment is never shown to
                 either author or student during authoring or training; it is revealed only at evaluation. Models can&apos;t
-                memorize the test, only learn to teach.
+                memorize the test; they can only learn to teach.
               </Callout>
             </div>
 

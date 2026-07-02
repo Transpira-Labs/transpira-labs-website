@@ -89,7 +89,7 @@ function NavBar({ isHome, overHero }: { isHome: boolean; overHero: boolean }) {
         rel="noopener noreferrer"
         className="text-sm font-medium rounded-full px-4 py-1.5 bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
       >
-        Get in touch
+        Book a meeting
       </a>
     </div>
   );
@@ -161,7 +161,7 @@ export const ScrollBackground = SolidBackground;
 
 export function SiteFooter() {
   return (
-    <footer id="company" className="relative border-t border-border px-6 py-14 bg-background">
+    <footer id="company" className="relative border-t border-border px-6 py-10 bg-background">
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-10">
           <div>
@@ -172,34 +172,38 @@ export function SiteFooter() {
             <p className="mt-3 text-sm text-muted-foreground max-w-xs leading-relaxed">
               Reinforcement-learning environments for supply-chain and operations agents.
             </p>
+            <div className="mt-6 flex flex-col gap-1 text-xs text-muted-foreground">
+              <span className="font-mono">© {new Date().getFullYear()} Transpira Labs</span>
+              <span>
+                Backed by{" "}
+                <a href="https://fusen.world/" target="_blank" rel="noopener noreferrer" className="text-foreground/80 hover:text-foreground underline underline-offset-2 transition-colors">
+                  Fusen World
+                </a>
+              </span>
+            </div>
           </div>
 
-          <div className="flex flex-col gap-8 sm:flex-row sm:gap-16">
-            <div className="flex flex-col gap-2.5 text-sm">
-              <div className="mb-1 font-mono text-[0.7rem] uppercase tracking-[0.14em] text-foreground/45">Explore</div>
-              <a href={PLATFORM_URL} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">Platform</a>
-              <a href={BUILD_URL} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">Build</a>
-              <Link to="/case-studies" className="text-muted-foreground hover:text-foreground transition-colors">Research</Link>
-              <Link to="/about" className="text-muted-foreground hover:text-foreground transition-colors">About</Link>
-              <Link to="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">Privacy</Link>
+          <div className="flex gap-12 text-sm sm:gap-20">
+            <div>
+              <div className="font-display text-[0.78rem] font-bold uppercase tracking-[0.15em] text-foreground">Explore</div>
+              <div className="mt-3 flex flex-col gap-2">
+                <a href={PLATFORM_URL} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">Platform</a>
+                <a href={BUILD_URL} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">Build</a>
+                <Link to="/case-studies" className="text-muted-foreground hover:text-foreground transition-colors">Research</Link>
+                <Link to="/about" className="text-muted-foreground hover:text-foreground transition-colors">About</Link>
+                <Link to="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">Privacy</Link>
+              </div>
             </div>
-            <div className="flex flex-col gap-2.5 text-sm">
-              <div className="mb-1 font-mono text-[0.7rem] uppercase tracking-[0.14em] text-foreground/45">Contact</div>
-              <a href={CAL_URL} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">Schedule a demo</a>
-              <a href={`mailto:${CONTACT_EMAIL}`} className="text-muted-foreground hover:text-foreground transition-colors">{CONTACT_EMAIL}</a>
+            <div>
+              <div className="font-display text-[0.78rem] font-bold uppercase tracking-[0.15em] text-foreground">Contact</div>
+              <div className="mt-3 flex flex-col gap-2">
+                <a href={CAL_URL} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">Schedule a demo</a>
+                <a href={`mailto:${CONTACT_EMAIL}`} className="text-muted-foreground hover:text-foreground transition-colors">{CONTACT_EMAIL}</a>
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="mt-12 pt-6 border-t border-border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-muted-foreground">
-          <span className="font-mono">© {new Date().getFullYear()} Transpira Labs</span>
-          <span>
-            Backed by{" "}
-            <a href="https://fusen.world/" target="_blank" rel="noopener noreferrer" className="text-foreground/80 hover:text-foreground underline underline-offset-2 transition-colors">
-              Fusen World
-            </a>
-          </span>
-        </div>
       </div>
     </footer>
   );

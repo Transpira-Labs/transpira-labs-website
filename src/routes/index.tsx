@@ -213,7 +213,7 @@ function Efforts() {
       href: PLATFORM_URL,
       tag: "platform.transpiralabs.com",
       intro:
-        "Where we author, evaluate, and quality-check every benchmark task, running them against frontier models and validating every trace before it ships.",
+        "Where we author, evaluate, and quality-check every benchmark task, running each against frontier models and validating every trace before it ships.",
       features: [
         {
           kicker: "Pipeline & analytics",
@@ -345,7 +345,7 @@ function Focus() {
             </div>
             <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
               Building on the SupChain-Bench supply-chain benchmark, we audited all 326 items through the real graders and
-              kept the 288 that are gold-correct and fairly gradable, a clean, held-out signal for training and evaluation.
+              kept the 288 that are gold-correct and fairly gradable, giving a clean, held-out signal for training and evaluation.
             </p>
             <div className="mt-5 flex items-center gap-6">
               {[
@@ -379,7 +379,7 @@ function CTA() {
             <h2 className="font-display text-[clamp(2rem,4.2vw,3.4rem)] leading-[1.06] tracking-tight text-foreground text-balance">
               Training agents for real-world operations?
             </h2>
-            <p className="mt-4 text-muted-foreground leading-relaxed">
+            <p className="mt-2 text-muted-foreground leading-relaxed">
               Book a 30-minute demo to see the platform in action, or email us at{" "}
               <a
                 href={`mailto:${CONTACT_EMAIL}`}
@@ -401,7 +401,7 @@ function CTA() {
                 <rect x="3" y="4.5" width="18" height="16" rx="2.5" stroke="currentColor" strokeWidth="1.6" />
                 <path d="M3 9h18M8 2.5v4M16 2.5v4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
               </svg>
-              Get in touch
+              Book a meeting
             </a>
             <Link
               to="/case-studies"

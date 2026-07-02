@@ -5,7 +5,7 @@ export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About | Transpira AI Lab" },
-      { name: "description", content: "Transpira is an AI lab building hyper-realistic reinforcement learning environments and delivering them to frontier labs." },
+      { name: "description", content: "Transpira is an AI lab building hyper-realistic reinforcement-learning environments and delivering them to frontier labs." },
       { property: "og:title", content: "About | Transpira AI Lab" },
       { property: "og:description", content: "An AI lab building the environments that teach agents to solve real engineering problems, already in use at frontier labs." },
     ],
@@ -40,7 +40,7 @@ function AboutPage() {
               We partner with research teams pushing agents toward real-world competence. If that sounds like you, we'd love to talk.
             </p>
             <a href={CAL_URL} target="_blank" rel="noopener noreferrer" className="mt-10 inline-block rounded-full px-6 py-3 bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity">
-              Get in touch
+              Book a meeting
             </a>
           </div>
         </section>

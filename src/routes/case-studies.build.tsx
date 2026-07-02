@@ -7,9 +7,9 @@ export const Route = createFileRoute("/case-studies/build")({
   head: () => ({
     meta: [
       { title: "Build: No-code RL Environments | Transpira" },
-      { name: "description", content: "Build is Transpira's Scratch-style, block-based builder for reinforcement-learning environments. Snap blocks together, describe each in plain language, check it, and ship a real HUD environment you can run and train on, no code." },
+      { name: "description", content: "Build is Transpira's Scratch-style, block-based builder for reinforcement-learning environments. Snap blocks together, describe each in plain language, check it, and ship a real HUD environment you can run and train on. No code." },
       { property: "og:title", content: "Build: No-code RL Environments | Transpira" },
-      { property: "og:description", content: "Snap blocks together, describe each in plain language, and ship a real RL environment on HUD, no code." },
+      { property: "og:description", content: "Snap blocks together, describe each in plain language, and ship a real RL environment on HUD. No code." },
     ],
   }),
   component: BuildCaseStudy,
@@ -104,7 +104,7 @@ function BuildCaseStudy() {
             </h1>
             <p className="mt-5 text-[20px] leading-[1.5] text-foreground/80">
               Build is a Scratch-style, block-based builder for reinforcement-learning environments. Snap blocks
-              together, describe each in plain language, and ship a real environment you can run and train on, no code,
+              together, describe each in plain language, and ship a real environment you can run and train on. No code,
               JSON, or CLI.
             </p>
             <div className="mt-6 inline-flex items-center gap-2.5 rounded-full border border-accent/30 bg-accent/[0.06] px-4 py-2 text-[13px] font-medium text-foreground">
@@ -212,7 +212,7 @@ function BuildCaseStudy() {
             <Step n="05" title="Run a baseline, then train">
               <P>
                 With the environment live, run every task on HUD across a spanning set of models (Haiku 4.5, Sonnet 4.6,
-                and Opus 4.8), a few attempts each. The results tell you whether the environment is any good:
+                and Opus 4.8), with a few attempts each. The results tell you whether the environment is any good:
                 <strong className="text-foreground"> solvable</strong> (a strong model can actually do it) and
                 <strong className="text-foreground"> discriminating</strong> (it separates weak models from strong ones).
                 Once it's both, fork a base model from the same screen and start an RL run against the reward you
