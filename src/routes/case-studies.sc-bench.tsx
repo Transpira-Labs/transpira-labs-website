@@ -270,7 +270,7 @@ function SupChainBenchPage() {
                 survived a blind panel that never saw it: a Sonnet 3-vote pass plus six vendors
                 answering cold (opus-4-8, sonnet-4-6, haiku-4-5, qwen3-max, deepseek-v3.1-terminus,
                 gpt-5.1). Where 0 of 6 landed on the gold, we dropped it; where only some disagreed,
-                we reviewed it by hand.
+                we reviewed it manually.
               </P>
               <Callout symbol="✓">
                 <strong className="text-foreground">9 excluded, 217 verified.</strong> Seven

@@ -29,10 +29,10 @@ export const Route = createFileRoute("/")({
 
 /* Verified task counts per track in SupChain-Bench Verified (288 instances total). */
 const TRACKS = [
-  { label: "QA · reasoning", sub: "single / multiple / true-false", value: 217 },
-  { label: "Tool · SOP", sub: "deterministic step-by-step", value: 33 },
-  { label: "Tool · No-SOP", sub: "minimal instruction", value: 19 },
-  { label: "Tool · ReAct", sub: "think / act / observe", value: 19 },
+  { label: "QA · reasoning", sub: "single / multiple / true-false", desc: "Answered from reasoning alone, no tools.", value: 217 },
+  { label: "Tool · SOP", sub: "deterministic step-by-step", desc: "Tool use under a fixed workflow prompt.", value: 33 },
+  { label: "Tool · No-SOP", sub: "minimal instruction", desc: "Tool use with no workflow given.", value: 19 },
+  { label: "Tool · ReAct", sub: "think / act / observe", desc: "Tool use with reason-and-act prompting.", value: 19 },
 ];
 
 /* A horizontal bar chart of verified tasks by track. One measure across tracks,
@@ -40,17 +40,22 @@ const TRACKS = [
 function TrackChart() {
   const max = Math.max(...TRACKS.map((t) => t.value));
   return (
-    <div className="flex flex-col gap-[18px]">
+    <div className="flex flex-1 flex-col">
       {TRACKS.map((t) => (
-        <div key={t.label} title={`${t.label}: ${t.value} verified`}>
+        <div
+          key={t.label}
+          title={`${t.label}: ${t.value} verified`}
+          className="flex flex-1 flex-col justify-center gap-2 border-t border-border/60 first:border-t-0"
+        >
           <div className="flex items-baseline justify-between gap-3">
-            <span className="text-[0.85rem] font-medium text-foreground">{t.label}</span>
-            <span className="font-mono text-[0.78rem] tabular-nums text-foreground">{t.value}</span>
+            <span className="text-[0.9rem] font-medium text-foreground">{t.label}</span>
+            <span className="font-mono text-sm font-semibold tabular-nums text-foreground">{t.value}</span>
           </div>
-          <div className="mt-2 h-2.5 w-full overflow-hidden rounded-full bg-secondary">
+          <div className="h-2 w-full overflow-hidden rounded-full bg-secondary">
             <div className="h-full rounded-full bg-accent" style={{ width: `${(t.value / max) * 100}%` }} />
           </div>
-          <div className="mt-1 font-mono text-[0.6rem] uppercase tracking-wider text-muted-foreground/70">{t.sub}</div>
+          <div className="font-mono text-[0.6rem] uppercase tracking-wider text-muted-foreground/70">{t.sub}</div>
+          <p className="text-[0.8rem] leading-snug text-muted-foreground">{t.desc}</p>
         </div>
       ))}
     </div>
@@ -95,8 +100,7 @@ function HeroScreen() {
               style={{ "--rise-delay": "200ms" } as CSSProperties}
             >
               Transpira builds hyper-realistic environments and benchmarks that train and evaluate AI agents on real
-              operational work, from three-tier logistics networks to production systems. Already delivered to frontier
-              labs.
+              operational work, from three-tier logistics networks to production systems.
             </p>
             <div className="rise mt-8 flex flex-wrap items-center gap-3" style={{ "--rise-delay": "300ms" } as CSSProperties}>
               <Link
@@ -173,7 +177,6 @@ function ImageFrame({
 
 function FeatureRow({
   flip,
-  kicker,
   title,
   body,
   imgUrl,
@@ -181,7 +184,6 @@ function FeatureRow({
   img,
 }: {
   flip?: boolean;
-  kicker: string;
   title: string;
   body: string;
   imgUrl: string;
@@ -196,8 +198,7 @@ function FeatureRow({
         </ImageFrame>
       </Reveal>
       <Reveal delay={100} className={flip ? "md:order-1" : undefined}>
-        <div className="eyebrow">{kicker}</div>
-        <h4 className="mt-3 font-display text-[clamp(1.3rem,2.2vw,1.65rem)] tracking-tight text-foreground">{title}</h4>
+        <h4 className="font-display text-[clamp(1.3rem,2.2vw,1.65rem)] tracking-tight text-foreground">{title}</h4>
         <p className="mt-3 text-muted-foreground leading-relaxed">{body}</p>
       </Reveal>
     </div>
@@ -211,12 +212,12 @@ function Efforts() {
       href: PLATFORM_URL,
       tag: "platform.transpiralabs.com",
       intro:
-        "Where we author, evaluate, and quality-check every benchmark task, running them against frontier models and reviewing every trace by hand before it ships.",
+        "Where we author, evaluate, and quality-check every benchmark task, running them against frontier models and validating every trace before it ships.",
       features: [
         {
           kicker: "Pipeline & analytics",
           title: "Track every task from draft to done.",
-          body: "Watch work move through the pipeline (created, evaluated against Sonnet and Opus, reviewed, completed) with per-model scores, run status, and spend in one view.",
+          body: "Watch work move through the pipeline with per-model scores, run status, and spend in one view.",
           imgLabel: "Pipeline analytics",
           img: buildDashboard,
         },
@@ -227,19 +228,19 @@ function Efforts() {
       href: BUILD_URL,
       tag: "build.transpiralabs.com",
       intro:
-        "An experiment in composing reinforcement-learning environments from blocks. Describe each step in plain language, then build, run, and test it, no code.",
+        "An experiment in composing reinforcement-learning environments from blocks. Describe each step in plain language, then build, run, and test.",
       features: [
         {
           kicker: "Block canvas",
           title: "Compose an environment from blocks.",
-          body: "Lay out an environment as a chain of blocks (a tool, a check, a branch) each described in plain language and wired to the next. No engineering required.",
+          body: "Lay out an environment as a chain of blocks described in plain language and wired to the next. No code required.",
           imgLabel: "Block canvas",
           img: buildCanvas,
         },
         {
           kicker: "Live run",
           title: "Run, test, and tune in place.",
-          body: "Send an agent through the environment you composed and watch it resolve, retry, and recover in real time, then adjust the reward signal and run it again.",
+          body: "Send an agent through the environment you composed and watch it resolve, retry, and recover in real time. Then adjust the reward and run it again.",
           imgLabel: "Live run",
           img: buildRunTrain,
         },
@@ -257,11 +258,11 @@ function Efforts() {
           </h2>
         </Reveal>
 
-        <div className="mt-16 space-y-20">
+        <div className="mt-16 divide-y divide-border">
           {efforts.map((p) => (
-            <div key={p.name}>
+            <div key={p.name} className="py-16 first:pt-0 last:pb-0">
               <Reveal>
-                <div className="flex flex-col gap-5 border-b border-border pb-8 md:flex-row md:items-end md:justify-between">
+                <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
                   <div className="max-w-2xl">
                     <h3 className="font-display text-[clamp(1.55rem,2.8vw,2.1rem)] tracking-tight text-foreground">{p.name}</h3>
                     <p className="mt-3 text-muted-foreground leading-relaxed">{p.intro}</p>
@@ -283,9 +284,8 @@ function Efforts() {
               <div className="mt-12 space-y-14">
                 {p.features.map((f, i) => (
                   <FeatureRow
-                    key={f.kicker}
+                    key={f.title}
                     flip={i % 2 === 1}
-                    kicker={f.kicker}
                     title={f.title}
                     body={f.body}
                     imgUrl={p.tag}
@@ -305,15 +305,15 @@ function Efforts() {
 function Focus() {
   return (
     <section className="relative px-6 py-24 border-t border-border">
-      <div className="mx-auto max-w-6xl grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-        <Reveal>
-          <div className="rounded-2xl border border-border bg-card p-6 sm:p-9 soft-shadow">
-            <div className="flex items-center justify-between mb-6">
+      <div className="mx-auto max-w-6xl grid lg:grid-cols-2 gap-12 lg:gap-16 items-stretch">
+        <Reveal className="h-full">
+          <div className="flex h-full flex-col rounded-2xl border border-border bg-card p-6 sm:p-9 soft-shadow">
+            <div className="flex items-center justify-between border-b border-border pb-5">
               <span className="eyebrow">Verified by track</span>
               <span className="font-mono text-[0.7rem] text-muted-foreground">288 total</span>
             </div>
             <TrackChart />
-            <div className="mt-6 flex items-center justify-between border-t border-border pt-4 font-mono text-[0.62rem] uppercase tracking-wider text-muted-foreground">
+            <div className="flex items-center justify-between border-t border-border pt-5 font-mono text-[0.62rem] uppercase tracking-wider text-muted-foreground">
               <span>217 QA</span>
               <span>71 tool</span>
               <span>2 environments</span>
@@ -334,7 +334,7 @@ function Focus() {
 
           <Link
             to="/case-studies/sc-bench"
-            className="group mt-8 block rounded-2xl border border-border bg-card p-6 transition hover:border-accent/40 hover:bg-background/95"
+            className="group mt-8 block rounded-2xl border border-accent/30 bg-accent/[0.07] p-6 transition hover:border-accent/50 hover:bg-accent/[0.11]"
           >
             <div className="flex items-center justify-between">
               <h3 className="font-display text-lg text-foreground group-hover:underline underline-offset-4 decoration-foreground/30">
