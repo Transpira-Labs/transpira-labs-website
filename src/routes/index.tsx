@@ -10,7 +10,7 @@ import {
   CONTACT_EMAIL,
   CAL_URL,
 } from "@/components/site-chrome";
-import portCranes from "@/assets/port-cranes.jpg";
+import warehouseAisle from "@/assets/warehouse-aisle.jpg";
 import buildCanvas from "@/assets/build-canvas.png";
 import buildRunTrain from "@/assets/build-run-train.png";
 import buildDashboard from "@/assets/build-dashboard.png";
@@ -19,7 +19,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Transpira: Reinforcement Learning for the Supply Chain" },
-      { name: "description", content: "Transpira is an AI research lab building hyper-realistic reinforcement-learning environments and benchmarks that train and evaluate agents on real operational work, with a focus on the supply chain." },
+      { name: "description", content: "Transpira is an AI research lab building reinforcement-learning environments and benchmarks that train and evaluate agents on operational work, with a focus on the supply chain." },
       { property: "og:title", content: "Transpira: Reinforcement Learning for the Supply Chain" },
       { property: "og:description", content: "An AI research lab building reinforcement-learning environments for supply-chain and operations agents." },
       { property: "og:type", content: "website" },
@@ -67,22 +67,23 @@ function TrackChart() {
 function HeroScreen() {
   return (
     <section className="relative min-h-screen flex flex-col overflow-hidden bg-[var(--hero)]">
-      {/* Cinematic port backdrop: crane silhouettes at dusk. The photo is
-          brightest in the sky, so the vertical veil leans on the top edge. */}
+      {/* Cinematic warehouse backdrop: tall stocked racks under a dark
+          ceiling. The ceiling (upper left) is already near-black, so the top
+          veil is light; the loaded racks on the right carry the brightness. */}
       <div className="absolute inset-0 z-0">
-        <img src={portCranes} alt="" className="w-full h-full object-cover object-center" />
+        <img src={warehouseAisle} alt="" className="w-full h-full object-cover object-center" />
         <div
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to right, var(--hero) 0%, color-mix(in oklch, var(--hero) 84%, transparent) 46%, color-mix(in oklch, var(--hero) 30%, transparent) 100%)",
+              "linear-gradient(to right, var(--hero) 0%, color-mix(in oklch, var(--hero) 86%, transparent) 48%, color-mix(in oklch, var(--hero) 32%, transparent) 100%)",
           }}
         />
         <div
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to bottom, color-mix(in oklch, var(--hero) 72%, transparent) 0%, color-mix(in oklch, var(--hero) 26%, transparent) 34%, transparent 62%, color-mix(in oklch, var(--hero) 62%, transparent) 100%)",
+              "linear-gradient(to bottom, color-mix(in oklch, var(--hero) 58%, transparent) 0%, color-mix(in oklch, var(--hero) 22%, transparent) 32%, transparent 62%, color-mix(in oklch, var(--hero) 62%, transparent) 100%)",
           }}
         />
       </div>
@@ -101,8 +102,8 @@ function HeroScreen() {
               className="rise mt-6 max-w-xl text-lg text-white/70 leading-relaxed"
               style={{ "--rise-delay": "200ms" } as CSSProperties}
             >
-              Transpira builds hyper-realistic environments and benchmarks that train and evaluate AI agents on real
-              operational work, from three-tier logistics networks to production systems.
+              Transpira builds environments and benchmarks that train and evaluate AI agents on operational work,
+              from three-tier logistics networks to production systems.
             </p>
             <div className="rise mt-8 flex flex-wrap items-center gap-3" style={{ "--rise-delay": "300ms" } as CSSProperties}>
               <Link
@@ -242,7 +243,7 @@ function Efforts() {
         {
           kicker: "Live run",
           title: "Run, test, and tune in place.",
-          body: "Send an agent through the environment you composed and watch it resolve, retry, and recover in real time. Then adjust the reward and run it again.",
+          body: "Send an agent through the environment you composed and watch it resolve, retry, and recover live. Then adjust the reward and run it again.",
           imgLabel: "Live run",
           img: buildRunTrain,
         },
@@ -326,10 +327,10 @@ function Focus() {
         <Reveal delay={120}>
           <div className="eyebrow">Focus: Supply Chain</div>
           <h2 className="mt-4 font-display text-[clamp(1.85rem,3.4vw,2.75rem)] tracking-tight text-foreground leading-[1.1]">
-            The supply chain is where reasoning gets real.
+            The supply chain is where reasoning gets tested.
           </h2>
           <p className="mt-6 text-muted-foreground leading-relaxed">
-            Real operations run on multi-tier networks (trade, fulfillment, warehouse) where one decision depends on
+            Operations run on multi-tier networks (trade, fulfillment, warehouse) where one decision depends on
             the state of dozens of others. To act, an agent has to call the right tools, chain them under conditional
             logic, and recover from cancellations and errors.
           </p>
@@ -345,7 +346,7 @@ function Focus() {
               <span className="font-mono text-[0.65rem] uppercase tracking-wider text-accent">Research Effort</span>
             </div>
             <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-              Building on the SupChain-Bench supply-chain benchmark, we audited all 326 items through the real graders and
+              Building on the SupChain-Bench supply-chain benchmark, we audited all 326 items through its graders and
               kept the 288 that are gold-correct and fairly gradable, giving a clean, held-out signal for training and evaluation.
             </p>
             <div className="mt-5 flex items-center gap-6">
@@ -378,7 +379,7 @@ function CTA() {
         <div className="mx-auto max-w-6xl flex flex-col md:flex-row md:items-center md:justify-between gap-8">
           <div className="max-w-2xl">
             <h2 className="font-display text-[clamp(2rem,4.2vw,3.4rem)] leading-[1.06] tracking-tight text-foreground text-balance">
-              Training agents for real-world operations?
+              Training agents to run operations?
             </h2>
             <p className="mt-2 text-muted-foreground leading-relaxed">
               Book a 30-minute demo to see the platform in action, or email us at{" "}

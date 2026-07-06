@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteNav, SolidBackground, SiteFooter, PLATFORM_URL, BUILD_URL, CAL_URL } from "@/components/site-chrome";
+import undockedLogo from "@/assets/undockedlgoo.avif";
+import hudLogo from "@/assets/hudlogo.png";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -44,6 +46,48 @@ function AboutPage() {
             </a>
           </div>
         </section>
+
+        <section className="px-6 py-24 border-t border-border">
+          <div className="mx-auto max-w-3xl">
+            <div className="eyebrow">Team</div>
+            <h2 className="mt-4 font-display text-3xl tracking-tight text-foreground">Who we are</h2>
+            <div className="mt-8 flex items-center gap-4 rounded-2xl border border-border bg-card p-6 soft-shadow">
+              <div className="grid size-14 shrink-0 place-items-center rounded-full bg-secondary font-display text-lg font-semibold text-foreground">
+                AK
+              </div>
+              <div>
+                <div className="text-lg font-medium text-foreground">Adi Krish</div>
+                <div className="text-sm text-muted-foreground">Founder</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="px-6 py-24 border-t border-border">
+          <div className="mx-auto max-w-3xl">
+            <div className="eyebrow">Partners</div>
+            <h2 className="mt-4 font-display text-3xl tracking-tight text-foreground">Who we work with</h2>
+            <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <a
+                href="https://www.undocked.net/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-32 items-center justify-center rounded-2xl border border-border bg-card p-8 soft-shadow transition-colors hover:border-accent/50"
+              >
+                <img src={undockedLogo} alt="Undocked logo" className="max-h-12 w-auto max-w-full object-contain" />
+              </a>
+              <a
+                href="https://www.hud.ai/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-32 items-center justify-center rounded-2xl border border-border bg-card p-8 soft-shadow transition-colors hover:border-accent/50"
+              >
+                <img src={hudLogo} alt="HUD logo" className="max-h-12 w-auto max-w-full object-contain" />
+              </a>
+            </div>
+          </div>
+        </section>
+
         <SiteFooter />
       </main>
     </>

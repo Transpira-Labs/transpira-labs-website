@@ -8,12 +8,12 @@ export const Route = createFileRoute("/case-studies/")({
       {
         name: "description",
         content:
-          "Real-world projects demonstrating how Transpira approaches hard reinforcement learning and code-generation problems.",
+          "What Transpira builds and measures: RL environments, benchmark audits, and fine-tuning runs, each written up with the methods and the numbers.",
       },
       { property: "og:title", content: "Case Studies | Transpira" },
       {
         property: "og:description",
-        content: "Real-world projects demonstrating how we approach hard engineering problems.",
+        content: "RL environments, benchmark audits, and fine-tuning runs, written up with the methods and the numbers.",
       },
     ],
   }),
@@ -26,28 +26,28 @@ function CaseStudiesIndex() {
       slug: "benchception",
       eyebrow: "Internal R&D",
       title: "Benchception",
-      desc: "We tested which frontier model is best at building RL environments by making environment-authoring itself the task, judged against a held-out supply chain benchmark. The full study covers the setup, the scoring, and how each model performed.",
+      desc: "Which model builds the better RL environment: Claude Opus 4.8 or GPT-5.5? We gave both the same plain-language spec, had each build an environment and train a student model on it, and let a held-out supply chain benchmark pick the winner.",
       tags: ["Environment Authoring", "Evaluation", "Supply Chain"],
     },
     {
       slug: "sc-bench",
       eyebrow: "Internal R&D",
       title: "SupChain-Bench Verified",
-      desc: "We ran all 326 benchmark items through the real graders to check their ground truth, removed the ones that failed, and shipped the rest as two HUD v6 environments. The study details what we found and why items were cut.",
+      desc: "326 benchmark items went in, 288 came out. We ran every SupChain-Bench item through its own graders, cut the ones that were wrong or could not be graded fairly, and shipped the survivors as two deployable HUD v6 environments.",
       tags: ["Benchmark Verification", "Evaluation", "HUD v6"],
     },
     {
       slug: "build",
       eyebrow: "Product",
       title: "Build",
-      desc: "A Scratch-style, block-based builder for RL environments: snap blocks together, describe each in plain language, then check, build, run, and train, with no code, JSON, or CLI. The study walks through the design and how it works.",
+      desc: "Snap blocks together and get a working RL environment. Build is our Scratch-style builder for HUD: describe each block in plain language, then check, run, and train. No code, no JSON, no CLI.",
       tags: ["No-code", "Environment Authoring", "HUD"],
     },
     {
       slug: "transpira-set",
       eyebrow: "RL Fine-Tuning",
       title: "Classhopper Set",
-      desc: "We fine-tuned GPT OSS 120B on 100 real-world bug-fixing tasks with GRPO and measured +13% on best@10 with fewer steps per task. The study covers the dataset, training setup, and results.",
+      desc: "100 bug-fixing tasks lifted GPT OSS 120B by 13% on best@10. We fine-tuned with GRPO on the Classhopper Set and also measured +8% on pass@1, with the model solving each task in 4 fewer steps.",
       tags: ["Reinforcement Learning", "Code Generation", "HUD Platform"],
     },
   ];
@@ -85,7 +85,8 @@ function CaseStudiesIndex() {
               Research &amp; case studies
             </h1>
             <p className="mt-6 max-w-2xl text-lg text-muted-foreground leading-relaxed">
-              Real-world projects demonstrating how we approach hard engineering problems.
+              What we build and measure: RL environments, benchmark audits, and fine-tuning runs, each written up with
+              the methods and the numbers.
             </p>
           </div>
         </section>
