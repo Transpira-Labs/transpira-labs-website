@@ -10,7 +10,7 @@ import {
   CONTACT_EMAIL,
   CAL_URL,
 } from "@/components/site-chrome";
-import supplyFloor from "@/assets/supply-floor.jpg";
+import portCranes from "@/assets/port-cranes.jpg";
 import buildCanvas from "@/assets/build-canvas.png";
 import buildRunTrain from "@/assets/build-run-train.png";
 import buildDashboard from "@/assets/build-dashboard.png";
@@ -67,21 +67,22 @@ function TrackChart() {
 function HeroScreen() {
   return (
     <section className="relative min-h-screen flex flex-col overflow-hidden bg-[var(--hero)]">
-      {/* Cinematic supply-floor backdrop. */}
+      {/* Cinematic port backdrop: crane silhouettes at dusk. The photo is
+          brightest in the sky, so the vertical veil leans on the top edge. */}
       <div className="absolute inset-0 z-0">
-        <img src={supplyFloor} alt="" className="w-full h-full object-cover object-center" />
+        <img src={portCranes} alt="" className="w-full h-full object-cover object-center" />
         <div
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to right, var(--hero) 0%, color-mix(in oklch, var(--hero) 80%, transparent) 46%, color-mix(in oklch, var(--hero) 22%, transparent) 100%)",
+              "linear-gradient(to right, var(--hero) 0%, color-mix(in oklch, var(--hero) 84%, transparent) 46%, color-mix(in oklch, var(--hero) 30%, transparent) 100%)",
           }}
         />
         <div
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to bottom, color-mix(in oklch, var(--hero) 55%, transparent) 0%, transparent 28%, transparent 64%, color-mix(in oklch, var(--hero) 70%, transparent) 100%)",
+              "linear-gradient(to bottom, color-mix(in oklch, var(--hero) 72%, transparent) 0%, color-mix(in oklch, var(--hero) 26%, transparent) 34%, transparent 62%, color-mix(in oklch, var(--hero) 62%, transparent) 100%)",
           }}
         />
       </div>
