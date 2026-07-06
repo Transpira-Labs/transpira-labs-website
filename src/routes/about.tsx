@@ -52,7 +52,10 @@ function AboutPage() {
             <div className="eyebrow">Team</div>
             <h2 className="mt-4 font-display text-3xl tracking-tight text-foreground">Who we are</h2>
             <div className="mt-8 flex items-center gap-4 rounded-2xl border border-border bg-card p-6 soft-shadow">
-              <div className="grid size-14 shrink-0 place-items-center rounded-full bg-secondary font-display text-lg font-semibold text-foreground">
+              {/* FOUNDER_PHOTO_PLACEHOLDER: replace this div with the real headshot, e.g.
+                  import adiKrish from "@/assets/adi-krish.png";
+                  <img src={adiKrish} alt="Adi Krish" className="size-14 shrink-0 rounded-full object-cover" /> */}
+              <div className="grid size-14 shrink-0 place-items-center rounded-full border border-dashed border-input bg-secondary/50 font-display text-lg font-semibold text-muted-foreground">
                 AK
               </div>
               <div>
