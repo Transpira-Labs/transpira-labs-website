@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteNav, SolidBackground, SiteFooter, PLATFORM_URL, BUILD_URL, CAL_URL } from "@/components/site-chrome";
-import undockedLogo from "@/assets/undockedlgoo.avif";
+import undockedLogo from "@/assets/undocked-logo.png";
 import hudLogo from "@/assets/hudlogo.png";
 
 export const Route = createFileRoute("/about")({
