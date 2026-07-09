@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as EnvironmentsRouteImport } from './routes/environments'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CaseStudiesIndexRouteImport } from './routes/case-studies.index'
@@ -27,6 +28,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
 const EnvironmentsRoute = EnvironmentsRouteImport.update({
   id: '/environments',
   path: '/environments',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -68,6 +74,7 @@ const CaseStudiesSlugRoute = CaseStudiesSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
   '/environments': typeof EnvironmentsRoute
   '/privacy': typeof PrivacyRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
@@ -79,6 +86,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
   '/environments': typeof EnvironmentsRoute
   '/privacy': typeof PrivacyRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
@@ -91,6 +99,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
   '/environments': typeof EnvironmentsRoute
   '/privacy': typeof PrivacyRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
@@ -104,6 +113,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/contact'
     | '/environments'
     | '/privacy'
     | '/case-studies/$slug'
@@ -115,6 +125,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/contact'
     | '/environments'
     | '/privacy'
     | '/case-studies/$slug'
@@ -126,6 +137,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/contact'
     | '/environments'
     | '/privacy'
     | '/case-studies/$slug'
@@ -138,6 +150,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  ContactRoute: typeof ContactRoute
   EnvironmentsRoute: typeof EnvironmentsRoute
   PrivacyRoute: typeof PrivacyRoute
   CaseStudiesSlugRoute: typeof CaseStudiesSlugRoute
@@ -161,6 +174,13 @@ declare module '@tanstack/react-router' {
       path: '/environments'
       fullPath: '/environments'
       preLoaderRoute: typeof EnvironmentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -218,6 +238,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  ContactRoute: ContactRoute,
   EnvironmentsRoute: EnvironmentsRoute,
   PrivacyRoute: PrivacyRoute,
   CaseStudiesSlugRoute: CaseStudiesSlugRoute,

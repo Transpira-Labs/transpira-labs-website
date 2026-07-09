@@ -8,7 +8,6 @@ import {
   FeatureRow,
   DEMO_URL,
   CONTACT_EMAIL,
-  CAL_URL,
 } from "@/components/site-chrome";
 import warehouseAisle from "@/assets/warehouse-aisle.jpg";
 import demoAsk from "@/assets/demo-ask.png";
@@ -21,9 +20,9 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Transpira | Every System. One Answer." },
-      { name: "description", content: "Transpira is building Manifest: one permissions-aware index across fifteen supply-chain systems. Plain-language questions, answers cited to the source record." },
+      { name: "description", content: "We're building Manifest: an augmentation layer across all your supply-chain systems, indexing your information and monitoring operations to fix problems as soon as they arise." },
       { property: "og:title", content: "Transpira | Every System. One Answer." },
-      { property: "og:description", content: "Transpira is building Manifest: one permissions-aware index across fifteen supply-chain systems. Plain-language questions, answers cited to the source record." },
+      { property: "og:description", content: "We're building Manifest: an augmentation layer across all your supply-chain systems, indexing your information and monitoring operations to fix problems as soon as they arise." },
       { property: "og:type", content: "website" },
     ],
   }),
@@ -104,8 +103,7 @@ function HeroScreen() {
               className="rise mt-6 text-lg text-white/70 leading-relaxed"
               style={{ "--rise-delay": "200ms" } as CSSProperties}
             >
-              Transpira is building Manifest: one permissions-aware index across fifteen supply-chain systems,
-              so any PO, container, or reject code traces to its cause in minutes. Every claim is cited to the source record.
+              We're building Manifest: an augmentation layer across all your supply-chain systems, indexing your information and monitoring operations to fix problems as soon as they arise.
             </p>
             <div className="rise mt-8 flex flex-wrap items-center gap-3" style={{ "--rise-delay": "300ms" } as CSSProperties}>
               <a
@@ -117,7 +115,7 @@ function HeroScreen() {
                 Explore the demo
               </a>
               <Link
-                to="/case-studies"
+                to="/contact"
                 className="rounded-full px-5 py-2.5 border border-white/25 text-sm font-medium text-white hover:bg-white/10 transition-colors"
               >
                 Get in touch
@@ -137,35 +135,34 @@ function Product() {
     {
       kicker: "Ask",
       title: "One question replaces the six-tab hunt.",
-      body: "Ask where PO-4500128843 is and whether it makes the Target MABD. Manifest queries SAP, project44, Flexport, and SharePoint, then streams an answer where every claim carries a citation that links to the exact source record.",
+      body: "Manifest indexes data across all your systems for quick retrival. It understands the context of your operations and efficiently answers questions, grounding answers with citations linked back to the source.",
       imgLabel: "Ask with citations",
       img: demoAsk,
     },
     {
       kicker: "Search",
-      title: "Type a container number, see its whole life.",
-      body: "One search on a container returns its live milestone feed, the house bill, the PO, the 14-reply Slack escalation, the retailer routing guide, and the dray quote buried in email, all scoped to what you already have permission to see.",
+      title: "Find containers through their lifecycle.",
+      body: "Our indexing monitors containers from order to fulfillment, providing you the relevant details scoped to your role.",
       imgLabel: "Unified search",
       img: demoSearch,
     },
     {
       kicker: "Feed",
-      title: "The problems come to you, ranked by dollars.",
-      body: "A severity-ranked exception stream joins each EDI failure, vessel delay, and short ship to the POs, owners, and dollars it puts at risk. A $9,320 OTIF fine gets flagged while there is still time to act, one click from asking Manifest why or assigning an owner.",
-      imgLabel: "Exception feed",
+      title: "The quantified problems come to you.",
+      body: "Every time a problem arises, Manifest automatically locates the error, diagnoses the issue, and proposes solutions, letting your team can focus on fixing problems instead of finding them.",
       img: demoFeed,
     },
     {
       kicker: "Agents",
       title: "Standing watchers that read the logs so nobody has to.",
-      body: "OTIF Sentinel pulls every open retail PO inside 21 days of its MABD, joins the in-transit containers, flags the one breaching its buffer, drafts the extension request per the routing guide, and posts the risk summary to Slack. Every run leaves a full step-by-step trace, and new agents are drafted in plain English.",
+      body: "Manifest deploys agents that can monitor your systems around the clock, completing custom workflows designed to save you time.",
       imgLabel: "Agent run log",
       img: demoAgents,
     },
     {
       kicker: "Connectors",
-      title: "Fifteen systems, one index. Access never widens.",
-      body: "Read-only connectors for SAP S/4HANA, Manhattan Active WM, project44, Flexport, SPS Commerce, Coupa, Slack, Outlook, SharePoint, and more feed one entity graph, with incremental updates landing in minutes. ACLs sync from each source on every crawl.",
+      title: "All systems, one index. Access never widens.",
+      body: "Connectors across your system feed into one entity graph with updates landing in minutes. Details sync through each source on every run.",
       imgLabel: "Connector grid",
       img: demoConnectors,
     },
@@ -181,22 +178,18 @@ function Product() {
               Every system. One answer.
             </h2>
             <p className="mt-5 text-muted-foreground leading-relaxed">
-              When a retailer starts rejecting ASNs at 6:03 AM, the reject code sits in one system, the root cause
-              in another, and the fine posts before anyone connects the dots. Manifest joins raw events to the PO,
-              container, and order behind them, so the answer arrives before the fine does. The demo is a concept
-              walkthrough you can click through as any of four operations roles.
+              When an issue arises within operations, the reject code sits in one system, the root cause
+              in another, and the costs accumulate before anyone connects the dots. Manifest lives on top of these systems, 
+              diagnosing errors and coordinating recovery, resolving issues as they come up instead of waiting for manual intervention.
             </p>
-            <div className="mt-6 flex justify-end">
+            <div className="mt-6 flex justify-center">
               <a
                 href={DEMO_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-accent/50 hover:bg-secondary"
+                className="rounded-full px-5 py-2.5 bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
               >
-                <span className="font-mono text-xs text-foreground/70 group-hover:text-foreground">demo.transpiralabs.com</span>
-                <svg viewBox="0 0 16 16" className="size-4 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent" fill="none" aria-hidden="true">
-                  <path d="M5 11 L11 5 M6 5 H11 V10" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+                Try the live demo
               </a>
             </div>
           </div>
@@ -243,10 +236,10 @@ function Focus() {
         <Reveal delay={120}>
           <div className="eyebrow">Focus: Supply Chain</div>
           <h2 className="mt-4 font-display text-[clamp(1.85rem,3.4vw,2.75rem)] tracking-tight text-foreground leading-[1.1]">
-            The supply chain is where reasoning gets tested.
+            Read our research on Supply Chain agent benchmarking.
           </h2>
           <p className="mt-6 text-muted-foreground leading-relaxed">
-            Operations run on multi-tier networks (trade, fulfillment, warehouse) where one decision depends on
+            In this simulation, operations run on multi-tier networks where one decision depends on
             the state of dozens of others. To act, an agent has to call the right tools, chain them under conditional
             logic, and recover from cancellations and errors.
           </p>
@@ -298,7 +291,7 @@ function CTA() {
               Running supply chain operations?
             </h2>
             <p className="mt-2 text-muted-foreground leading-relaxed">
-              Book a 30-minute call to see Manifest in action, or email us at{" "}
+              Try out Manifest, book a meeting, or email us at{" "}
               <a
                 href={`mailto:${CONTACT_EMAIL}`}
                 className="text-accent underline underline-offset-2 hover:opacity-80"
@@ -310,22 +303,18 @@ function CTA() {
           </div>
           <div className="flex flex-wrap items-center gap-3 shrink-0">
             <a
-              href={CAL_URL}
+              href={DEMO_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full px-6 py-3 bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
+              className="rounded-full px-6 py-3 bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
             >
-              <svg viewBox="0 0 24 24" className="size-4" fill="none" aria-hidden="true">
-                <rect x="3" y="4.5" width="18" height="16" rx="2.5" stroke="currentColor" strokeWidth="1.6" />
-                <path d="M3 9h18M8 2.5v4M16 2.5v4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-              </svg>
-              Book a meeting
+              Try our Demo
             </a>
             <Link
-              to="/case-studies"
+              to="/contact"
               className="rounded-full px-6 py-3 border border-border text-sm font-medium text-foreground hover:bg-secondary transition-colors"
             >
-              See our work
+              Get in touch
             </Link>
           </div>
         </div>

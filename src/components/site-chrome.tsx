@@ -153,24 +153,21 @@ function NavBar({ isHome, overHero }: { isHome: boolean; overHero: boolean }) {
         <Link to="/case-studies" className={`transition-colors ${link}`}>
           Research
         </Link>
-        <Link to="/environments" className={`transition-colors ${link}`}>
-          Environments
-        </Link>
         <Link to="/about" className={`transition-colors ${link}`}>
           About
         </Link>
-        <a href={DEMO_URL} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-1 transition-colors ${link}`}>
-          Demo <ExternalArrow />
-        </a>
+        <Link to="/contact" className={`transition-colors ${link}`}>
+          Contact
+        </Link>
       </nav>
 
       <a
-        href={CAL_URL}
+        href={DEMO_URL}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-sm font-medium rounded-full px-4 py-1.5 bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
+        className="inline-flex items-center gap-1.5 text-sm font-medium rounded-full px-4 py-1.5 bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
       >
-        Book a meeting
+        Try our Demo <ExternalArrow />
       </a>
     </div>
   );
@@ -274,6 +271,7 @@ export function SiteFooter() {
                 <Link to="/case-studies" className="text-muted-foreground hover:text-foreground transition-colors">Research</Link>
                 <Link to="/environments" className="text-muted-foreground hover:text-foreground transition-colors">Environments</Link>
                 <Link to="/about" className="text-muted-foreground hover:text-foreground transition-colors">About</Link>
+                <Link to="/contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact</Link>
                 <Link to="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">Privacy</Link>
               </div>
             </div>
