@@ -67,7 +67,7 @@ function TrackChart() {
 /* The dark hero fills the screen; the light page below flips in beneath it. */
 function HeroScreen() {
   return (
-    <section className="relative min-h-screen flex flex-col overflow-hidden bg-[var(--hero)]">
+    <section className="relative min-h-[82svh] flex flex-col overflow-hidden bg-[var(--hero)]">
       {/* Cinematic warehouse backdrop: tall stocked racks under a dark
           ceiling. The ceiling (upper left) is already near-black, so the top
           veil is light; the loaded racks on the right carry the brightness. */}
@@ -112,7 +112,7 @@ function HeroScreen() {
                 rel="noopener noreferrer"
                 className="rounded-full px-5 py-2.5 bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
               >
-                Explore the demo
+                Try the Demo
               </a>
               <Link
                 to="/contact"
@@ -134,6 +134,7 @@ function Product() {
   const features = [
     {
       kicker: "Ask",
+      path: "/ask",
       title: "One question replaces the six-tab hunt.",
       body: "Manifest indexes data across all your systems for quick retrival. It understands the context of your operations and efficiently answers questions, grounding answers with citations linked back to the source.",
       imgLabel: "Ask with citations",
@@ -141,6 +142,7 @@ function Product() {
     },
     {
       kicker: "Search",
+      path: "/search",
       title: "Find containers through their lifecycle.",
       body: "Our indexing monitors containers from order to fulfillment, providing you the relevant details scoped to your role.",
       imgLabel: "Unified search",
@@ -148,12 +150,15 @@ function Product() {
     },
     {
       kicker: "Feed",
+      path: "/feed",
       title: "The quantified problems come to you.",
-      body: "Every time a problem arises, Manifest automatically locates the error, diagnoses the issue, and proposes solutions, letting your team can focus on fixing problems instead of finding them.",
+      body: "Every time a problem arises, Manifest automatically locates the error, diagnoses the issue, and proposes solutions, letting your team focus on fixing problems instead of finding them.",
+      imgLabel: "Problem feed",
       img: demoFeed,
     },
     {
       kicker: "Agents",
+      path: "/agents",
       title: "Standing watchers that read the logs so nobody has to.",
       body: "Manifest deploys agents that can monitor your systems around the clock, completing custom workflows designed to save you time.",
       imgLabel: "Agent run log",
@@ -161,6 +166,7 @@ function Product() {
     },
     {
       kicker: "Connectors",
+      path: "/connectors",
       title: "All systems, one index. Access never widens.",
       body: "Connectors across your system feed into one entity graph with updates landing in minutes. Details sync through each source on every run.",
       imgLabel: "Connector grid",
@@ -182,16 +188,15 @@ function Product() {
               in another, and the costs accumulate before anyone connects the dots. Manifest lives on top of these systems, 
               diagnosing errors and coordinating recovery, resolving issues as they come up instead of waiting for manual intervention.
             </p>
-            <div className="mt-6 flex justify-center">
-              <a
-                href={DEMO_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-full px-5 py-2.5 bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
-              >
-                Try the live demo
-              </a>
-            </div>
+            <a
+              href={DEMO_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group mt-8 flex items-center justify-center gap-2 rounded-2xl border border-accent/30 bg-accent/[0.07] px-6 py-4 text-sm font-medium text-foreground transition hover:border-accent/50 hover:bg-accent/[0.11]"
+            >
+              <span>See Manifest in action and try the demo today</span>
+              <span className="text-accent transition-transform group-hover:translate-x-0.5">→</span>
+            </a>
           </div>
         </Reveal>
 
@@ -203,7 +208,8 @@ function Product() {
               kicker={f.kicker}
               title={f.title}
               body={f.body}
-              imgUrl="demo.transpiralabs.com"
+              imgUrl={`demo.transpiralabs.com${f.path}`}
+              imgHref={`${DEMO_URL}${f.path}`}
               imgLabel={f.imgLabel}
               img={f.img}
             />

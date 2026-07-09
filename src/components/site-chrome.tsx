@@ -53,20 +53,22 @@ export function Reveal({ children, delay = 0, className = "" }: { children: Reac
    placeholder until an <img> child is passed. */
 export function ImageFrame({
   url,
+  href,
   label,
   children,
 }: {
   url: string;
+  href?: string;
   label: string;
   children?: ReactNode;
 }) {
-  return (
-    <div className="overflow-hidden rounded-2xl border border-border bg-card soft-shadow">
-      <div className="flex items-center gap-1.5 border-b border-border bg-secondary/60 px-4 py-2.5">
-        <span className="size-2.5 rounded-full bg-foreground/12" />
-        <span className="size-2.5 rounded-full bg-foreground/12" />
-        <span className="size-2.5 rounded-full bg-foreground/12" />
-        <span className="ml-3 truncate font-mono text-[0.65rem] text-muted-foreground">{url}</span>
+  const frame = (
+    <>
+      <div className="flex items-center gap-1.5 border-b border-border bg-secondary/60 px-4 py-2.5 transition-colors group-hover:bg-accent/15">
+        <span className="size-2.5 rounded-full bg-[#ff5f57]" />
+        <span className="size-2.5 rounded-full bg-[#febc2e]" />
+        <span className="size-2.5 rounded-full bg-[#28c840]" />
+        <span className="ml-3 truncate font-mono text-[0.65rem] text-muted-foreground transition-colors group-hover:text-accent">{url}</span>
       </div>
       {children ?? (
         <div
@@ -90,8 +92,22 @@ export function ImageFrame({
           </div>
         </div>
       )}
-    </div>
+    </>
   );
+  const frameClass = "overflow-hidden rounded-2xl border border-border bg-card soft-shadow";
+  if (href) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`group block ${frameClass} transition-colors hover:border-accent/50`}
+      >
+        {frame}
+      </a>
+    );
+  }
+  return <div className={frameClass}>{frame}</div>;
 }
 
 export function FeatureRow({
@@ -100,6 +116,7 @@ export function FeatureRow({
   title,
   body,
   imgUrl,
+  imgHref,
   imgLabel,
   img,
 }: {
@@ -108,13 +125,14 @@ export function FeatureRow({
   title: string;
   body: string;
   imgUrl: string;
+  imgHref?: string;
   imgLabel: string;
   img?: string;
 }) {
   return (
     <div className="grid items-center gap-8 md:grid-cols-2 lg:gap-14">
       <Reveal className={flip ? "md:order-2" : undefined}>
-        <ImageFrame url={imgUrl} label={imgLabel}>
+        <ImageFrame url={imgUrl} href={imgHref} label={imgLabel}>
           {img ? <img src={img} alt={imgLabel} className="block w-full" /> : undefined}
         </ImageFrame>
       </Reveal>
@@ -191,7 +209,8 @@ export function SiteNav() {
       window.removeEventListener("resize", update);
     };
   }, []);
-  const heroPassed = vh > 0 && y > vh - 110;
+  // The homepage hero is 82svh tall; swap the sticky nav in as it scrolls past.
+  const heroPassed = vh > 0 && y > vh * 0.82 - 110;
   // On the homepage the nav sits at the top of the dark hero and scrolls away
   // with the page (absolute), then the solid sticky nav slides in on the light body.
   // The sticky nav is always mounted so it can transition *out* smoothly when
