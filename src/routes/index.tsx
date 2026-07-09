@@ -22,7 +22,7 @@ export const Route = createFileRoute("/")({
       { title: "Transpira | Every System. One Answer." },
       { name: "description", content: "We're building Manifest: an augmentation layer across all your supply-chain systems, indexing your information and monitoring operations to fix problems as soon as they arise." },
       { property: "og:title", content: "Transpira | Every System. One Answer." },
-      { property: "og:description", content: "We're building Manifest: an augmentation layer across all your supply-chain systems, indexing your information and monitoring operations to fix problems as soon as they arise." },
+      { property: "og:description", content: "We're building an augmentation layer across all your supply-chain systems, indexing your information and monitoring operations to fix problems as soon as they arise." },
       { property: "og:type", content: "website" },
     ],
   }),
