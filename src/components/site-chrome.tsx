@@ -28,6 +28,14 @@ export function Reveal({ children, delay = 0, className = "" }: { children: Reac
       setVisible(true);
       return;
     }
+    // Anything already in the viewport on first paint reveals immediately;
+    // the scroll-triggered threshold below would otherwise leave partially
+    // visible content hidden until the user scrolls.
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      setVisible(true);
+      return;
+    }
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
