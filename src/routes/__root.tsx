@@ -12,26 +12,43 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import transpiraLogo from "@/assets/classhopper.jpeg";
+import { SiteNav, SolidBackground, SiteFooter, CONTACT_EMAIL } from "@/components/site-chrome";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
-        </p>
-        <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Go home
-          </Link>
-        </div>
-      </div>
-    </div>
+    <>
+      <SolidBackground />
+      <main className="relative z-10 flex min-h-screen flex-col">
+        <SiteNav />
+        <section className="flex flex-1 items-center px-6 pt-36 pb-24">
+          <div className="mx-auto max-w-3xl text-center">
+            <div className="eyebrow">404</div>
+            <h1 className="mt-5 font-display text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.05] tracking-tight text-foreground text-balance">
+              This page doesn't exist
+            </h1>
+            <p className="mt-8 text-lg text-foreground/85 leading-relaxed">
+              The page you're looking for may have been moved, renamed, or never
+              existed. Let's get you back on track.
+            </p>
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+              <Link
+                to="/"
+                className="rounded-full px-6 py-3 bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
+              >
+                Go home
+              </Link>
+              <a
+                href={`mailto:${CONTACT_EMAIL}`}
+                className="rounded-full px-6 py-3 border border-border bg-card text-sm font-medium text-foreground hover:border-accent/50 transition-colors"
+              >
+                Contact us
+              </a>
+            </div>
+          </div>
+        </section>
+        <SiteFooter />
+      </main>
+    </>
   );
 }
 
@@ -79,12 +96,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Transpira Labs" },
-      { name: "description", content: "Transpira is an AI research lab building reinforcement-learning environments and benchmarks that train and evaluate agents on real-world work, with a focus on the supply chain." },
+      { name: "description", content: "Transpira is building Manifest: one permissions-aware index across fifteen supply-chain systems. Plain-language questions, answers cited to the source record." },
       { name: "twitter:card", content: "summary_large_image" },
       { property: "og:title", content: "Transpira Labs" },
       { name: "twitter:title", content: "Transpira Labs" },
-      { property: "og:description", content: "An AI research lab building reinforcement-learning environments for supply-chain and operations agents." },
-      { name: "twitter:description", content: "An AI research lab building reinforcement-learning environments for supply-chain and operations agents." },
+      { property: "og:description", content: "Transpira is building Manifest: one permissions-aware index across fifteen supply-chain systems. Plain-language questions, answers cited to the source record." },
+      { name: "twitter:description", content: "Transpira is building Manifest: one permissions-aware index across fifteen supply-chain systems. Plain-language questions, answers cited to the source record." },
       { property: "og:type", content: "website" },
     ],
     links: [

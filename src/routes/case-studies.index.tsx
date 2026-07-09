@@ -8,12 +8,12 @@ export const Route = createFileRoute("/case-studies/")({
       {
         name: "description",
         content:
-          "What Transpira builds and measures: RL environments, benchmark audits, and fine-tuning runs, each written up with the methods and the numbers.",
+          "The research program behind Manifest: RL environments, benchmark audits, and fine-tuning runs, each written up with the methods and the numbers.",
       },
       { property: "og:title", content: "Case Studies | Transpira" },
       {
         property: "og:description",
-        content: "RL environments, benchmark audits, and fine-tuning runs, written up with the methods and the numbers.",
+        content: "The research behind Manifest: RL environments, benchmark audits, and fine-tuning runs, written up with the methods and the numbers.",
       },
     ],
   }),
@@ -38,7 +38,7 @@ function CaseStudiesIndex() {
     },
     {
       slug: "build",
-      eyebrow: "Product",
+      eyebrow: "Research Tooling",
       title: "Build",
       desc: "Snap blocks together and get a working RL environment. Build is our Scratch-style builder for HUD: describe each block in plain language, then check, run, and train. No code, no JSON, no CLI.",
       tags: ["No-code", "Environment Authoring", "HUD"],
@@ -85,8 +85,8 @@ function CaseStudiesIndex() {
               Research &amp; case studies
             </h1>
             <p className="mt-6 max-w-2xl text-lg text-muted-foreground leading-relaxed">
-              What we build and measure: RL environments, benchmark audits, and fine-tuning runs, each written up with
-              the methods and the numbers.
+              The research program behind Manifest: RL environments, benchmark audits, and fine-tuning runs, each
+              written up with the methods and the numbers.
             </p>
           </div>
         </section>

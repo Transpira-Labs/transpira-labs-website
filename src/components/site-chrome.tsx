@@ -2,6 +2,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode, type CSSProperties } from "react";
 import transpiraLogo from "@/assets/classhopper.jpeg";
 
+export const DEMO_URL = "https://demo.transpiralabs.com";
 export const PLATFORM_URL = "https://platform.transpiralabs.com";
 export const BUILD_URL = "https://build.transpiralabs.com";
 export const CONTACT_EMAIL = "adi@transpiralabs.com";
@@ -15,7 +16,7 @@ function ExternalArrow() {
   );
 }
 
-/* Fades + lifts children into view on scroll — hud-style reveal. */
+/* Fades + lifts children into view on scroll (hud-style reveal). */
 export function Reveal({ children, delay = 0, className = "" }: { children: ReactNode; delay?: number; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -48,7 +49,87 @@ export function Reveal({ children, delay = 0, className = "" }: { children: Reac
   );
 }
 
-/* The inner bar — shared by the transparent hero nav and the solid sticky nav. */
+/* Screenshot frame with browser chrome. Renders a "Screenshot coming soon"
+   placeholder until an <img> child is passed. */
+export function ImageFrame({
+  url,
+  label,
+  children,
+}: {
+  url: string;
+  label: string;
+  children?: ReactNode;
+}) {
+  return (
+    <div className="overflow-hidden rounded-2xl border border-border bg-card soft-shadow">
+      <div className="flex items-center gap-1.5 border-b border-border bg-secondary/60 px-4 py-2.5">
+        <span className="size-2.5 rounded-full bg-foreground/12" />
+        <span className="size-2.5 rounded-full bg-foreground/12" />
+        <span className="size-2.5 rounded-full bg-foreground/12" />
+        <span className="ml-3 truncate font-mono text-[0.65rem] text-muted-foreground">{url}</span>
+      </div>
+      {children ?? (
+        <div
+          className="relative grid aspect-[16/10] place-items-center bg-secondary"
+          style={{
+            backgroundImage:
+              "linear-gradient(oklch(0.225 0.013 262 / 0.04) 1px, transparent 1px), linear-gradient(90deg, oklch(0.225 0.013 262 / 0.04) 1px, transparent 1px)",
+            backgroundSize: "28px 28px",
+          }}
+        >
+          <div className="text-center">
+            <div className="mx-auto mb-3 grid size-11 place-items-center rounded-xl border border-dashed border-input text-muted-foreground">
+              <svg viewBox="0 0 24 24" className="size-5" fill="none" aria-hidden="true">
+                <rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" strokeWidth="1.5" />
+                <circle cx="8.5" cy="9.5" r="1.5" fill="currentColor" />
+                <path d="M4 17l5-5 4 4 3-3 4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
+            <div className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-muted-foreground">{label}</div>
+            <div className="mt-1 text-[0.7rem] text-muted-foreground/70">Screenshot coming soon</div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export function FeatureRow({
+  flip,
+  kicker,
+  title,
+  body,
+  imgUrl,
+  imgLabel,
+  img,
+}: {
+  flip?: boolean;
+  kicker?: string;
+  title: string;
+  body: string;
+  imgUrl: string;
+  imgLabel: string;
+  img?: string;
+}) {
+  return (
+    <div className="grid items-center gap-8 md:grid-cols-2 lg:gap-14">
+      <Reveal className={flip ? "md:order-2" : undefined}>
+        <ImageFrame url={imgUrl} label={imgLabel}>
+          {img ? <img src={img} alt={imgLabel} className="block w-full" /> : undefined}
+        </ImageFrame>
+      </Reveal>
+      <Reveal delay={100} className={flip ? "md:order-1" : undefined}>
+        {kicker ? (
+          <div className="mb-3 font-mono text-[0.65rem] uppercase tracking-[0.16em] text-accent">{kicker}</div>
+        ) : null}
+        <h4 className="font-display text-[clamp(1.3rem,2.2vw,1.65rem)] tracking-tight text-foreground">{title}</h4>
+        <p className="mt-3 text-muted-foreground leading-relaxed">{body}</p>
+      </Reveal>
+    </div>
+  );
+}
+
+/* The inner bar, shared by the transparent hero nav and the solid sticky nav. */
 function NavBar({ isHome, overHero }: { isHome: boolean; overHero: boolean }) {
   const brand = overHero ? "text-white" : "text-foreground";
   const link = overHero ? "text-white/75 hover:text-white" : "text-muted-foreground hover:text-foreground";
@@ -72,14 +153,14 @@ function NavBar({ isHome, overHero }: { isHome: boolean; overHero: boolean }) {
         <Link to="/case-studies" className={`transition-colors ${link}`}>
           Research
         </Link>
+        <Link to="/environments" className={`transition-colors ${link}`}>
+          Environments
+        </Link>
         <Link to="/about" className={`transition-colors ${link}`}>
           About
         </Link>
-        <a href={PLATFORM_URL} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-1 transition-colors ${link}`}>
-          Platform <ExternalArrow />
-        </a>
-        <a href={BUILD_URL} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-1 transition-colors ${link}`}>
-          Build <ExternalArrow />
+        <a href={DEMO_URL} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-1 transition-colors ${link}`}>
+          Demo <ExternalArrow />
         </a>
       </nav>
 
@@ -156,7 +237,7 @@ export function SolidBackground() {
   );
 }
 
-// Backwards-compatible alias — the homepage manages its own hero backdrop.
+// Backwards-compatible alias; the homepage manages its own hero backdrop.
 export const ScrollBackground = SolidBackground;
 
 export function SiteFooter() {
@@ -170,7 +251,7 @@ export function SiteFooter() {
               <span className="font-display font-semibold">Transpira Labs</span>
             </div>
             <p className="mt-3 text-sm text-muted-foreground max-w-xs leading-relaxed">
-              Reinforcement-learning environments for supply-chain and operations agents.
+              Every system. One answer. Root cause in minutes, on your own network.
             </p>
             <div className="mt-6 flex flex-col gap-1 text-xs text-muted-foreground">
               <span className="font-mono">© {new Date().getFullYear()} Transpira Labs</span>
@@ -186,10 +267,12 @@ export function SiteFooter() {
           <div className="flex gap-12 text-sm sm:gap-20">
             <div>
               <div className="font-display text-[0.78rem] font-bold uppercase tracking-[0.15em] text-foreground">Explore</div>
-              <div className="mt-3 flex flex-col gap-2">
+              <div className="mt-3 grid grid-cols-2 gap-x-10 gap-y-2">
+                <a href={DEMO_URL} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">Demo</a>
                 <a href={PLATFORM_URL} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">Platform</a>
                 <a href={BUILD_URL} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">Build</a>
                 <Link to="/case-studies" className="text-muted-foreground hover:text-foreground transition-colors">Research</Link>
+                <Link to="/environments" className="text-muted-foreground hover:text-foreground transition-colors">Environments</Link>
                 <Link to="/about" className="text-muted-foreground hover:text-foreground transition-colors">About</Link>
                 <Link to="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">Privacy</Link>
               </div>
@@ -197,7 +280,7 @@ export function SiteFooter() {
             <div>
               <div className="font-display text-[0.78rem] font-bold uppercase tracking-[0.15em] text-foreground">Contact</div>
               <div className="mt-3 flex flex-col gap-2">
-                <a href={CAL_URL} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">Schedule a demo</a>
+                <a href={CAL_URL} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">Book a call</a>
                 <a href={`mailto:${CONTACT_EMAIL}`} className="text-muted-foreground hover:text-foreground transition-colors">{CONTACT_EMAIL}</a>
               </div>
             </div>

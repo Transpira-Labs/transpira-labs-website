@@ -1,15 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { SiteNav, SolidBackground, SiteFooter, PLATFORM_URL, BUILD_URL, CAL_URL } from "@/components/site-chrome";
+import { SiteNav, SolidBackground, SiteFooter, DEMO_URL, PLATFORM_URL, BUILD_URL, CAL_URL } from "@/components/site-chrome";
 import undockedLogo from "@/assets/undocked-logo.png";
 import hudLogo from "@/assets/hudlogo.png";
+import adiKrish from "@/assets/adi-krish.png";
+import fusenWorldLogo from "@/assets/fusen-world.png";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About | Transpira AI Lab" },
-      { name: "description", content: "Transpira is an AI lab building hyper-realistic reinforcement-learning environments and delivering them to frontier labs." },
-      { property: "og:title", content: "About | Transpira AI Lab" },
-      { property: "og:description", content: "An AI lab building the environments that teach agents to solve real engineering problems, already in use at frontier labs." },
+      { title: "About | Transpira" },
+      { name: "description", content: "Transpira is building Manifest, a permissions-aware index across the supply-chain stack, backed by an in-house research program in reinforcement-learning environments." },
+      { property: "og:title", content: "About | Transpira" },
+      { property: "og:description", content: "The company building Manifest: every supply-chain system, one answer, with a research lab training the agents behind it." },
     ],
   }),
   component: AboutPage,
@@ -25,21 +27,22 @@ function AboutPage() {
           <div className="mx-auto max-w-3xl">
             <div className="eyebrow">About</div>
             <h1 className="mt-5 font-display text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.05] tracking-tight text-foreground text-balance">
-              An AI research lab for real-world agents
+              Enterprise AI for the supply chain, backed by a research lab
             </h1>
             <p className="mt-8 text-lg text-foreground/85 leading-relaxed">
-              Transpira builds hyper-realistic reinforcement-learning environments and benchmarks that train and evaluate AI agents on real operational work. Static benchmarks plateau quickly. The frontier of agent capability now depends on the quality of the worlds we train them in.
+              Transpira is building Manifest: one permissions-aware index across the supply-chain stack, so any PO, container, or reject code traces to its cause in minutes. Every claim is cited to the source record. A concept walkthrough is live at the{" "}
+              <a href={DEMO_URL} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline underline-offset-4">demo</a>.
             </p>
             <p className="mt-6 text-lg text-foreground/85 leading-relaxed">
-              Our focus is the supply chain: multi-tier networks where one decision depends on the state of dozens of others, and where progress demands real tool-use and multi-step reasoning. We design environments with dense reward signals grounded in real business logic, and we've delivered high-quality environments to frontier labs.
+              Our focus is the supply chain: multi-tier networks where one decision depends on the state of dozens of others, and where progress demands real tool-use and multi-step reasoning. Behind the product sits a research program: we design reinforcement-learning environments with dense reward signals grounded in real business logic, and we've delivered them to frontier labs.
             </p>
             <p className="mt-6 text-lg text-foreground/85 leading-relaxed">
-              Our work ships through two surfaces: the{" "}
+              That research ships through two surfaces: the{" "}
               <a href={PLATFORM_URL} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline underline-offset-4">Platform</a>, where tasks are authored, evaluated, and quality-checked, and{" "}
-              <a href={BUILD_URL} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline underline-offset-4">Build</a>, a no-code way to compose environments from blocks.
+              <a href={BUILD_URL} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline underline-offset-4">Build</a>, a no-code way to compose environments from blocks. Together they are the training ground behind Manifest's agents.
             </p>
             <p className="mt-6 text-lg text-foreground/85 leading-relaxed">
-              We partner with research teams pushing agents toward real-world competence. If that sounds like you, we'd love to talk.
+              We work with supply-chain operators tired of chasing answers across disconnected systems, and with research teams pushing agents toward real-world competence. If either sounds like you, we'd love to talk.
             </p>
             <a href={CAL_URL} target="_blank" rel="noopener noreferrer" className="mt-10 inline-block rounded-full px-6 py-3 bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity">
               Book a meeting
@@ -51,17 +54,20 @@ function AboutPage() {
           <div className="mx-auto max-w-3xl">
             <div className="eyebrow">Team</div>
             <h2 className="mt-4 font-display text-3xl tracking-tight text-foreground">Who we are</h2>
-            <div className="mt-8 flex items-center gap-4 rounded-2xl border border-border bg-card p-6 soft-shadow">
-              {/* FOUNDER_PHOTO_PLACEHOLDER: replace this div with the real headshot, e.g.
-                  import adiKrish from "@/assets/adi-krish.png";
-                  <img src={adiKrish} alt="Adi Krish" className="size-14 shrink-0 rounded-full object-cover" /> */}
-              <div className="grid size-14 shrink-0 place-items-center rounded-full border border-dashed border-input bg-secondary/50 font-display text-lg font-semibold text-muted-foreground">
-                AK
+            <div className="mt-8 rounded-2xl border border-border bg-card p-6 soft-shadow">
+              <div className="flex items-center gap-4">
+                <img src={adiKrish} alt="Adi Krish" className="size-14 shrink-0 rounded-full object-cover" />
+                <div>
+                  <div className="text-lg font-medium text-foreground">Adi Krish</div>
+                  <div className="text-sm text-muted-foreground">Founder</div>
+                </div>
               </div>
-              <div>
-                <div className="text-lg font-medium text-foreground">Adi Krish</div>
-                <div className="text-sm text-muted-foreground">Founder</div>
-              </div>
+              <p className="mt-4 text-foreground/85 leading-relaxed">
+                Adi studies computer science at Georgia Tech and previously worked on the Ads
+                Machine Learning team at Meta. His AI research at Georgia Tech earned the
+                President&apos;s Undergraduate Research Award, and he turned down offers from
+                Google, Meta, and others to found Transpira Labs and build Manifest.
+              </p>
             </div>
           </div>
         </section>
@@ -86,6 +92,23 @@ function AboutPage() {
                 className="flex h-32 items-center justify-center rounded-2xl border border-border bg-card p-8 soft-shadow transition-colors hover:border-accent/50"
               >
                 <img src={hudLogo} alt="HUD logo" className="max-h-12 w-auto max-w-full object-contain" />
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section className="px-6 py-24 border-t border-border">
+          <div className="mx-auto max-w-3xl">
+            <div className="eyebrow">Investors</div>
+            <h2 className="mt-4 font-display text-3xl tracking-tight text-foreground">Backed by</h2>
+            <div className="mt-8 flex justify-center">
+              <a
+                href="https://fusen.world/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-40 w-full items-center justify-center rounded-2xl border border-border bg-neutral-900 p-8 soft-shadow transition-colors hover:border-accent/50 sm:w-96"
+              >
+                <img src={fusenWorldLogo} alt="Fusen World logo" className="max-h-20 w-auto max-w-full object-contain" />
               </a>
             </div>
           </div>

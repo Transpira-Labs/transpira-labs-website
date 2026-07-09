@@ -97,7 +97,7 @@ function BuildCaseStudy() {
           <header className="mt-8">
             <div className="inline-flex items-center gap-2.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
               <span className="h-px w-[18px] bg-accent" />
-              Case study · Product
+              Case study · Research tooling
             </div>
             <h1 className="mt-[18px] font-display text-[clamp(40px,6vw,68px)] font-bold leading-[0.98] tracking-[-0.02em]">
               Build

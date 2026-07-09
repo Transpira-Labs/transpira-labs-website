@@ -1,27 +1,29 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import type { CSSProperties, ReactNode } from "react";
+import type { CSSProperties } from "react";
 import {
   SiteNav,
   SolidBackground,
   SiteFooter,
   Reveal,
-  PLATFORM_URL,
-  BUILD_URL,
+  FeatureRow,
+  DEMO_URL,
   CONTACT_EMAIL,
   CAL_URL,
 } from "@/components/site-chrome";
 import warehouseAisle from "@/assets/warehouse-aisle.jpg";
-import buildCanvas from "@/assets/build-canvas.png";
-import buildRunTrain from "@/assets/build-run-train.png";
-import buildDashboard from "@/assets/build-dashboard.png";
+import demoAsk from "@/assets/demo-ask.png";
+import demoSearch from "@/assets/demo-search.png";
+import demoFeed from "@/assets/demo-feed.png";
+import demoAgents from "@/assets/demo-agents.png";
+import demoConnectors from "@/assets/demo-connectors.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Transpira: Reinforcement Learning for the Supply Chain" },
-      { name: "description", content: "Transpira is an AI research lab building reinforcement-learning environments and benchmarks that train and evaluate agents on operational work, with a focus on the supply chain." },
-      { property: "og:title", content: "Transpira: Reinforcement Learning for the Supply Chain" },
-      { property: "og:description", content: "An AI research lab building reinforcement-learning environments for supply-chain and operations agents." },
+      { title: "Transpira | Manifest: Every System. One Answer." },
+      { name: "description", content: "Transpira is building Manifest: one permissions-aware index across fifteen supply-chain systems. Plain-language questions, answers cited to the source record." },
+      { property: "og:title", content: "Transpira | Manifest: Every System. One Answer." },
+      { property: "og:description", content: "Transpira is building Manifest: one permissions-aware index across fifteen supply-chain systems. Plain-language questions, answers cited to the source record." },
       { property: "og:type", content: "website" },
     ],
   }),
@@ -91,35 +93,35 @@ function HeroScreen() {
       {/* Headline block, vertically centered in the remaining space. */}
       <div className="relative z-10 flex-1 flex items-center">
         <div className="mx-auto max-w-6xl px-6 w-full pt-16">
-          <div className="max-w-2xl">
+          <div>
             <h1
               className="rise font-display text-[clamp(2.4rem,5.6vw,4.5rem)] leading-[1.03] tracking-tight text-white text-balance"
               style={{ "--rise-delay": "80ms" } as CSSProperties}
             >
-              Reinforcement learning for the supply chain.
+              Find the root cause before the costs accumulate.
             </h1>
             <p
-              className="rise mt-6 max-w-xl text-lg text-white/70 leading-relaxed"
+              className="rise mt-6 text-lg text-white/70 leading-relaxed"
               style={{ "--rise-delay": "200ms" } as CSSProperties}
             >
-              Transpira builds environments and benchmarks that train and evaluate AI agents on operational work,
-              from three-tier logistics networks to production systems.
+              Transpira is building Manifest: one permissions-aware index across fifteen supply-chain systems,
+              so any PO, container, or reject code traces to its cause in minutes. Every claim is cited to the source record.
             </p>
             <div className="rise mt-8 flex flex-wrap items-center gap-3" style={{ "--rise-delay": "300ms" } as CSSProperties}>
-              <Link
-                to="/case-studies"
-                className="rounded-full px-5 py-2.5 bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
-              >
-                Read the research
-              </Link>
               <a
-                href={PLATFORM_URL}
+                href={DEMO_URL}
                 target="_blank"
                 rel="noopener noreferrer"
+                className="rounded-full px-5 py-2.5 bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
+              >
+                Explore the demo
+              </a>
+              <Link
+                to="/case-studies"
                 className="rounded-full px-5 py-2.5 border border-white/25 text-sm font-medium text-white hover:bg-white/10 transition-colors"
               >
-                Explore the platform →
-              </a>
+                Get in touch
+              </Link>
             </div>
           </div>
         </div>
@@ -128,126 +130,44 @@ function HeroScreen() {
   );
 }
 
-/* Screenshot placeholder with browser chrome. Drop a real screenshot in by
-   replacing the inner placeholder <div> with an <img>:
-     import platformLibrary from "@/assets/platform-library.png";
-     <ImageFrame url="platform.transpiralabs.com" label="Benchmark library">
-       <img src={platformLibrary} alt="Benchmark library" className="block w-full" />
-     </ImageFrame>
-   When children are present, the placeholder is hidden automatically. */
-function ImageFrame({
-  url,
-  label,
-  children,
-}: {
-  url: string;
-  label: string;
-  children?: ReactNode;
-}) {
-  return (
-    <div className="overflow-hidden rounded-2xl border border-border bg-card soft-shadow">
-      <div className="flex items-center gap-1.5 border-b border-border bg-secondary/60 px-4 py-2.5">
-        <span className="size-2.5 rounded-full bg-foreground/12" />
-        <span className="size-2.5 rounded-full bg-foreground/12" />
-        <span className="size-2.5 rounded-full bg-foreground/12" />
-        <span className="ml-3 truncate font-mono text-[0.65rem] text-muted-foreground">{url}</span>
-      </div>
-      {children ?? (
-        <div
-          className="relative grid aspect-[16/10] place-items-center bg-secondary"
-          style={{
-            backgroundImage:
-              "linear-gradient(oklch(0.225 0.013 262 / 0.04) 1px, transparent 1px), linear-gradient(90deg, oklch(0.225 0.013 262 / 0.04) 1px, transparent 1px)",
-            backgroundSize: "28px 28px",
-          }}
-        >
-          <div className="text-center">
-            <div className="mx-auto mb-3 grid size-11 place-items-center rounded-xl border border-dashed border-input text-muted-foreground">
-              <svg viewBox="0 0 24 24" className="size-5" fill="none" aria-hidden="true">
-                <rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" strokeWidth="1.5" />
-                <circle cx="8.5" cy="9.5" r="1.5" fill="currentColor" />
-                <path d="M4 17l5-5 4 4 3-3 4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </div>
-            <div className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-muted-foreground">{label}</div>
-            <div className="mt-1 text-[0.7rem] text-muted-foreground/70">Screenshot coming soon</div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-function FeatureRow({
-  flip,
-  title,
-  body,
-  imgUrl,
-  imgLabel,
-  img,
-}: {
-  flip?: boolean;
-  title: string;
-  body: string;
-  imgUrl: string;
-  imgLabel: string;
-  img?: string;
-}) {
-  return (
-    <div className="grid items-center gap-8 md:grid-cols-2 lg:gap-14">
-      <Reveal className={flip ? "md:order-2" : undefined}>
-        <ImageFrame url={imgUrl} label={imgLabel}>
-          {img ? <img src={img} alt={imgLabel} className="block w-full" /> : undefined}
-        </ImageFrame>
-      </Reveal>
-      <Reveal delay={100} className={flip ? "md:order-1" : undefined}>
-        <h4 className="font-display text-[clamp(1.3rem,2.2vw,1.65rem)] tracking-tight text-foreground">{title}</h4>
-        <p className="mt-3 text-muted-foreground leading-relaxed">{body}</p>
-      </Reveal>
-    </div>
-  );
-}
-
-function Efforts() {
-  const efforts = [
+/* The product: Manifest, our permissions-aware index across the supply-chain
+   stack. */
+function Product() {
+  const features = [
     {
-      name: "Platform",
-      href: PLATFORM_URL,
-      tag: "platform.transpiralabs.com",
-      intro:
-        "Where we author, evaluate, and quality-check every benchmark task, running each against frontier models and validating every trace before it ships.",
-      features: [
-        {
-          kicker: "Pipeline & analytics",
-          title: "Track every task from draft to done.",
-          body: "Watch work move through the pipeline with per-model scores, run status, and spend in one view.",
-          imgLabel: "Pipeline analytics",
-          img: buildDashboard,
-        },
-      ],
+      kicker: "Ask",
+      title: "One question replaces the six-tab hunt.",
+      body: "Ask where PO-4500128843 is and whether it makes the Target MABD. Manifest queries SAP, project44, Flexport, and SharePoint, then streams an answer where every claim carries a citation that links to the exact source record.",
+      imgLabel: "Ask with citations",
+      img: demoAsk,
     },
     {
-      name: "Build",
-      href: BUILD_URL,
-      tag: "build.transpiralabs.com",
-      intro:
-        "An experiment in composing reinforcement-learning environments from blocks. Describe each step in plain language, then build, run, and test.",
-      features: [
-        {
-          kicker: "Block canvas",
-          title: "Compose an environment from blocks.",
-          body: "Lay out an environment as a chain of blocks described in plain language and wired to the next. No code required.",
-          imgLabel: "Block canvas",
-          img: buildCanvas,
-        },
-        {
-          kicker: "Live run",
-          title: "Run, test, and tune in place.",
-          body: "Send an agent through the environment you composed and watch it resolve, retry, and recover live. Then adjust the reward and run it again.",
-          imgLabel: "Live run",
-          img: buildRunTrain,
-        },
-      ],
+      kicker: "Search",
+      title: "Type a container number, see its whole life.",
+      body: "One search on a container returns its live milestone feed, the house bill, the PO, the 14-reply Slack escalation, the retailer routing guide, and the dray quote buried in email, all scoped to what you already have permission to see.",
+      imgLabel: "Unified search",
+      img: demoSearch,
+    },
+    {
+      kicker: "Feed",
+      title: "The problems come to you, ranked by dollars.",
+      body: "A severity-ranked exception stream joins each EDI failure, vessel delay, and short ship to the POs, owners, and dollars it puts at risk. A $9,320 OTIF fine gets flagged while there is still time to act, one click from asking Manifest why or assigning an owner.",
+      imgLabel: "Exception feed",
+      img: demoFeed,
+    },
+    {
+      kicker: "Agents",
+      title: "Standing watchers that read the logs so nobody has to.",
+      body: "OTIF Sentinel pulls every open retail PO inside 21 days of its MABD, joins the in-transit containers, flags the one breaching its buffer, drafts the extension request per the routing guide, and posts the risk summary to Slack. Every run leaves a full step-by-step trace, and new agents are drafted in plain English.",
+      imgLabel: "Agent run log",
+      img: demoAgents,
+    },
+    {
+      kicker: "Connectors",
+      title: "Fifteen systems, one index. Access never widens.",
+      body: "Read-only connectors for SAP S/4HANA, Manhattan Active WM, project44, Flexport, SPS Commerce, Coupa, Slack, Outlook, SharePoint, and more feed one entity graph, with incremental updates landing in minutes. ACLs sync from each source on every crawl.",
+      imgLabel: "Connector grid",
+      img: demoConnectors,
     },
   ];
 
@@ -255,49 +175,45 @@ function Efforts() {
     <section className="relative px-6 py-24 border-t border-border">
       <div className="mx-auto max-w-6xl">
         <Reveal>
-          <div className="eyebrow">Research Efforts</div>
-          <h2 className="mt-4 font-display text-[clamp(1.85rem,3.4vw,2.75rem)] tracking-tight text-foreground max-w-2xl">
-            How we build and study these environments.
-          </h2>
+          <div>
+            <div className="eyebrow">Product</div>
+            <h2 className="mt-4 font-display text-[clamp(1.85rem,3.4vw,2.75rem)] tracking-tight text-foreground">
+              Every system. One answer.
+            </h2>
+            <p className="mt-5 text-muted-foreground leading-relaxed">
+              When a retailer starts rejecting ASNs at 6:03 AM, the reject code sits in one system, the root cause
+              in another, and the fine posts before anyone connects the dots. Manifest joins raw events to the PO,
+              container, and order behind them, so the answer arrives before the fine does. The demo is a concept
+              walkthrough you can click through as any of four operations roles.
+            </p>
+            <div className="mt-6 flex justify-end">
+              <a
+                href={DEMO_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-accent/50 hover:bg-secondary"
+              >
+                <span className="font-mono text-xs text-foreground/70 group-hover:text-foreground">demo.transpiralabs.com</span>
+                <svg viewBox="0 0 16 16" className="size-4 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent" fill="none" aria-hidden="true">
+                  <path d="M5 11 L11 5 M6 5 H11 V10" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </a>
+            </div>
+          </div>
         </Reveal>
 
-        <div className="mt-16 divide-y divide-border">
-          {efforts.map((p) => (
-            <div key={p.name} className="py-16 first:pt-0 last:pb-0">
-              <Reveal>
-                <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
-                  <div className="max-w-2xl">
-                    <h3 className="font-display text-[clamp(1.55rem,2.8vw,2.1rem)] tracking-tight text-foreground">{p.name}</h3>
-                    <p className="mt-3 text-muted-foreground leading-relaxed">{p.intro}</p>
-                  </div>
-                  <a
-                    href={p.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group inline-flex shrink-0 items-center gap-2 self-start rounded-full border border-border px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-accent/50 hover:bg-secondary md:self-auto"
-                  >
-                    <span className="font-mono text-xs text-foreground/70 group-hover:text-foreground">{p.tag}</span>
-                    <svg viewBox="0 0 16 16" className="size-4 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent" fill="none" aria-hidden="true">
-                      <path d="M5 11 L11 5 M6 5 H11 V10" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </a>
-                </div>
-              </Reveal>
-
-              <div className="mt-12 space-y-14">
-                {p.features.map((f, i) => (
-                  <FeatureRow
-                    key={f.title}
-                    flip={i % 2 === 1}
-                    title={f.title}
-                    body={f.body}
-                    imgUrl={p.tag}
-                    imgLabel={f.imgLabel}
-                    img={f.img}
-                  />
-                ))}
-              </div>
-            </div>
+        <div className="mt-8 space-y-14">
+          {features.map((f, i) => (
+            <FeatureRow
+              key={f.title}
+              flip={i % 2 === 1}
+              kicker={f.kicker}
+              title={f.title}
+              body={f.body}
+              imgUrl="demo.transpiralabs.com"
+              imgLabel={f.imgLabel}
+              img={f.img}
+            />
           ))}
         </div>
       </div>
@@ -346,7 +262,7 @@ function Focus() {
               <span className="font-mono text-[0.65rem] uppercase tracking-wider text-accent">Research Effort</span>
             </div>
             <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-              Building on the SupChain-Bench supply-chain benchmark, we audited all 326 items through its graders and
+              Building on SupChain-Bench, we audited all 326 items through its graders and
               kept the 288 that are gold-correct and fairly gradable, giving a clean, held-out signal for training and evaluation.
             </p>
             <div className="mt-5 flex items-center gap-6">
@@ -377,12 +293,12 @@ function CTA() {
     <section className="relative px-6 py-28 border-t border-border">
       <Reveal>
         <div className="mx-auto max-w-6xl flex flex-col md:flex-row md:items-center md:justify-between gap-8">
-          <div className="max-w-2xl">
+          <div>
             <h2 className="font-display text-[clamp(2rem,4.2vw,3.4rem)] leading-[1.06] tracking-tight text-foreground text-balance">
-              Training agents to run operations?
+              Running supply chain operations?
             </h2>
             <p className="mt-2 text-muted-foreground leading-relaxed">
-              Book a 30-minute demo to see the platform in action, or email us at{" "}
+              Book a 30-minute call to see Manifest in action, or email us at{" "}
               <a
                 href={`mailto:${CONTACT_EMAIL}`}
                 className="text-accent underline underline-offset-2 hover:opacity-80"
@@ -425,7 +341,7 @@ function Index() {
       <SiteNav />
       <main className="relative z-10">
         <HeroScreen />
-        <Efforts />
+        <Product />
         <Focus />
         <CTA />
         <SiteFooter />

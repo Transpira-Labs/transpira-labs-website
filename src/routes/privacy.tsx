@@ -55,7 +55,7 @@ function PrivacyPage() {
                 <li>Provide, operate, and maintain our website and services</li>
                 <li>Respond to your inquiries and fulfill access requests</li>
                 <li>Improve and personalize your experience</li>
-                <li>Communicate updates, research, and relevant information about our environments</li>
+                <li>Communicate updates, research, and relevant information about our platform and services</li>
                 <li>Monitor and analyze usage trends and website performance</li>
               </ul>
             </section>
