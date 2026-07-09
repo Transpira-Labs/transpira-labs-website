@@ -143,7 +143,7 @@ function Product() {
     {
       kicker: "Connectors",
       path: "/connectors",
-      title: "All systems, one index. Access never widens.",
+      title: "All systems, one index.",
       body: "Connectors across your system feed into one entity graph with updates landing in minutes. Details sync through each source on every run.",
       imgLabel: "Connector grid",
       img: demoConnectors,
