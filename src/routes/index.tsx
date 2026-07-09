@@ -8,6 +8,7 @@ import {
   FeatureRow,
   DEMO_URL,
   CONTACT_EMAIL,
+  CAL_URL,
 } from "@/components/site-chrome";
 import warehouseAisle from "@/assets/warehouse-aisle.jpg";
 import demoAsk from "@/assets/demo-ask.png";
@@ -294,7 +295,16 @@ function CTA() {
               Running supply chain operations?
             </h2>
             <p className="mt-2 text-muted-foreground leading-relaxed">
-              Try out Manifest, book a meeting, or email us at{" "}
+              Try out Manifest,{" "}
+              <a
+                href={CAL_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-accent underline underline-offset-2 hover:opacity-80"
+              >
+                book a meeting
+              </a>
+              , or email us at{" "}
               <a
                 href={`mailto:${CONTACT_EMAIL}`}
                 className="text-accent underline underline-offset-2 hover:opacity-80"
