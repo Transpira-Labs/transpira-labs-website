@@ -113,14 +113,18 @@ function BenchceptionPage() {
                 </a>{" "}
                 (
                 <a
-                  href="https://github.com/Damon-GSY/SC-bench"
+                  href="https://github.com/Transpira-Labs/sc-bench"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-accent underline underline-offset-2"
                 >
                   code
                 </a>
-                ), a HUD benchmark we hold out from every model.
+                ), a HUD benchmark we hold out from every model. The contest runs on{" "}
+                <Link to="/case-studies/sc-bench" className="text-accent underline underline-offset-2">
+                  SupChain-Bench Verified
+                </Link>
+                : the 33 tool questions that survived verification against the real grader.
               </p>
 
               <div className="mt-6 flex flex-wrap gap-x-7 gap-y-3">
@@ -331,14 +335,15 @@ function BenchceptionPage() {
               <div className="min-w-[360px] flex-[1_1_440px] rounded-xl border border-border bg-card px-7 py-6">
                 <div className="mb-2 flex items-baseline justify-between">
                   <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">Leaderboard</span>
-                  <span className="text-[11px] text-muted-foreground">Supply Chain Bench · success rate</span>
+                  <span className="text-[11px] text-muted-foreground">SupChain-Bench Verified · success rate</span>
                 </div>
-                <LeaderRow rank="T-1" label="Qwen-8B · untrained baseline" pct={45} tone="neutral" first />
-                <LeaderRow rank="T-1" label="Qwen-8B · trained on Opus env" pct={45} tone="accent" />
-                <LeaderRow rank="T-1" label="Qwen-8B · trained on GPT env" pct={44} tone="accent" last />
+                <LeaderRow rank="T-1" label="Qwen-8B · trained on GPT env" pct={35.7} tone="accent" first />
+                <LeaderRow rank="T-1" label="Qwen-8B · untrained baseline" pct={33.6} tone="neutral" />
+                <LeaderRow rank="T-1" label="Qwen-8B · trained on Opus env" pct={31.5} tone="accent" last />
                 <div className="mt-4 text-[11.5px] leading-[1.5] text-muted-foreground">
-                  Tied within noise (±2% across seeds). Neither trained student shows a reliable lift over the untrained
-                  baseline.
+                  Tied within noise (3% tie band). Neither trained student shows a reliable lift over the untrained
+                  baseline. Re-contested on the 33 verified tool questions with entity-scoped grading; the original run
+                  on the first 40 questions measured 44 to 45% for all three.
                 </div>
               </div>
             </div>
@@ -444,7 +449,7 @@ function BenchceptionPage() {
             <Link to="/case-studies" className="transition hover:text-foreground">← All case studies</Link>
             <span className="flex gap-[18px]">
               <a href="https://arxiv.org/pdf/2602.07342" target="_blank" rel="noopener noreferrer" className="transition hover:text-accent">Paper</a>
-              <a href="https://github.com/Damon-GSY/SC-bench" target="_blank" rel="noopener noreferrer" className="transition hover:text-accent">SC-Bench code</a>
+              <a href="https://github.com/Transpira-Labs/sc-bench" target="_blank" rel="noopener noreferrer" className="transition hover:text-accent">SC-Bench code</a>
             </span>
           </div>
         </div>
