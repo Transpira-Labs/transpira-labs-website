@@ -20,9 +20,9 @@ import demoConnectors from "@/assets/demo-connectors.png";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Transpira | Manifest: Every System. One Answer." },
+      { title: "Transpira | Every System. One Answer." },
       { name: "description", content: "Transpira is building Manifest: one permissions-aware index across fifteen supply-chain systems. Plain-language questions, answers cited to the source record." },
-      { property: "og:title", content: "Transpira | Manifest: Every System. One Answer." },
+      { property: "og:title", content: "Transpira | Every System. One Answer." },
       { property: "og:description", content: "Transpira is building Manifest: one permissions-aware index across fifteen supply-chain systems. Plain-language questions, answers cited to the source record." },
       { property: "og:type", content: "website" },
     ],
