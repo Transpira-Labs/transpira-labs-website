@@ -20,9 +20,9 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Transpira | Every System. One Answer." },
-      { name: "description", content: "We're building an augmentation layer across all your supply-chain systems, indexing your information and monitoring operations to fix problems as soon as they arise." },
+      { name: "description", content: "The intelligence layer for your supply chain: indexing data, monitoring operations, and fixing problems automatically." },
       { property: "og:title", content: "Transpira | Every System. One Answer." },
-      { property: "og:description", content: "We're building an augmentation layer across all your supply-chain systems, indexing your information and monitoring operations to fix problems as soon as they arise." },
+      { property: "og:description", content: "The intelligence layer for your supply chain: indexing data, monitoring operations, and fixing problems automatically." },
       { property: "og:type", content: "website" },
     ],
   }),
@@ -103,7 +103,7 @@ function HeroScreen() {
               className="rise mt-6 text-lg text-white/70 leading-relaxed"
               style={{ "--rise-delay": "200ms" } as CSSProperties}
             >
-              We're building an augmentation layer across all your supply-chain systems, indexing your information and monitoring operations to fix problems as soon as they arise.
+              The intelligence layer for your supply chain: indexing data, monitoring operations, and fixing problems automatically.
             </p>
             <div className="rise mt-8 flex flex-wrap items-center gap-3" style={{ "--rise-delay": "300ms" } as CSSProperties}>
               <a
@@ -133,30 +133,6 @@ function HeroScreen() {
 function Product() {
   const features = [
     {
-      kicker: "Ask",
-      path: "/ask",
-      title: "One question replaces the six-tab hunt.",
-      body: "Manifest indexes data across all your systems for quick retrival. It understands the context of your operations and efficiently answers questions, grounding answers with citations linked back to the source.",
-      imgLabel: "Ask with citations",
-      img: demoAsk,
-    },
-    {
-      kicker: "Search",
-      path: "/search",
-      title: "Find containers through their lifecycle.",
-      body: "Our indexing monitors containers from order to fulfillment, providing you the relevant details scoped to your role.",
-      imgLabel: "Unified search",
-      img: demoSearch,
-    },
-    {
-      kicker: "Feed",
-      path: "/feed",
-      title: "The quantified problems come to you.",
-      body: "Every time a problem arises, Manifest automatically locates the error, diagnoses the issue, and proposes solutions, letting your team focus on fixing problems instead of finding them.",
-      imgLabel: "Problem feed",
-      img: demoFeed,
-    },
-    {
       kicker: "Agents",
       path: "/agents",
       title: "Standing watchers that read the logs so nobody has to.",
@@ -171,6 +147,30 @@ function Product() {
       body: "Connectors across your system feed into one entity graph with updates landing in minutes. Details sync through each source on every run.",
       imgLabel: "Connector grid",
       img: demoConnectors,
+    },
+    {
+      kicker: "Feed",
+      path: "/feed",
+      title: "The quantified problems come to you.",
+      body: "Every time a problem arises, Manifest automatically locates the error, diagnoses the issue, and proposes solutions, letting your team focus on fixing problems instead of finding them.",
+      imgLabel: "Problem feed",
+      img: demoFeed,
+    },
+    {
+      kicker: "Ask",
+      path: "/ask",
+      title: "One question replaces the six-tab hunt.",
+      body: "Manifest indexes data across all your systems for quick retrival. It understands the context of your operations and efficiently answers questions, grounding answers with citations linked back to the source.",
+      imgLabel: "Ask with citations",
+      img: demoAsk,
+    },
+    {
+      kicker: "Search",
+      path: "/search",
+      title: "Find containers through their lifecycle.",
+      body: "Our indexing monitors containers from order to fulfillment, providing you the relevant details scoped to your role.",
+      imgLabel: "Unified search",
+      img: demoSearch,
     },
   ];
 
@@ -254,12 +254,9 @@ function Focus() {
             to="/case-studies/sc-bench"
             className="group mt-8 block rounded-2xl border border-accent/30 bg-accent/[0.07] p-6 transition hover:border-accent/50 hover:bg-accent/[0.11]"
           >
-            <div className="flex items-center justify-between">
-              <h3 className="font-display text-lg text-foreground group-hover:underline underline-offset-4 decoration-foreground/30">
-                SupChain-Bench Verified
-              </h3>
-              <span className="font-mono text-[0.65rem] uppercase tracking-wider text-accent">Research Effort</span>
-            </div>
+            <h3 className="font-display text-lg text-foreground group-hover:underline underline-offset-4 decoration-foreground/30">
+              SupChain-Bench Verified
+            </h3>
             <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
               Building on SupChain-Bench, we audited all 326 items through its graders and
               kept the 288 that are gold-correct and fairly gradable, giving a clean, held-out signal for training and evaluation.

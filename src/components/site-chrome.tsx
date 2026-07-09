@@ -5,7 +5,7 @@ import transpiraLogo from "@/assets/classhopper.jpeg";
 export const DEMO_URL = "https://demo.transpiralabs.com";
 export const PLATFORM_URL = "https://platform.transpiralabs.com";
 export const BUILD_URL = "https://build.transpiralabs.com";
-export const CONTACT_EMAIL = "adi@transpiralabs.com";
+export const CONTACT_EMAIL = "team@transpiralabs.com";
 export const CAL_URL = "https://cal.com/adi-krish";
 
 function ExternalArrow() {

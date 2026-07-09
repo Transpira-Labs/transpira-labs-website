@@ -3,15 +3,15 @@ import { SiteNav, SolidBackground, SiteFooter, DEMO_URL, PLATFORM_URL, BUILD_URL
 import undockedLogo from "@/assets/undocked-logo.png";
 import hudLogo from "@/assets/hudlogo.png";
 import adiKrish from "@/assets/adi-krish.png";
-import fusenWorldLogo from "@/assets/fusen-world.png";
+import fusenWorldLogo from "@/assets/fusen-world.jpeg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About | Transpira" },
-      { name: "description", content: "Transpira is building Manifest, a permissions-aware index across the supply-chain stack, backed by an in-house research program in reinforcement-learning environments." },
+      { name: "description", content: "Transpira is building Manifest, the intelligence layer for the supply chain: indexing data, monitoring operations, and fixing problems automatically." },
       { property: "og:title", content: "About | Transpira" },
-      { property: "og:description", content: "The company building Manifest: every supply-chain system, one answer, with a research lab training the agents behind it." },
+      { property: "og:description", content: "The company building Manifest: every system, one answer, with a research lab training the agents behind it." },
     ],
   }),
   component: AboutPage,
@@ -27,22 +27,19 @@ function AboutPage() {
           <div className="mx-auto max-w-3xl">
             <div className="eyebrow">About</div>
             <h1 className="mt-5 font-display text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.05] tracking-tight text-foreground text-balance">
-              Enterprise AI for the supply chain, backed by a research lab
+              Building the intelligence layer for the supply chain
             </h1>
             <p className="mt-8 text-lg text-foreground/85 leading-relaxed">
-              Transpira is building Manifest: one permissions-aware index across the supply-chain stack, so any PO, container, or reject code traces to its cause in minutes. Every claim is cited to the source record. A concept walkthrough is live at the{" "}
+              Transpira is building Manifest: one index across all your supply-chain systems that monitors operations and fixes problems automatically. Any PO, container, or reject code traces to its root cause in minutes, with every answer cited to the source record. See it in action at the{" "}
               <a href={DEMO_URL} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline underline-offset-4">demo</a>.
             </p>
             <p className="mt-6 text-lg text-foreground/85 leading-relaxed">
-              Our focus is the supply chain: multi-tier networks where one decision depends on the state of dozens of others, and where progress demands real tool-use and multi-step reasoning. Behind the product sits a research program: we design reinforcement-learning environments with dense reward signals grounded in real business logic, and we've delivered them to frontier labs.
+            Additionally, we design reinforcement-learning environments and deliver them to frontier labs. That work ships through the{" "}
+            <a href={PLATFORM_URL} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline underline-offset-4">Platform</a> and{" "}
+              <a href={BUILD_URL} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline underline-offset-4">Build</a>, and it's the training ground behind Manifest's agents.
             </p>
             <p className="mt-6 text-lg text-foreground/85 leading-relaxed">
-              That research ships through two surfaces: the{" "}
-              <a href={PLATFORM_URL} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline underline-offset-4">Platform</a>, where tasks are authored, evaluated, and quality-checked, and{" "}
-              <a href={BUILD_URL} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline underline-offset-4">Build</a>, a no-code way to compose environments from blocks. Together they are the training ground behind Manifest's agents.
-            </p>
-            <p className="mt-6 text-lg text-foreground/85 leading-relaxed">
-              We work with supply-chain operators tired of chasing answers across disconnected systems, and with research teams pushing agents toward real-world competence. If either sounds like you, we'd love to talk.
+              If you run supply-chain operations, or you're pushing agents toward real-world competence, we'd love to talk.
             </p>
             <a href={CAL_URL} target="_blank" rel="noopener noreferrer" className="mt-10 inline-block rounded-full px-6 py-3 bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity">
               Book a meeting
@@ -106,9 +103,9 @@ function AboutPage() {
                 href="https://fusen.world/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-40 w-full items-center justify-center rounded-2xl border border-border bg-neutral-900 p-8 soft-shadow transition-colors hover:border-accent/50 sm:w-96"
+                className="flex h-48 w-full items-center justify-center rounded-2xl border border-border bg-[#f6f8f5] p-8 soft-shadow transition-colors hover:border-accent/50 sm:w-[28rem]"
               >
-                <img src={fusenWorldLogo} alt="Fusen World logo" className="max-h-20 w-auto max-w-full object-contain" />
+                <img src={fusenWorldLogo} alt="Fusen World logo" className="max-h-32 w-auto max-w-full object-contain" />
               </a>
             </div>
           </div>
