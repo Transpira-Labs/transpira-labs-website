@@ -59,14 +59,14 @@ function AboutPage() {
                 <img src={adiKrish} alt="Adi Krish" className="size-14 shrink-0 rounded-full object-cover" />
                 <div>
                   <div className="text-lg font-medium text-foreground">Adi Krish</div>
-                  <div className="text-sm text-muted-foreground">Founder</div>
+                  <div className="text-sm text-muted-foreground">Founder & CEO</div>
                 </div>
               </div>
               <p className="mt-4 text-foreground/85 leading-relaxed">
-                Adi studies computer science at Georgia Tech and previously worked on the Ads
+                Before Transpira, Adi studied computer science at Georgia Tech and worked on the Ads
                 Machine Learning team at Meta. His AI research at Georgia Tech earned the
                 President&apos;s Undergraduate Research Award, and he turned down offers from
-                Google, Meta, and others to found Transpira Labs and build Manifest.
+                Google, Meta, and others to found Transpira Labs.
               </p>
             </div>
           </div>
