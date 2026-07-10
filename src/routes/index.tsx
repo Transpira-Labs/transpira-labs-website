@@ -144,8 +144,8 @@ function Product() {
     {
       kicker: "Connectors",
       path: "/connectors",
-      title: "All systems, one index.",
-      body: "Connectors across your system feed into one entity graph with updates landing in minutes. Details sync through each source on every run.",
+      title: "All of your systems, one index.",
+      body: "Connectors across your systems feed into one entity graph with updates landing in minutes. Details sync through each source on every run.",
       imgLabel: "Connector grid",
       img: demoConnectors,
     },
@@ -160,8 +160,8 @@ function Product() {
     {
       kicker: "Ask",
       path: "/ask",
-      title: "One question replaces the six-tab hunt.",
-      body: "Manifest indexes data across all your systems for quick retrival. It understands the context of your operations and efficiently answers questions, grounding answers with citations linked back to the source.",
+      title: "One question replaces the multi-system hunt.",
+      body: "Manifest indexes data across all of your systems for quick retrieval. It understands the context of your operations and efficiently answers questions, grounding answers with citations linked back to the source.",
       imgLabel: "Ask with citations",
       img: demoAsk,
     },
