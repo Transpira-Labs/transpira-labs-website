@@ -1,7 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteNav, SolidBackground, SiteFooter, DEMO_URL, PLATFORM_URL, BUILD_URL, CAL_URL } from "@/components/site-chrome";
-import undockedLogo from "@/assets/undocked-logo.png";
-import hudLogo from "@/assets/hudlogo.png";
 import adiKrish from "@/assets/adi-krish.png";
 import fusenWorldLogo from "@/assets/fusen-world.jpeg";
 
@@ -65,31 +63,6 @@ function AboutPage() {
                 President&apos;s Undergraduate Research Award, and he turned down offers from
                 Google, Meta, and others to found Transpira Labs.
               </p>
-            </div>
-          </div>
-        </section>
-
-        <section className="px-6 py-24 border-t border-border">
-          <div className="mx-auto max-w-3xl">
-            <div className="eyebrow">Partners</div>
-            <h2 className="mt-4 font-display text-3xl tracking-tight text-foreground">Who we work with</h2>
-            <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <a
-                href="https://www.undocked.net/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex h-32 items-center justify-center rounded-2xl border border-border bg-card p-8 soft-shadow transition-colors hover:border-accent/50"
-              >
-                <img src={undockedLogo} alt="Undocked logo" className="max-h-12 w-auto max-w-full object-contain" />
-              </a>
-              <a
-                href="https://www.hud.ai/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex h-32 items-center justify-center rounded-2xl border border-border bg-card p-8 soft-shadow transition-colors hover:border-accent/50"
-              >
-                <img src={hudLogo} alt="HUD logo" className="max-h-12 w-auto max-w-full object-contain" />
-              </a>
             </div>
           </div>
         </section>
