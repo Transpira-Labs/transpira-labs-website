@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode, type CSSProperties } from "react";
-import transpiraLogo from "@/assets/classhopper.jpeg";
+import transpiraLogo from "@/assets/transpira-logo.png";
 
 export const DEMO_URL = "https://demo.transpiralabs.com";
 export const PLATFORM_URL = "https://platform.transpiralabs.com";

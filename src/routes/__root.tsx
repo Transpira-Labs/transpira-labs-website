@@ -11,7 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import transpiraLogo from "@/assets/classhopper.jpeg";
+import transpiraLogo from "@/assets/transpira-logo.png";
 import { SiteNav, SolidBackground, SiteFooter, CONTACT_EMAIL } from "@/components/site-chrome";
 
 function NotFoundComponent() {
@@ -106,7 +106,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", type: "image/jpeg", href: transpiraLogo },
+      { rel: "icon", type: "image/png", href: transpiraLogo },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
