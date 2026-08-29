@@ -32,12 +32,12 @@ function ContactPage() {
           <Reveal>
             <div className="eyebrow">Contact</div>
             <h1 className="mt-4 font-display text-[clamp(2rem,4.2vw,3.4rem)] leading-[1.06] tracking-tight text-foreground">
-              Running supply chain operations?
+              Running a brokerage?
               <br />
               Let's talk.
             </h1>
             <p className="mt-5 text-muted-foreground leading-relaxed">
-              Whether you want a walkthrough of Manifest, have a question about our research, or
+              Whether you want a walkthrough of the bidding agent, have a question about our research, or
               just want to compare notes on your operations, we'd love to hear from you.
             </p>
           </Reveal>
@@ -80,7 +80,7 @@ function ContactPage() {
                 </div>
                 <h2 className="mt-5 font-display text-xl tracking-tight text-foreground">Book a meeting</h2>
                 <p className="mt-2 flex-1 text-sm text-muted-foreground leading-relaxed">
-                  Grab time directly on our calendar for a live walkthrough of Manifest and a
+                  Grab time directly on our calendar for a live walkthrough of the bidding agent and a
                   conversation about your operations.
                 </p>
                 <div className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-accent">
@@ -96,7 +96,7 @@ function ContactPage() {
               <div>
                 <h2 className="font-display text-xl tracking-tight text-foreground">Prefer to explore on your own first?</h2>
                 <p className="mt-2 max-w-xl text-sm text-muted-foreground leading-relaxed">
-                  Try the demo of Manifest, or read our research on
+                  Try the demo, or read our research on
                   supply-chain agents.
                 </p>
               </div>

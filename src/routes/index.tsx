@@ -11,57 +11,78 @@ import {
   CAL_URL,
 } from "@/components/site-chrome";
 import warehouseAisle from "@/assets/warehouse-aisle.jpg";
-import demoAsk from "@/assets/demo-ask.png";
-import demoSearch from "@/assets/demo-search.png";
-import demoFeed from "@/assets/demo-feed.png";
-import demoAgents from "@/assets/demo-agents.png";
-import demoConnectors from "@/assets/demo-connectors.png";
+import demoCapabilities from "@/assets/demo-capabilities.png";
+import demoInbox from "@/assets/demo-inbox.png";
+import demoPrice from "@/assets/demo-price.png";
+import demoDraft from "@/assets/demo-draft.png";
+import demoApprove from "@/assets/demo-approve.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Transpira | Every System. One Answer." },
-      { name: "description", content: "The intelligence layer for your supply chain: indexing data, monitoring operations, and fixing problems automatically." },
-      { property: "og:title", content: "Transpira | Every System. One Answer." },
-      { property: "og:description", content: "The intelligence layer for your supply chain: indexing data, monitoring operations, and fixing problems automatically." },
+      { title: "Transpira | Win the load with the first quote back" },
+      {
+        name: "description",
+        content:
+          "The AI bidding agent for 3PL brokers: it reads the inbox, prices spot quotes and RFP bid sheets, and drafts the replies. A human approves every send.",
+      },
+      { property: "og:title", content: "Transpira | Win the load with the first quote back" },
+      {
+        property: "og:description",
+        content:
+          "The AI bidding agent for 3PL brokers: it reads the inbox, prices spot quotes and RFP bid sheets, and drafts the replies. A human approves every send.",
+      },
       { property: "og:type", content: "website" },
     ],
   }),
   component: Index,
 });
 
-/* Verified task counts per track in SupChain-Bench Verified (288 instances total). */
-const TRACKS = [
-  { label: "QA · reasoning", sub: "single / multiple / true-false", desc: "Answered from reasoning alone, no tools.", value: 217 },
-  { label: "Tool · SOP", sub: "deterministic step-by-step", desc: "Tool use under a fixed workflow prompt.", value: 33 },
-  { label: "Tool · No-SOP", sub: "minimal instruction", desc: "Tool use with no workflow given.", value: 19 },
-  { label: "Tool · ReAct", sub: "think / act / observe", desc: "Tool use with reason-and-act prompting.", value: 19 },
+/* Why speed matters: the numbers behind the wedge. */
+const SPEED_STATS = [
+  { value: "~67%", label: "of freight deals go to the first bidder to respond" },
+  {
+    value: "90 hrs",
+    label: "average forwarder response time; winning firms respond in under 30 minutes",
+  },
+  { value: "31%", label: "of quote requests receive any response at all" },
 ];
 
-/* A horizontal bar chart of verified tasks by track. One measure across tracks,
-   so a single accent hue carries magnitude; the labels carry identity. */
-function TrackChart() {
-  const max = Math.max(...TRACKS.map((t) => t.value));
+function StatBand() {
   return (
-    <div className="flex flex-1 flex-col">
-      {TRACKS.map((t) => (
-        <div
-          key={t.label}
-          title={`${t.label}: ${t.value} verified`}
-          className="flex flex-1 flex-col justify-center gap-2 border-t border-border/60 first:border-t-0"
-        >
-          <div className="flex items-baseline justify-between gap-3">
-            <span className="text-[0.9rem] font-medium text-foreground">{t.label}</span>
-            <span className="font-mono text-sm font-semibold tabular-nums text-foreground">{t.value}</span>
-          </div>
-          <div className="h-2 w-full overflow-hidden rounded-full bg-secondary">
-            <div className="h-full rounded-full bg-accent" style={{ width: `${(t.value / max) * 100}%` }} />
-          </div>
-          <div className="font-mono text-[0.6rem] uppercase tracking-wider text-muted-foreground/70">{t.sub}</div>
-          <p className="text-[0.8rem] leading-snug text-muted-foreground">{t.desc}</p>
+    <section className="relative px-6 py-24 border-t border-border">
+      <div className="mx-auto max-w-6xl">
+        <Reveal>
+          <div className="eyebrow">Why speed matters</div>
+          <h2 className="mt-4 font-display text-[clamp(1.85rem,3.4vw,2.75rem)] tracking-tight text-foreground">
+            The first quote back wins the load.
+          </h2>
+        </Reveal>
+        <div className="mt-12 grid gap-8 sm:grid-cols-3">
+          {SPEED_STATS.map((s, i) => (
+            <Reveal key={s.value} delay={i * 100}>
+              <div className="rounded-2xl border border-border bg-card p-6 soft-shadow h-full">
+                <div className="font-display text-[clamp(2.2rem,4vw,3rem)] tracking-tight text-accent">
+                  {s.value}
+                </div>
+                <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{s.label}</p>
+              </div>
+            </Reveal>
+          ))}
         </div>
-      ))}
-    </div>
+        <Reveal delay={200}>
+          <p className="mt-8 text-muted-foreground leading-relaxed max-w-3xl">
+            Answering faster used to mean hiring more people, but payroll already consumes most of
+            the gross margin on a load. The way to win more freight isn&apos;t more headcount.
+            It&apos;s an agent that quotes in minutes.
+          </p>
+          <p className="mt-4 font-mono text-[0.62rem] uppercase tracking-wider text-muted-foreground/70">
+            Sources: Expedock; Freightos; Rippey AI; FreightWaves unit-economics analysis, Jan 2026;
+            TIA
+          </p>
+        </Reveal>
+      </div>
+    </section>
   );
 }
 
@@ -98,15 +119,20 @@ function HeroScreen() {
               className="rise font-display text-[clamp(2.4rem,5.6vw,4.5rem)] leading-[1.03] tracking-tight text-white text-balance"
               style={{ "--rise-delay": "80ms" } as CSSProperties}
             >
-              Find the root cause before the costs accumulate.
+              Win the load with the first quote back.
             </h1>
             <p
-              className="rise mt-6 text-lg text-white/70 leading-relaxed"
+              className="rise mt-6 text-lg text-white/70 leading-relaxed max-w-2xl"
               style={{ "--rise-delay": "200ms" } as CSSProperties}
             >
-              The intelligence layer for your supply chain: indexing data, monitoring operations, and fixing problems automatically.
+              The AI bidding agent for 3PL brokers. It reads your inbox, prices spot quotes and RFP
+              bid sheets from the rate data you already pay for, and drafts the replies. A human
+              approves every send.
             </p>
-            <div className="rise mt-8 flex flex-wrap items-center gap-3" style={{ "--rise-delay": "300ms" } as CSSProperties}>
+            <div
+              className="rise mt-8 flex flex-wrap items-center gap-3"
+              style={{ "--rise-delay": "300ms" } as CSSProperties}
+            >
               <a
                 href={DEMO_URL}
                 target="_blank"
@@ -129,49 +155,48 @@ function HeroScreen() {
   );
 }
 
-/* The product: Manifest, our permissions-aware index across the supply-chain
-   stack. */
+/* The product: the bidding pipeline, from inbox to approved send. */
 function Product() {
   const features = [
     {
-      kicker: "Agents",
-      path: "/agents",
-      title: "Standing watchers that read the logs so nobody has to.",
-      body: "Manifest deploys agents that can monitor your systems around the clock, completing custom workflows designed to save you time.",
-      imgLabel: "Agent run log",
-      img: demoAgents,
-    },
-    {
-      kicker: "Connectors",
+      kicker: "Connect",
       path: "/connectors",
-      title: "All of your systems, one index.",
-      body: "Connectors across your systems feed into one entity graph with updates landing in minutes. Details sync through each source on every run.",
-      imgLabel: "Connector grid",
-      img: demoConnectors,
+      title: "Plugs into the systems you already run.",
+      body: "Transpira connects to your inbox, SMS, and carrier registries in minutes. Every connector declares exactly what it can do, so the agent can never take an action you haven't scoped: no rip-and-replace, no implementation project.",
+      imgLabel: "Capability manifest",
+      img: demoCapabilities,
     },
     {
-      kicker: "Feed",
-      path: "/feed",
-      title: "The quantified problems come to you.",
-      body: "Every time a problem arises, Manifest automatically locates the error, diagnoses the issue, and proposes solutions, letting your team focus on fixing problems instead of finding them.",
-      imgLabel: "Problem feed",
-      img: demoFeed,
+      kicker: "Inbox",
+      path: "/inbox",
+      title: "Every quote request gets read the moment it lands.",
+      body: "The agent watches the inbox around the clock, picks out spot-quote requests and RFP bid spreadsheets, and pulls the lane, equipment, and dates into structured fields. Anything ambiguous is flagged for you, not guessed.",
+      imgLabel: "Parsed quote request",
+      img: demoInbox,
     },
     {
-      kicker: "Ask",
-      path: "/ask",
-      title: "One question replaces the multi-system hunt.",
-      body: "Manifest indexes data across all of your systems for quick retrieval. It understands the context of your operations and efficiently answers questions, grounding answers with citations linked back to the source.",
-      imgLabel: "Ask with citations",
-      img: demoAsk,
+      kicker: "Price",
+      path: "/command",
+      title: "Spot quotes and bid sheets priced from your own rate data.",
+      body: "The agent prices each lane from your own quote history and market benchmarks: what you've won, what you've lost, and where the spot band sits today. Evidence your team never had time to assemble, in seconds.",
+      imgLabel: "Lane pricing evidence",
+      img: demoPrice,
     },
     {
-      kicker: "Search",
-      path: "/search",
-      title: "Find containers through their lifecycle.",
-      body: "Our indexing monitors containers from order to fulfillment, providing you the relevant details scoped to your role.",
-      imgLabel: "Unified search",
-      img: demoSearch,
+      kicker: "Draft",
+      path: "/command",
+      title: "The reply is written before you open the thread.",
+      body: "Every priced quote comes back as a ready-to-send reply on the original thread, with the numbers laid out the way the shipper asked for them. The reply stays a draft: nothing sends without your approval.",
+      imgLabel: "Drafted reply",
+      img: demoDraft,
+    },
+    {
+      kicker: "Approve",
+      path: "/command",
+      title: "A human approves every send.",
+      body: "Nothing leaves the building without your sign-off. You see the full plan before anything happens, click approve, and the quote goes out while your competitors are still opening the email.",
+      imgLabel: "Approve and run",
+      img: demoApprove,
     },
   ];
 
@@ -182,12 +207,13 @@ function Product() {
           <div>
             <div className="eyebrow">Product</div>
             <h2 className="mt-4 font-display text-[clamp(1.85rem,3.4vw,2.75rem)] tracking-tight text-foreground">
-              Every system. One answer.
+              From inbox to approved quote in minutes.
             </h2>
             <p className="mt-5 text-muted-foreground leading-relaxed">
-              When an issue arises within operations, the reject code sits in one system, the root cause
-              in another, and the costs accumulate before anyone connects the dots. Manifest lives on top of these systems, 
-              diagnosing errors and coordinating recovery, resolving issues as they come up instead of waiting for manual intervention.
+              Winnable freight is lost two ways: spot quotes answered too slowly, and RFP bid
+              spreadsheets that can&apos;t be priced fast enough. Transpira&apos;s agent handles
+              both, reading requests, pricing them, and drafting the replies, so your team spends
+              its time approving quotes instead of assembling them.
             </p>
             <a
               href={DEMO_URL}
@@ -195,8 +221,10 @@ function Product() {
               rel="noopener noreferrer"
               className="group mt-8 flex items-center justify-center gap-2 rounded-2xl border border-accent/30 bg-accent/[0.07] px-6 py-4 text-sm font-medium text-foreground transition hover:border-accent/50 hover:bg-accent/[0.11]"
             >
-              <span>See Manifest in action and try the demo today</span>
-              <span className="text-accent transition-transform group-hover:translate-x-0.5">→</span>
+              <span>See the agent in action and try the demo today</span>
+              <span className="text-accent transition-transform group-hover:translate-x-0.5">
+                →
+              </span>
             </a>
           </div>
         </Reveal>
@@ -209,7 +237,7 @@ function Product() {
               kicker={f.kicker}
               title={f.title}
               body={f.body}
-              imgUrl={`demo.transpiralabs.com${f.path}`}
+              imgUrl={`manifest-freight.vercel.app${f.path}`}
               imgHref={`${DEMO_URL}${f.path}`}
               imgLabel={f.imgLabel}
               img={f.img}
@@ -221,66 +249,88 @@ function Product() {
   );
 }
 
-function Focus() {
+/* Pricing and traction: self-serve at a price a three-person shop can buy. */
+function Pricing() {
   return (
     <section className="relative px-6 py-24 border-t border-border">
-      <div className="mx-auto max-w-6xl grid lg:grid-cols-2 gap-12 lg:gap-16 items-stretch">
-        <Reveal className="h-full">
-          <div className="flex h-full flex-col rounded-2xl border border-border bg-card p-6 sm:p-9 soft-shadow">
-            <div className="flex items-center justify-between border-b border-border pb-5">
-              <span className="eyebrow">Verified by track</span>
-              <span className="font-mono text-[0.7rem] text-muted-foreground">288 total</span>
-            </div>
-            <TrackChart />
-            <div className="flex items-center justify-between border-t border-border pt-5 font-mono text-[0.62rem] uppercase tracking-wider text-muted-foreground">
-              <span>217 QA</span>
-              <span>71 tool</span>
-              <span>2 environments</span>
-            </div>
-          </div>
-        </Reveal>
-
-        <Reveal delay={120}>
-          <div className="eyebrow">Focus: Supply Chain</div>
+      <div className="mx-auto max-w-6xl grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <Reveal>
+          <div className="eyebrow">Pricing</div>
           <h2 className="mt-4 font-display text-[clamp(1.85rem,3.4vw,2.75rem)] tracking-tight text-foreground leading-[1.1]">
-            Read our research on Supply Chain agent benchmarking.
+            Starts at $500 a month. Self-serve.
           </h2>
           <p className="mt-6 text-muted-foreground leading-relaxed">
-            In this simulation, operations run on multi-tier networks where one decision depends on
-            the state of dozens of others. To act, an agent has to call the right tools, chain them under conditional
-            logic, and recover from cancellations and errors.
+            A tiered subscription that grows as the agent takes on more of the workflow, at a price
+            a three-person shop can buy. No sales cycle, no paid implementation: connect your
+            systems and start quoting the same day.
           </p>
-
-          <Link
-            to="/case-studies/sc-bench"
-            className="group mt-8 block rounded-2xl border border-accent/30 bg-accent/[0.07] p-6 transition hover:border-accent/50 hover:bg-accent/[0.11]"
-          >
-            <h3 className="font-display text-lg text-foreground group-hover:underline underline-offset-4 decoration-foreground/30">
-              SupChain-Bench Verified
-            </h3>
-            <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-              Building on SupChain-Bench, we audited all 326 items through its graders and
-              kept the 288 that are gold-correct and fairly gradable, giving a clean, held-out signal for training and evaluation.
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <a
+              href={DEMO_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full px-5 py-2.5 bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
+            >
+              Try the Demo
+            </a>
+            <a
+              href={CAL_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full px-5 py-2.5 border border-border text-sm font-medium text-foreground hover:bg-secondary transition-colors"
+            >
+              Book a call
+            </a>
+          </div>
+        </Reveal>
+        <Reveal delay={120}>
+          <div className="rounded-2xl border border-accent/30 bg-accent/[0.07] p-8 soft-shadow">
+            <div className="eyebrow">Traction</div>
+            <div className="mt-4 font-display text-[clamp(2.2rem,4vw,3rem)] tracking-tight text-foreground">
+              5 customers
+            </div>
+            <p className="mt-2 text-muted-foreground leading-relaxed">
+              in private beta, quoting real freight today. Want in? Email{" "}
+              <a
+                href={`mailto:${CONTACT_EMAIL}`}
+                className="text-accent underline underline-offset-2 hover:opacity-80"
+              >
+                {CONTACT_EMAIL}
+              </a>{" "}
+              for early access.
             </p>
-            <div className="mt-5 flex items-center gap-6">
-              {[
-                { v: "288", l: "Verified" },
-                { v: "326", l: "Audited" },
-                { v: "76", l: "Excluded" },
-              ].map((s) => (
-                <div key={s.l}>
-                  <div className="font-display text-lg text-foreground">{s.v}</div>
-                  <div className="font-mono text-[0.6rem] uppercase tracking-wider text-muted-foreground">{s.l}</div>
-                </div>
-              ))}
-            </div>
-            <div className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-accent">
-              Read the case study
-              <span className="transition-transform group-hover:translate-x-0.5">→</span>
-            </div>
-          </Link>
+          </div>
         </Reveal>
       </div>
+    </section>
+  );
+}
+
+/* Research footnote: the benchmarking work stays reachable without carrying
+   the homepage narrative. */
+function ResearchNote() {
+  return (
+    <section className="relative px-6 py-16 border-t border-border">
+      <Reveal>
+        <div className="mx-auto max-w-6xl">
+          <Link
+            to="/case-studies"
+            className="group flex flex-col gap-2 rounded-2xl border border-border bg-card p-6 soft-shadow transition hover:border-accent/50 sm:flex-row sm:items-center sm:justify-between"
+          >
+            <div>
+              <div className="eyebrow">Research</div>
+              <p className="mt-2 text-sm text-muted-foreground leading-relaxed max-w-2xl">
+                Behind the product is a research practice benchmarking and training supply-chain
+                agents, including SupChain-Bench Verified, our audited 288-task evaluation set.
+              </p>
+            </div>
+            <span className="inline-flex shrink-0 items-center gap-1.5 text-sm font-medium text-accent">
+              Read the case studies
+              <span className="transition-transform group-hover:translate-x-0.5">→</span>
+            </span>
+          </Link>
+        </div>
+      </Reveal>
     </section>
   );
 }
@@ -292,10 +342,10 @@ function CTA() {
         <div className="mx-auto max-w-6xl flex flex-col md:flex-row md:items-center md:justify-between gap-8">
           <div>
             <h2 className="font-display text-[clamp(2rem,4.2vw,3.4rem)] leading-[1.06] tracking-tight text-foreground text-balance">
-              Running supply chain operations?
+              Running a brokerage?
             </h2>
             <p className="mt-2 text-muted-foreground leading-relaxed">
-              Try out Manifest,{" "}
+              Try the demo,{" "}
               <a
                 href={CAL_URL}
                 target="_blank"
@@ -343,8 +393,10 @@ function Index() {
       <SiteNav />
       <main className="relative z-10">
         <HeroScreen />
+        <StatBand />
         <Product />
-        <Focus />
+        <Pricing />
+        <ResearchNote />
         <CTA />
         <SiteFooter />
       </main>

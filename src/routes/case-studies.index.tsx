@@ -8,12 +8,12 @@ export const Route = createFileRoute("/case-studies/")({
       {
         name: "description",
         content:
-          "The research program behind Manifest: RL environments, benchmark audits, and fine-tuning runs, each written up with the methods and the numbers.",
+          "The research program behind Transpira's agents: RL environments, benchmark audits, and fine-tuning runs, each written up with the methods and the numbers.",
       },
       { property: "og:title", content: "Case Studies | Transpira" },
       {
         property: "og:description",
-        content: "The research behind Manifest: RL environments, benchmark audits, and fine-tuning runs, written up with the methods and the numbers.",
+        content: "The research behind Transpira's agents: RL environments, benchmark audits, and fine-tuning runs, written up with the methods and the numbers.",
       },
     ],
   }),
@@ -85,7 +85,7 @@ function CaseStudiesIndex() {
               Research &amp; case studies
             </h1>
             <p className="mt-6 max-w-2xl text-lg text-muted-foreground leading-relaxed">
-              The research program behind Manifest: RL environments, benchmark audits, and fine-tuning runs, each
+              The research program behind Transpira's agents: RL environments, benchmark audits, and fine-tuning runs, each
               written up with the methods and the numbers.
             </p>
           </div>

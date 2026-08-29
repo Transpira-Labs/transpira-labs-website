@@ -30,7 +30,7 @@ const EFFORTS = [
     href: PLATFORM_URL,
     tag: "platform.transpiralabs.com",
     intro:
-      "The evaluation pipeline behind Manifest's agents: where we author benchmark tasks, run them against frontier models, and validate every trace before a capability is trusted with real operational work.",
+      "The evaluation pipeline behind Transpira's agents: where we author benchmark tasks, run them against frontier models, and validate every trace before a capability is trusted with real operational work.",
     features: [
       {
         kicker: "Pipeline & analytics",
@@ -46,7 +46,7 @@ const EFFORTS = [
     href: BUILD_URL,
     tag: "build.transpiralabs.com",
     intro:
-      "Where Manifest's agents train: composing reinforcement-learning environments from blocks described in plain language, then building, running, and testing them against operational scenarios.",
+      "Where Transpira's agents train: composing reinforcement-learning environments from blocks described in plain language, then building, running, and testing them against operational scenarios.",
     features: [
       {
         kicker: "Block canvas",
@@ -76,7 +76,7 @@ function EnvironmentsPage() {
           <div className="mx-auto max-w-6xl">
             <div className="eyebrow">Environments</div>
             <h1 className="mt-5 font-display text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.05] tracking-tight text-foreground">
-              The training ground behind Manifest
+              The training ground behind Transpira's agents
             </h1>
             <p className="mt-8 text-lg text-foreground/85 leading-relaxed">
               An agent is only as good as the environments it trains in. We design reinforcement-learning

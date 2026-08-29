@@ -2,10 +2,10 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode, type CSSProperties } from "react";
 import transpiraLogo from "@/assets/transpira-logo.png";
 
-export const DEMO_URL = "https://demo.transpiralabs.com";
+export const DEMO_URL = "https://manifest-freight.vercel.app";
 export const PLATFORM_URL = "https://platform.transpiralabs.com";
 export const BUILD_URL = "https://build.transpiralabs.com";
-export const CONTACT_EMAIL = "team@transpiralabs.com";
+export const CONTACT_EMAIL = "adi@transpiralabs.com";
 export const CAL_URL = "https://cal.com/adi-krish";
 
 function ExternalArrow() {
@@ -275,7 +275,7 @@ export function SiteFooter() {
               <span className="font-display font-semibold">Transpira Labs</span>
             </div>
             <p className="mt-3 text-sm text-muted-foreground max-w-xs leading-relaxed">
-              Every system. One answer. Root cause in minutes, on your own network.
+              The AI bidding agent for 3PL brokers. First quote back, human-approved.
             </p>
             <div className="mt-6 flex flex-col gap-1 text-xs text-muted-foreground">
               <span className="font-mono">© {new Date().getFullYear()} Transpira Labs</span>
