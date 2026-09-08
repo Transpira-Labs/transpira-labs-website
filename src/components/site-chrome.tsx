@@ -2,7 +2,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode, type CSSProperties } from "react";
 import transpiraLogo from "@/assets/transpira-logo.png";
 
-export const DEMO_URL = "https://manifest-freight.vercel.app";
+export const DEMO_URL = "https://demo.transpiralabs.com";
 export const PLATFORM_URL = "https://platform.transpiralabs.com";
 export const BUILD_URL = "https://build.transpiralabs.com";
 export const CONTACT_EMAIL = "adi@transpiralabs.com";

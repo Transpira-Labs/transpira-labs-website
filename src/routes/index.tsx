@@ -237,7 +237,7 @@ function Product() {
               kicker={f.kicker}
               title={f.title}
               body={f.body}
-              imgUrl={`manifest-freight.vercel.app${f.path}`}
+              imgUrl={`demo.transpiralabs.com${f.path}`}
               imgHref={`${DEMO_URL}${f.path}`}
               imgLabel={f.imgLabel}
               img={f.img}
