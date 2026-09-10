@@ -17,5 +17,9 @@ export default defineConfig({
   // explicit `nitro` option the wrapper skips Nitro entirely off-platform, which
   // would produce no deployable server output. Inside the Lovable sandbox the
   // wrapper still overrides this back to the Cloudflare preset.
-  nitro: { preset: "vercel" },
+  // Cloud Run needs a self-contained Node server (.output/server/index.mjs);
+  // Vercel needs its Build Output API layout. The container build sets
+  // DOCKER_BUILD, so both targets keep working from one config and Vercel
+  // stays available as the rollback.
+  nitro: { preset: process.env.DOCKER_BUILD ? "node-server" : "vercel" },
 });

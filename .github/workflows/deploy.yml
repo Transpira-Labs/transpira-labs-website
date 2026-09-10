@@ -1,0 +1,64 @@
+# Builds this app into a container and rolls it onto Cloud Run on every push to
+# main.
+#
+# Authentication is Workload Identity Federation: GitHub proves who it is with
+# a short-lived OIDC token, so there is no service-account key in repository
+# secrets waiting to leak. The provider only accepts assertions from repos
+# owned by Transpira-Labs.
+name: deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      PROJECT: transpira-prod
+      REGION: us-east1
+      SERVICE: website
+      IMAGE: us-east1-docker.pkg.dev/transpira-prod/apps/website
+    steps:
+      - uses: actions/checkout@v4
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: projects/1024338249988/locations/global/workloadIdentityPools/github/providers/github
+          service_account: web-deployer@transpira-prod.iam.gserviceaccount.com
+      - uses: google-github-actions/setup-gcloud@v2
+
+      - name: Build and push
+        working-directory: .
+        run: |
+          gcloud builds submit --project "$PROJECT" --region "$REGION" \
+            --tag "$IMAGE:${{ github.sha }}" .
+
+      - name: Deploy
+        run: |
+          gcloud run deploy "$SERVICE" \
+            --project "$PROJECT" --region "$REGION" \
+            --image "$IMAGE:${{ github.sha }}" \
+            --service-account web-runtime@transpira-prod.iam.gserviceaccount.com \
+            --allow-unauthenticated --port 8080 --memory 512Mi --cpu 1 \
+            --min-instances 0 --max-instances 4  --quiet
+
+      # Cloud Run calls a revision healthy as soon as the port accepts a
+      # connection, which happens before the first render can throw. Ask for
+      # real pages instead.
+      - name: Verify it renders
+        run: |
+          url=$(gcloud run services describe "$SERVICE" --project "$PROJECT" \
+                  --region "$REGION" --format='value(status.url)')
+          for path in / /about /case-studies /contact; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 30 "$url$path")
+            echo "$path -> $code"
+            [ "$code" = "200" ] || { echo "$SERVICE is not serving $path"; exit 1; }
+          done
