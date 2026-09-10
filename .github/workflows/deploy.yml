@@ -19,6 +19,12 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    # Records each rollout under the repo's Environments tab, next to the
+    # Vercel entries, so the fallback and the real target are visible in
+    # one place. A distinct name - Vercel owns "Production".
+    environment:
+      name: cloud-run
+      url: ${{ steps.deploy.outputs.url }}
     permissions:
       contents: read
       id-token: write
@@ -49,6 +55,22 @@ jobs:
             --service-account web-runtime@transpira-prod.iam.gserviceaccount.com \
             --allow-unauthenticated --port 8080 --memory 512Mi --cpu 1 \
             --min-instances 0 --max-instances 4  --quiet
+
+      - name: Publish the service URL
+        id: deploy
+        run: |
+          url=$(gcloud run services describe "$SERVICE" --project "$PROJECT" \
+                  --region "$REGION" --format='value(status.url)')
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          # A run summary beats digging through log lines for the link.
+          {
+            echo "### $SERVICE deployed"
+            echo ""
+            echo "- **Live:** $url"
+            echo "- **Image:** \`$IMAGE:${{ github.sha }}\`"
+            echo "- **Cloud Build:** https://console.cloud.google.com/cloud-build/builds;region=$REGION?project=$PROJECT"
+            echo "- **Revision:** https://console.cloud.google.com/run/detail/$REGION/$SERVICE/revisions?project=$PROJECT"
+          } >> "$GITHUB_STEP_SUMMARY"
 
       # Cloud Run calls a revision healthy as soon as the port accepts a
       # connection, which happens before the first render can throw. Ask for
