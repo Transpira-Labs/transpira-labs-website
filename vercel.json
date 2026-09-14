@@ -1,5 +1,0 @@
-{
-  "routes": [
-    { "src": "/(.*)", "dest": "https://website-dtvxnvxsjq-ue.a.run.app/$1" }
-  ]
-}
