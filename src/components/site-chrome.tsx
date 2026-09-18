@@ -1,5 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode, type CSSProperties } from "react";
+import transpiraLogo from "@/assets/transpira-logo.png";
 
 export const DEMO_URL = "https://demo.transpiralabs.com";
 export const PLATFORM_URL = "https://platform.transpiralabs.com";
@@ -292,8 +293,11 @@ export function LinkCard({
 function Brand() {
   return (
     <Link to="/" className="flex shrink-0 items-center gap-2.5 text-white no-underline">
-      <span className="block size-3 rounded-full bg-forest" aria-hidden="true" />
-      <span className="text-base font-semibold tracking-[-0.01em]">Manifest</span>
+      <img src={transpiraLogo} alt="Transpira logo" className="size-7 rounded-md object-cover" />
+      <span className="flex items-baseline gap-1.5">
+        <span className="text-base font-semibold tracking-[-0.01em]">Manifest</span>
+        <span className="hidden text-xs text-fog sm:inline">by Transpira</span>
+      </span>
     </Link>
   );
 }
@@ -457,11 +461,14 @@ export function SiteFooter() {
   return (
     <footer className="border-t border-white/8 px-4 py-7 text-[13px] text-ink-faint sm:px-6">
       <div className="mx-auto flex max-w-[1400px] flex-wrap items-center justify-between gap-x-6 gap-y-3">
-        <span>
-          © {new Date().getFullYear()} Transpira Labs · Backed by{" "}
-          <a href="https://fusen.world/" target="_blank" rel="noreferrer" className={linkCls}>
-            Fusen World
-          </a>
+        <span className="flex items-center gap-2.5">
+          <img src={transpiraLogo} alt="Transpira logo" className="size-5 rounded object-cover" />
+          <span>
+            Manifest by Transpira Labs · © {new Date().getFullYear()} · Backed by{" "}
+            <a href="https://fusen.world/" target="_blank" rel="noreferrer" className={linkCls}>
+              Fusen World
+            </a>
+          </span>
         </span>
         <span className="flex flex-wrap gap-x-[18px] gap-y-2">
           <Link to="/case-studies" className={linkCls}>
