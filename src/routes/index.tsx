@@ -98,7 +98,7 @@ function Hero() {
         className="rise m-0 max-w-[640px] text-[clamp(1.0625rem,2vw,1.5rem)] text-pretty text-fog"
         style={{ "--rise-delay": "600ms" } as CSSProperties}
       >
-        Keep scrolling. This takes one minute.
+        Keep scrolling.
       </p>
       <button
         type="button"
