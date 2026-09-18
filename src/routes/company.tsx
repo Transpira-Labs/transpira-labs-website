@@ -23,7 +23,7 @@ export const Route = createFileRoute("/company")({
       {
         property: "og:description",
         content:
-          "Built by people who benchmark supply-chain agents for a living. Backed by Fusen World.",
+          "Built by researchers and engineers. Backed by Fusen World.",
       },
     ],
   }),
@@ -37,7 +37,7 @@ function CompanyPage() {
       <main className="flex flex-1 flex-col items-center gap-10 px-4 py-[clamp(64px,12vw,120px)] sm:px-6 rise-fast">
         <PageIntro
           eyebrow="Transpira Labs"
-          title="Built by people who benchmark supply-chain agents for a living."
+          title="Built by researchers and engineers."
           body="Behind the product is a research practice benchmarking and training supply-chain agents, including SupChain-Bench Verified, our audited 288-task evaluation set. Five brokerages are in private beta, quoting real freight today. Backed by Fusen World."
         />
         <div className="grid w-full max-w-[900px] grid-cols-[repeat(auto-fit,minmax(min(220px,100%),1fr))] gap-3">
