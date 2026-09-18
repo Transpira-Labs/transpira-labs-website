@@ -50,7 +50,7 @@ function CompanyPage() {
           <LinkCard
             to="/environments"
             title="Environments"
-            desc="Where our agents are trained and tested"
+            desc="Shipped to frontier AI labs; the same technology powers our newer products"
           />
           <LinkCard href={DEMO_URL} title="Live demo" desc="quoting.transpiralabs.com" />
           <LinkCard to="/contact" title="Contact" desc={CONTACT_EMAIL} />

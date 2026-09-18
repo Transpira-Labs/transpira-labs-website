@@ -16,9 +16,9 @@ export const Route = createFileRoute("/environments")({
   head: () => ({
     meta: [
       { title: "Environments | Transpira" },
-      { name: "description", content: "How Transpira creates reinforcement-learning environments: tasks authored and verified on the Platform, environments composed and run on Build." },
+      { name: "description", content: "Transpira has shipped training and evaluation environments to frontier AI labs. The same technology now helps power the models behind our newer products." },
       { property: "og:title", content: "Environments | Transpira" },
-      { property: "og:description", content: "How Transpira creates reinforcement-learning environments: tasks authored and verified on the Platform, environments composed and run on Build." },
+      { property: "og:description", content: "Transpira has shipped training and evaluation environments to frontier AI labs. The same technology now helps power the models behind our newer products." },
     ],
   }),
   component: EnvironmentsPage,
@@ -76,14 +76,14 @@ function EnvironmentsPage() {
           <div className="mx-auto max-w-6xl">
             <div className="eyebrow">Environments</div>
             <h1 className="mt-5 font-display text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.05] tracking-tight text-foreground">
-              The training ground behind Transpira's agents
+              Shipped to frontier AI labs
             </h1>
             <p className="mt-8 text-lg text-foreground/85 leading-relaxed">
-              An agent is only as good as the environments it trains in. We design reinforcement-learning
-              environments with dense reward signals grounded in real business logic, and we&apos;ve delivered
-              them to frontier labs. That work ships through two surfaces: the Platform, where tasks are
-              authored, evaluated, and quality-checked, and Build, a no-code way to compose environments
-              from blocks.
+              We have shipped training and evaluation environments to frontier AI labs, built on real
+              business logic and verified task by task. That same technology now helps power the models
+              behind our newer products, including Manifest. It runs on two surfaces: the Platform, where
+              tasks are authored, evaluated, and quality-checked, and Build, a no-code way to compose
+              environments from blocks.
             </p>
           </div>
         </section>
