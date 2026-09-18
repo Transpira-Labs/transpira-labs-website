@@ -9,7 +9,6 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as WhyNowRouteImport } from './routes/why-now'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as EnvironmentsRouteImport } from './routes/environments'
@@ -23,11 +22,6 @@ import { Route as CaseStudiesBuildRouteImport } from './routes/case-studies.buil
 import { Route as CaseStudiesBenchceptionRouteImport } from './routes/case-studies.benchception'
 import { Route as CaseStudiesSlugRouteImport } from './routes/case-studies.$slug'
 
-const WhyNowRoute = WhyNowRouteImport.update({
-  id: '/why-now',
-  path: '/why-now',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
@@ -97,7 +91,6 @@ export interface FileRoutesByFullPath {
   '/environments': typeof EnvironmentsRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
-  '/why-now': typeof WhyNowRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/case-studies/benchception': typeof CaseStudiesBenchceptionRoute
   '/case-studies/build': typeof CaseStudiesBuildRoute
@@ -112,7 +105,6 @@ export interface FileRoutesByTo {
   '/environments': typeof EnvironmentsRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
-  '/why-now': typeof WhyNowRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/case-studies/benchception': typeof CaseStudiesBenchceptionRoute
   '/case-studies/build': typeof CaseStudiesBuildRoute
@@ -128,7 +120,6 @@ export interface FileRoutesById {
   '/environments': typeof EnvironmentsRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
-  '/why-now': typeof WhyNowRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/case-studies/benchception': typeof CaseStudiesBenchceptionRoute
   '/case-studies/build': typeof CaseStudiesBuildRoute
@@ -145,7 +136,6 @@ export interface FileRouteTypes {
     | '/environments'
     | '/pricing'
     | '/privacy'
-    | '/why-now'
     | '/case-studies/$slug'
     | '/case-studies/benchception'
     | '/case-studies/build'
@@ -160,7 +150,6 @@ export interface FileRouteTypes {
     | '/environments'
     | '/pricing'
     | '/privacy'
-    | '/why-now'
     | '/case-studies/$slug'
     | '/case-studies/benchception'
     | '/case-studies/build'
@@ -175,7 +164,6 @@ export interface FileRouteTypes {
     | '/environments'
     | '/pricing'
     | '/privacy'
-    | '/why-now'
     | '/case-studies/$slug'
     | '/case-studies/benchception'
     | '/case-studies/build'
@@ -191,7 +179,6 @@ export interface RootRouteChildren {
   EnvironmentsRoute: typeof EnvironmentsRoute
   PricingRoute: typeof PricingRoute
   PrivacyRoute: typeof PrivacyRoute
-  WhyNowRoute: typeof WhyNowRoute
   CaseStudiesSlugRoute: typeof CaseStudiesSlugRoute
   CaseStudiesBenchceptionRoute: typeof CaseStudiesBenchceptionRoute
   CaseStudiesBuildRoute: typeof CaseStudiesBuildRoute
@@ -201,13 +188,6 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/why-now': {
-      id: '/why-now'
-      path: '/why-now'
-      fullPath: '/why-now'
-      preLoaderRoute: typeof WhyNowRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/privacy': {
       id: '/privacy'
       path: '/privacy'
@@ -303,7 +283,6 @@ const rootRouteChildren: RootRouteChildren = {
   EnvironmentsRoute: EnvironmentsRoute,
   PricingRoute: PricingRoute,
   PrivacyRoute: PrivacyRoute,
-  WhyNowRoute: WhyNowRoute,
   CaseStudiesSlugRoute: CaseStudiesSlugRoute,
   CaseStudiesBenchceptionRoute: CaseStudiesBenchceptionRoute,
   CaseStudiesBuildRoute: CaseStudiesBuildRoute,
