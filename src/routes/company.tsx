@@ -17,7 +17,7 @@ export const Route = createFileRoute("/company")({
       {
         name: "description",
         content:
-          "Transpira Labs builds Manifest. Behind the product is a research practice benchmarking and training supply-chain agents, including SupChain-Bench Verified.",
+          "Transpira Labs is a research lab ensuring that AI is actually useful for everyone, not just a select few. Manifest is where that work meets freight brokers.",
       },
       { property: "og:title", content: "Company | Transpira Labs" },
       {
@@ -38,7 +38,7 @@ function CompanyPage() {
         <PageIntro
           eyebrow="Transpira Labs"
           title="Built by researchers and engineers."
-          body="Behind the product is a research practice benchmarking and training supply-chain agents, including SupChain-Bench Verified, our audited 288-task evaluation set. Five brokerages are in private beta, quoting real freight today. Backed by Fusen World."
+          body="We're a research lab ensuring that AI is actually useful for everyone, not just a select few. Manifest is where that work meets freight brokers. Backed by Fusen World."
         />
         <div className="grid w-full max-w-[900px] grid-cols-[repeat(auto-fit,minmax(min(220px,100%),1fr))] gap-3">
           <LinkCard
