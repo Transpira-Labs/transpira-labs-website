@@ -78,7 +78,7 @@ function CaseStudiesIndex() {
       <SolidBackground />
       <main className="relative z-10">
         <SiteNav />
-        <section className="px-6 pt-36 pb-16">
+        <section className="px-6 pt-16 pb-16">
           <div className="mx-auto max-w-7xl">
             <div className="eyebrow">Research</div>
             <h1 className="mt-5 font-display text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.05] tracking-tight text-foreground text-balance max-w-4xl">

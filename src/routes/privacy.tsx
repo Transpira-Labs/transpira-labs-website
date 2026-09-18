@@ -17,7 +17,7 @@ function PrivacyPage() {
   return (
     <div className="min-h-screen">
       <SiteNav />
-      <main className="pt-28 pb-24 px-6">
+      <main className="pt-14 pb-24 px-6">
         <div className="mx-auto max-w-3xl">
           <h1 className="font-display text-4xl tracking-tight mb-10 text-foreground">
             Privacy Policy

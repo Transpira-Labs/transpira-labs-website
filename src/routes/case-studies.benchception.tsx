@@ -82,7 +82,7 @@ function BenchceptionPage() {
         <SiteNav />
 
         {/* HERO / SPLIT ----------------------------------------------------- */}
-        <section className="mx-auto max-w-[1280px] px-6 pb-2 pt-28 sm:px-8">
+        <section className="mx-auto max-w-[1280px] px-6 pb-2 pt-14 sm:px-8">
           <Link to="/case-studies" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition">
             ← All case studies
           </Link>

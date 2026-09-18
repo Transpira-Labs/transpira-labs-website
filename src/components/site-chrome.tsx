@@ -1,6 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode, type CSSProperties } from "react";
-import transpiraLogo from "@/assets/transpira-logo.png";
 
 export const DEMO_URL = "https://demo.transpiralabs.com";
 export const PLATFORM_URL = "https://platform.transpiralabs.com";
@@ -8,16 +7,54 @@ export const BUILD_URL = "https://build.transpiralabs.com";
 export const CONTACT_EMAIL = "adi@transpiralabs.com";
 export const CAL_URL = "https://cal.com/adi-krish";
 
+/* Button recipes shared across pages. */
+export const BTN_PRIMARY =
+  "inline-flex items-center justify-center gap-2 rounded-lg bg-forest px-7 py-3.5 text-base font-semibold text-white no-underline transition-colors hover:bg-[#3a806d]";
+export const BTN_GHOST =
+  "inline-flex items-center justify-center gap-2 rounded-lg border border-white/25 px-7 py-3.5 text-base font-medium text-white no-underline transition-colors hover:bg-white/5";
+
+/* The four top-level tabs from the design. */
+const TABS = [
+  { to: "/", label: "Walkthrough" },
+  { to: "/why-now", label: "Why now" },
+  { to: "/pricing", label: "Pricing" },
+  { to: "/company", label: "Company" },
+] as const;
+
+/* Pages that live under the Company tab, so the tab stays lit while you read them. */
+const COMPANY_PATHS = [
+  "/company",
+  "/about",
+  "/case-studies",
+  "/contact",
+  "/environments",
+  "/privacy",
+];
+
 function ExternalArrow() {
   return (
-    <svg viewBox="0 0 12 12" className="size-3 opacity-50" fill="none" aria-hidden="true">
-      <path d="M3.5 8.5 L8.5 3.5 M4.5 3.5 H8.5 V7.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+    <svg viewBox="0 0 12 12" className="size-3 opacity-60" fill="none" aria-hidden="true">
+      <path
+        d="M3.5 8.5 L8.5 3.5 M4.5 3.5 H8.5 V7.5"
+        stroke="currentColor"
+        strokeWidth="1.3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }
 
-/* Fades + lifts children into view on scroll (hud-style reveal). */
-export function Reveal({ children, delay = 0, className = "" }: { children: ReactNode; delay?: number; className?: string }) {
+/* Fades + lifts children into view on scroll. */
+export function Reveal({
+  children,
+  delay = 0,
+  className = "",
+}: {
+  children: ReactNode;
+  delay?: number;
+  className?: string;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   useEffect(() => {
@@ -28,9 +65,6 @@ export function Reveal({ children, delay = 0, className = "" }: { children: Reac
       setVisible(true);
       return;
     }
-    // Anything already in the viewport on first paint reveals immediately;
-    // the scroll-triggered threshold below would otherwise leave partially
-    // visible content hidden until the user scrolls.
     const rect = el.getBoundingClientRect();
     if (rect.top < window.innerHeight && rect.bottom > 0) {
       setVisible(true);
@@ -51,7 +85,11 @@ export function Reveal({ children, delay = 0, className = "" }: { children: Reac
     return () => io.disconnect();
   }, []);
   return (
-    <div ref={ref} className={`reveal ${visible ? "is-visible" : ""} ${className}`} style={{ "--reveal-delay": `${delay}ms` } as CSSProperties}>
+    <div
+      ref={ref}
+      className={`reveal ${visible ? "is-visible" : ""} ${className}`}
+      style={{ "--reveal-delay": `${delay}ms` } as CSSProperties}
+    >
       {children}
     </div>
   );
@@ -72,31 +110,51 @@ export function ImageFrame({
 }) {
   const frame = (
     <>
-      <div className="flex items-center gap-1.5 border-b border-border bg-secondary/60 px-4 py-2.5 transition-colors group-hover:bg-accent/15">
+      <div className="flex items-center gap-1.5 border-b border-border bg-secondary/60 px-4 py-2.5 transition-colors group-hover:bg-forest/20">
         <span className="size-2.5 rounded-full bg-[#ff5f57]" />
         <span className="size-2.5 rounded-full bg-[#febc2e]" />
         <span className="size-2.5 rounded-full bg-[#28c840]" />
-        <span className="ml-3 truncate font-mono text-[0.65rem] text-muted-foreground transition-colors group-hover:text-accent">{url}</span>
+        <span className="ml-3 truncate font-mono text-[0.65rem] text-muted-foreground transition-colors group-hover:text-mint">
+          {url}
+        </span>
       </div>
       {children ?? (
         <div
           className="relative grid aspect-[16/10] place-items-center bg-secondary"
           style={{
             backgroundImage:
-              "linear-gradient(oklch(0.225 0.013 262 / 0.04) 1px, transparent 1px), linear-gradient(90deg, oklch(0.225 0.013 262 / 0.04) 1px, transparent 1px)",
+              "linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)",
             backgroundSize: "28px 28px",
           }}
         >
           <div className="text-center">
             <div className="mx-auto mb-3 grid size-11 place-items-center rounded-xl border border-dashed border-input text-muted-foreground">
               <svg viewBox="0 0 24 24" className="size-5" fill="none" aria-hidden="true">
-                <rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" strokeWidth="1.5" />
+                <rect
+                  x="3"
+                  y="4"
+                  width="18"
+                  height="16"
+                  rx="2"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                />
                 <circle cx="8.5" cy="9.5" r="1.5" fill="currentColor" />
-                <path d="M4 17l5-5 4 4 3-3 4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                <path
+                  d="M4 17l5-5 4 4 3-3 4 4"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
             </div>
-            <div className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-muted-foreground">{label}</div>
-            <div className="mt-1 text-[0.7rem] text-muted-foreground/70">Screenshot coming soon</div>
+            <div className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-muted-foreground">
+              {label}
+            </div>
+            <div className="mt-1 text-[0.7rem] text-muted-foreground/70">
+              Screenshot coming soon
+            </div>
           </div>
         </div>
       )}
@@ -109,7 +167,7 @@ export function ImageFrame({
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className={`group block ${frameClass} transition-colors hover:border-accent/50`}
+        className={`group block ${frameClass} transition-colors hover:border-mint/50`}
       >
         {frame}
       </a>
@@ -145,173 +203,287 @@ export function FeatureRow({
         </ImageFrame>
       </Reveal>
       <Reveal delay={100} className={flip ? "md:order-1" : undefined}>
-        {kicker ? (
-          <div className="mb-3 font-mono text-[0.65rem] uppercase tracking-[0.16em] text-accent">{kicker}</div>
-        ) : null}
-        <h4 className="font-display text-[clamp(1.3rem,2.2vw,1.65rem)] tracking-tight text-foreground">{title}</h4>
-        <p className="mt-3 text-muted-foreground leading-relaxed">{body}</p>
+        {kicker ? <div className="eyebrow mb-3">{kicker}</div> : null}
+        <h4 className="font-display text-[clamp(1.3rem,2.2vw,1.65rem)] text-foreground">{title}</h4>
+        <p className="mt-3 leading-relaxed text-muted-foreground">{body}</p>
       </Reveal>
     </div>
   );
 }
 
-/* The inner bar, shared by the transparent hero nav and the solid sticky nav. */
-function NavBar({ isHome, overHero }: { isHome: boolean; overHero: boolean }) {
-  const brand = overHero ? "text-white" : "text-foreground";
-  const link = overHero ? "text-white/75 hover:text-white" : "text-muted-foreground hover:text-foreground";
+/* Centered page opener used by the tab pages and the Company sub-pages. */
+export function PageIntro({
+  eyebrow,
+  title,
+  body,
+  light,
+  className = "",
+}: {
+  eyebrow: string;
+  title: ReactNode;
+  body?: ReactNode;
+  light?: boolean;
+  className?: string;
+}) {
   return (
-    <div className="mx-auto max-w-6xl px-6 h-16 flex items-center justify-between">
-      <Link
-        to="/"
-        onClick={(e) => {
-          if (isHome) {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          }
-        }}
-        className={`flex items-center gap-2.5 transition-colors ${brand}`}
+    <div className={`flex max-w-[900px] flex-col gap-4 text-center ${className}`}>
+      <p className={light ? "eyebrow-ink m-0" : "eyebrow m-0"}>{eyebrow}</p>
+      <h1
+        className={`m-0 font-display text-[clamp(2.25rem,6vw,5.5rem)] leading-[1.02] text-balance ${
+          light ? "text-ink" : "text-white"
+        }`}
       >
-        <img src={transpiraLogo} alt="Transpira logo" className="size-7 rounded-md object-cover" />
-        <span className="font-display text-lg font-semibold tracking-tight">Transpira</span>
-      </Link>
-
-      <nav className="hidden md:flex items-center gap-7 text-sm">
-        <Link to="/case-studies" className={`transition-colors ${link}`}>
-          Research
-        </Link>
-        <Link to="/about" className={`transition-colors ${link}`}>
-          About
-        </Link>
-        <Link to="/contact" className={`transition-colors ${link}`}>
-          Contact
-        </Link>
-      </nav>
-
-      <a
-        href={DEMO_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center gap-1.5 text-sm font-medium rounded-full px-4 py-1.5 bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
-      >
-        Try our Demo <ExternalArrow />
-      </a>
+        {title}
+      </h1>
+      {body ? (
+        <p
+          className={`m-0 text-[clamp(1.0625rem,2vw,1.375rem)] leading-[1.45] text-pretty ${
+            light ? "text-ink-muted" : "text-fog"
+          }`}
+        >
+          {body}
+        </p>
+      ) : null}
     </div>
+  );
+}
+
+/* Bordered tile with a title and a one-line description; links internally or out. */
+export function LinkCard({
+  to,
+  href,
+  title,
+  desc,
+}: {
+  to?: string;
+  href?: string;
+  title: string;
+  desc: string;
+}) {
+  const cls =
+    "flex flex-col gap-1.5 rounded-xl border border-white/15 p-5 text-white no-underline transition-colors hover:border-mint/60 hover:bg-white/[0.03] sm:p-6";
+  const inner = (
+    <>
+      <span className="flex items-center gap-2 text-lg font-semibold">
+        {title}
+        {href ? <ExternalArrow /> : null}
+      </span>
+      <span className="text-sm text-fog">{desc}</span>
+    </>
+  );
+  if (href) {
+    return (
+      <a
+        href={href}
+        target={href.startsWith("mailto:") ? undefined : "_blank"}
+        rel="noreferrer"
+        className={cls}
+      >
+        {inner}
+      </a>
+    );
+  }
+  return (
+    <Link to={to ?? "/"} className={cls}>
+      {inner}
+    </Link>
+  );
+}
+
+function Brand() {
+  return (
+    <Link to="/" className="flex shrink-0 items-center gap-2.5 text-white no-underline">
+      <span className="block size-3 rounded-full bg-forest" aria-hidden="true" />
+      <span className="text-base font-semibold tracking-[-0.01em]">Manifest</span>
+    </Link>
   );
 }
 
 export function SiteNav() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const isHome = pathname === "/";
-  const [y, setY] = useState(0);
-  const [vh, setVh] = useState(0);
+  const [open, setOpen] = useState(false);
+
+  // Close the phone menu whenever the route changes.
   useEffect(() => {
-    const update = () => {
-      setY(window.scrollY);
-      setVh(window.innerHeight);
-    };
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
+    setOpen(false);
+  }, [pathname]);
+
+  // Lock body scroll while the phone menu is open.
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
     return () => {
-      window.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
+      document.body.style.overflow = prev;
     };
-  }, []);
-  // The homepage hero is 82svh tall; swap the sticky nav in as it scrolls past.
-  const heroPassed = vh > 0 && y > vh * 0.82 - 110;
-  // On the homepage the nav sits at the top of the dark hero and scrolls away
-  // with the page (absolute), then the solid sticky nav slides in on the light body.
-  // The sticky nav is always mounted so it can transition *out* smoothly when
-  // scrolling back up, rather than snapping away.
-  const showSticky = !isHome || heroPassed;
-  return (
-    <>
-      {isHome && (
-        <header className="absolute top-0 inset-x-0 z-50 bg-transparent">
-          <NavBar isHome overHero />
-        </header>
-      )}
-      <header
-        className={`fixed top-0 inset-x-0 z-50 bg-background/80 backdrop-blur-md border-b border-border transition-all duration-300 ease-out will-change-transform ${
-          showSticky ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0 pointer-events-none"
-        }`}
-        aria-hidden={showSticky ? undefined : true}
-      >
-        <NavBar isHome={isHome} overHero={false} />
-      </header>
-    </>
-  );
-}
+  }, [open]);
 
-/* Light backdrop: cool paper with a faint blueprint grid. */
-export function SolidBackground() {
+  const isActive = (to: string) =>
+    to === "/company"
+      ? COMPANY_PATHS.some((p) => pathname === p || pathname.startsWith(p + "/"))
+      : pathname === to;
+
+  const tabClass = (active: boolean) =>
+    `whitespace-nowrap rounded-md px-3 py-[7px] text-sm font-medium no-underline transition-colors ${
+      active ? "bg-white/12 text-white" : "text-fog hover:text-white"
+    }`;
+
   return (
-    <div className="fixed inset-0 z-0 bg-background pointer-events-none">
+    <header className="sticky top-0 z-40 border-b border-white/8 bg-[rgba(27,36,32,0.85)] backdrop-blur-[10px]">
+      <div className="mx-auto flex h-14 max-w-[1400px] items-center justify-between gap-4 px-4 sm:px-6">
+        <Brand />
+
+        <nav
+          className="hidden min-w-0 flex-1 items-center justify-center gap-1 md:flex"
+          aria-label="Primary"
+        >
+          {TABS.map((t) => (
+            <Link key={t.to} to={t.to} className={tabClass(isActive(t.to))}>
+              {t.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-2">
+          <a
+            href={CAL_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="whitespace-nowrap rounded-md bg-forest px-3.5 py-2 text-sm font-medium text-white no-underline transition-colors hover:bg-[#3a806d]"
+          >
+            Book a call
+          </a>
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+            aria-label={open ? "Close menu" : "Open menu"}
+            className="grid size-10 place-items-center rounded-md text-white transition-colors hover:bg-white/8 md:hidden"
+          >
+            <svg viewBox="0 0 24 24" className="size-5" fill="none" aria-hidden="true">
+              {open ? (
+                <path
+                  d="M6 6l12 12M18 6L6 18"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                />
+              ) : (
+                <path
+                  d="M4 7h16M4 12h16M4 17h16"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                />
+              )}
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      {/* Phone menu: full-width sheet under the bar. */}
       <div
-        className="absolute inset-0 opacity-[0.55]"
-        style={{
-          backgroundImage:
-            "linear-gradient(oklch(0.225 0.013 262 / 0.03) 1px, transparent 1px), linear-gradient(90deg, oklch(0.225 0.013 262 / 0.03) 1px, transparent 1px)",
-          backgroundSize: "52px 52px",
-          maskImage: "radial-gradient(ellipse 90% 55% at 50% 0%, #000 35%, transparent 78%)",
-          WebkitMaskImage: "radial-gradient(ellipse 90% 55% at 50% 0%, #000 35%, transparent 78%)",
-        }}
-      />
-    </div>
+        id="mobile-nav"
+        className={`md:hidden ${open ? "block" : "hidden"} border-t border-white/8 bg-[#1b2420]`}
+      >
+        <nav
+          className="mx-auto flex max-w-[1400px] flex-col px-4 py-3 sm:px-6"
+          aria-label="Primary (mobile)"
+        >
+          {TABS.map((t) => (
+            <Link
+              key={t.to}
+              to={t.to}
+              className={`rounded-md px-3 py-3 text-base font-medium no-underline ${
+                isActive(t.to) ? "bg-white/12 text-white" : "text-fog"
+              }`}
+            >
+              {t.label}
+            </Link>
+          ))}
+          <div className="mt-2 border-t border-white/8 pt-2">
+            <div className="px-3 pb-1 pt-2 font-mono text-[11px] uppercase tracking-[0.08em] text-ink-faint">
+              Company
+            </div>
+            <Link
+              to="/case-studies"
+              className="block rounded-md px-3 py-2.5 text-[15px] text-fog no-underline"
+            >
+              Our research
+            </Link>
+            <Link
+              to="/about"
+              className="block rounded-md px-3 py-2.5 text-[15px] text-fog no-underline"
+            >
+              About
+            </Link>
+            <Link
+              to="/environments"
+              className="block rounded-md px-3 py-2.5 text-[15px] text-fog no-underline"
+            >
+              Environments
+            </Link>
+            <Link
+              to="/contact"
+              className="block rounded-md px-3 py-2.5 text-[15px] text-fog no-underline"
+            >
+              Contact
+            </Link>
+            <a
+              href={DEMO_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-2 rounded-md px-3 py-2.5 text-[15px] text-fog no-underline"
+            >
+              Live demo <ExternalArrow />
+            </a>
+          </div>
+        </nav>
+      </div>
+    </header>
   );
 }
 
-// Backwards-compatible alias; the homepage manages its own hero backdrop.
+/* Kept for pages that mount it; the dark page background is now the body itself. */
+export function SolidBackground() {
+  return <div className="pointer-events-none fixed inset-0 z-0 bg-background" aria-hidden="true" />;
+}
+
+// Backwards-compatible alias.
 export const ScrollBackground = SolidBackground;
 
 export function SiteFooter() {
+  const linkCls = "text-mint no-underline transition-colors hover:text-white";
   return (
-    <footer id="company" className="relative border-t border-border px-6 py-10 bg-background">
-      <div className="mx-auto max-w-6xl">
-        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-10">
-          <div>
-            <div className="flex items-center gap-2.5 text-foreground">
-              <img src={transpiraLogo} alt="Transpira logo" className="size-6 rounded-md object-cover" />
-              <span className="font-display font-semibold">Transpira Labs</span>
-            </div>
-            <p className="mt-3 text-sm text-muted-foreground max-w-xs leading-relaxed">
-              The AI bidding agent for 3PL brokers. First quote back, human-approved.
-            </p>
-            <div className="mt-6 flex flex-col gap-1 text-xs text-muted-foreground">
-              <span className="font-mono">© {new Date().getFullYear()} Transpira Labs</span>
-              <span>
-                Backed by{" "}
-                <a href="https://fusen.world/" target="_blank" rel="noopener noreferrer" className="text-foreground/80 hover:text-foreground underline underline-offset-2 transition-colors">
-                  Fusen World
-                </a>
-              </span>
-            </div>
-          </div>
-
-          <div className="flex gap-12 text-sm sm:gap-20">
-            <div>
-              <div className="font-display text-[0.78rem] font-bold uppercase tracking-[0.15em] text-foreground">Explore</div>
-              <div className="mt-3 grid grid-cols-2 gap-x-10 gap-y-2">
-                <a href={DEMO_URL} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">Demo</a>
-                <a href={PLATFORM_URL} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">Platform</a>
-                <a href={BUILD_URL} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">Build</a>
-                <Link to="/case-studies" className="text-muted-foreground hover:text-foreground transition-colors">Research</Link>
-                <Link to="/environments" className="text-muted-foreground hover:text-foreground transition-colors">Environments</Link>
-                <Link to="/about" className="text-muted-foreground hover:text-foreground transition-colors">About</Link>
-                <Link to="/contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact</Link>
-                <Link to="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">Privacy</Link>
-              </div>
-            </div>
-            <div>
-              <div className="font-display text-[0.78rem] font-bold uppercase tracking-[0.15em] text-foreground">Contact</div>
-              <div className="mt-3 flex flex-col gap-2">
-                <a href={CAL_URL} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">Book a call</a>
-                <a href={`mailto:${CONTACT_EMAIL}`} className="text-muted-foreground hover:text-foreground transition-colors">{CONTACT_EMAIL}</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
+    <footer className="border-t border-white/8 px-4 py-7 text-[13px] text-ink-faint sm:px-6">
+      <div className="mx-auto flex max-w-[1400px] flex-wrap items-center justify-between gap-x-6 gap-y-3">
+        <span>
+          © {new Date().getFullYear()} Transpira Labs · Backed by{" "}
+          <a href="https://fusen.world/" target="_blank" rel="noreferrer" className={linkCls}>
+            Fusen World
+          </a>
+        </span>
+        <span className="flex flex-wrap gap-x-[18px] gap-y-2">
+          <Link to="/case-studies" className={linkCls}>
+            Research
+          </Link>
+          <Link to="/about" className={linkCls}>
+            About
+          </Link>
+          <Link to="/environments" className={linkCls}>
+            Environments
+          </Link>
+          <Link to="/contact" className={linkCls}>
+            Contact
+          </Link>
+          <Link to="/privacy" className={linkCls}>
+            Privacy
+          </Link>
+          <a href={`mailto:${CONTACT_EMAIL}`} className={linkCls}>
+            {CONTACT_EMAIL}
+          </a>
+        </span>
       </div>
     </footer>
   );

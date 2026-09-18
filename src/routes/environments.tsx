@@ -72,7 +72,7 @@ function EnvironmentsPage() {
       <SolidBackground />
       <main className="relative z-10">
         <SiteNav />
-        <section className="px-6 pt-36 pb-24">
+        <section className="px-6 pt-16 pb-24">
           <div className="mx-auto max-w-6xl">
             <div className="eyebrow">Environments</div>
             <h1 className="mt-5 font-display text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.05] tracking-tight text-foreground">

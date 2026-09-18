@@ -57,7 +57,7 @@ function CaseStudyPage() {
       <main className="relative z-10">
         <SiteNav />
 
-        <article className="px-6 pt-36 pb-24">
+        <article className="px-6 pt-16 pb-24">
           <div className="mx-auto max-w-5xl">
             <h1 className="font-display text-[clamp(2.25rem,5.5vw,4rem)] leading-[1.05] tracking-tight text-gradient text-balance text-center">
               Classhopper Set

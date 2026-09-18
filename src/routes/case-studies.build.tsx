@@ -88,7 +88,7 @@ function BuildCaseStudy() {
       <main className="relative z-10 text-foreground">
         <SiteNav />
 
-        <article className="mx-auto max-w-[64rem] px-6 pt-28 pb-20 sm:px-8">
+        <article className="mx-auto max-w-[64rem] px-6 pt-14 pb-20 sm:px-8">
           <Link to="/case-studies" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition">
             ← All case studies
           </Link>

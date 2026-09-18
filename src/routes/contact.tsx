@@ -27,7 +27,7 @@ function ContactPage() {
     <div className="min-h-screen">
       <SolidBackground />
       <SiteNav />
-      <main className="relative z-10 pt-28 pb-24 px-6">
+      <main className="relative z-10 pt-14 pb-24 px-6">
         <div className="mx-auto max-w-6xl">
           <Reveal>
             <div className="eyebrow">Contact</div>

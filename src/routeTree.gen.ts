@@ -9,9 +9,12 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WhyNowRouteImport } from './routes/why-now'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as EnvironmentsRouteImport } from './routes/environments'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CompanyRouteImport } from './routes/company'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CaseStudiesIndexRouteImport } from './routes/case-studies.index'
@@ -20,9 +23,19 @@ import { Route as CaseStudiesBuildRouteImport } from './routes/case-studies.buil
 import { Route as CaseStudiesBenchceptionRouteImport } from './routes/case-studies.benchception'
 import { Route as CaseStudiesSlugRouteImport } from './routes/case-studies.$slug'
 
+const WhyNowRoute = WhyNowRouteImport.update({
+  id: '/why-now',
+  path: '/why-now',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EnvironmentsRoute = EnvironmentsRouteImport.update({
@@ -33,6 +46,11 @@ const EnvironmentsRoute = EnvironmentsRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompanyRoute = CompanyRouteImport.update({
+  id: '/company',
+  path: '/company',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -74,9 +92,12 @@ const CaseStudiesSlugRoute = CaseStudiesSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/company': typeof CompanyRoute
   '/contact': typeof ContactRoute
   '/environments': typeof EnvironmentsRoute
+  '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
+  '/why-now': typeof WhyNowRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/case-studies/benchception': typeof CaseStudiesBenchceptionRoute
   '/case-studies/build': typeof CaseStudiesBuildRoute
@@ -86,9 +107,12 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/company': typeof CompanyRoute
   '/contact': typeof ContactRoute
   '/environments': typeof EnvironmentsRoute
+  '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
+  '/why-now': typeof WhyNowRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/case-studies/benchception': typeof CaseStudiesBenchceptionRoute
   '/case-studies/build': typeof CaseStudiesBuildRoute
@@ -99,9 +123,12 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/company': typeof CompanyRoute
   '/contact': typeof ContactRoute
   '/environments': typeof EnvironmentsRoute
+  '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
+  '/why-now': typeof WhyNowRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/case-studies/benchception': typeof CaseStudiesBenchceptionRoute
   '/case-studies/build': typeof CaseStudiesBuildRoute
@@ -113,9 +140,12 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/company'
     | '/contact'
     | '/environments'
+    | '/pricing'
     | '/privacy'
+    | '/why-now'
     | '/case-studies/$slug'
     | '/case-studies/benchception'
     | '/case-studies/build'
@@ -125,9 +155,12 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/company'
     | '/contact'
     | '/environments'
+    | '/pricing'
     | '/privacy'
+    | '/why-now'
     | '/case-studies/$slug'
     | '/case-studies/benchception'
     | '/case-studies/build'
@@ -137,9 +170,12 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/company'
     | '/contact'
     | '/environments'
+    | '/pricing'
     | '/privacy'
+    | '/why-now'
     | '/case-studies/$slug'
     | '/case-studies/benchception'
     | '/case-studies/build'
@@ -150,9 +186,12 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  CompanyRoute: typeof CompanyRoute
   ContactRoute: typeof ContactRoute
   EnvironmentsRoute: typeof EnvironmentsRoute
+  PricingRoute: typeof PricingRoute
   PrivacyRoute: typeof PrivacyRoute
+  WhyNowRoute: typeof WhyNowRoute
   CaseStudiesSlugRoute: typeof CaseStudiesSlugRoute
   CaseStudiesBenchceptionRoute: typeof CaseStudiesBenchceptionRoute
   CaseStudiesBuildRoute: typeof CaseStudiesBuildRoute
@@ -162,11 +201,25 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/why-now': {
+      id: '/why-now'
+      path: '/why-now'
+      fullPath: '/why-now'
+      preLoaderRoute: typeof WhyNowRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/privacy': {
       id: '/privacy'
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/environments': {
@@ -181,6 +234,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/company': {
+      id: '/company'
+      path: '/company'
+      fullPath: '/company'
+      preLoaderRoute: typeof CompanyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -238,9 +298,12 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  CompanyRoute: CompanyRoute,
   ContactRoute: ContactRoute,
   EnvironmentsRoute: EnvironmentsRoute,
+  PricingRoute: PricingRoute,
   PrivacyRoute: PrivacyRoute,
+  WhyNowRoute: WhyNowRoute,
   CaseStudiesSlugRoute: CaseStudiesSlugRoute,
   CaseStudiesBenchceptionRoute: CaseStudiesBenchceptionRoute,
   CaseStudiesBuildRoute: CaseStudiesBuildRoute,
