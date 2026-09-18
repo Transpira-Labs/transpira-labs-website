@@ -52,7 +52,7 @@ function CompanyPage() {
             title="Environments"
             desc="Where our agents are trained and tested"
           />
-          <LinkCard href={DEMO_URL} title="Live demo" desc="demo.transpiralabs.com" />
+          <LinkCard href={DEMO_URL} title="Live demo" desc="quoting.transpiralabs.com" />
           <LinkCard to="/contact" title="Contact" desc={CONTACT_EMAIL} />
         </div>
         <a href={CAL_URL} target="_blank" rel="noreferrer" className={BTN_PRIMARY}>
