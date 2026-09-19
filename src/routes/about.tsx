@@ -150,7 +150,7 @@ function AboutPage() {
             href="https://fusen.world/"
             target="_blank"
             rel="noreferrer"
-            className="flex h-44 w-full max-w-[28rem] items-center justify-center rounded-xl border border-white/15 bg-white p-8 transition-colors hover:border-mint/60"
+            className="flex h-44 w-full max-w-[28rem] items-center justify-center rounded-xl border border-white/15 bg-[#f7f7f7] p-8 transition-colors hover:border-mint/60"
           >
             <img
               src={fusenWorldLogo}
