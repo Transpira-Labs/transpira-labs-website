@@ -1,6 +1,6 @@
 # website — transpiralabs.com
 
-Public marketing site for Transpira Labs. Positions the product as **Manifest**, the team of AI agents for freight brokers ("Win and manage 10× the loads. Same team." A human approves every send). The nav has three tabs from the Claude Design mock: **Walkthrough** (`/`, a scroll story with the animated "chaos" desktop and an interactive load thread), **Pricing** (`/pricing`), and **Company** (`/company`, a hub that links to research, about, environments, the demo, and contact). Under Company: about, environments, case studies (index + SC-bench, benchception, Build, and a GPT-OSS-120B fine-tuning study), contact, privacy.
+Public marketing site for Transpira Labs. Positions the product as **Manifest**, the team of AI agents for freight brokers ("Win and manage 10× the loads. Same team." A human approves every send). The nav has three tabs from the Claude Design mock: **Walkthrough** (`/`, a scroll story with the animated "chaos" desktop and an interactive load thread), **Pricing** (`/pricing`), and **About** (`/about`: the team first, then cards for research, environments, the demo, and contact, then investors; `/company` redirects here). Under About: environments, case studies (index + SC-bench, benchception, Build, and a GPT-OSS-120B fine-tuning study), contact, privacy.
 
 ## Commands
 

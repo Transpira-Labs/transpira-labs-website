@@ -1,6 +1,6 @@
 # Transpira Labs — website
 
-The public marketing site at [transpiralabs.com](https://transpiralabs.com). Presents Transpira's product **Manifest**, the team of AI agents for freight brokers: a scroll-through walkthrough with an interactive load thread, plus Pricing and a Company hub that links to the about page, the environments page (Platform + Build), and written case studies (SC-bench, Benchception, Build, GPT-OSS-120B fine-tuning). Designed for phones as much as desktops.
+The public marketing site at [transpiralabs.com](https://transpiralabs.com). Presents Transpira's product **Manifest**, the team of AI agents for freight brokers: a scroll-through walkthrough with an interactive load thread, plus Pricing and an About page (team first, then links to research, the environments page (Platform + Build), and written case studies (SC-bench, Benchception, Build, GPT-OSS-120B fine-tuning). Designed for phones as much as desktops.
 
 ## Stack
 

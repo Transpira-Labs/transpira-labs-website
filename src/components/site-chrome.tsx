@@ -18,13 +18,13 @@ export const BTN_GHOST =
 const TABS = [
   { to: "/", label: "Walkthrough" },
   { to: "/pricing", label: "Pricing" },
-  { to: "/company", label: "Company" },
+  { to: "/about", label: "About" },
 ] as const;
 
-/* Pages that live under the Company tab, so the tab stays lit while you read them. */
-const COMPANY_PATHS = [
-  "/company",
+/* Pages that live under the About tab, so the tab stays lit while you read them. */
+const ABOUT_PATHS = [
   "/about",
+  "/company",
   "/case-studies",
   "/contact",
   "/environments",
@@ -322,8 +322,8 @@ export function SiteNav() {
   }, [open]);
 
   const isActive = (to: string) =>
-    to === "/company"
-      ? COMPANY_PATHS.some((p) => pathname === p || pathname.startsWith(p + "/"))
+    to === "/about"
+      ? ABOUT_PATHS.some((p) => pathname === p || pathname.startsWith(p + "/"))
       : pathname === to;
 
   const tabClass = (active: boolean) =>
@@ -407,19 +407,13 @@ export function SiteNav() {
           ))}
           <div className="mt-2 border-t border-white/8 pt-2">
             <div className="px-3 pb-1 pt-2 font-mono text-[11px] uppercase tracking-[0.08em] text-ink-faint">
-              Company
+              More
             </div>
             <Link
               to="/case-studies"
               className="block rounded-md px-3 py-2.5 text-[15px] text-fog no-underline"
             >
               Our research
-            </Link>
-            <Link
-              to="/about"
-              className="block rounded-md px-3 py-2.5 text-[15px] text-fog no-underline"
-            >
-              About
             </Link>
             <Link
               to="/environments"

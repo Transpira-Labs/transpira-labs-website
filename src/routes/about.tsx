@@ -3,28 +3,25 @@ import {
   SiteNav,
   SiteFooter,
   PageIntro,
+  LinkCard,
   BTN_PRIMARY,
-  BTN_GHOST,
-  DEMO_URL,
   CAL_URL,
+  DEMO_URL,
+  CONTACT_EMAIL,
 } from "@/components/site-chrome";
 import adiKrish from "@/assets/adi-krish.png";
 import fusenWorldLogo from "@/assets/fusen-world.jpeg";
+
+const DESCRIPTION =
+  "Transpira Labs is a research lab ensuring that AI is actually useful for everyone, not just a select few. Manifest is where that work meets freight brokers. Backed by Fusen World.";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About | Transpira Labs" },
-      {
-        name: "description",
-        content:
-          "The team behind Manifest by Transpira: researchers and engineers making AI actually useful for everyone, not just a select few.",
-      },
+      { name: "description", content: DESCRIPTION },
       { property: "og:title", content: "About | Transpira Labs" },
-      {
-        property: "og:description",
-        content: "The team behind Manifest by Transpira. Backed by Fusen World.",
-      },
+      { property: "og:description", content: DESCRIPTION },
     ],
   }),
   component: AboutPage,
@@ -78,30 +75,18 @@ function AboutPage() {
     <div className="flex min-h-screen flex-col">
       <SiteNav />
       <main className="flex-1 rise-fast">
-        <section className="flex flex-col items-center gap-8 px-4 py-[clamp(64px,12vw,120px)] sm:px-6">
-          <PageIntro eyebrow="About" title="The AI partner for supply chain" />
-          <div className="flex flex-wrap justify-center gap-3">
-            <a href={CAL_URL} target="_blank" rel="noreferrer" className={BTN_PRIMARY}>
-              Book a meeting
-            </a>
-            <a href={DEMO_URL} target="_blank" rel="noreferrer" className={BTN_GHOST}>
-              See the demo
-            </a>
-          </div>
-        </section>
-
-        <section className="flex flex-col items-center gap-8 bg-paper px-4 py-[clamp(56px,10vw,96px)] text-ink sm:px-6">
-          <div className="flex flex-col gap-3 text-center">
-            <p className="eyebrow-ink m-0">Transpira Labs</p>
-            <h2 className="m-0 font-display text-[clamp(1.75rem,4vw,3rem)] leading-[1.05]">
-              The team
-            </h2>
-          </div>
+        {/* The team comes first. */}
+        <section className="flex flex-col items-center gap-8 px-4 py-[clamp(56px,10vw,96px)] sm:px-6">
+          <PageIntro
+            eyebrow="About"
+            title="The team"
+            body="We're a research lab ensuring that AI is actually useful for everyone, not just a select few. Manifest is where that work meets freight brokers."
+          />
           <div className="grid w-full max-w-[1100px] grid-cols-[repeat(auto-fit,minmax(min(300px,100%),1fr))] gap-4">
             {TEAM.map((member) => (
               <div
                 key={member.name}
-                className="flex flex-col gap-4 rounded-xl border border-line bg-white p-6 shadow-[0_8px_30px_rgba(27,36,32,0.06)]"
+                className="flex flex-col gap-4 rounded-xl bg-white p-6 text-ink shadow-[0_8px_30px_rgba(0,0,0,0.25)]"
               >
                 <div className="flex items-center gap-4">
                   {member.photo ? (
@@ -130,7 +115,31 @@ function AboutPage() {
           </div>
         </section>
 
-        <section className="flex flex-col items-center gap-8 px-4 py-[clamp(56px,10vw,96px)] sm:px-6">
+        {/* Everything else about the company sits below the team. */}
+        <section className="flex flex-col items-center gap-8 border-t border-white/8 px-4 py-[clamp(56px,10vw,96px)] sm:px-6">
+          <div className="flex flex-col gap-3 text-center">
+            <p className="eyebrow m-0">Transpira Labs</p>
+            <h2 className="m-0 font-display text-[clamp(1.75rem,4vw,3rem)] leading-[1.05] text-white">
+              More from the lab
+            </h2>
+          </div>
+          <div className="grid w-full max-w-[900px] grid-cols-[repeat(auto-fit,minmax(min(220px,100%),1fr))] gap-3">
+            <LinkCard
+              to="/case-studies"
+              title="Our research"
+              desc="Case studies and SupChain-Bench"
+            />
+            <LinkCard
+              to="/environments"
+              title="Environments"
+              desc="Shipped to frontier AI labs; the same technology powers our newer products"
+            />
+            <LinkCard href={DEMO_URL} title="Live demo" desc="quoting.transpiralabs.com" />
+            <LinkCard to="/contact" title="Contact" desc={CONTACT_EMAIL} />
+          </div>
+        </section>
+
+        <section className="flex flex-col items-center gap-8 border-t border-white/8 px-4 py-[clamp(56px,10vw,96px)] sm:px-6">
           <div className="flex flex-col gap-3 text-center">
             <p className="eyebrow m-0">Investors</p>
             <h2 className="m-0 font-display text-[clamp(1.75rem,4vw,3rem)] leading-[1.05] text-white">
@@ -148,6 +157,9 @@ function AboutPage() {
               alt="Fusen World logo"
               className="max-h-28 w-auto max-w-full object-contain"
             />
+          </a>
+          <a href={CAL_URL} target="_blank" rel="noreferrer" className={BTN_PRIMARY}>
+            Book a 20-minute call
           </a>
         </section>
       </main>
