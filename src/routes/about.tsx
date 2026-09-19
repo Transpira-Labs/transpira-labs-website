@@ -18,13 +18,12 @@ export const Route = createFileRoute("/about")({
       {
         name: "description",
         content:
-          "Transpira Labs builds Manifest, the team of AI agents for freight brokers. Bidding is the wedge; the goal is to be the AI partner for supply chain.",
+          "The team behind Manifest by Transpira: researchers and engineers making AI actually useful for everyone, not just a select few.",
       },
       { property: "og:title", content: "About | Transpira Labs" },
       {
         property: "og:description",
-        content:
-          "The company building Manifest, on the way to being the AI partner for supply chain.",
+        content: "The team behind Manifest by Transpira. Backed by Fusen World.",
       },
     ],
   }),
@@ -43,21 +42,34 @@ function InitialsAvatar({ initials }: { initials: string }) {
 const TEAM = [
   {
     name: "Adi Krish",
-    role: "Founder & CEO",
+    role: "Founder and CEO",
     photo: adiKrish,
-    bio: "Before Transpira, Adi studied computer science at Georgia Tech and built product on the Ads Machine Learning team at Meta, generating $5M ARR. His AI research at Georgia Tech earned the President's Undergraduate Research Award, he won the YC Hackathon grand prize, and he turned down offers from Google, Meta, and others to found Transpira Labs.",
+    bullets: [
+      "Ex-Meta; built product on the Ads Machine Learning team generating $5M ARR.",
+      "YC Hackathon grand prize winner.",
+      "CS @ Georgia Tech.",
+    ],
   },
   {
     name: "Rishith Auluka",
     role: "Founding Engineer",
     initials: "RA",
-    bio: "Previously on Meta's AI agents team and a manufacturing plant consultant. Rishith has been building with Adi since 7th grade.",
+    bullets: [
+      "Ex-Meta AI agents team.",
+      "Manufacturing plant consultant.",
+      "Top 300 competitive programmer in the US.",
+      "CS @ UGA.",
+    ],
   },
   {
     name: "Saketh Koona",
     role: "Supply Chain Intern",
     initials: "SK",
-    bio: "Industrial Engineering graduate from Georgia Tech, the #1 program in the country.",
+    bullets: [
+      "Industrial Engineering graduate, from the #1 program in the country at Georgia Tech.",
+      "Head of ML research @ SipLab, Georgia Tech.",
+      "YC Hackathon grand prize winner.",
+    ],
   },
 ];
 
@@ -68,22 +80,6 @@ function AboutPage() {
       <main className="flex-1 rise-fast">
         <section className="flex flex-col items-center gap-8 px-4 py-[clamp(64px,12vw,120px)] sm:px-6">
           <PageIntro eyebrow="About" title="The AI partner for supply chain" />
-          <div className="flex max-w-[760px] flex-col gap-5 text-[clamp(1.0625rem,1.8vw,1.25rem)] leading-[1.5] text-fog">
-            <p className="m-0">
-              Transpira Labs builds Manifest, the team of AI agents for freight brokers. Manifest
-              connects to the systems a brokerage already runs, reads the inbox, reaches carriers
-              where they already are, prices the load, and drafts every reply. A human approves
-              every send.
-            </p>
-            <p className="m-0">
-              Bidding is the wedge, not the destination. Once the agents are inside a brokerage's
-              systems, every neighboring workflow is an expansion route, and the long-term goal is
-              to be the AI layer supercharging every logistics firm.
-            </p>
-            <p className="m-0">
-              If you run a brokerage, or freight operations of any kind, we'd love to talk.
-            </p>
-          </div>
           <div className="flex flex-wrap justify-center gap-3">
             <a href={CAL_URL} target="_blank" rel="noreferrer" className={BTN_PRIMARY}>
               Book a meeting
@@ -96,9 +92,9 @@ function AboutPage() {
 
         <section className="flex flex-col items-center gap-8 bg-paper px-4 py-[clamp(56px,10vw,96px)] text-ink sm:px-6">
           <div className="flex flex-col gap-3 text-center">
-            <p className="eyebrow-ink m-0">Team</p>
+            <p className="eyebrow-ink m-0">Transpira Labs</p>
             <h2 className="m-0 font-display text-[clamp(1.75rem,4vw,3rem)] leading-[1.05]">
-              Who we are
+              The team
             </h2>
           </div>
           <div className="grid w-full max-w-[1100px] grid-cols-[repeat(auto-fit,minmax(min(300px,100%),1fr))] gap-4">
@@ -119,10 +115,16 @@ function AboutPage() {
                   )}
                   <div>
                     <div className="text-lg font-semibold leading-tight">{member.name}</div>
-                    <div className="text-sm text-ink-muted">{member.role}</div>
+                    <div className="mt-0.5 font-mono text-[11px] uppercase tracking-[0.08em] text-ink-faint">
+                      {member.role}
+                    </div>
                   </div>
                 </div>
-                <p className="m-0 text-[15px] leading-[1.5] text-ink-muted">{member.bio}</p>
+                <ul className="m-0 flex list-disc flex-col gap-1.5 pl-5 text-[15px] leading-[1.5] text-ink-muted marker:text-forest">
+                  {member.bullets.map((b) => (
+                    <li key={b}>{b}</li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
