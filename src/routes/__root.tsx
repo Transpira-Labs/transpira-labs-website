@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { Analytics } from "@/components/analytics";
 import transpiraLogo from "@/assets/transpira-logo.png";
 import {
   SiteNav,
@@ -134,6 +135,8 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      {/* Product analytics, on every page and mounted once. Renders nothing. */}
+      <Analytics />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
     </QueryClientProvider>

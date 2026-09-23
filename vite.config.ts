@@ -21,5 +21,24 @@ export default defineConfig({
   // Vercel needs its Build Output API layout. The container build sets
   // DOCKER_BUILD, so both targets keep working from one config and Vercel
   // stays available as the rollback.
-  nitro: { preset: process.env.DOCKER_BUILD ? "node-server" : "vercel" },
+  nitro: {
+    preset: process.env.DOCKER_BUILD ? "node-server" : "vercel",
+    // PostHog goes through this origin rather than straight to posthog.com,
+    // which keeps ad blockers from dropping it - the same trick the quoting
+    // app plays with a Next rewrite, under the same path, so the two sites
+    // are debugged the same way. The path is deliberately not called
+    // anything like /analytics.
+    //
+    // Assets and ingest are different hosts and the specific rule has to come
+    // first; a single /sap/** rule would send the recorder script to the
+    // ingest host, which does not serve it.
+    //
+    // Build-time only. Under `vite dev` these rules do not exist, which is
+    // one of the reasons the client skips localhost entirely.
+    routeRules: {
+      "/sap/static/**": { proxy: "https://us-assets.i.posthog.com/static/**" },
+      "/sap/array/**": { proxy: "https://us-assets.i.posthog.com/array/**" },
+      "/sap/**": { proxy: "https://us.i.posthog.com/**" },
+    },
+  },
 });
