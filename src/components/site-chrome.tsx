@@ -302,7 +302,11 @@ function Brand() {
   );
 }
 
-export function SiteNav() {
+/**
+ * `sticky={false}` for pages with their own full-viewport sticky stages (the
+ * homepage story), where a pinned nav would cover the top of the stage.
+ */
+export function SiteNav({ sticky = true }: { sticky?: boolean } = {}) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const [open, setOpen] = useState(false);
 
@@ -332,7 +336,9 @@ export function SiteNav() {
     }`;
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/8 bg-[rgba(27,36,32,0.85)] backdrop-blur-[10px]">
+    <header
+      className={`${sticky ? "sticky top-0" : "relative"} z-40 border-b border-white/8 bg-[rgba(27,36,32,0.85)] backdrop-blur-[10px]`}
+    >
       <div className="mx-auto flex h-14 max-w-[1400px] items-center justify-between gap-4 px-4 sm:px-6">
         <Brand />
 
