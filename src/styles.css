@@ -504,9 +504,10 @@
 
 /* Zero-friction fan-out: sources -> agent -> the apps people already use. */
 .ms-src-grid {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
 }
 .ms-fan-grid {
   display: grid;
@@ -514,7 +515,7 @@
   gap: 14px;
 }
 .ms-fan-card {
-  min-height: 200px;
+  min-height: 150px;
 }
 .ms-fan-rail {
   display: none;
@@ -541,9 +542,6 @@
   }
 }
 @media (max-width: 900px) {
-  .ms-src-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
   .ms-fan-wires {
     display: none !important;
   }
@@ -566,7 +564,7 @@
   .ms-fan-card {
     flex: 0 0 min(78%, 300px);
     scroll-snap-align: center;
-    min-height: 190px;
+    min-height: 150px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -598,5 +596,223 @@
   .ms-pain-card {
     flex: 0 0 min(72%, 260px);
     scroll-snap-align: center;
+  }
+}
+
+/* "Book a call": pinned for the whole page, and inline at section ends. */
+.ms-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 14px;
+  background: var(--color-forest);
+  color: #fff;
+  padding: 12px 18px 12px 16px;
+  text-decoration: none;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+  transition:
+    background-color 0.2s,
+    transform 0.2s;
+}
+.ms-cta:hover {
+  background: #3a806d;
+  color: #fff;
+  transform: translateY(-1px);
+}
+.ms-cta-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  text-align: left;
+}
+.ms-cta-text b {
+  font-size: 16px;
+  font-weight: 600;
+}
+.ms-cta-text small {
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.8);
+}
+.ms-cta-arrow {
+  font-size: 20px;
+  margin-left: 4px;
+}
+.ms-cta-inline {
+  padding: 16px 24px 16px 20px;
+}
+.ms-cta-inline .ms-cta-text b {
+  font-size: 19px;
+}
+.ms-cta-dock {
+  position: fixed;
+  right: 20px;
+  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  z-index: 9550;
+}
+@media (max-width: 640px) {
+  /* Phones: a full-width bar, always in reach of a thumb. */
+  .ms-cta-dock {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
+    background: rgba(27, 36, 32, 0.92);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .ms-cta-dock .ms-cta {
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: center;
+  }
+  /* Keep the scroll cue and the page's last lines clear of the bar. */
+  .ms-scroll-cue {
+    bottom: calc(92px + env(safe-area-inset-bottom, 0px));
+  }
+  .ms-has-dock {
+    padding-bottom: 84px;
+  }
+}
+
+/* "Book a call", animated to be noticed: a sweep of light, a pulsing ring,
+   a nudging arrow, a wiggling calendar and a small hop every few seconds. */
+.ms-cta-live {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(135deg, #2f6f5e, #3f8a74 55%, #2f6f5e);
+  animation:
+    ms-cta-in 0.7s cubic-bezier(0.2, 0.9, 0.3, 1.2) both,
+    ms-cta-ring 2s ease-out 0.8s infinite,
+    ms-cta-hop 6s ease-in-out 2s infinite;
+}
+.ms-cta-live:hover {
+  background: linear-gradient(135deg, #3a806d, #4b9a82 55%, #3a806d);
+  animation-play-state: paused;
+}
+/* the sweep of light */
+.ms-cta-live::after {
+  content: "";
+  position: absolute;
+  inset: -40% auto -40% -60%;
+  width: 45%;
+  z-index: -1;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.35) 50%, transparent);
+  transform: skewX(-20deg);
+  animation: ms-cta-shine 3.2s ease-in-out 1s infinite;
+}
+.ms-cta-live .ms-cta-arrow {
+  display: inline-block;
+  animation: ms-cta-nudge 1.2s ease-in-out infinite;
+}
+.ms-cta-live .ms-cta-cal {
+  animation: ms-cta-wiggle 6s ease-in-out 2.4s infinite;
+  transform-origin: 50% 20%;
+}
+@keyframes ms-cta-in {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes ms-cta-ring {
+  0% {
+    box-shadow:
+      0 12px 36px rgba(0, 0, 0, 0.45),
+      0 0 0 0 rgba(127, 176, 156, 0.7);
+  }
+  100% {
+    box-shadow:
+      0 12px 36px rgba(0, 0, 0, 0.45),
+      0 0 0 16px rgba(127, 176, 156, 0);
+  }
+}
+@keyframes ms-cta-hop {
+  0%,
+  88%,
+  100% {
+    translate: 0 0;
+  }
+  92% {
+    translate: 0 -8px;
+  }
+  96% {
+    translate: 0 0;
+  }
+  98% {
+    translate: 0 -3px;
+  }
+}
+@keyframes ms-cta-shine {
+  0% {
+    left: -60%;
+  }
+  45%,
+  100% {
+    left: 130%;
+  }
+}
+@keyframes ms-cta-nudge {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+}
+@keyframes ms-cta-wiggle {
+  0%,
+  85%,
+  100% {
+    transform: rotate(0);
+  }
+  88% {
+    transform: rotate(-14deg);
+  }
+  91% {
+    transform: rotate(12deg);
+  }
+  94% {
+    transform: rotate(-8deg);
+  }
+  97% {
+    transform: rotate(4deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ms-cta-live,
+  .ms-cta-live::after,
+  .ms-cta-live .ms-cta-arrow,
+  .ms-cta-live .ms-cta-cal {
+    animation: none;
+  }
+}
+
+/* The ten-person heap never quite sits still. */
+.ms-jiggle {
+  animation: ms-jiggle 2.4s ease-in-out infinite;
+}
+@keyframes ms-jiggle {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  25% {
+    translate: 1.5px -2px;
+  }
+  75% {
+    translate: -1.5px 1px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ms-jiggle {
+    animation: none;
   }
 }

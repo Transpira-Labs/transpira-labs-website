@@ -124,7 +124,7 @@ const OUT: Out[] = [
         style={{
           flex: "1",
           background: "#fff",
-          padding: "12px",
+          padding: "10px",
           display: "flex",
           flexDirection: "column",
           alignItems: "flex-end",
@@ -140,7 +140,7 @@ const OUT: Out[] = [
             color: "#fff",
             borderRadius: "17px",
             padding: "8px 12px",
-            fontSize: "13.5px",
+            fontSize: "12.5px",
             lineHeight: "1.32",
           }}
         >
@@ -158,7 +158,7 @@ function Chat({ bg, children }: { bg: string; children: ReactNode }) {
       style={{
         flex: "1",
         background: bg,
-        padding: "12px",
+        padding: "10px",
         display: "flex",
         flexDirection: "column",
         alignItems: "flex-end",
@@ -192,7 +192,7 @@ function Bubble({
         color: "#111",
         borderRadius: "12px 12px 3px 12px",
         padding: "7px 10px 5px",
-        fontSize: "13.5px",
+        fontSize: "12.5px",
         lineHeight: "1.35",
         boxShadow: "0 1px 1px rgba(0,0,0,.12)",
       }}
@@ -257,13 +257,19 @@ function Tile({ d, bg, size = 32 }: { d: string; bg: string; size?: number }) {
 
 const GREEN = "linear-gradient(180deg,#5ef27a,#28c840)";
 
-const SOURCES: { icon: ReactNode; name: string; what: string }[] = [
-  { icon: <ChannelLogo channel="Gmail" size={32} />, name: "Gmail", what: "Quote request" },
-  { icon: <Tile d={GLYPH.call} bg={GREEN} />, name: "Call", what: "Carrier calling" },
-  { icon: <Tile d={GLYPH.voicemail} bg={GREEN} />, name: "Voicemail", what: "Transcribed" },
-  { icon: <Tile d={GLYPH.truck} bg="#0f6cbd" />, name: "Load board", what: "New bid $1,750" },
-  { icon: <Tile d={GLYPH.table} bg="#46617a" />, name: "TMS", what: "Load created" },
-  { icon: <ChannelLogo channel="WhatsApp" size={32} />, name: "WhatsApp", what: "BOL photo" },
+const SOURCES: { icon: ReactNode; name: string }[] = [
+  { icon: <ChannelLogo channel="Gmail" size={18} />, name: "Gmail" },
+  { icon: <Tile d={GLYPH.call} bg={GREEN} size={18} />, name: "Call" },
+  {
+    icon: <Tile d={GLYPH.voicemail} bg={GREEN} size={18} />,
+    name: "Voicemail",
+  },
+  {
+    icon: <Tile d={GLYPH.truck} bg="#0f6cbd" size={18} />,
+    name: "Load board",
+  },
+  { icon: <Tile d={GLYPH.table} bg="#46617a" size={18} />, name: "TMS" },
+  { icon: <ChannelLogo channel="WhatsApp" size={18} />, name: "WhatsApp" },
 ];
 
 /* ---- What the agent builds from it: your load board ---- */
@@ -271,10 +277,7 @@ const SOURCES: { icon: ReactNode; name: string; what: string }[] = [
 const BOARD: { stage: string; cards: [string, string][] }[] = [
   {
     stage: "Quoting",
-    cards: [
-      ["Kubota tractor", "$2,100 quoted"],
-      ["John Deere", "Draft ready"],
-    ],
+    cards: [["Kubota tractor", "$2,100 quoted"]],
   },
   { stage: "Covering", cards: [["Suburban", "2 bids in"]] },
   { stage: "On the road", cards: [["CAT 305", "ETA 4 PM"]] },
@@ -287,7 +290,7 @@ function LoadBoard() {
     <div
       style={{
         width: "100%",
-        maxWidth: "680px",
+        maxWidth: "520px",
         display: "flex",
         flexDirection: "column",
         gap: "8px",
@@ -384,7 +387,7 @@ function Wires({ xs, into }: { xs: number[]; into?: boolean }) {
       viewBox="0 0 1000 100"
       preserveAspectRatio="none"
       aria-hidden="true"
-      style={{ width: "100%", height: "64px", display: "block" }}
+      style={{ width: "100%", height: "34px", display: "block" }}
     >
       {xs.map((x) => (
         <path
@@ -410,7 +413,7 @@ function Rail({ always }: { always?: boolean }) {
       viewBox="0 0 2 100"
       preserveAspectRatio="none"
       aria-hidden="true"
-      style={{ width: "2px", height: "36px" }}
+      style={{ width: "2px", height: "22px" }}
     >
       <path
         d="M1 0 V100"
@@ -426,7 +429,7 @@ function Rail({ always }: { always?: boolean }) {
 }
 
 function RowLabel({ children }: { children: ReactNode }) {
-  return <div style={{ ...mono, color: "#868e8b", margin: "0 0 12px" }}>{children}</div>;
+  return <div style={{ ...mono, color: "#868e8b", margin: "0 0 8px" }}>{children}</div>;
 }
 
 export function FanOut() {
@@ -437,7 +440,7 @@ export function FanOut() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        marginTop: "18px",
+        marginTop: "6px",
         textAlign: "left",
       }}
     >
@@ -448,14 +451,12 @@ export function FanOut() {
             key={x.name}
             style={{
               display: "flex",
-              flexDirection: "column",
               alignItems: "center",
               gap: "8px",
-              padding: "14px 8px 12px",
-              borderRadius: "12px",
+              padding: "6px 12px 6px 8px",
+              borderRadius: "999px",
               border: "1px solid rgba(255,255,255,.14)",
               background: "#232b28",
-              textAlign: "center",
             }}
           >
             <span style={{ position: "relative" }}>
@@ -464,10 +465,10 @@ export function FanOut() {
                 className="ms-ping"
                 style={{
                   position: "absolute",
-                  top: "-5px",
-                  right: "-6px",
-                  width: "12px",
-                  height: "12px",
+                  top: "-4px",
+                  right: "-4px",
+                  width: "8px",
+                  height: "8px",
                   borderRadius: "50%",
                   background: "#e0202a",
                   border: "2px solid #232b28",
@@ -476,11 +477,10 @@ export function FanOut() {
               />
             </span>
             <span style={{ fontSize: "13px", fontWeight: "600", color: "#fff" }}>{x.name}</span>
-            <span style={{ fontSize: "12px", color: "#b7c4bf", lineHeight: "1.25" }}>{x.what}</span>
           </div>
         ))}
       </div>
-      <Wires xs={[83, 250, 417, 583, 750, 917]} into />
+      <Wires xs={[250, 350, 450, 550, 650, 750]} into />
       <Rail />
 
       {/* the agent */}
@@ -493,16 +493,16 @@ export function FanOut() {
           border: "1px solid rgba(127,176,156,.55)",
           background: "rgba(47,111,94,.22)",
           boxShadow: "0 0 50px rgba(127,176,156,.25)",
-          padding: "8px 18px 8px 8px",
+          padding: "5px 14px 5px 5px",
         }}
       >
         <img
           src={transpiraLogo}
           alt="Transpira"
-          style={{ width: "36px", height: "36px", display: "block" }}
+          style={{ width: "28px", height: "28px", display: "block" }}
         />
         <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-          <span style={{ fontSize: "15px", fontWeight: "600", color: "#fff" }}>Manifest agent</span>
+          <span style={{ fontSize: "14px", fontWeight: "600", color: "#fff" }}>Manifest agent</span>
           <span style={{ ...mono, color: "#7fb09c" }}>Answers and sends as you</span>
         </div>
       </div>

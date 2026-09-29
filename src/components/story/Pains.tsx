@@ -1,5 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
 import { ChannelLogo } from "./ChannelLogo";
+import { InlineCall } from "./FloatingCall";
 
 /*
  * The five ways a load goes wrong without help, each shown as the thing the
@@ -316,6 +317,7 @@ export function Pains() {
           </div>
         ))}
       </div>
+      <InlineCall where="pains" />
     </section>
   );
 }

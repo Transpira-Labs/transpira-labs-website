@@ -28,7 +28,7 @@ export const Route = createFileRoute("/")({
 function Story() {
   const v = useStoryVals();
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="ms-has-dock flex min-h-screen flex-col">
       <SiteNav sticky={false} />
       <main className="flex-1">
         <StoryMarkup v={v} />

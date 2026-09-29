@@ -1,30 +1,76 @@
-import { useEffect, useState } from "react";
 import { CAL_URL } from "@/components/site-chrome";
 
 /**
- * The nav's "Book a call", kept on screen once the (non-sticky) homepage nav
- * scrolls away. It sits where the nav button was, so it reads as the same button.
+ * "Book a call", on screen for the whole page: a pinned button at the
+ * bottom-right on desktop and a full-width bar on phones. A booked call is the
+ * conversion, so it is never more than one tap away.
+ *
+ * `data-ph-capture-attribute-cta` tags PostHog's autocaptured click with where
+ * the button sits, so bookings can be split by placement.
  */
 export function FloatingCall() {
-  const [show, setShow] = useState(false);
-  useEffect(() => {
-    const onScroll = () => setShow(window.scrollY > 56);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  return (
+    <div className="ms-cta-dock">
+      <a
+        href={CAL_URL}
+        target="_blank"
+        rel="noreferrer"
+        data-ph-capture-attribute-cta="floating"
+        className="ms-cta ms-cta-live"
+      >
+        <CalendarIcon />
+        <span className="ms-cta-text">
+          <b>Book a 20-minute call</b>
+          <small>See it working on your loads</small>
+        </span>
+        <span aria-hidden="true" className="ms-cta-arrow">
+          →
+        </span>
+      </a>
+    </div>
+  );
+}
+
+/** The same call to action, inline, for the end of a section. */
+export function InlineCall({ where }: { where: string }) {
   return (
     <a
       href={CAL_URL}
       target="_blank"
       rel="noreferrer"
-      aria-hidden={!show}
-      tabIndex={show ? 0 : -1}
-      className={`fixed top-2.5 right-4 z-50 whitespace-nowrap rounded-md bg-forest px-3.5 py-2 text-sm font-medium text-white no-underline shadow-[0_6px_24px_rgba(0,0,0,0.45)] transition-[opacity,transform,background-color] duration-300 hover:bg-[#3a806d] sm:right-6 ${
-        show ? "opacity-100" : "pointer-events-none -translate-y-2 opacity-0"
-      }`}
+      data-ph-capture-attribute-cta={where}
+      className="ms-cta ms-cta-inline ms-cta-live"
     >
-      Book a call
+      <CalendarIcon />
+      <span className="ms-cta-text">
+        <b>Book a 20-minute call</b>
+        <small>See it working on your loads</small>
+      </span>
+      <span aria-hidden="true" className="ms-cta-arrow">
+        →
+      </span>
     </a>
+  );
+}
+
+function CalendarIcon() {
+  return (
+    <svg
+      className="ms-cta-cal"
+      viewBox="0 0 24 24"
+      width="22"
+      height="22"
+      aria-hidden="true"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      style={{ flex: "none" }}
+    >
+      <rect x="3" y="4.5" width="18" height="16" rx="2.5" />
+      <path d="M8 2.5v4M16 2.5v4M3 9.5h18" />
+      <path d="M8.5 14.5l2.2 2.2 4.8-4.8" />
+    </svg>
   );
 }
