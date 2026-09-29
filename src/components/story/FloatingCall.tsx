@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { CAL_URL } from "@/components/site-chrome";
 
 /**
@@ -9,13 +10,31 @@ import { CAL_URL } from "@/components/site-chrome";
  * the button sits, so bookings can be split by placement.
  */
 export function FloatingCall() {
+  // Step aside whenever another "Book a call" is already on screen (the nav's,
+  // or an inline one), so there is never more than one in view.
+  const [hidden, setHidden] = useState(true);
+  useEffect(() => {
+    const targets = [
+      document.querySelector("header"),
+      ...document.querySelectorAll(".ms-cta-inline"),
+    ].filter((el): el is Element => !!el);
+    const visible = new Set<Element>();
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => (e.isIntersecting ? visible.add(e.target) : visible.delete(e.target)));
+      setHidden(visible.size > 0);
+    });
+    targets.forEach((t) => io.observe(t));
+    return () => io.disconnect();
+  }, []);
+
   return (
-    <div className="ms-cta-dock">
+    <div className="ms-cta-dock" data-hidden={hidden ? "1" : "0"} aria-hidden={hidden}>
       <a
         href={CAL_URL}
         target="_blank"
         rel="noreferrer"
         data-ph-capture-attribute-cta="floating"
+        tabIndex={hidden ? -1 : 0}
         className="ms-cta ms-cta-live"
       >
         <CalendarIcon />
