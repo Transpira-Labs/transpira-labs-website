@@ -391,6 +391,18 @@ export function SiteNav({ sticky = true }: { sticky?: boolean } = {}) {
         </div>
       </div>
 
+      {/* Phones: the three tabs stay visible in a row under the bar. */}
+      <nav
+        className="flex items-center justify-center gap-1 border-t border-white/8 px-2 py-1.5 md:hidden"
+        aria-label="Primary (phone tabs)"
+      >
+        {TABS.map((t) => (
+          <Link key={t.to} to={t.to} className={`${tabClass(isActive(t.to))} flex-1 text-center`}>
+            {t.label}
+          </Link>
+        ))}
+      </nav>
+
       {/* Phone menu: full-width sheet under the bar. */}
       <div
         id="mobile-nav"

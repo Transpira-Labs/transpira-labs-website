@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { scrollNext } from "./scroll-next";
 
 /** The floating "scroll ↓" cue: hidden over the hero (it has its own arrow) and at the end. */
 export function ScrollCue() {
@@ -23,9 +24,16 @@ export function ScrollCue() {
     };
   }, []);
   return (
-    <div className="ms-scroll-cue" data-on={on ? "1" : "0"} aria-hidden="true">
-      <i>scroll</i>
-      <b>↓</b>
+    <div className="ms-scroll-cue" data-on={on ? "1" : "0"}>
+      <i aria-hidden="true">scroll</i>
+      <button
+        type="button"
+        onClick={scrollNext}
+        aria-label="Scroll to the next step"
+        tabIndex={on ? 0 : -1}
+      >
+        ↓
+      </button>
     </div>
   );
 }

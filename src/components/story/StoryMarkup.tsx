@@ -11,6 +11,7 @@ import { Pains } from "./Pains";
 import { Kanban } from "./Kanban";
 import { InlineCall } from "./FloatingCall";
 import { TeamScene } from "./TeamScene";
+import { scrollNext } from "./scroll-next";
 
 /* The "more loads meant more people" columns: loads a week and the team it takes. */
 const ROLES = {
@@ -120,8 +121,15 @@ export function StoryMarkup({ v }: { v: StoryVals }) {
         >
           Keep scrolling to see how.
         </p>
-        <div
+        <button
+          type="button"
+          onClick={scrollNext}
+          aria-label="Scroll down"
           style={{
+            cursor: "pointer",
+            color: "#fff",
+            font: "inherit",
+            padding: "0",
             marginTop: "clamp(12px,3vw,24px)",
             width: "clamp(64px,12vw,88px)",
             height: "clamp(64px,12vw,88px)",
@@ -136,7 +144,7 @@ export function StoryMarkup({ v }: { v: StoryVals }) {
           }}
         >
           ↓
-        </div>
+        </button>
       </section>
       <section data-screen-label="Problem" style={{ borderTop: "1px solid rgba(255,255,255,.08)" }}>
         <div
@@ -3571,8 +3579,32 @@ export function StoryMarkup({ v }: { v: StoryVals }) {
                   >
                     {v.scEmpty && (
                       <>
-                        <div style={{ margin: "auto", fontSize: "13px", color: "#8e8e93" }}>
-                          No new messages
+                        <div
+                          style={{
+                            margin: "auto",
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            gap: "14px",
+                          }}
+                        >
+                          <div style={{ fontSize: "13px", color: "#8e8e93" }}>No new messages</div>
+                          {/* A nudge: the story plays as you scroll, so say so. */}
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "column",
+                              alignItems: "center",
+                              gap: "6px",
+                              color: "#007aff",
+                              animation: "ms-bob 1.6s ease-in-out infinite",
+                            }}
+                          >
+                            <span style={{ fontSize: "15px", fontWeight: "600" }}>
+                              Keep scrolling
+                            </span>
+                            <span style={{ fontSize: "22px", lineHeight: "1" }}>↓</span>
+                          </div>
                         </div>
                       </>
                     )}

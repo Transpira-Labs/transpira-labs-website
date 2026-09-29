@@ -436,6 +436,14 @@
 .ms-scroll-cue[data-on="1"] {
   opacity: 1;
 }
+/* The arrow is a button; the rest of the cue stays click-through. */
+.ms-scroll-cue[data-on="1"] button {
+  pointer-events: auto;
+  cursor: pointer;
+}
+.ms-scroll-cue button:hover {
+  background: rgba(47, 111, 94, 0.9);
+}
 .ms-scroll-cue i {
   font-style: normal;
   font-size: 10px;
@@ -444,7 +452,7 @@
   color: rgba(255, 255, 255, 0.6);
   text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
 }
-.ms-scroll-cue b {
+.ms-scroll-cue button {
   font-weight: 400;
   width: 40px;
   height: 40px;
@@ -471,14 +479,14 @@
   }
 }
 @media (max-width: 600px) {
-  .ms-scroll-cue b {
+  .ms-scroll-cue button {
     width: 36px;
     height: 36px;
     font-size: 18px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .ms-scroll-cue b {
+  .ms-scroll-cue button {
     animation: none;
   }
 }
