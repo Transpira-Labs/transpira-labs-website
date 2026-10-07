@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as MobiledemoRouteImport } from './routes/mobiledemo'
 import { Route as EnvironmentsRouteImport } from './routes/environments'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CompanyRouteImport } from './routes/company'
@@ -30,6 +31,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
 const PricingRoute = PricingRouteImport.update({
   id: '/pricing',
   path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MobiledemoRoute = MobiledemoRouteImport.update({
+  id: '/mobiledemo',
+  path: '/mobiledemo',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EnvironmentsRoute = EnvironmentsRouteImport.update({
@@ -89,6 +95,7 @@ export interface FileRoutesByFullPath {
   '/company': typeof CompanyRoute
   '/contact': typeof ContactRoute
   '/environments': typeof EnvironmentsRoute
+  '/mobiledemo': typeof MobiledemoRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
@@ -103,6 +110,7 @@ export interface FileRoutesByTo {
   '/company': typeof CompanyRoute
   '/contact': typeof ContactRoute
   '/environments': typeof EnvironmentsRoute
+  '/mobiledemo': typeof MobiledemoRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
@@ -118,6 +126,7 @@ export interface FileRoutesById {
   '/company': typeof CompanyRoute
   '/contact': typeof ContactRoute
   '/environments': typeof EnvironmentsRoute
+  '/mobiledemo': typeof MobiledemoRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
@@ -134,6 +143,7 @@ export interface FileRouteTypes {
     | '/company'
     | '/contact'
     | '/environments'
+    | '/mobiledemo'
     | '/pricing'
     | '/privacy'
     | '/case-studies/$slug'
@@ -148,6 +158,7 @@ export interface FileRouteTypes {
     | '/company'
     | '/contact'
     | '/environments'
+    | '/mobiledemo'
     | '/pricing'
     | '/privacy'
     | '/case-studies/$slug'
@@ -162,6 +173,7 @@ export interface FileRouteTypes {
     | '/company'
     | '/contact'
     | '/environments'
+    | '/mobiledemo'
     | '/pricing'
     | '/privacy'
     | '/case-studies/$slug'
@@ -177,6 +189,7 @@ export interface RootRouteChildren {
   CompanyRoute: typeof CompanyRoute
   ContactRoute: typeof ContactRoute
   EnvironmentsRoute: typeof EnvironmentsRoute
+  MobiledemoRoute: typeof MobiledemoRoute
   PricingRoute: typeof PricingRoute
   PrivacyRoute: typeof PrivacyRoute
   CaseStudiesSlugRoute: typeof CaseStudiesSlugRoute
@@ -200,6 +213,13 @@ declare module '@tanstack/react-router' {
       path: '/pricing'
       fullPath: '/pricing'
       preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mobiledemo': {
+      id: '/mobiledemo'
+      path: '/mobiledemo'
+      fullPath: '/mobiledemo'
+      preLoaderRoute: typeof MobiledemoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/environments': {
@@ -281,6 +301,7 @@ const rootRouteChildren: RootRouteChildren = {
   CompanyRoute: CompanyRoute,
   ContactRoute: ContactRoute,
   EnvironmentsRoute: EnvironmentsRoute,
+  MobiledemoRoute: MobiledemoRoute,
   PricingRoute: PricingRoute,
   PrivacyRoute: PrivacyRoute,
   CaseStudiesSlugRoute: CaseStudiesSlugRoute,
