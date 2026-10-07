@@ -9,48 +9,23 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as PricingRouteImport } from './routes/pricing'
-import { Route as MobiledemoRouteImport } from './routes/mobiledemo'
-import { Route as EnvironmentsRouteImport } from './routes/environments'
-import { Route as ContactRouteImport } from './routes/contact'
-import { Route as CompanyRouteImport } from './routes/company'
-import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as CompanyRouteImport } from './routes/company'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as EnvironmentsRouteImport } from './routes/environments'
+import { Route as MobiledemoRouteImport } from './routes/mobiledemo'
+import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as CaseStudiesIndexRouteImport } from './routes/case-studies.index'
-import { Route as CaseStudiesScBenchRouteImport } from './routes/case-studies.sc-bench'
-import { Route as CaseStudiesBuildRouteImport } from './routes/case-studies.build'
-import { Route as CaseStudiesBenchceptionRouteImport } from './routes/case-studies.benchception'
 import { Route as CaseStudiesSlugRouteImport } from './routes/case-studies.$slug'
+import { Route as CaseStudiesBenchceptionRouteImport } from './routes/case-studies.benchception'
+import { Route as CaseStudiesBuildRouteImport } from './routes/case-studies.build'
+import { Route as CaseStudiesScBenchRouteImport } from './routes/case-studies.sc-bench'
 
-const PrivacyRoute = PrivacyRouteImport.update({
-  id: '/privacy',
-  path: '/privacy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PricingRoute = PricingRouteImport.update({
-  id: '/pricing',
-  path: '/pricing',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MobiledemoRoute = MobiledemoRouteImport.update({
-  id: '/mobiledemo',
-  path: '/mobiledemo',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EnvironmentsRoute = EnvironmentsRouteImport.update({
-  id: '/environments',
-  path: '/environments',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CompanyRoute = CompanyRouteImport.update({
-  id: '/company',
-  path: '/company',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -58,9 +33,34 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const CompanyRoute = CompanyRouteImport.update({
+  id: '/company',
+  path: '/company',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnvironmentsRoute = EnvironmentsRouteImport.update({
+  id: '/environments',
+  path: '/environments',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MobiledemoRoute = MobiledemoRouteImport.update({
+  id: '/mobiledemo',
+  path: '/mobiledemo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CaseStudiesIndexRoute = CaseStudiesIndexRouteImport.update({
@@ -68,14 +68,9 @@ const CaseStudiesIndexRoute = CaseStudiesIndexRouteImport.update({
   path: '/case-studies/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CaseStudiesScBenchRoute = CaseStudiesScBenchRouteImport.update({
-  id: '/case-studies/sc-bench',
-  path: '/case-studies/sc-bench',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CaseStudiesBuildRoute = CaseStudiesBuildRouteImport.update({
-  id: '/case-studies/build',
-  path: '/case-studies/build',
+const CaseStudiesSlugRoute = CaseStudiesSlugRouteImport.update({
+  id: '/case-studies/$slug',
+  path: '/case-studies/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CaseStudiesBenchceptionRoute = CaseStudiesBenchceptionRouteImport.update({
@@ -83,9 +78,14 @@ const CaseStudiesBenchceptionRoute = CaseStudiesBenchceptionRouteImport.update({
   path: '/case-studies/benchception',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CaseStudiesSlugRoute = CaseStudiesSlugRouteImport.update({
-  id: '/case-studies/$slug',
-  path: '/case-studies/$slug',
+const CaseStudiesBuildRoute = CaseStudiesBuildRouteImport.update({
+  id: '/case-studies/build',
+  path: '/case-studies/build',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CaseStudiesScBenchRoute = CaseStudiesScBenchRouteImport.update({
+  id: '/case-studies/sc-bench',
+  path: '/case-studies/sc-bench',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -201,46 +201,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/privacy': {
-      id: '/privacy'
-      path: '/privacy'
-      fullPath: '/privacy'
-      preLoaderRoute: typeof PrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/pricing': {
-      id: '/pricing'
-      path: '/pricing'
-      fullPath: '/pricing'
-      preLoaderRoute: typeof PricingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mobiledemo': {
-      id: '/mobiledemo'
-      path: '/mobiledemo'
-      fullPath: '/mobiledemo'
-      preLoaderRoute: typeof MobiledemoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/environments': {
-      id: '/environments'
-      path: '/environments'
-      fullPath: '/environments'
-      preLoaderRoute: typeof EnvironmentsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/company': {
-      id: '/company'
-      path: '/company'
-      fullPath: '/company'
-      preLoaderRoute: typeof CompanyRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -250,11 +215,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/company': {
+      id: '/company'
+      path: '/company'
+      fullPath: '/company'
+      preLoaderRoute: typeof CompanyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/environments': {
+      id: '/environments'
+      path: '/environments'
+      fullPath: '/environments'
+      preLoaderRoute: typeof EnvironmentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mobiledemo': {
+      id: '/mobiledemo'
+      path: '/mobiledemo'
+      fullPath: '/mobiledemo'
+      preLoaderRoute: typeof MobiledemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/case-studies/': {
@@ -264,18 +264,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CaseStudiesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/case-studies/sc-bench': {
-      id: '/case-studies/sc-bench'
-      path: '/case-studies/sc-bench'
-      fullPath: '/case-studies/sc-bench'
-      preLoaderRoute: typeof CaseStudiesScBenchRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/case-studies/build': {
-      id: '/case-studies/build'
-      path: '/case-studies/build'
-      fullPath: '/case-studies/build'
-      preLoaderRoute: typeof CaseStudiesBuildRouteImport
+    '/case-studies/$slug': {
+      id: '/case-studies/$slug'
+      path: '/case-studies/$slug'
+      fullPath: '/case-studies/$slug'
+      preLoaderRoute: typeof CaseStudiesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/case-studies/benchception': {
@@ -285,11 +278,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CaseStudiesBenchceptionRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/case-studies/$slug': {
-      id: '/case-studies/$slug'
-      path: '/case-studies/$slug'
-      fullPath: '/case-studies/$slug'
-      preLoaderRoute: typeof CaseStudiesSlugRouteImport
+    '/case-studies/build': {
+      id: '/case-studies/build'
+      path: '/case-studies/build'
+      fullPath: '/case-studies/build'
+      preLoaderRoute: typeof CaseStudiesBuildRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/case-studies/sc-bench': {
+      id: '/case-studies/sc-bench'
+      path: '/case-studies/sc-bench'
+      fullPath: '/case-studies/sc-bench'
+      preLoaderRoute: typeof CaseStudiesScBenchRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
