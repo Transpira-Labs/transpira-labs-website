@@ -5,19 +5,25 @@ import { useEffect, useRef } from "react";
  * /mobiledemo - the front door to the text line.
  *
  * One screen: a phone in the middle of a landscape, and a conversation that
- * starts by itself. Manifest texts first, the visitor picks one of the five
- * workflows, sees the kind of card the line sends, and is handed to their own
- * Messages app with the first text already written. Nothing here is
- * generated and nothing is sent from the page; the line treats whatever
- * arrives first as "hi" and runs its own script from there.
+ * starts by itself. Nothing on this page is scripted here. It is a window
+ * onto the same engine that answers the phone line (longleaf-text-demo,
+ * src/web.ts): the page opens a session, sends what the visitor types or
+ * taps, and draws what comes back - typing, bubbles, the cards as pictures,
+ * the link. The words live in that repo's script.json and only there.
+ *
+ * It asks one thing first, what to call the visitor, and "Continue in
+ * Messages" hands them to their own phone with a first text carrying that
+ * name; the line picks up from exactly where the page was. On a laptop a QR
+ * code opens Messages on the phone the same way.
  *
  * No site chrome on purpose. The page is the phone, and the phone is the
  * pitch. The original lives in longleaf-text-demo/site/index.html; this is
- * that page as a route, so it ships with the site.
+ * that page as a route, so it ships with the site. Keep the two in step.
  */
 
-const NUMBER = "+14152024448";
-const NUMBER_DISPLAY = "(415) 202-4448";
+/** Where the engine is. `?engine=` on the URL points at another worker. */
+const DEFAULT_ENGINE = "https://longleaf-text-demo-dtvxnvxsjq-ue.a.run.app";
+const FALLBACK_NUMBER = "+14152024448";
 
 const DESCRIPTION =
   "Manifest is a freight broker's agent that lives in your texts. Quotes, coverage, paperwork, prospecting. Text it and it texts back.";
@@ -35,116 +41,44 @@ export const Route = createFileRoute("/mobiledemo")({
   component: MobileDemoPage,
 });
 
-type Pick = { key: string; label: string; first: string };
-type Card = { kicker: string; title: string; rows: [string, string, ("ok" | "warn")?][] };
-type Preview = { say: string[]; card: Card; after: string };
-
-const MENU: Pick[] = [
-  { key: "A", label: "Get more loads", first: "Where should I be looking for more loads?" },
-  { key: "B", label: "Respond to quotes faster", first: "Help me answer quote requests faster." },
-  { key: "C", label: "Help me cover a load", first: "I've got a load that needs a truck." },
-  { key: "D", label: "Finalise paperwork", first: "Check the paperwork on a delivered load." },
-  { key: "E", label: "The whole thing", first: "Show me the whole process, end to end." },
-];
-
-/* One short answer per choice: what the line would say, and a card of the
-   kind it sends. The wording tracks the line's script.json; keep it that way. */
-const PREVIEW: Record<string, Preview> = {
-  A: {
-    say: [
-      "On it. Shippers within 40 miles of your dock who move freight on lanes you already run.",
-    ],
-    card: {
-      kicker: "Prospects · 40 mi of Macon GA",
-      title: "4 worth calling",
-      rows: [
-        ["Kessler Produce", "Dry van · 12 loads/wk"],
-        ["Ridgeview Mills", "Van + flatbed · 8/wk"],
-        ["Tatum Paper Co", "Dry van · 5/wk"],
-        ["Southpoint Foods", "Reefer · 6/wk", "warn"],
-      ],
-    },
-    after: "Numbers, who answers, and when. Saved to your contacts with the notes attached.",
-  },
-  B: {
-    say: ["A quote request just landed in your email, from Harbor Foods. Here's what's in it."],
-    card: {
-      kicker: "Parsed · L-2041",
-      title: "Harbor Foods → Raleigh NC",
-      rows: [
-        ["Pickup", "Macon GA · Thu 9 AM"],
-        ["Equipment", "Dry van 53', floor loaded"],
-        ["Freight", "22 pallets"],
-        ["Distance", "430 mi"],
-        ["Weight", "not stated", "warn"],
-      ],
-    },
-    after: "Low, mid or high, or text me any number. I'll send it in her thread.",
-  },
-  C: {
-    say: [
-      "L-2041 needs a truck. Posted it to DAT, Truckstop, three WhatsApp carrier groups, and texted your own 38 carriers. One message from me, four places.",
-    ],
-    card: {
-      kicker: "Posted · L-2041",
-      title: "4 places, 1 message",
-      rows: [
-        ["DAT", "live", "ok"],
-        ["Truckstop", "live", "ok"],
-        ["WhatsApp groups", "3 groups · 412 carriers", "ok"],
-        ["Your own carriers", "38 texted", "ok"],
-      ],
-    },
-    after: "Six bids inside twenty minutes, and none of them called you.",
-  },
-  D: {
-    say: ["L-2041 delivered Friday, 2:40 PM. The packet's in."],
-    card: {
-      kicker: "Packet · L-2041",
-      title: "6 of 6 checked",
-      rows: [
-        ["Rate confirmation", "signed", "ok"],
-        ["Bill of lading", "43,880 lb", "ok"],
-        ["Proof of delivery", "signed, legible", "ok"],
-        ["Carrier invoice", "matches bid", "ok"],
-        ["Insurance", "valid to 03/27", "ok"],
-      ],
-    },
-    after:
-      "BOL weight matches the rate con and the carrier invoiced what they bid. Want me to invoice Harbor Foods?",
-  },
-  E: {
-    say: ["All four, back to back: find the freight, quote it, cover it, close the paperwork."],
-    card: {
-      kicker: "This morning",
-      title: "Your board",
-      rows: [
-        ["Prospecting", "4 shippers found", "ok"],
-        ["L-2041", "quoted $2,100", "ok"],
-        ["L-2041", "booked $1,750", "ok"],
-        ["L-2041", "invoiced", "ok"],
-      ],
-    },
-    after: "That one takes a few minutes. Worth it on a real morning.",
-  },
-};
-
 /*
  * The conversation is built imperatively into one container the component
- * hands over and never touches again. It is a scripted sequence of appends
- * with pauses between them, which reads far more plainly as a script than as
- * state, and React has nothing to reconcile inside it.
+ * hands over and never touches again: events arrive from the engine and are
+ * appended, which reads far more plainly as a script than as state, and
+ * React has nothing to reconcile inside it.
  */
-function play(thread: HTMLDivElement, signal: AbortSignal) {
-  const sleep = (ms: number) =>
-    new Promise<void>((resolve, reject) => {
-      const t = setTimeout(resolve, ms);
-      signal.addEventListener("abort", () => {
-        clearTimeout(t);
-        reject(new DOMException("aborted", "AbortError"));
-      });
-    });
+type Choice = { say: string; label: string };
+type Ev =
+  | { t: "typing"; on: boolean }
+  | { t: "text"; text: string; id: number }
+  | { t: "image"; src: string; name: string; id: number }
+  | { t: "link"; href: string; id: number }
+  | { t: "poll"; q: string; opts: string[]; id: number }
+  | { t: "offer"; choices: Choice[]; id: number }
+  | { t: "you"; text: string; id: number };
+
+type Parts = {
+  thread: HTMLDivElement;
+  input: HTMLInputElement;
+  go: HTMLButtonElement;
+  composer: HTMLFormElement;
+  toPhone: HTMLButtonElement;
+  cta: HTMLAnchorElement;
+};
+
+function play({ thread, input, go, composer, toPhone, cta }: Parts, signal: AbortSignal) {
+  const ENGINE =
+    new URLSearchParams(location.search).get("engine") ||
+    (location.hostname === "localhost" || location.hostname === "127.0.0.1"
+      ? "http://localhost:8787"
+      : DEFAULT_ENGINE);
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const ua = navigator.userAgent;
+  const isApple = /iPhone|iPad|iPod/i.test(ua);
+  const isPhone = isApple || /Android/i.test(ua);
+  let NUMBER = FALLBACK_NUMBER;
+  const display = (n: string) => n.replace(/^\+1(\d{3})(\d{3})(\d{4})$/, "($1) $2-$3");
+
   const el = (html: string) => {
     const t = document.createElement("template");
     t.innerHTML = html.trim();
@@ -155,154 +89,317 @@ function play(thread: HTMLDivElement, signal: AbortSignal) {
       /[&<>"]/g,
       (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c] ?? c,
     );
-  // Follow new messages only while the reader is already near the bottom.
-  // Measured before the append, so a tall card does not count as the reader
-  // having scrolled away; somebody who went up to reread is left there.
-  const add = (node: HTMLElement) => {
-    const gap = thread.scrollHeight - thread.clientHeight - thread.scrollTop;
-    thread.appendChild(node);
-    if (gap < 400) thread.scrollTop = thread.scrollHeight;
+  const scrollDown = () => {
+    thread.scrollTop = thread.scrollHeight;
   };
+  const bubble = (text: string) =>
+    el(`<div class="row them tail"><div class="bubble">${esc(text)}</div></div>`);
 
-  async function showTyping(ms: number) {
-    if (reduced) return;
-    const t = el(
-      `<div class="row them tail"><div class="bubble typing" aria-hidden="true"><i></i><i></i><i></i></div></div>`,
-    );
-    add(t);
-    try {
-      await sleep(ms);
-    } finally {
-      t.remove();
-    }
+  // --- drawing -------------------------------------------------------------
+
+  let typingEl: HTMLElement | null = null;
+  let pendingOffers: Choice[] | null = null;
+  let pendingLink: HTMLElement | null = null;
+  let lastOffer: Choice[] | null = null;
+  let offerTimer: ReturnType<typeof setTimeout> | undefined;
+
+  function flushOffers() {
+    if (!pendingOffers && !pendingLink) return;
+    chips(pendingOffers ?? [], pendingLink);
+    pendingOffers = null;
+    pendingLink = null;
   }
-
-  // A run of bubbles from Manifest; only the last gets a tail, as Messages does it.
-  async function them(lines: string[], { first = 900, per = 120 } = {}) {
-    for (let i = 0; i < lines.length; i += 1) {
-      const text = lines[i];
-      await showTyping(i === 0 ? first : Math.min(2200, 500 + text.length * 14));
-      const last = i === lines.length - 1;
-      add(
-        el(
-          `<div class="row them ${last ? "tail" : ""}"><div class="bubble">${esc(text)}</div></div>`,
-        ),
+  function typing(on: boolean) {
+    if (on && !typingEl && !reduced) {
+      typingEl = el(
+        `<div class="row them tail"><div class="bubble typing" aria-hidden="true"><i></i><i></i><i></i></div></div>`,
       );
-      if (!last) await sleep(per);
+      thread.appendChild(typingEl);
+      scrollDown();
+    }
+    if (!on && typingEl) {
+      typingEl.remove();
+      typingEl = null;
+    }
+    // Chips wait until the run of messages they belong to has finished, so
+    // they come after the link rather than between the bubble and it.
+    clearTimeout(offerTimer);
+    if (!on && (pendingOffers || pendingLink)) offerTimer = setTimeout(flushOffers, 600);
+  }
+  // Only the last bubble in a run from Manifest gets a tail, as Messages does it.
+  let lastThem: HTMLElement | null = null;
+  function them(node: HTMLElement) {
+    typing(false);
+    if (lastThem) lastThem.classList.remove("tail");
+    thread.appendChild(node);
+    lastThem = node.classList.contains("row") ? node : null;
+    scrollDown();
+  }
+  function me(text: string) {
+    pendingOffers = null;
+    pendingLink = null;
+    typing(false);
+    lastThem = null;
+    thread.querySelectorAll(".chips:not(.done)").forEach((c) => c.classList.add("done"));
+    thread.appendChild(el(`<div class="row me tail"><div class="bubble">${esc(text)}</div></div>`));
+    thread.appendChild(el(`<div class="delivered">Delivered</div>`));
+    scrollDown();
+  }
+  /**
+   * Nothing has to be typed. Every question the engine asks comes with the
+   * answers it will take (an `offer` event), and a bubble that names a word
+   * to reply with - SHOW ME MORE, SEND, RESTART - gets that word as a chip.
+   */
+  const OFFERS: [RegExp, string][] = [
+    [/\bSHOW ME MORE\b/, "Show me more"],
+    [/\bSEND\b/, "Send"],
+    [/\bRESTART\b/, "Restart"],
+  ];
+  function text(t: string) {
+    them(bubble(t));
+    if (/^Not sure I caught that|^Sorry, I didn't catch that/.test(t) && lastOffer)
+      pendingOffers = lastOffer;
+    else {
+      const found = OFFERS.filter(([re]) => re.test(t)).map(([, label]) => ({ say: label, label }));
+      if (found.length) pendingOffers = found;
     }
   }
-
-  function me(text: string) {
-    add(el(`<div class="row me tail"><div class="bubble">${esc(text)}</div></div>`));
-    add(el(`<div class="delivered">Delivered</div>`));
+  function offer(choices: Choice[]) {
+    typing(false);
+    lastOffer = choices;
+    pendingOffers = choices;
   }
-
-  function card(c: Card) {
-    const rows = c.rows
-      .map(
-        ([k, v, s]) =>
-          `<div class="r ${s ?? ""}"><span>${esc(k)}</span><span>${esc(v)}</span></div>`,
-      )
-      .join("");
-    add(
-      el(
-        `<div class="card"><div class="kicker">${esc(c.kicker)}</div><div class="title">${esc(c.title)}</div>${rows}</div>`,
-      ),
-    );
-  }
-
-  function chips(items: Pick[], onPick: (p: Pick) => void) {
+  function chips(items: Choice[], extra: HTMLElement | null = null) {
     const wrap = el(`<div class="chips" role="group" aria-label="Pick one"></div>`);
+    if (extra) wrap.appendChild(extra);
     for (const it of items) {
+      const badge = /^[A-Z0-9]$/i.test(it.say) ? it.say : "";
       const b = el(
-        `<button class="chip" type="button"><span class="k">${it.key}</span>${esc(it.label)}</button>`,
+        `<button class="chip ${badge ? "" : "plain"}" type="button"><span class="k">${esc(badge)}</span>${esc(it.label)}</button>`,
       );
       b.addEventListener("click", () => {
         if (wrap.classList.contains("done")) return;
         wrap.classList.add("done");
         b.classList.add("picked");
-        onPick(it);
+        void say(it.say);
       });
       wrap.appendChild(b);
     }
-    add(wrap);
+    thread.appendChild(wrap);
+    scrollDown();
+  }
+  function image(src: string, name: string) {
+    them(el(`<div class="pic"><img src="${src}" alt="${esc(name)}"></div>`));
+  }
+  // The link goes in with the chips, on the visitor's side.
+  function link(href: string) {
+    typing(false);
+    pendingLink = el(
+      `<a class="preview" href="${esc(href)}" target="_blank" rel="noopener"><span class="s" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24"><path d="M4 4h16v16H4z" fill="#fff"/></svg></span>Get started</a>`,
+    );
+    if (!pendingOffers) {
+      clearTimeout(offerTimer);
+      offerTimer = setTimeout(flushOffers, 600);
+    }
   }
 
-  const ua = navigator.userAgent;
-  const isPhone = /iPhone|iPad|iPod|Android/i.test(ua);
-  const isApple = /iPhone|iPad|iPod/i.test(ua);
+  // --- the engine ----------------------------------------------------------
 
-  function draft(pick: Pick) {
-    const body = `Hi Manifest. ${pick.first}`;
-    // iOS wants "&body=", everything else "?body=". Apple's own docs.
-    const href = `sms:${NUMBER}${isPhone && isApple ? "&" : "?"}body=${encodeURIComponent(body)}`;
-    const d = el(`
-      <div class="draft">
-        <div class="box">
-          <div class="lbl">Your first text · written for you</div>
-          <div class="row me tail"><div class="bubble">${esc(body)}</div></div>
-        </div>
-        <div class="send"><a href="${href}"><span class="im" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.5 1.5 4.7 3.8 6.2-.2 1.2-.8 2.5-1.6 3.4 1.9-.2 3.6-1 4.9-2 .9.2 1.9.4 2.9.4 5.5 0 10-3.6 10-8S17.5 3 12 3Z" fill="#fff"/></svg></span>Open Messages →</a></div>
-        <div class="alt"><span>${isPhone ? "or text anything to" : "or, from your phone, text anything to"}</span><button type="button" class="num" data-copy><b>${esc(NUMBER_DISPLAY)}</b><span class="c">copy</span></button></div>
-        <div class="fine">no app · nothing to install · it texts back in seconds</div>
-      </div>`);
-    d.querySelector("[data-copy]")!.addEventListener("click", async (e) => {
-      const c = (e.currentTarget as HTMLElement).querySelector(".c")!;
-      try {
-        await navigator.clipboard.writeText(NUMBER);
-        c.textContent = "copied";
-      } catch {
-        c.textContent = "select";
-      }
+  let session: string | null = null;
+  let es: EventSource | null = null;
+
+  async function post<T = unknown>(path: string, body?: unknown): Promise<T> {
+    const r = await fetch(`${ENGINE}${path}`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: body ? JSON.stringify(body) : undefined,
+      signal,
     });
-    add(d);
+    if (!r.ok) throw new Error(`${path}: ${r.status}`);
+    return r.json() as Promise<T>;
+  }
+  function listen() {
+    es = new EventSource(`${ENGINE}/web/session/${encodeURIComponent(session!)}/events`);
+    const seen = new Set<number>();
+    es.onmessage = (ev) => {
+      const e = JSON.parse(ev.data) as Ev;
+      if (e.t === "typing") return typing(e.on);
+      if (seen.has(e.id)) return; // a reconnect replays the thread
+      seen.add(e.id);
+      if (e.t === "you") return me(e.text);
+      if (e.t === "text") return text(e.text);
+      if (e.t === "image") return image(e.src, e.name);
+      if (e.t === "link") return link(e.href);
+      if (e.t === "offer") return offer(e.choices);
+      if (e.t === "poll") text([e.q, ...e.opts.map((o, i) => `${i + 1}. ${o}`)].join("\n"));
+    };
+  }
+  async function say(t: string) {
+    const said = t.trim();
+    if (!said || !session) return;
+    input.value = "";
+    go.disabled = true;
+    try {
+      await post(`/web/session/${encodeURIComponent(session)}/say`, { text: said });
+    } catch {
+      them(bubble("Couldn't reach the line just now. Try again in a moment."));
+    }
+  }
+  composer.addEventListener(
+    "submit",
+    (ev) => {
+      ev.preventDefault();
+      void say(input.value);
+    },
+    { signal },
+  );
+  input.addEventListener(
+    "input",
+    () => {
+      go.disabled = !input.value.trim();
+    },
+    { signal },
+  );
+
+  // --- carrying on in Messages -------------------------------------------
+
+  type Handoff = { text: string; number: string; sms: string; qr: string };
+  toPhone.addEventListener(
+    "click",
+    async () => {
+      if (!session) return;
+      let h: Handoff;
+      try {
+        h = await post<Handoff>(`/web/session/${encodeURIComponent(session)}/handoff`);
+      } catch {
+        return;
+      }
+      if (isPhone) {
+        location.href = h.sms;
+        return;
+      }
+      thread.querySelector(".handoff")?.remove();
+      const d = el(`
+      <div class="handoff">
+        <div class="box qr">
+          <div class="lbl">Carry on in Messages</div>
+          <img src="${ENGINE}${h.qr}" alt="QR code that opens Messages with your first text written" width="150" height="150">
+          <p>Point your phone's camera at this. Messages opens with your first text written; just send it.</p>
+        </div>
+        <div class="alt"><span>or text</span><b class="q">${esc(h.text)}</b><span>to</span><button type="button" class="num" data-copy><b>${esc(display(h.number))}</b><span class="c">copy</span></button></div>
+        <div class="fine">it picks up right here · nothing starts over</div>
+      </div>`);
+      d.querySelector("[data-copy]")!.addEventListener("click", async (e) => {
+        const c = (e.currentTarget as HTMLElement).querySelector(".c")!;
+        try {
+          await navigator.clipboard.writeText(h.number);
+          c.textContent = "copied";
+        } catch {
+          c.textContent = "select";
+        }
+      });
+      d.querySelector("img")!.addEventListener("load", scrollDown);
+      thread.appendChild(d);
+      scrollDown();
+    },
+    { signal },
+  );
+
+  // --- go ---------------------------------------------------------------------
+
+  /** The one thing asked before the demo: what to call them. It is how the
+   *  line knows this visitor again when they carry on by text. Remembered on
+   *  this browser so a second visit skips it. */
+  function askName(): Promise<string> {
+    return new Promise((resolve) => {
+      let had = "";
+      try {
+        had = localStorage.getItem("manifest.name") || "";
+      } catch {
+        /* private mode */
+      }
+      them(bubble("Hi, I'm Manifest. What should I call you?"));
+      const box = el(
+        `<div class="ask"><form autocomplete="off"><input type="text" name="given-name" autocomplete="given-name" placeholder="Your name" aria-label="Your name" maxlength="40" required><button type="submit">→</button></form></div>`,
+      );
+      const field = box.querySelector("input")!;
+      field.value = had;
+      box.querySelector("form")!.addEventListener("submit", (ev) => {
+        ev.preventDefault();
+        const name = field.value.trim().replace(/\s+/g, " ");
+        if (!name) {
+          field.focus();
+          return;
+        }
+        try {
+          localStorage.setItem("manifest.name", name);
+        } catch {
+          /* private mode */
+        }
+        box.remove();
+        me(name);
+        resolve(name);
+      });
+      thread.appendChild(box);
+      scrollDown();
+      field.focus({ preventScroll: true });
+    });
   }
 
   async function run() {
-    await sleep(500);
-    await them(
-      [
-        "Hi, I'm Manifest.",
-        "I'm a freight agent that lives in your texts. No app, no login. You text me like you'd text dispatch.",
-        "I find loads, answer quote requests, cover trucks and close out paperwork. What's eating your morning?",
-      ],
-      { first: 1100 },
-    );
-    await sleep(300);
-    chips(MENU, async (pick) => {
-      await sleep(250);
-      me(pick.label);
-      const p = PREVIEW[pick.key];
-      await them(p.say, { first: 1000 });
-      await sleep(250);
-      card(p.card);
-      await them([p.after], { first: 900 });
-      await sleep(350);
-      await them(
-        [
-          "That's the shape of it. The rest happens on your phone.",
-          "I wrote your first text. Just hit send.",
-        ],
-        { first: 800 },
-      );
-      await sleep(200);
-      draft(pick);
-    });
+    const down = () =>
+      them(bubble(`The line is not answering right now. Text ${display(NUMBER)} instead.`));
+    try {
+      const cfg = (await (await fetch(`${ENGINE}/web/config`, { signal })).json()) as {
+        stripe?: string;
+        number?: string;
+      };
+      if (cfg.stripe) cta.href = cfg.stripe;
+      if (cfg.number) NUMBER = cfg.number;
+    } catch {
+      if (!signal.aborted) down();
+      return;
+    }
+    input.disabled = true;
+    const name = await askName();
+    input.disabled = false;
+    try {
+      ({ id: session } = await post<{ id: string }>("/web/session", { name }));
+    } catch {
+      if (!signal.aborted) down();
+      return;
+    }
+    listen();
+    // Manifest texts first, as on the phone where anything starts it.
+    await post(`/web/session/${encodeURIComponent(session!)}/say`, { text: "hi", silent: true });
+    input.focus({ preventScroll: true });
   }
-
-  run().catch((err) => {
-    if (!(err instanceof DOMException && err.name === "AbortError")) throw err;
+  run().catch(() => {
+    /* aborted on unmount */
+  });
+  signal.addEventListener("abort", () => {
+    es?.close();
+    clearTimeout(offerTimer);
   });
 }
 
 function MobileDemoPage() {
   const threadRef = useRef<HTMLDivElement>(null);
-
+  const inputRef = useRef<HTMLInputElement>(null);
+  const goRef = useRef<HTMLButtonElement>(null);
+  const composerRef = useRef<HTMLFormElement>(null);
+  const toPhoneRef = useRef<HTMLButtonElement>(null);
+  const ctaRef = useRef<HTMLAnchorElement>(null);
   useEffect(() => {
     const thread = threadRef.current;
-    if (!thread) return;
+    const input = inputRef.current;
+    const go = goRef.current;
+    const composer = composerRef.current;
+    const toPhone = toPhoneRef.current;
+    const cta = ctaRef.current;
+    if (!thread || !input || !go || !composer || !toPhone || !cta) return;
     const ctl = new AbortController();
-    play(thread, ctl.signal);
+    play({ thread, input, go, composer, toPhone, cta }, ctl.signal);
     return () => {
       ctl.abort();
       // Strict mode runs effects twice in dev; a second run must not stack
@@ -310,10 +407,23 @@ function MobileDemoPage() {
       for (const n of Array.from(thread.children)) if (!n.classList.contains("stamp")) n.remove();
     };
   }, []);
-
   return (
     <div className="mobiledemo">
       <style>{CSS}</style>
+      <a
+        className="cta"
+        ref={ctaRef}
+        href="https://buy.stripe.com/eVqeVcdJi4vWfkI8EK3Nm02"
+        target="_blank"
+        rel="noopener"
+      >
+        <span className="s" aria-hidden="true">
+          <svg width="11" height="11" viewBox="0 0 24 24">
+            <path d="M4 4h16v16H4z" fill="#fff" />
+          </svg>
+        </span>
+        Get started <small>· run it on your own loads</small>
+      </a>
 
       <div className="scene" aria-hidden="true">
         <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
@@ -464,22 +574,38 @@ function MobileDemoPage() {
             </div>
           </div>
 
-          <div className="composer" aria-hidden="true">
-            <div className="plus">+</div>
-            <div className="field">
-              <span>iMessage</span>
-              <svg width="12" height="16" viewBox="0 0 12 16">
-                <rect x="3.5" y="0" width="5" height="9" rx="2.5" fill="#a0a0a4" />
-                <path
-                  d="M1 7a5 5 0 0 0 10 0M6 12v3.5M3.5 15.5h5"
-                  fill="none"
-                  stroke="#a0a0a4"
-                  strokeWidth="1.4"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </div>
+          <div className="carry">
+            <span>Rather do this by text?</span>
+            <button type="button" ref={toPhoneRef}>
+              Continue in Messages →
+            </button>
           </div>
+          <form className="composer" ref={composerRef} autoComplete="off">
+            <div className="plus" aria-hidden="true">
+              +
+            </div>
+            <label className="field">
+              <input
+                ref={inputRef}
+                type="text"
+                placeholder="iMessage"
+                aria-label="Message"
+                enterKeyHint="send"
+              />
+              <button className="go" ref={goRef} type="submit" aria-label="Send" disabled>
+                <svg width="12" height="14" viewBox="0 0 12 14">
+                  <path
+                    d="M6 13V1M1 6l5-5 5 5"
+                    fill="none"
+                    stroke="#fff"
+                    strokeWidth="2.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+            </label>
+          </form>
           <div className="homebar" />
         </div>
       </main>
@@ -596,6 +722,40 @@ const CSS = `
 .mobiledemo .composer .field { flex: 1; height: 34px; border-radius: 17px; border: .5px solid rgba(0,0,0,.18); display: flex; align-items: center; justify-content: space-between; padding: 0 10px 0 12px; color: #a0a0a4; font-size: 15px; background: #fff; }
 .mobiledemo .homebar { position: absolute; bottom: 7px; left: 50%; transform: translateX(-50%); width: 120px; height: 5px; border-radius: 3px; background: #000; z-index: 6; }
 
+.mobiledemo .chip.plain .k { display: none; }
+.mobiledemo .chips.done .preview { opacity: 1; }
+.mobiledemo .pic { margin: 6px 0 4px; max-width: 84%; border-radius: 16px; overflow: hidden; box-shadow: 0 0 0 .5px rgba(0,0,0,.1), 0 6px 16px rgba(0,0,0,.08); animation: md-pop .3s ease both; background: #fff; }
+.mobiledemo .pic img { display: block; width: 100%; height: auto; }
+.mobiledemo .preview { display: inline-flex; align-items: center; gap: 7px; padding: 8px 13px 8px 9px; border-radius: 999px; background: linear-gradient(135deg,#635bff,#7a6cff); color: #fff; text-decoration: none; font-size: 13.5px; font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,.15), 0 4px 10px rgba(99,91,255,.25); transition: transform .12s ease; }
+.mobiledemo .preview:hover { transform: translateY(-1px); }
+.mobiledemo .preview .s { width: 18px; height: 18px; border-radius: 5px; background: rgba(255,255,255,.22); display: grid; place-items: center; flex: none; }
+.mobiledemo .composer .field { cursor: text; }
+.mobiledemo .composer input { flex: 1; border: 0; outline: 0; background: transparent; font: inherit; font-size: 15px; color: #000; min-width: 0; }
+.mobiledemo .composer input::placeholder { color: #a0a0a4; }
+.mobiledemo .composer .go { width: 26px; height: 26px; border-radius: 50%; border: 0; background: var(--bubble-blue); color: #fff; display: grid; place-items: center; cursor: pointer; flex: none; padding: 0; }
+.mobiledemo .composer .go:disabled { background: #c7c7cc; cursor: default; }
+.mobiledemo .carry { display: flex; justify-content: center; align-items: center; gap: 10px; padding: 6px 12px 4px; background: rgba(249,249,249,.95); font-size: 12px; color: var(--meta); }
+.mobiledemo .carry button { font: inherit; font-size: 12.5px; font-weight: 600; color: #0a84ff; background: none; border: 0; padding: 4px 2px; cursor: pointer; }
+.mobiledemo .handoff { margin: 8px 0 0; animation: md-rise .4s ease both; }
+.mobiledemo .handoff .box { border: 1.5px dashed rgba(0,0,0,.14); border-radius: 18px; padding: 10px 10px 12px; }
+.mobiledemo .handoff .lbl { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--meta); font-weight: 700; margin: 0 4px 8px; }
+.mobiledemo .handoff .qr { text-align: center; }
+.mobiledemo .handoff .qr img { display: block; margin: 2px auto 8px; border-radius: 10px; background: #fff; }
+.mobiledemo .handoff .qr p { margin: 0 6px; font-size: 13px; line-height: 1.3; color: #3c3c43; }
+.mobiledemo .handoff .alt .q { font-size: 11.5px; color: #111; }
+.mobiledemo .ask { margin: 10px 0 6px; animation: md-rise .35s ease both; }
+.mobiledemo .ask form { display: flex; gap: 8px; justify-content: flex-end; }
+.mobiledemo .ask input { width: 56%; font: inherit; font-size: 16px; padding: 9px 13px; border-radius: 18px; border: .5px solid rgba(0,0,0,.18); outline: 0; background: #fff; color: #000; }
+.mobiledemo .ask input:focus { border-color: var(--bubble-blue); box-shadow: 0 0 0 3px rgba(10,132,255,.15); }
+.mobiledemo .ask button { font: inherit; font-size: 14px; font-weight: 600; color: #fff; background: var(--bubble-blue); border: 0; border-radius: 18px; padding: 0 14px; cursor: pointer; }
+.mobiledemo .cta { position: fixed; top: 18px; right: 18px; z-index: 3; display: inline-flex; align-items: center; gap: 8px; font: inherit; font-size: 15px; font-weight: 600; color: #fff; text-decoration: none; padding: 12px 18px; border-radius: 22px; background: var(--send-bg); box-shadow: var(--send-shadow); transition: transform .12s ease; }
+.mobiledemo .cta:hover { transform: translateY(-1px); }
+.mobiledemo .cta .s { width: 18px; height: 18px; border-radius: 5px; background: #635bff; display: grid; place-items: center; }
+.mobiledemo .cta small { font-weight: 500; opacity: .75; font-size: 12px; }
+@media (max-width: 480px), (max-height: 720px) {
+  .mobiledemo .cta { top: auto; bottom: max(14px, env(safe-area-inset-bottom)); right: 12px; left: auto; padding: 10px 14px; font-size: 14px; }
+  .mobiledemo .cta small { display: none; }
+}
 @media (max-width: 480px), (max-height: 720px) {
   .mobiledemo { display: block; }
   .mobiledemo .scene { display: none; }
