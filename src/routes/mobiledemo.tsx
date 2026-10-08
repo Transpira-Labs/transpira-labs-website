@@ -90,9 +90,29 @@ function play({ thread, input, go, composer, toPhone, cta }: Parts, signal: Abor
       /[&<>"]/g,
       (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c] ?? c,
     );
+  /**
+   * Follow new messages only while the reader is at the bottom. Somebody who
+   * scrolled up to reread is left there; tapping or typing brings them back.
+   * Our own scrolls only ever move down, since the thread grows at the end,
+   * so a move up is the visitor's, and that is the only thing that stops the
+   * following. Instant rather than smooth, as Messages itself snaps.
+   */
+  let follow = true;
+  let lastTop = 0;
   const scrollDown = () => {
-    thread.scrollTop = thread.scrollHeight;
+    if (follow) thread.scrollTo({ top: thread.scrollHeight, behavior: "instant" });
   };
+  thread.addEventListener(
+    "scroll",
+    () => {
+      const top = thread.scrollTop;
+      const gap = thread.scrollHeight - thread.clientHeight - top;
+      if (top < lastTop - 1) follow = gap < 120;
+      else if (gap < 120) follow = true;
+      lastTop = top;
+    },
+    { signal, passive: true },
+  );
   const bubble = (text: string) =>
     el(`<div class="row them tail"><div class="bubble">${esc(text)}</div></div>`);
 
@@ -142,6 +162,7 @@ function play({ thread, input, go, composer, toPhone, cta }: Parts, signal: Abor
     typing(false);
     lastThem = null;
     thread.querySelectorAll(".chips:not(.done)").forEach((c) => c.classList.add("done"));
+    follow = true;
     thread.appendChild(el(`<div class="row me tail"><div class="bubble">${esc(text)}</div></div>`));
     thread.appendChild(el(`<div class="delivered">Delivered</div>`));
     scrollDown();
@@ -182,7 +203,7 @@ function play({ thread, input, go, composer, toPhone, cta }: Parts, signal: Abor
         if (wrap.classList.contains("done")) return;
         wrap.classList.add("done");
         b.classList.add("picked");
-        void say(it.say);
+        void say(it.say, it.label);
       });
       wrap.appendChild(b);
     }
@@ -235,13 +256,19 @@ function play({ thread, input, go, composer, toPhone, cta }: Parts, signal: Abor
       if (e.t === "poll") text([e.q, ...e.opts.map((o, i) => `${i + 1}. ${o}`)].join("\n"));
     };
   }
-  async function say(t: string) {
+  /** `shown` is what the visitor's bubble reads when it is not what was sent:
+   *  a chip sends "C" but the person tapped "Help me cover a load". */
+  async function say(t: string, shown?: string) {
     const said = t.trim();
     if (!said || !session) return;
     input.value = "";
     go.disabled = true;
+    if (shown) me(shown);
     try {
-      await post(`/web/session/${encodeURIComponent(session)}/say`, { text: said });
+      await post(`/web/session/${encodeURIComponent(session)}/say`, {
+        text: said,
+        silent: !!shown,
+      });
     } catch {
       them(bubble("Couldn't reach the line just now. Try again in a moment."));
     }
@@ -621,7 +648,7 @@ const CSS = `
 .mobiledemo .contact .name { font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 999px; background: rgba(0,0,0,.05); color: #000; display: inline-flex; gap: 2px; align-items: center; }
 .mobiledemo .contact .name i { font-style: normal; color: #b0b0b4; font-size: 11px; }
 
-.mobiledemo .thread { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; touch-action: pan-y; padding: 14px 12px 12px; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+.mobiledemo .thread { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; touch-action: pan-y; padding: 14px 12px 12px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
 .mobiledemo .thread::-webkit-scrollbar { display: none; }
 .mobiledemo .stamp { text-align: center; font-size: 11px; color: var(--meta); margin: 2px 0 10px; }
 .mobiledemo .stamp b { font-weight: 600; }
@@ -707,8 +734,10 @@ const CSS = `
 .mobiledemo .cta .s { width: 18px; height: 18px; border-radius: 5px; background: #635bff; display: grid; place-items: center; }
 .mobiledemo .cta small { font-weight: 500; opacity: .75; font-size: 12px; }
 @media (max-width: 480px), (max-height: 720px) {
-  .mobiledemo .cta { top: auto; bottom: max(14px, env(safe-area-inset-bottom)); right: 12px; left: auto; padding: 10px 14px; font-size: 14px; }
+  /* Top right, where the header's video icon was: never over the compose bar. */
+  .mobiledemo .cta { top: calc(env(safe-area-inset-top, 0px) + 12px); right: 12px; left: auto; bottom: auto; padding: 8px 12px; font-size: 13px; border-radius: 18px; }
   .mobiledemo .cta small { display: none; }
+  .mobiledemo .header .ico:last-child { visibility: hidden; }
 }
 @media (max-width: 480px), (max-height: 720px) {
   .mobiledemo { display: block; }
@@ -719,7 +748,9 @@ const CSS = `
   .mobiledemo .phone { position: absolute; inset: 0; width: auto; height: auto; max-height: none; border-radius: 0; padding: 0; box-shadow: none; background: #fff; }
   .mobiledemo .phone::before, .mobiledemo .phone::after, .mobiledemo .island, .mobiledemo .homebar { display: none; }
   .mobiledemo .screen { border-radius: 0; }
-  .mobiledemo .status { padding-top: max(10px, env(safe-area-inset-top)); height: auto; padding-bottom: 4px; }
+  /* A real phone already has a status bar. */
+  .mobiledemo .status { display: none; }
+  .mobiledemo .header { padding-top: calc(env(safe-area-inset-top, 0px) + 10px); }
   .mobiledemo .composer { padding-bottom: max(14px, env(safe-area-inset-bottom)); }
 }
 @media (prefers-reduced-motion: reduce) {
