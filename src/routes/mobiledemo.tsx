@@ -11,10 +11,11 @@ import { useEffect, useRef } from "react";
  * taps, and draws what comes back - typing, bubbles, the cards as pictures,
  * the link. The words live in that repo's script.json and only there.
  *
- * It asks one thing first, what to call the visitor, and "Continue in
- * Messages" hands them to their own phone with a first text carrying that
- * name; the line picks up from exactly where the page was. On a laptop a QR
- * code opens Messages on the phone the same way.
+ * Nothing is asked of the visitor. "Continue in Messages" hands them to
+ * their own phone with a first text written, carrying a tag the line
+ * listens for in zero-width characters nobody sees; the line picks up from
+ * exactly where the page was. On a laptop a QR code opens Messages on the
+ * phone the same way.
  *
  * No site chrome on purpose. The page is the phone, and the phone is the
  * pitch. The original lives in longleaf-text-demo/site/index.html; this is
@@ -307,45 +308,6 @@ function play({ thread, input, go, composer, toPhone, cta }: Parts, signal: Abor
 
   // --- go ---------------------------------------------------------------------
 
-  /** The one thing asked before the demo: what to call them. It is how the
-   *  line knows this visitor again when they carry on by text. Remembered on
-   *  this browser so a second visit skips it. */
-  function askName(): Promise<string> {
-    return new Promise((resolve) => {
-      let had = "";
-      try {
-        had = localStorage.getItem("manifest.name") || "";
-      } catch {
-        /* private mode */
-      }
-      them(bubble("Hi, I'm Manifest. What should I call you?"));
-      const box = el(
-        `<div class="ask"><form autocomplete="off"><input type="text" name="given-name" autocomplete="given-name" placeholder="Your name" aria-label="Your name" maxlength="40" required><button type="submit">→</button></form></div>`,
-      );
-      const field = box.querySelector("input")!;
-      field.value = had;
-      box.querySelector("form")!.addEventListener("submit", (ev) => {
-        ev.preventDefault();
-        const name = field.value.trim().replace(/\s+/g, " ");
-        if (!name) {
-          field.focus();
-          return;
-        }
-        try {
-          localStorage.setItem("manifest.name", name);
-        } catch {
-          /* private mode */
-        }
-        box.remove();
-        me(name);
-        resolve(name);
-      });
-      thread.appendChild(box);
-      scrollDown();
-      field.focus({ preventScroll: true });
-    });
-  }
-
   async function run() {
     const down = () =>
       them(bubble(`The line is not answering right now. Text ${display(NUMBER)} instead.`));
@@ -360,11 +322,8 @@ function play({ thread, input, go, composer, toPhone, cta }: Parts, signal: Abor
       if (!signal.aborted) down();
       return;
     }
-    input.disabled = true;
-    const name = await askName();
-    input.disabled = false;
     try {
-      ({ id: session } = await post<{ id: string }>("/web/session", { name }));
+      ({ id: session } = await post<{ id: string }>("/web/session"));
     } catch {
       if (!signal.aborted) down();
       return;
@@ -743,11 +702,6 @@ const CSS = `
 .mobiledemo .handoff .qr img { display: block; margin: 2px auto 8px; border-radius: 10px; background: #fff; }
 .mobiledemo .handoff .qr p { margin: 0 6px; font-size: 13px; line-height: 1.3; color: #3c3c43; }
 .mobiledemo .handoff .alt .q { font-size: 11.5px; color: #111; }
-.mobiledemo .ask { margin: 10px 0 6px; animation: md-rise .35s ease both; }
-.mobiledemo .ask form { display: flex; gap: 8px; justify-content: flex-end; }
-.mobiledemo .ask input { width: 56%; font: inherit; font-size: 16px; padding: 9px 13px; border-radius: 18px; border: .5px solid rgba(0,0,0,.18); outline: 0; background: #fff; color: #000; }
-.mobiledemo .ask input:focus { border-color: var(--bubble-blue); box-shadow: 0 0 0 3px rgba(10,132,255,.15); }
-.mobiledemo .ask button { font: inherit; font-size: 14px; font-weight: 600; color: #fff; background: var(--bubble-blue); border: 0; border-radius: 18px; padding: 0 14px; cursor: pointer; }
 .mobiledemo .cta { position: fixed; top: 18px; right: 18px; z-index: 3; display: inline-flex; align-items: center; gap: 8px; font: inherit; font-size: 15px; font-weight: 600; color: #fff; text-decoration: none; padding: 12px 18px; border-radius: 22px; background: var(--send-bg); box-shadow: var(--send-shadow); transition: transform .12s ease; }
 .mobiledemo .cta:hover { transform: translateY(-1px); }
 .mobiledemo .cta .s { width: 18px; height: 18px; border-radius: 5px; background: #635bff; display: grid; place-items: center; }
