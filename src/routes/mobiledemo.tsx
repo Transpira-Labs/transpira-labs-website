@@ -155,8 +155,13 @@ function play(thread: HTMLDivElement, signal: AbortSignal) {
       /[&<>"]/g,
       (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c] ?? c,
     );
-  const scrollDown = () => {
-    thread.scrollTop = thread.scrollHeight;
+  // Follow new messages only while the reader is already near the bottom.
+  // Measured before the append, so a tall card does not count as the reader
+  // having scrolled away; somebody who went up to reread is left there.
+  const add = (node: HTMLElement) => {
+    const gap = thread.scrollHeight - thread.clientHeight - thread.scrollTop;
+    thread.appendChild(node);
+    if (gap < 400) thread.scrollTop = thread.scrollHeight;
   };
 
   async function showTyping(ms: number) {
@@ -164,8 +169,7 @@ function play(thread: HTMLDivElement, signal: AbortSignal) {
     const t = el(
       `<div class="row them tail"><div class="bubble typing" aria-hidden="true"><i></i><i></i><i></i></div></div>`,
     );
-    thread.appendChild(t);
-    scrollDown();
+    add(t);
     try {
       await sleep(ms);
     } finally {
@@ -179,20 +183,18 @@ function play(thread: HTMLDivElement, signal: AbortSignal) {
       const text = lines[i];
       await showTyping(i === 0 ? first : Math.min(2200, 500 + text.length * 14));
       const last = i === lines.length - 1;
-      thread.appendChild(
+      add(
         el(
           `<div class="row them ${last ? "tail" : ""}"><div class="bubble">${esc(text)}</div></div>`,
         ),
       );
-      scrollDown();
       if (!last) await sleep(per);
     }
   }
 
   function me(text: string) {
-    thread.appendChild(el(`<div class="row me tail"><div class="bubble">${esc(text)}</div></div>`));
-    thread.appendChild(el(`<div class="delivered">Delivered</div>`));
-    scrollDown();
+    add(el(`<div class="row me tail"><div class="bubble">${esc(text)}</div></div>`));
+    add(el(`<div class="delivered">Delivered</div>`));
   }
 
   function card(c: Card) {
@@ -202,12 +204,11 @@ function play(thread: HTMLDivElement, signal: AbortSignal) {
           `<div class="r ${s ?? ""}"><span>${esc(k)}</span><span>${esc(v)}</span></div>`,
       )
       .join("");
-    thread.appendChild(
+    add(
       el(
         `<div class="card"><div class="kicker">${esc(c.kicker)}</div><div class="title">${esc(c.title)}</div>${rows}</div>`,
       ),
     );
-    scrollDown();
   }
 
   function chips(items: Pick[], onPick: (p: Pick) => void) {
@@ -224,8 +225,7 @@ function play(thread: HTMLDivElement, signal: AbortSignal) {
       });
       wrap.appendChild(b);
     }
-    thread.appendChild(wrap);
-    scrollDown();
+    add(wrap);
   }
 
   const ua = navigator.userAgent;
@@ -255,8 +255,7 @@ function play(thread: HTMLDivElement, signal: AbortSignal) {
         c.textContent = "select";
       }
     });
-    thread.appendChild(d);
-    scrollDown();
+    add(d);
   }
 
   async function run() {
@@ -537,7 +536,7 @@ const CSS = `
 .mobiledemo .contact .name { font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 999px; background: rgba(0,0,0,.05); color: #000; display: inline-flex; gap: 2px; align-items: center; }
 .mobiledemo .contact .name i { font-style: normal; color: #b0b0b4; font-size: 11px; }
 
-.mobiledemo .thread { flex: 1; overflow-y: auto; padding: 14px 12px 12px; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+.mobiledemo .thread { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; touch-action: pan-y; padding: 14px 12px 12px; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
 .mobiledemo .thread::-webkit-scrollbar { display: none; }
 .mobiledemo .stamp { text-align: center; font-size: 11px; color: var(--meta); margin: 2px 0 10px; }
 .mobiledemo .stamp b { font-weight: 600; }
@@ -598,9 +597,12 @@ const CSS = `
 .mobiledemo .homebar { position: absolute; bottom: 7px; left: 50%; transform: translateX(-50%); width: 120px; height: 5px; border-radius: 3px; background: #000; z-index: 6; }
 
 @media (max-width: 480px), (max-height: 720px) {
-  .mobiledemo { place-items: stretch; }
+  .mobiledemo { display: block; }
   .mobiledemo .scene { display: none; }
-  .mobiledemo .phone { width: 100%; height: 100%; max-height: none; border-radius: 0; padding: 0; box-shadow: none; background: #fff; }
+  /* Pinned to the viewport, not sized by it: a percentage height inside the
+     grid never resolved, so the frame grew to fit the whole conversation and
+     the thread had nothing to scroll. */
+  .mobiledemo .phone { position: absolute; inset: 0; width: auto; height: auto; max-height: none; border-radius: 0; padding: 0; box-shadow: none; background: #fff; }
   .mobiledemo .phone::before, .mobiledemo .phone::after, .mobiledemo .island, .mobiledemo .homebar { display: none; }
   .mobiledemo .screen { border-radius: 0; }
   .mobiledemo .status { padding-top: max(10px, env(safe-area-inset-top)); height: auto; padding-bottom: 4px; }
