@@ -245,6 +245,7 @@ function play({ thread, input, go, composer, toPhone, cta }: Parts, signal: Abor
     const seen = new Set<number>();
     es.onmessage = (ev) => {
       const e = JSON.parse(ev.data) as Ev;
+      lastEvent = Date.now();
       if (e.t === "typing") return typing(e.on);
       if (seen.has(e.id)) return; // a reconnect replays the thread
       seen.add(e.id);
@@ -292,10 +293,34 @@ function play({ thread, input, go, composer, toPhone, cta }: Parts, signal: Abor
   // --- carrying on in Messages -------------------------------------------
 
   type Handoff = { text: string; number: string; sms: string; qr: string };
+  /**
+   * Not while the line is talking. A handoff asked for mid-run would land
+   * in the middle of it, with the rest of the run arriving underneath. So
+   * the click waits for the run to finish - nothing typing, nothing queued
+   * and a quiet second - and the QR and the links come after it.
+   */
+  let lastEvent = 0;
+  const quiet = () =>
+    new Promise<void>((resolve) => {
+      const check = () => {
+        if (signal.aborted) return;
+        const busy = typingEl || pendingOffers || pendingLink || Date.now() - lastEvent < 1000;
+        if (busy) setTimeout(check, 200);
+        else resolve();
+      };
+      check();
+    });
+  const toPhoneLabel = toPhone.textContent;
   toPhone.addEventListener(
     "click",
     async () => {
-      if (!session) return;
+      if (!session || toPhone.disabled) return;
+      toPhone.disabled = true;
+      toPhone.textContent = "One moment…";
+      await quiet();
+      toPhone.disabled = false;
+      toPhone.textContent = toPhoneLabel;
+      if (signal.aborted) return;
       let h: Handoff;
       try {
         h = await post<Handoff>(`/web/session/${encodeURIComponent(session)}/handoff`);
@@ -722,6 +747,7 @@ const CSS = `
 .mobiledemo .composer .go:disabled { background: #c7c7cc; cursor: default; }
 .mobiledemo .carry { display: flex; justify-content: center; align-items: center; gap: 10px; padding: 6px 12px 4px; background: rgba(249,249,249,.95); font-size: 12px; color: var(--meta); }
 .mobiledemo .carry button { font: inherit; font-size: 12.5px; font-weight: 600; color: #0a84ff; background: none; border: 0; padding: 4px 2px; cursor: pointer; }
+.mobiledemo .carry button:disabled { color: var(--meta); cursor: default; }
 .mobiledemo .handoff { margin: 8px 0 0; animation: md-rise .4s ease both; }
 .mobiledemo .handoff .box { border: 1.5px dashed rgba(0,0,0,.14); border-radius: 18px; padding: 10px 10px 12px; }
 .mobiledemo .handoff .lbl { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--meta); font-weight: 700; margin: 0 4px 8px; }
