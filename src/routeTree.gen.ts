@@ -17,6 +17,7 @@ import { Route as EnvironmentsRouteImport } from './routes/environments'
 import { Route as MobiledemoRouteImport } from './routes/mobiledemo'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as CaseStudiesIndexRouteImport } from './routes/case-studies.index'
 import { Route as CaseStudiesSlugRouteImport } from './routes/case-studies.$slug'
 import { Route as CaseStudiesBenchceptionRouteImport } from './routes/case-studies.benchception'
@@ -63,6 +64,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CaseStudiesIndexRoute = CaseStudiesIndexRouteImport.update({
   id: '/case-studies/',
   path: '/case-studies/',
@@ -98,6 +104,7 @@ export interface FileRoutesByFullPath {
   '/mobiledemo': typeof MobiledemoRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/case-studies/benchception': typeof CaseStudiesBenchceptionRoute
   '/case-studies/build': typeof CaseStudiesBuildRoute
@@ -113,6 +120,7 @@ export interface FileRoutesByTo {
   '/mobiledemo': typeof MobiledemoRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/case-studies/benchception': typeof CaseStudiesBenchceptionRoute
   '/case-studies/build': typeof CaseStudiesBuildRoute
@@ -129,6 +137,7 @@ export interface FileRoutesById {
   '/mobiledemo': typeof MobiledemoRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/case-studies/benchception': typeof CaseStudiesBenchceptionRoute
   '/case-studies/build': typeof CaseStudiesBuildRoute
@@ -146,6 +155,7 @@ export interface FileRouteTypes {
     | '/mobiledemo'
     | '/pricing'
     | '/privacy'
+    | '/terms'
     | '/case-studies/$slug'
     | '/case-studies/benchception'
     | '/case-studies/build'
@@ -161,6 +171,7 @@ export interface FileRouteTypes {
     | '/mobiledemo'
     | '/pricing'
     | '/privacy'
+    | '/terms'
     | '/case-studies/$slug'
     | '/case-studies/benchception'
     | '/case-studies/build'
@@ -176,6 +187,7 @@ export interface FileRouteTypes {
     | '/mobiledemo'
     | '/pricing'
     | '/privacy'
+    | '/terms'
     | '/case-studies/$slug'
     | '/case-studies/benchception'
     | '/case-studies/build'
@@ -192,6 +204,7 @@ export interface RootRouteChildren {
   MobiledemoRoute: typeof MobiledemoRoute
   PricingRoute: typeof PricingRoute
   PrivacyRoute: typeof PrivacyRoute
+  TermsRoute: typeof TermsRoute
   CaseStudiesSlugRoute: typeof CaseStudiesSlugRoute
   CaseStudiesBenchceptionRoute: typeof CaseStudiesBenchceptionRoute
   CaseStudiesBuildRoute: typeof CaseStudiesBuildRoute
@@ -257,6 +270,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/case-studies/': {
       id: '/case-studies/'
       path: '/case-studies'
@@ -304,6 +324,7 @@ const rootRouteChildren: RootRouteChildren = {
   MobiledemoRoute: MobiledemoRoute,
   PricingRoute: PricingRoute,
   PrivacyRoute: PrivacyRoute,
+  TermsRoute: TermsRoute,
   CaseStudiesSlugRoute: CaseStudiesSlugRoute,
   CaseStudiesBenchceptionRoute: CaseStudiesBenchceptionRoute,
   CaseStudiesBuildRoute: CaseStudiesBuildRoute,

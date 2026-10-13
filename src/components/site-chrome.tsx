@@ -29,6 +29,7 @@ const ABOUT_PATHS = [
   "/contact",
   "/environments",
   "/privacy",
+  "/terms",
 ];
 
 function ExternalArrow() {
@@ -497,6 +498,9 @@ export function SiteFooter() {
           </Link>
           <Link to="/privacy" className={linkCls}>
             Privacy
+          </Link>
+          <Link to="/terms" className={linkCls}>
+            Terms
           </Link>
           <a href={`mailto:${CONTACT_EMAIL}`} className={linkCls}>
             {CONTACT_EMAIL}
