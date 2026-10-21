@@ -24,7 +24,7 @@ function PrivacyPage() {
   return (
     <LegalPage
       title="Privacy Policy"
-      updated="October 13, 2026"
+      updated="October 21, 2026"
       intro={
         <>
           <p>
@@ -94,10 +94,11 @@ function PrivacyPage() {
       <LegalSection n={3} title="Google user data">
         <p>
           If you connect a Google account, Manifest requests read-only access to Gmail
-          (<code>gmail.readonly</code>) and, only if your company turns on sending, permission to send replies you
-          approve (<code>gmail.send</code>). We use this access only to provide and improve the user-facing features of
-          Manifest described above: finding and reading quote requests and related shipment emails, and sending replies
-          you have approved.
+          (<code>gmail.readonly</code>) and permission to manage drafts and send email (<code>gmail.compose</code>).
+          It uses the first to find and read quote requests and related shipment emails, including their attachments,
+          and the second to put the replies it writes in your Gmail Drafts, in the customer&rsquo;s thread, for you to
+          review, edit and send, and to send a reply only after you approve it. We use this access only to provide and
+          improve the user-facing features of Manifest described above.
         </p>
         <p>
           Transpira's use and transfer to any other app of information received from Google APIs will adhere to the{" "}
