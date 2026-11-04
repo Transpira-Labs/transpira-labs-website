@@ -162,6 +162,14 @@ function AboutPage() {
             Book a 20-minute call
           </a>
         </section>
+
+        {/* Legal entity note. */}
+        <section className="border-t border-white/8 px-4 py-8 text-center text-[13px] text-ink-faint sm:px-6">
+          <p className="m-0">
+            © {new Date().getFullYear()} Classhopper Technologies Inc. Transpira Labs is officially
+            incorporated as Classhopper Technologies Inc.
+          </p>
+        </section>
       </main>
       <SiteFooter />
     </div>

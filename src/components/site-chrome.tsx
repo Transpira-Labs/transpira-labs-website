@@ -477,10 +477,14 @@ export function SiteFooter() {
         <span className="flex items-center gap-2.5">
           <img src={transpiraLogo} alt="Transpira logo" className="size-5 rounded object-cover" />
           <span>
-            Manifest by Transpira Labs · © {new Date().getFullYear()} · Backed by{" "}
+            Manifest by Transpira Labs · © {new Date().getFullYear()} Classhopper Technologies Inc.
+            · Backed by{" "}
             <a href="https://fusen.world/" target="_blank" rel="noreferrer" className={linkCls}>
               Fusen World
             </a>
+            <span className="mt-1 block text-[12px] text-ink-faint/80">
+              Transpira Labs is officially incorporated as Classhopper Technologies Inc.
+            </span>
           </span>
         </span>
         <span className="flex flex-wrap gap-x-[18px] gap-y-2">
