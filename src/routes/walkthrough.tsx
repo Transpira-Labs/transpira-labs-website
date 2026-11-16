@@ -1,0 +1,39 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { SiteNav, SiteFooter } from "@/components/site-chrome";
+import { StoryMarkup } from "@/components/story/StoryMarkup";
+import { FloatingCall } from "@/components/story/FloatingCall";
+import { useStoryVals } from "@/components/story/story-logic";
+
+const DESCRIPTION =
+  "Win and manage 10× the loads. Same team. Manifest reads the email, prices the load, posts it for carriers and only texts you when it needs you. You approve with one tap.";
+
+export const Route = createFileRoute("/walkthrough")({
+  head: () => ({
+    meta: [
+      { title: "Manifest | Win and manage 10× the loads. Same team." },
+      { name: "description", content: DESCRIPTION },
+      {
+        property: "og:title",
+        content: "Manifest | Win and manage 10× the loads. Same team.",
+      },
+      { property: "og:description", content: DESCRIPTION },
+      { property: "og:type", content: "website" },
+    ],
+  }),
+  component: Story,
+});
+
+/* The broker story page, ported from Transpira-Labs/manifest-story. */
+function Story() {
+  const v = useStoryVals();
+  return (
+    <div className="ms-has-dock flex min-h-screen flex-col">
+      <SiteNav sticky="wide" />
+      <main className="flex-1">
+        <StoryMarkup v={v} />
+        <FloatingCall />
+      </main>
+      <SiteFooter />
+    </div>
+  );
+}

@@ -1,39 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { SiteNav, SiteFooter } from "@/components/site-chrome";
-import { StoryMarkup } from "@/components/story/StoryMarkup";
-import { FloatingCall } from "@/components/story/FloatingCall";
-import { useStoryVals } from "@/components/story/story-logic";
+import { HomePage } from "@/components/home/HomePage";
 
+// TODO(before launch): the design sets no page title, description or share
+// image. These reuse the page's own headline and opening line; confirm them.
+const TITLE = "Manifest | Quote, cover and get paid with a one-letter text";
 const DESCRIPTION =
-  "Win and manage 10× the loads. Same team. Manifest reads the email, prices the load, posts it for carriers and only texts you when it needs you. You approve with one tap.";
+  "Manifest is an agent for equipment brokers. It reads your email, prices loads, books trucks and chases paperwork, then texts you before anything goes out.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Manifest | Win and manage 10× the loads. Same team." },
+      { title: TITLE },
       { name: "description", content: DESCRIPTION },
-      {
-        property: "og:title",
-        content: "Manifest | Win and manage 10× the loads. Same team.",
-      },
+      { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
     ],
   }),
-  component: Story,
+  component: HomePage,
 });
-
-/* The broker story page, ported from Transpira-Labs/manifest-story. */
-function Story() {
-  const v = useStoryVals();
-  return (
-    <div className="ms-has-dock flex min-h-screen flex-col">
-      <SiteNav sticky="wide" />
-      <main className="flex-1">
-        <StoryMarkup v={v} />
-        <FloatingCall />
-      </main>
-      <SiteFooter />
-    </div>
-  );
-}

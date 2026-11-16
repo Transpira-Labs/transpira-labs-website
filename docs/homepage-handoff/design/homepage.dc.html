@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Manifest homepage, OpenTag-style flow</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&amp;family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Overpass+Mono:wght@400;600&amp;display=swap">
+<style>
+body{margin:0;background:#F7F5EF}
+a{color:#B86E00}a:hover{color:#8A5200}
+@keyframes mf-scroll{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 8px))}}
+.mf-track{animation:mf-scroll 40s linear infinite}
+.mf-marquee:hover .mf-track{animation-play-state:paused}
+@keyframes mf-drive{from{left:-560px}to{left:100%}}
+.mf-drive{left:-560px;animation:mf-drive 26s linear infinite}
+@media (prefers-reduced-motion: reduce){.mf-track{animation:none}.mf-drive{animation:none;left:calc(50% - 260px)}}
+</style>
+</helmet>
+<div style="background: #F7F5EF; color: #1A1C1E; font-family: 'Hanken Grotesk', system-ui, sans-serif; min-height: 100vh; overflow-x: hidden">
+
+<header style="position: sticky; top: 0; background: rgba(247,245,239,0.94); border-bottom: 1px solid #E6E3DA; z-index: 2">
+<nav aria-label="Main" style="max-width: 1200px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap">
+<a href="#top" style="display: flex; align-items: center; gap: 10px; color: #1A1C1E; text-decoration: none">
+<svg role="img" aria-label="Manifest logo" width="34" height="34" viewBox="0 0 100 100" style="flex-shrink: 0"><defs><linearGradient id="lgo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5FC3D0"></stop><stop offset="1" stop-color="#1F7385"></stop></linearGradient></defs><polygon points="50,9 85.5,29.5 85.5,70.5 50,91 14.5,70.5 14.5,29.5" fill="none" stroke="#2A8FA0" stroke-width="5.5" stroke-linejoin="round"></polygon><path d="M50 20 Q53.5 40 79 35 Q57 50 50 82 Q43 50 21 35 Q46.5 40 50 20 Z" fill="url(#lgo)"></path><path d="M50 20 Q53.5 40 79 35 Q57 50 50 82 Z" fill="#1F7385" opacity="0.35"></path></svg>
+<span style="font-family: 'Young Serif', serif; font-size: 22px">Manifest</span>
+</a>
+<div style="display: flex; align-items: center; gap: 28px; flex-wrap: wrap; font-size: 15px">
+<a href="#jobs" style="color: #1A1C1E; text-decoration: none">One load</a>
+<a href="#how" style="color: #1A1C1E; text-decoration: none">How it works</a>
+<a href="#board" style="color: #1A1C1E; text-decoration: none">The board</a>
+<a href="#pricing" style="color: #1A1C1E; text-decoration: none">Pricing</a>
+<a href="#faq" style="color: #1A1C1E; text-decoration: none">FAQ</a>
+<a href="#call" style="background: #1A1C1E; color: #F7F5EF; text-decoration: none; font-weight: 600; padding: 11px 18px; border-radius: 8px">Book a call</a>
+</div>
+</nav>
+</header>
+
+<main id="top">
+<section style="max-width: 1200px; margin: 0 auto; padding: 88px 32px 0; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 26px">
+<h1 style="margin: 0; font-family: 'Young Serif', serif; font-size: 68px; line-height: 1.1; font-weight: 400; letter-spacing: -1px; max-width: 980px">Quote, cover and get paid with a one-letter
+<span style="display: inline-flex; align-items: center; justify-content: center; vertical-align: middle; width: 72px; height: 64px; margin: 0 4px; border-radius: 22px 22px 6px 22px; background: #1A1C1E; color: #F5A300; font-family: 'Hanken Grotesk', sans-serif; font-size: 36px; font-weight: 700">A</span>
+text.</h1>
+<p style="margin: 0; font-size: 20px; line-height: 1.55; color: #5F666C; max-width: 640px">Manifest is an agent for equipment brokers. It reads your email, prices loads, books trucks and chases paperwork, then texts you before anything goes out.</p>
+<div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; font-size: 14px">
+<span style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid #DCD8CC; border-radius: 999px; padding: 6px 14px; background: #FFFFFF"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2E7D4F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"></path></svg>A person approves every send</span>
+<span style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid #DCD8CC; border-radius: 999px; padding: 6px 14px; background: #FFFFFF"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1A1C1E" stroke-width="2" stroke-linecap="round"><rect x="7" y="2" width="10" height="20" rx="2"></rect><path d="M11 18h2"></path></svg>Nothing to install</span>
+<span style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid #DCD8CC; border-radius: 999px; padding: 6px 14px; background: #FFFFFF">Backed by Fusen World</span>
+</div>
+<div style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center">
+<a href="#try" style="color: #1A1C1E; text-decoration: none; font-size: 16px; font-weight: 600; padding: 14px 22px; border-radius: 8px; background: #ECE9E1">Try it on an email</a>
+<a href="#call" style="background: #F5A300; color: #1A1C1E; text-decoration: none; font-size: 16px; font-weight: 600; padding: 14px 22px; border-radius: 8px">Book a 20-minute call</a>
+</div>
+
+<div style="position: relative; z-index: 1; width: 100%; max-width: 1080px; height: 760px; margin-top: 64px; display: flex; justify-content: center; align-items: flex-start">
+<div aria-hidden="true" style="position: absolute; z-index: 1; left: 0; top: 70px; width: 440px; transform: rotate(-2.5deg); background: #FFFFFF; border: 1px solid #DCD8CC; border-radius: 12px; box-shadow: 0 16px 40px rgba(26,28,30,0.10); overflow: hidden; text-align: left; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif">
+<div style="display: flex; align-items: center; gap: 7px; padding: 10px 14px; background: #F2F1EC; border-bottom: 1px solid #E6E3DA"><span style="width: 11px; height: 11px; border-radius: 999px; background: #D9D6CE"></span><span style="width: 11px; height: 11px; border-radius: 999px; background: #D9D6CE"></span><span style="width: 11px; height: 11px; border-radius: 999px; background: #D9D6CE"></span><span style="flex: 1; text-align: center; font-size: 12px; color: #8A8E91">Inbox · 1,400 unread</span></div>
+<div style="padding: 18px 22px 24px; display: flex; flex-direction: column; gap: 10px">
+<p style="margin: 0; font-size: 18px; font-weight: 600; color: #1A1C1E">Kubota to Raleigh</p>
+<div style="display: flex; justify-content: space-between; font-size: 13px; color: #5F666C"><span><span style="color: #1A1C1E; font-weight: 600">Erin Caldwell</span> · Caldwell Equipment</span><span>Mon 8:05 AM</span></div>
+<p style="margin: 6px 0 0; font-size: 15px; line-height: 1.55; color: #1A1C1E">Hi, can you move a Kubota tractor from Macon, GA to Raleigh, NC on Thursday? What would it cost?</p>
+<p style="margin: 0; font-size: 15px; color: #1A1C1E">Erin</p>
+</div>
+</div>
+<div style="position: relative; z-index: 2; flex: 0 0 auto; width: 332px; height: 718px; box-sizing: border-box; background: #FFFFFF; border-radius: 56px; border: 11px solid #101012; box-shadow: 0 0 0 1px #3A3A3C, 0 40px 80px rgba(26,28,30,0.28); overflow: hidden; display: flex; flex-direction: column; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif; text-align: left">
+<div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 26px 0; font-size: 15px; font-weight: 600; color: #000000"><span>9:41</span>
+<span aria-hidden="true" style="display: flex; gap: 5px; align-items: center"><svg width="17" height="11" viewBox="0 0 17 11"><rect x="0" y="7" width="3" height="4" rx="1" fill="#000"></rect><rect x="4.5" y="5" width="3" height="6" rx="1" fill="#000"></rect><rect x="9" y="2.5" width="3" height="8.5" rx="1" fill="#000"></rect><rect x="13.5" y="0" width="3" height="11" rx="1" fill="#000"></rect></svg><svg width="15" height="11" viewBox="0 0 15 11"><path d="M7.5 10.5l2.2-2.4a3.2 3.2 0 0 0-4.4 0zM3.8 6.6a5.4 5.4 0 0 1 7.4 0l1.4-1.5a7.5 7.5 0 0 0-10.2 0zM1 3.6a9.6 9.6 0 0 1 13 0l1-1.1a11 11 0 0 0-15 0z" fill="#000"></path></svg><svg width="25" height="12" viewBox="0 0 25 12"><rect x="0.5" y="0.5" width="21" height="11" rx="3" fill="none" stroke="#000" opacity="0.4"></rect><rect x="2" y="2" width="16" height="8" rx="1.8" fill="#000"></rect><rect x="22.5" y="4" width="1.6" height="4" rx="0.8" fill="#000" opacity="0.4"></rect></svg></span></div>
+<div aria-hidden="true" style="position: absolute; top: 10px; left: 50%; margin-left: -54px; width: 108px; height: 30px; border-radius: 999px; background: #000000"></div>
+<div style="display: flex; align-items: center; padding: 10px 12px 8px; border-bottom: 0.5px solid #D1D1D6; background: #F7F7F7">
+<span aria-hidden="true" style="color: #007AFF; font-size: 30px; line-height: 1; width: 40px; font-weight: 300">‹</span>
+<span style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px"><span aria-hidden="true" style="width: 44px; height: 44px; border-radius: 999px; background: #1A1C1E; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="30" height="30" viewBox="0 0 100 100" style="flex-shrink: 0"><defs><linearGradient id="lgav32" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5FC3D0"></stop><stop offset="1" stop-color="#1F7385"></stop></linearGradient></defs><polygon points="50,9 85.5,29.5 85.5,70.5 50,91 14.5,70.5 14.5,29.5" fill="none" stroke="#2A8FA0" stroke-width="5.5" stroke-linejoin="round"></polygon><path d="M50 20 Q53.5 40 79 35 Q57 50 50 82 Q43 50 21 35 Q46.5 40 50 20 Z" fill="url(#lgav32)"></path><path d="M50 20 Q53.5 40 79 35 Q57 50 50 82 Z" fill="#1F7385" opacity="0.35"></path></svg></span><span style="font-size: 11px; color: #000000">Manifest ›</span></span>
+<span style="width: 40px"></span>
+</div>
+<div style="flex: 1; padding: 6px 12px; display: flex; flex-direction: column; gap: 4px; overflow: hidden">
+<p style="margin: 6px 0 2px; text-align: center; font-size: 11px; color: #8E8E93"><span style="font-weight: 600">Today</span> 7:00 AM</p>
+<div style="align-self: flex-start; max-width: 78%; background: #E9E9EB; color: #000000; border-radius: 18px; padding: 7px 12px; font-size: 15px; line-height: 1.3">Good morning. 7 active loads. 1 needs you, and $750 is still owed on the Honda Odyssey.</div>
+<p style="margin: 6px 0 2px; text-align: center; font-size: 11px; color: #8E8E93"><span style="font-weight: 600">Today</span> 8:06 AM</p>
+<div style="align-self: flex-start; max-width: 78%; background: #E9E9EB; color: #000000; border-radius: 18px; padding: 7px 12px; font-size: 15px; line-height: 1.3">Erin wants the Kubota moved Macon → Raleigh on Thursday. Similar trips went for $1,950–2,050.</div>
+<div style="align-self: flex-start; max-width: 78%; background: #E9E9EB; color: #000000; border-radius: 18px; padding: 7px 12px; font-size: 15px; line-height: 1.3">I suggest $2,100. Reply A to send.</div>
+<div style="align-self: flex-end; max-width: 78%; background: #007AFF; color: #FFFFFF; border-radius: 18px; padding: 7px 12px; font-size: 15px; line-height: 1.3">A</div>
+<div style="align-self: flex-start; max-width: 78%; background: #E9E9EB; color: #000000; border-radius: 18px; padding: 7px 12px; font-size: 15px; line-height: 1.3">Sent from your email.</div>
+<p style="margin: 6px 0 2px; text-align: center; font-size: 11px; color: #8E8E93"><span style="font-weight: 600">Today</span> 8:44 AM</p>
+<div style="align-self: flex-start; max-width: 78%; background: #E9E9EB; color: #000000; border-radius: 18px; padding: 7px 12px; font-size: 15px; line-height: 1.3">Erin said yes. Bluegrass can pick up Thursday 9 AM for $1,750. Book them?</div>
+<div style="align-self: flex-end; max-width: 78%; background: #007AFF; color: #FFFFFF; border-radius: 18px; padding: 7px 12px; font-size: 15px; line-height: 1.3">Yes, book them</div>
+<div style="align-self: flex-start; max-width: 78%; background: #E9E9EB; color: #000000; border-radius: 18px; padding: 7px 12px; font-size: 15px; line-height: 1.3">Booked Bluegrass for Thursday 9 AM. Rate con sent.</div>
+</div>
+<div style="display: flex; align-items: center; gap: 8px; padding: 8px 12px 26px">
+<span aria-hidden="true" style="width: 32px; height: 32px; border-radius: 999px; background: #E9E9EB; display: inline-flex; align-items: center; justify-content: center; color: #8E8E93; font-size: 22px; line-height: 1">+</span>
+<span style="flex: 1; border: 1px solid #D1D1D6; border-radius: 999px; padding: 7px 14px; font-size: 15px; color: #C7C7CC">iMessage</span>
+</div>
+</div>
+<div aria-hidden="true" style="position: absolute; z-index: 1; right: 0; top: 150px; width: 380px; transform: rotate(3deg); background: #FFFFFF; border: 1px solid #DCD8CC; box-shadow: 0 16px 40px rgba(26,28,30,0.10); padding: 24px 26px 20px; font-size: 13px; text-align: left; display: flex; flex-direction: column; gap: 2px">
+<div style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 12px; border-bottom: 1.5px solid #1A1C1E"><span style="font-family: 'Young Serif', serif; font-size: 18px">Rate confirmation</span><span style="font-family: 'Overpass Mono', monospace; font-size: 12px">L-2041</span></div>
+<div style="display: flex; justify-content: space-between; gap: 16px; padding: 8px 0; border-bottom: 1px solid #ECEDEA"><span style="color: #5F666C">Shipper</span><span style="font-weight: 600; text-align: right">Caldwell Equipment, Macon GA</span></div><div style="display: flex; justify-content: space-between; gap: 16px; padding: 8px 0; border-bottom: 1px solid #ECEDEA"><span style="color: #5F666C">Deliver to</span><span style="font-weight: 600; text-align: right">Raleigh, NC</span></div><div style="display: flex; justify-content: space-between; gap: 16px; padding: 8px 0; border-bottom: 1px solid #ECEDEA"><span style="color: #5F666C">Unit</span><span style="font-weight: 600; text-align: right">Kubota tractor · 14,200 lb</span></div><div style="display: flex; justify-content: space-between; gap: 16px; padding: 8px 0; border-bottom: 1px solid #ECEDEA"><span style="color: #5F666C">Pickup</span><span style="font-weight: 600; text-align: right">Thu 9:00 AM</span></div><div style="display: flex; justify-content: space-between; gap: 16px; padding: 8px 0; border-bottom: 1px solid #ECEDEA"><span style="color: #5F666C">Carrier</span><span style="font-weight: 600; text-align: right">Bluegrass</span></div><div style="display: flex; justify-content: space-between; gap: 16px; padding: 8px 0; border-bottom: 1px solid #ECEDEA"><span style="color: #5F666C">Rate</span><span style="font-weight: 600; text-align: right">$1,750</span></div>
+<div style="display: flex; justify-content: flex-end; padding-top: 14px"><span style="font-family: 'Overpass Mono', monospace; font-size: 12px; font-weight: 600; color: #B86E00; border: 1.5px solid #B86E00; border-radius: 4px; padding: 4px 8px; transform: rotate(-4deg)">SENT 9:12 AM</span></div>
+</div>
+</div>
+<div aria-label="On the road" style="position: relative; z-index: 0; width: 100vw; margin-left: calc(50% - 50vw); height: 200px; margin-top: -190px; overflow: hidden">
+<div aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 34px; border-top: 3px dashed #E0C38A"></div>
+<div aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 0; height: 34px; background: #ECE9E1"></div>
+<div class="mf-drive" style="position: absolute; bottom: 22px; width: 520px">
+<svg role="img" aria-label="Line drawing of a flatbed truck hauling an amber compact tractor" width="520" height="140" viewBox="0 0 520 140">
+<g fill="#F7F5EF" stroke="#1A1C1E" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round">
+<path d="M18 92 L300 92 L318 78 L372 78 L372 100 L18 100 Z"></path>
+<rect x="330" y="86" width="176" height="12" rx="2"></rect>
+<rect x="384" y="10" width="7" height="76" rx="2"></rect>
+<path d="M394 86 L394 34 Q394 28 400 28 L446 28 Q450 28 452 32 L462 54 L496 60 Q506 62 506 72 L506 98 L394 98 Z"></path>
+<path d="M402 38 L442 38 L452 56 L402 56 Z" fill="#DCE9EC"></path>
+<line x1="446" y1="62" x2="446" y2="94"></line>
+<circle cx="50" cy="112" r="14"></circle><circle cx="50" cy="112" r="5" fill="#1A1C1E"></circle>
+<circle cx="84" cy="112" r="14"></circle><circle cx="84" cy="112" r="5" fill="#1A1C1E"></circle>
+<circle cx="352" cy="112" r="14"></circle><circle cx="352" cy="112" r="5" fill="#1A1C1E"></circle>
+<circle cx="386" cy="112" r="14"></circle><circle cx="386" cy="112" r="5" fill="#1A1C1E"></circle>
+<circle cx="480" cy="112" r="14"></circle><circle cx="480" cy="112" r="5" fill="#1A1C1E"></circle>
+</g>
+<g stroke="#1A1C1E" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round">
+<circle cx="232" cy="66" r="25" fill="#2A2D31"></circle><circle cx="232" cy="66" r="10" fill="#F5A300"></circle>
+<circle cx="142" cy="77" r="14" fill="#2A2D31"></circle><circle cx="142" cy="77" r="5" fill="#F5A300"></circle>
+<rect x="120" y="46" width="94" height="22" rx="4" fill="#F5A300"></rect>
+<path d="M212 66 L212 22 L258 22 L264 52" fill="none"></path>
+<rect x="206" y="15" width="64" height="7" rx="2" fill="#F5A300"></rect>
+<path d="M214 40 L252 40" fill="none"></path>
+<line x1="162" y1="46" x2="162" y2="28"></line>
+</g>
+<g stroke="#B86E00" stroke-width="1.8" stroke-dasharray="3 3" fill="none"><path d="M104 92 L132 74"></path><path d="M276 92 L250 76"></path></g>
+<rect x="500" y="66" width="6" height="6" rx="1" fill="#F5A300"></rect>
+</svg>
+</div>
+</div>
+</section>
+
+
+<section aria-label="Works with" style="padding: 40px 0 24px; display: flex; flex-direction: column; gap: 28px; align-items: center">
+<p style="margin: 0; font-size: 15px; color: #5F666C">Works inside the tools your brokerage already runs on</p>
+<div class="mf-marquee" style="width: 100%; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent)">
+<ul class="mf-track" style="list-style: none; margin: 0; padding: 0; display: flex; gap: 16px; width: max-content"><li style="flex: 0 0 auto; display: flex; align-items: center; gap: 12px; background: #FFFFFF; border: 1px solid #DCDDD8; border-radius: 14px; padding: 18px 26px; font-size: 22px; font-weight: 500; white-space: nowrap"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#D64226" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg>Gmail</li><li style="flex: 0 0 auto; display: flex; align-items: center; gap: 12px; background: #FFFFFF; border: 1px solid #DCDDD8; border-radius: 14px; padding: 18px 26px; font-size: 22px; font-weight: 500; white-space: nowrap"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1F6FB2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg>Outlook</li><li style="flex: 0 0 auto; display: flex; align-items: center; gap: 12px; background: #FFFFFF; border: 1px solid #DCDDD8; border-radius: 14px; padding: 18px 26px; font-size: 22px; font-weight: 500; white-space: nowrap"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1A1C1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M3 10h18M9 10v10"></path></svg>DAT</li><li style="flex: 0 0 auto; display: flex; align-items: center; gap: 12px; background: #FFFFFF; border: 1px solid #DCDDD8; border-radius: 14px; padding: 18px 26px; font-size: 22px; font-weight: 500; white-space: nowrap"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2E7D4F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M3 10h18M9 10v10"></path></svg>Truckstop</li><li style="flex: 0 0 auto; display: flex; align-items: center; gap: 12px; background: #FFFFFF; border: 1px solid #DCDDD8; border-radius: 14px; padding: 18px 26px; font-size: 22px; font-weight: 500; white-space: nowrap"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2E9E5B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.5-4A8 8 0 1 1 8 18.5z"></path></svg>WhatsApp</li><li style="flex: 0 0 auto; display: flex; align-items: center; gap: 12px; background: #FFFFFF; border: 1px solid #DCDDD8; border-radius: 14px; padding: 18px 26px; font-size: 22px; font-weight: 500; white-space: nowrap"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1F6FB2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.5-4A8 8 0 1 1 8 18.5z"></path></svg>Telegram</li><li style="flex: 0 0 auto; display: flex; align-items: center; gap: 12px; background: #FFFFFF; border: 1px solid #DCDDD8; border-radius: 14px; padding: 18px 26px; font-size: 22px; font-weight: 500; white-space: nowrap"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1A1C1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.5-4A8 8 0 1 1 8 18.5z"></path></svg>SMS</li><li style="flex: 0 0 auto; display: flex; align-items: center; gap: 12px; background: #FFFFFF; border: 1px solid #DCDDD8; border-radius: 14px; padding: 18px 26px; font-size: 22px; font-weight: 500; white-space: nowrap"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2E9E5B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.5-4A8 8 0 1 1 8 18.5z"></path></svg>iMessage</li><li style="flex: 0 0 auto; display: flex; align-items: center; gap: 12px; background: #FFFFFF; border: 1px solid #DCDDD8; border-radius: 14px; padding: 18px 26px; font-size: 22px; font-weight: 500; white-space: nowrap"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1A1C1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>Phone calls</li><li style="flex: 0 0 auto; display: flex; align-items: center; gap: 12px; background: #FFFFFF; border: 1px solid #DCDDD8; border-radius: 14px; padding: 18px 26px; font-size: 22px; font-weight: 500; white-space: nowrap"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#5F666C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>Voicemail</li><li style="flex: 0 0 auto; display: flex; align-items: center; gap: 12px; background: #FFFFFF; border: 1px solid #DCDDD8; border-radius: 14px; padding: 18px 26px; font-size: 22px; font-weight: 500; white-space: nowrap"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#B86E00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M3 10h18M9 10v10"></path></svg>Your TMS</li><li aria-hidden="true" style="flex: 0 0 auto; display: flex; align-items: center; gap: 12px; background: #FFFFFF; border: 1px solid #DCDDD8; border-radius: 14px; padding: 18px 26px; font-size: 22px; font-weight: 500; white-space: nowrap"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#D64226" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg>Gmail</li><li aria-hidden="true" style="flex: 0 0 auto; display: flex; align-items: center; gap: 12px; background: #FFFFFF; border: 1px solid #DCDDD8; border-radius: 14px; padding: 18px 26px; font-size: 22px; font-weight: 500; white-space: nowrap"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1F6FB2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg>Outlook</li><li aria-hidden="true" style="flex: 0 0 auto; display: flex; align-items: center; gap: 12px; background: #FFFFFF; border: 1px solid #DCDDD8; border-radius: 14px; padding: 18px 26px; font-size: 22px; font-weight: 500; white-space: nowrap"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1A1C1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M3 10h18M9 10v10"></path></svg>DAT</li><li aria-hidden="true" style="flex: 0 0 auto; display: flex; align-items: center; gap: 12px; background: #FFFFFF; border: 1px solid #DCDDD8; border-radius: 14px; padding: 18px 26px; font-size: 22px; font-weight: 500; white-space: nowrap"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2E7D4F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M3 10h18M9 10v10"></path></svg>Truckstop</li><li aria-hidden="true" style="flex: 0 0 auto; display: flex; align-items: center; gap: 12px; background: #FFFFFF; border: 1px solid #DCDDD8; border-radius: 14px; padding: 18px 26px; font-size: 22px; font-weight: 500; white-space: nowrap"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2E9E5B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.5-4A8 8 0 1 1 8 18.5z"></path></svg>WhatsApp</li><li aria-hidden="true" style="flex: 0 0 auto; display: flex; align-items: center; gap: 12px; background: #FFFFFF; border: 1px solid #DCDDD8; border-radius: 14px; padding: 18px 26px; font-size: 22px; font-weight: 500; white-space: nowrap"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1F6FB2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.5-4A8 8 0 1 1 8 18.5z"></path></svg>Telegram</li><li aria-hidden="true" style="flex: 0 0 auto; display: flex; align-items: center; gap: 12px; background: #FFFFFF; border: 1px solid #DCDDD8; border-radius: 14px; padding: 18px 26px; font-size: 22px; font-weight: 500; white-space: nowrap"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1A1C1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.5-4A8 8 0 1 1 8 18.5z"></path></svg>SMS</li><li aria-hidden="true" style="flex: 0 0 auto; display: flex; align-items: center; gap: 12px; background: #FFFFFF; border: 1px solid #DCDDD8; border-radius: 14px; padding: 18px 26px; font-size: 22px; font-weight: 500; white-space: nowrap"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2E9E5B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.5-4A8 8 0 1 1 8 18.5z"></path></svg>iMessage</li><li aria-hidden="true" style="flex: 0 0 auto; display: flex; align-items: center; gap: 12px; background: #FFFFFF; border: 1px solid #DCDDD8; border-radius: 14px; padding: 18px 26px; font-size: 22px; font-weight: 500; white-space: nowrap"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1A1C1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>Phone calls</li><li aria-hidden="true" style="flex: 0 0 auto; display: flex; align-items: center; gap: 12px; background: #FFFFFF; border: 1px solid #DCDDD8; border-radius: 14px; padding: 18px 26px; font-size: 22px; font-weight: 500; white-space: nowrap"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#5F666C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>Voicemail</li><li aria-hidden="true" style="flex: 0 0 auto; display: flex; align-items: center; gap: 12px; background: #FFFFFF; border: 1px solid #DCDDD8; border-radius: 14px; padding: 18px 26px; font-size: 22px; font-weight: 500; white-space: nowrap"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#B86E00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M3 10h18M9 10v10"></path></svg>Your TMS</li></ul>
+</div>
+</section>
+
+<section id="jobs" style="max-width: 1200px; margin: 0 auto; padding: 112px 32px; display: flex; flex-direction: column; gap: 48px">
+<div style="display: flex; gap: 48px; flex-wrap: wrap; align-items: flex-end; justify-content: space-between">
+<h2 style="margin: 0; font-family: 'Young Serif', serif; font-size: 54px; line-height: 1.1; font-weight: 400; letter-spacing: -0.8px; max-width: 680px">One load, from first email to final payment</h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.55; color: #5F666C; max-width: 400px">Follow Erin&#39;s Kubota down the road. Click any stop to see what Manifest sent.</p>
+</div>
+<div style="overflow-x: auto">
+<div role="tablist" aria-label="Stops on the load" style="position: relative; min-width: 760px; display: flex; gap: 8px">
+<div aria-hidden="true" style="position: absolute; left: 0; right: 0; top: 8px; border-top: 3px dashed #E0C38A"></div>
+<button type="button" role="tab" onClick="{{pick0}}" aria-selected="{{isQuote}}" style="flex: 1; min-width: 0; background: transparent; border: 0; padding: 0; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 12px; font-family: 'Hanken Grotesk', sans-serif; color: #1A1C1E">
+<sc-if value="{{isQuote}}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 4px; background: #F5A300; border: 2px solid #1A1C1E"></span></sc-if>
+<sc-if value="{{not_isQuote}}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 4px; background: #F7F5EF; border: 2px solid #CFC7B0"></span></sc-if>
+<span style="font-family: 'Overpass Mono', monospace; font-size: 13px; color: #8A5200">Mon 8:07</span>
+<span style="font-family: 'Young Serif', serif; font-size: 24px">Quote</span>
+</button><button type="button" role="tab" onClick="{{pick1}}" aria-selected="{{isCover}}" style="flex: 1; min-width: 0; background: transparent; border: 0; padding: 0; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 12px; font-family: 'Hanken Grotesk', sans-serif; color: #1A1C1E">
+<sc-if value="{{isCover}}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 4px; background: #F5A300; border: 2px solid #1A1C1E"></span></sc-if>
+<sc-if value="{{not_isCover}}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 4px; background: #F7F5EF; border: 2px solid #CFC7B0"></span></sc-if>
+<span style="font-family: 'Overpass Mono', monospace; font-size: 13px; color: #8A5200">Mon 9:10</span>
+<span style="font-family: 'Young Serif', serif; font-size: 24px">Cover</span>
+</button><button type="button" role="tab" onClick="{{pick2}}" aria-selected="{{isPaperwork}}" style="flex: 1; min-width: 0; background: transparent; border: 0; padding: 0; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 12px; font-family: 'Hanken Grotesk', sans-serif; color: #1A1C1E">
+<sc-if value="{{isPaperwork}}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 4px; background: #F5A300; border: 2px solid #1A1C1E"></span></sc-if>
+<sc-if value="{{not_isPaperwork}}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 4px; background: #F7F5EF; border: 2px solid #CFC7B0"></span></sc-if>
+<span style="font-family: 'Overpass Mono', monospace; font-size: 13px; color: #8A5200">Mon 9:20</span>
+<span style="font-family: 'Young Serif', serif; font-size: 24px">Paperwork</span>
+</button><button type="button" role="tab" onClick="{{pick3}}" aria-selected="{{isTrack}}" style="flex: 1; min-width: 0; background: transparent; border: 0; padding: 0; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 12px; font-family: 'Hanken Grotesk', sans-serif; color: #1A1C1E">
+<sc-if value="{{isTrack}}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 4px; background: #F5A300; border: 2px solid #1A1C1E"></span></sc-if>
+<sc-if value="{{not_isTrack}}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 4px; background: #F7F5EF; border: 2px solid #CFC7B0"></span></sc-if>
+<span style="font-family: 'Overpass Mono', monospace; font-size: 13px; color: #8A5200">Thu 9:04</span>
+<span style="font-family: 'Young Serif', serif; font-size: 24px">On the road</span>
+</button><button type="button" role="tab" onClick="{{pick4}}" aria-selected="{{isPaid}}" style="flex: 1; min-width: 0; background: transparent; border: 0; padding: 0; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 12px; font-family: 'Hanken Grotesk', sans-serif; color: #1A1C1E">
+<sc-if value="{{isPaid}}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 4px; background: #F5A300; border: 2px solid #1A1C1E"></span></sc-if>
+<sc-if value="{{not_isPaid}}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 4px; background: #F7F5EF; border: 2px solid #CFC7B0"></span></sc-if>
+<span style="font-family: 'Overpass Mono', monospace; font-size: 13px; color: #8A5200">Fri</span>
+<span style="font-family: 'Young Serif', serif; font-size: 24px">Get paid</span>
+</button>
+</div>
+</div>
+<div style="background: #ECE9E1; border-radius: 28px; padding: 48px 32px">
+<sc-if value="{{isQuote}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 16px; align-items: center">
+<div style="width: 100%; max-width: 600px"><div style="background: #FFFFFF; border: 1px solid #DCD8CC; border-radius: 12px; box-shadow: 0 16px 36px rgba(26,28,30,0.08); overflow: hidden; text-align: left"><div style="padding: 16px 22px; border-bottom: 1px solid #ECEDEA; display: flex; flex-direction: column; gap: 6px; font-size: 14px"><p style="margin: 0; font-size: 18px; font-weight: 600">Re: Kubota to Raleigh</p><div style="display: flex; justify-content: space-between; gap: 12px; color: #5F666C"><span><span style="color: #1A1C1E; font-weight: 600">You, sent by Manifest</span> to Erin Caldwell</span><span>Mon 8:07 AM</span></div></div><p style="margin: 0; padding: 20px 22px 24px; font-size: 16px; line-height: 1.6">Hi Erin, it&#39;s $2,100 to move the Kubota from Macon to Raleigh, pickup Thursday. What does the unit weigh, so we send the right trailer?</p></div></div>
+<p style="margin: 0; display: flex; align-items: center; gap: 10px; font-size: 15px; color: #3F4448"><span style="background: #007AFF; color: #FFFFFF; border-radius: 14px; padding: 4px 11px; font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif; font-size: 14px">A</span>Your part: one reply</p>
+</div>
+</sc-if><sc-if value="{{isCover}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 16px; align-items: center">
+<div style="width: 100%; max-width: 600px"><div style="background: #FFFFFF; border: 1px solid #DCD8CC; border-radius: 12px; box-shadow: 0 16px 36px rgba(26,28,30,0.08); overflow: hidden; text-align: left"><div style="padding: 22px 24px"><div style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 12px; border-bottom: 1.5px solid #1A1C1E"><span style="font-family: 'Young Serif', serif; font-size: 19px">Load posted</span><span style="font-family: 'Overpass Mono', monospace; font-size: 12px">L-2041 · DAT · Truckstop</span></div><div style="display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid #ECEDEA; font-size: 14px"><span style="color: #5F666C">Lane</span><span style="font-weight: 600; color: #1A1C1E; text-align: right">Macon, GA → Raleigh, NC</span></div><div style="display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid #ECEDEA; font-size: 14px"><span style="color: #5F666C">Unit</span><span style="font-weight: 600; color: #1A1C1E; text-align: right">Kubota tractor · 14,200 lb</span></div><div style="display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid #ECEDEA; font-size: 14px"><span style="color: #5F666C">Pickup</span><span style="font-weight: 600; color: #1A1C1E; text-align: right">Thursday</span></div><div style="display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid #ECEDEA; font-size: 14px"><span style="color: #5F666C">Bluegrass</span><span style="font-weight: 600; color: #2E7D4F; text-align: right">Thu 9 AM · $1,750</span></div><div style="display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid #ECEDEA; font-size: 14px"><span style="color: #5F666C">Delta Haul</span><span style="font-weight: 600; color: #1A1C1E; text-align: right">Friday pickup</span></div><div style="display: flex; justify-content: flex-end; padding-top: 14px"><span style="font-family: 'Overpass Mono', monospace; font-size: 12px; font-weight: 600; color: #2E7D4F; border: 1.5px solid #2E7D4F; border-radius: 4px; padding: 4px 8px; transform: rotate(-4deg)">BOOKED 9:10 AM</span></div></div></div></div>
+<p style="margin: 0; display: flex; align-items: center; gap: 10px; font-size: 15px; color: #3F4448"><span style="background: #007AFF; color: #FFFFFF; border-radius: 14px; padding: 4px 11px; font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif; font-size: 14px">Yes</span>Your part: picked the truck</p>
+</div>
+</sc-if><sc-if value="{{isPaperwork}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 16px; align-items: center">
+<div style="width: 100%; max-width: 600px"><div style="background: #FFFFFF; border: 1px solid #DCD8CC; border-radius: 12px; box-shadow: 0 16px 36px rgba(26,28,30,0.08); overflow: hidden; text-align: left"><div style="padding: 22px 24px"><div style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 12px; border-bottom: 1.5px solid #1A1C1E"><span style="font-family: 'Young Serif', serif; font-size: 19px">Carrier packet</span><span style="font-family: 'Overpass Mono', monospace; font-size: 12px">L-2041 · Bluegrass</span></div><div style="display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid #ECEDEA; font-size: 14px"><span style="color: #5F666C">W-9</span><span style="font-weight: 600; color: #2E7D4F; text-align: right">On file</span></div><div style="display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid #ECEDEA; font-size: 14px"><span style="color: #5F666C">Certificate of insurance</span><span style="font-weight: 600; color: #2E7D4F; text-align: right">Wrong holder, corrected</span></div><div style="display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid #ECEDEA; font-size: 14px"><span style="color: #5F666C">Rate confirmation</span><span style="font-weight: 600; color: #2E7D4F; text-align: right">Signed</span></div><div style="display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid #ECEDEA; font-size: 14px"><span style="color: #5F666C">Pickup instructions</span><span style="font-weight: 600; color: #1A1C1E; text-align: right">Sent to driver</span></div><div style="display: flex; justify-content: flex-end; padding-top: 14px"><span style="font-family: 'Overpass Mono', monospace; font-size: 12px; font-weight: 600; color: #2E7D4F; border: 1.5px solid #2E7D4F; border-radius: 4px; padding: 4px 8px; transform: rotate(-4deg)">DOCS 4/4</span></div></div></div></div>
+<p style="margin: 0; display: flex; align-items: center; gap: 10px; font-size: 15px; color: #3F4448"><span style="background: #007AFF; color: #FFFFFF; border-radius: 14px; padding: 4px 11px; font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif; font-size: 14px">Done?</span>Your part: asked one question</p>
+</div>
+</sc-if><sc-if value="{{isTrack}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 16px; align-items: center">
+<div style="width: 100%; max-width: 600px"><div style="background: #FFFFFF; border: 1px solid #DCD8CC; border-radius: 12px; box-shadow: 0 16px 36px rgba(26,28,30,0.08); overflow: hidden; text-align: left"><div style="padding: 16px 22px; border-bottom: 1px solid #ECEDEA; display: flex; flex-direction: column; gap: 6px; font-size: 14px"><p style="margin: 0; font-size: 18px; font-weight: 600">Your Kubota is on the way</p><div style="display: flex; justify-content: space-between; gap: 12px; color: #5F666C"><span><span style="color: #1A1C1E; font-weight: 600">You, sent by Manifest</span> to Erin Caldwell</span><span>Thu 9:20 AM</span></div></div><p style="margin: 0; padding: 20px 22px 24px; font-size: 16px; line-height: 1.6">Hi Erin, your Kubota was loaded in Macon at 9:04 this morning. ETA Raleigh around 4 PM today. I&#39;ll confirm when it&#39;s delivered.</p></div></div>
+<p style="margin: 0; display: flex; align-items: center; gap: 10px; font-size: 15px; color: #3F4448"><span style="font-family: 'Overpass Mono', monospace; font-size: 13px; color: #8A5200">—</span>Your part: nothing. It just happened.</p>
+</div>
+</sc-if><sc-if value="{{isPaid}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 16px; align-items: center">
+<div style="width: 100%; max-width: 600px"><div style="background: #FFFFFF; border: 1px solid #DCD8CC; border-radius: 12px; box-shadow: 0 16px 36px rgba(26,28,30,0.08); overflow: hidden; text-align: left"><div style="padding: 22px 24px"><div style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 12px; border-bottom: 1.5px solid #1A1C1E"><span style="font-family: 'Young Serif', serif; font-size: 19px">Invoice</span><span style="font-family: 'Overpass Mono', monospace; font-size: 12px">L-2041 · Caldwell Equipment</span></div><div style="display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid #ECEDEA; font-size: 14px"><span style="color: #5F666C">Kubota tractor</span><span style="font-weight: 600; color: #1A1C1E; text-align: right">Macon → Raleigh</span></div><div style="display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid #ECEDEA; font-size: 14px"><span style="color: #5F666C">Billed</span><span style="font-weight: 600; color: #1A1C1E; text-align: right">$2,100</span></div><div style="display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid #ECEDEA; font-size: 14px"><span style="color: #5F666C">Carrier cost</span><span style="font-weight: 600; color: #1A1C1E; text-align: right">$1,750</span></div><div style="display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid #ECEDEA; font-size: 14px"><span style="color: #5F666C">Margin</span><span style="font-weight: 600; color: #2E7D4F; text-align: right">$350</span></div><div style="display: flex; justify-content: flex-end; padding-top: 14px"><span style="font-family: 'Overpass Mono', monospace; font-size: 12px; font-weight: 600; color: #2E7D4F; border: 1.5px solid #2E7D4F; border-radius: 4px; padding: 4px 8px; transform: rotate(-4deg)">PAID</span></div></div></div></div>
+<p style="margin: 0; display: flex; align-items: center; gap: 10px; font-size: 15px; color: #3F4448"><span style="background: #007AFF; color: #FFFFFF; border-radius: 14px; padding: 4px 11px; font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif; font-size: 14px">A</span>Your part: one reply to send it</p>
+</div>
+</sc-if>
+</div>
+</section>
+
+<section id="how" style="background: #FFFFFF; border-top: 1px solid #E6E3DA; border-bottom: 1px solid #E6E3DA">
+<div style="max-width: 1200px; margin: 0 auto; padding: 112px 32px; display: flex; flex-direction: column; gap: 56px">
+<h2 style="margin: 0; font-family: 'Young Serif', serif; font-size: 54px; line-height: 1.1; font-weight: 400; letter-spacing: -0.8px">How Manifest works</h2>
+<div style="display: flex; gap: 64px; flex-wrap: wrap; align-items: flex-start">
+<ol style="flex: 1 1 440px; min-width: 0; margin: 0; padding: 0; list-style: none; position: relative">
+<div aria-hidden="true" style="position: absolute; left: 21px; top: 24px; bottom: 24px; border-left: 3px dashed #E0C38A"></div>
+<sc-for list="{{steps}}" as="st" hint-placeholder-count="5">
+<li style="position: relative; padding: 4px 0 28px">
+<sc-if value="{{st.active}}" hint-placeholder-val="{{ false }}">
+<button type="button" onClick="{{st.pick}}" aria-current="step" style="display: flex; gap: 20px; align-items: flex-start; background: transparent; border: 0; padding: 0; text-align: left; cursor: pointer; font-family: 'Hanken Grotesk', sans-serif; color: #1A1C1E">
+<span style="flex-shrink: 0; width: 46px; height: 46px; border-radius: 12px; background: #F5A300; display: inline-flex; align-items: center; justify-content: center; font-family: 'Overpass Mono', monospace; font-size: 15px; font-weight: 600">{{st.num}}</span>
+<span style="display: flex; flex-direction: column; gap: 6px; padding-top: 6px"><span style="font-family: 'Young Serif', serif; font-size: 26px">{{st.title}}</span><span style="font-size: 17px; line-height: 1.55; color: #3F4448">{{st.body}}</span></span>
+</button>
+</sc-if>
+<sc-if value="{{st.inactive}}" hint-placeholder-val="{{ true }}">
+<button type="button" onClick="{{st.pick}}" style="display: flex; gap: 20px; align-items: center; background: transparent; border: 0; padding: 0; text-align: left; cursor: pointer; font-family: 'Hanken Grotesk', sans-serif; color: #8A8E91; min-height: 46px">
+<span style="flex-shrink: 0; width: 46px; height: 46px; border-radius: 12px; background: #F3EEE1; border: 1px solid #E0C38A; display: inline-flex; align-items: center; justify-content: center; font-family: 'Overpass Mono', monospace; font-size: 15px; font-weight: 600; color: #8A5200">{{st.num}}</span>
+<span style="font-family: 'Young Serif', serif; font-size: 24px">{{st.title}}</span>
+</button>
+</sc-if>
+</li>
+</sc-for>
+</ol>
+<div style="flex: 1 1 420px; min-width: 0; background: #F7F5EF; border: 1px solid #E6E3DA; border-radius: 20px; padding: 32px; display: flex; flex-direction: column; gap: 18px">
+<p style="margin: 0; font-family: 'Overpass Mono', monospace; font-size: 12px; font-weight: 600; color: #5F666C">{{panel.label}}</p>
+<sc-for list="{{panel.lines}}" as="ln" hint-placeholder-count="3">
+<div style="display: flex; gap: 16px; align-items: baseline; padding: 14px 0; border-bottom: 1px solid #E6E3DA"><span style="font-family: 'Overpass Mono', monospace; font-size: 13px; color: #8A5200; width: 64px; flex-shrink: 0">{{ln.t}}</span><span style="font-size: 17px; line-height: 1.45">{{ln.x}}</span></div>
+</sc-for>
+</div>
+</div>
+</div>
+</section>
+
+<section id="board" style="max-width: 1200px; margin: 0 auto; padding: 112px 32px; display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; gap: 48px; flex-wrap: wrap; align-items: flex-end; justify-content: space-between">
+<h2 style="margin: 0; font-family: 'Young Serif', serif; font-size: 54px; line-height: 1.1; font-weight: 400; letter-spacing: -0.8px; max-width: 640px">Behind the texts, one board</h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.55; color: #5F666C; max-width: 440px">You run the day from your phone. When you want the detail, every load is on one board, kept current by the agent.</p>
+</div>
+<div style="background: #FFFFFF; border: 1px solid #DCD8CC; border-radius: 14px; box-shadow: 0 30px 60px rgba(26,28,30,0.12); overflow: hidden; text-align: left">
+<div style="display: flex; align-items: center; gap: 14px; padding: 12px 16px; background: #1A1C1E; color: #C9CBD6; font-family: 'Overpass Mono', monospace; font-size: 12px">
+<span aria-hidden="true" style="display: flex; gap: 6px"><span style="width: 10px; height: 10px; border-radius: 999px; background: #4A4F55"></span><span style="width: 10px; height: 10px; border-radius: 999px; background: #4A4F55"></span><span style="width: 10px; height: 10px; border-radius: 999px; background: #4A4F55"></span></span>
+<span style="flex: 1; text-align: center">app.manifest.link/ops</span><span style="color: #F5A300">● Live</span>
+</div>
+<div style="overflow-x: auto">
+<div style="min-width: 900px; display: flex">
+<div style="flex: 1; padding: 18px; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; background: #F7F5EF">
+<div style="display: flex; flex-direction: column; gap: 8px"><p style="margin: 0; font-family: 'Overpass Mono', monospace; font-size: 11px; font-weight: 600; color: #5F666C">QUOTING</p><div style="background: #FFFFFF; border: 1px solid #E6E3DA; border-radius: 8px; padding: 10px; display: flex; flex-direction: column; gap: 3px; box-shadow: inset 0 3px 0 #F5A300"><span style="font-family: 'Overpass Mono', monospace; font-size: 11px; color: #8A5200">L-2047 · NEEDS YOU</span><span style="font-size: 14px; font-weight: 600">John Deere 5075E</span><span style="font-size: 13px; color: #5F666C">Athens → Charlotte</span></div></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><p style="margin: 0; font-family: 'Overpass Mono', monospace; font-size: 11px; font-weight: 600; color: #5F666C">FINDING A TRUCK</p><div style="background: #FFFFFF; border: 1px solid #E6E3DA; border-radius: 8px; padding: 10px; display: flex; flex-direction: column; gap: 3px"><span style="font-family: 'Overpass Mono', monospace; font-size: 11px; color: #5F666C">L-2041 · 2 BIDS</span><span style="font-size: 14px; font-weight: 600">Kubota tractor</span><span style="font-size: 13px; color: #5F666C">Macon → Raleigh</span></div><div style="background: #FFFFFF; border: 1px solid #E6E3DA; border-radius: 8px; padding: 10px; display: flex; flex-direction: column; gap: 3px"><span style="font-family: 'Overpass Mono', monospace; font-size: 11px; color: #5F666C">L-2038</span><span style="font-size: 14px; font-weight: 600">Ford Expedition</span><span style="font-size: 13px; color: #5F666C">Houston → Little Rock</span></div></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><p style="margin: 0; font-family: 'Overpass Mono', monospace; font-size: 11px; font-weight: 600; color: #5F666C">BOOKED</p><div style="background: #FFFFFF; border: 1px solid #E6E3DA; border-radius: 8px; padding: 10px; display: flex; flex-direction: column; gap: 3px"><span style="font-family: 'Overpass Mono', monospace; font-size: 11px; color: #5F666C">L-2044 · DOCS 4/5</span><span style="font-size: 14px; font-weight: 600">Bobcat S650</span><span style="font-size: 13px; color: #5F666C">Tampa → Savannah</span></div></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><p style="margin: 0; font-family: 'Overpass Mono', monospace; font-size: 11px; font-weight: 600; color: #5F666C">ON THE ROAD</p><div style="background: #FFFFFF; border: 1px solid #E6E3DA; border-radius: 8px; padding: 10px; display: flex; flex-direction: column; gap: 3px"><span style="font-family: 'Overpass Mono', monospace; font-size: 11px; color: #5F666C">L-2049 · ETA 4 PM</span><span style="font-size: 14px; font-weight: 600">Kubota M7-172</span><span style="font-size: 13px; color: #5F666C">Macon → Charlotte</span></div><div style="background: #FFFFFF; border: 1px solid #E6E3DA; border-radius: 8px; padding: 10px; display: flex; flex-direction: column; gap: 3px"><span style="font-family: 'Overpass Mono', monospace; font-size: 11px; color: #B33A22">L-2045 · DETENTION</span><span style="font-size: 14px; font-weight: 600">CAT 305 excavator</span><span style="font-size: 13px; color: #5F666C">Valdosta → Mobile</span></div></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><p style="margin: 0; font-family: 'Overpass Mono', monospace; font-size: 11px; font-weight: 600; color: #5F666C">PAID</p><div style="background: #FFFFFF; border: 1px solid #E6E3DA; border-radius: 8px; padding: 10px; display: flex; flex-direction: column; gap: 3px"><span style="font-family: 'Overpass Mono', monospace; font-size: 11px; color: #2E7D4F">L-2031 · PAID</span><span style="font-size: 14px; font-weight: 600">Bobcat T770</span><span style="font-size: 13px; color: #5F666C">Margin $320</span></div></div>
+</div>
+<div style="width: 280px; border-left: 1px solid #E6E3DA; padding: 18px; display: flex; flex-direction: column; gap: 12px">
+<p style="margin: 0; font-family: 'Overpass Mono', monospace; font-size: 11px; font-weight: 600; color: #5F666C">AGENT ACTIVITY</p>
+<div style="display: flex; flex-direction: column; gap: 3px; font-size: 13px; line-height: 1.4"><span style="font-family: 'Overpass Mono', monospace; font-size: 11px; color: #5F666C">8:41 AM</span>Moved L-2041 to Finding a truck. Erin accepted $2,100.</div>
+<div style="display: flex; flex-direction: column; gap: 3px; font-size: 13px; line-height: 1.4"><span style="font-family: 'Overpass Mono', monospace; font-size: 11px; color: #5F666C">8:07 AM</span>You replied A. Quote sent to Erin.</div>
+<div style="display: flex; flex-direction: column; gap: 3px; font-size: 13px; line-height: 1.4"><span style="font-family: 'Overpass Mono', monospace; font-size: 11px; color: #5F666C">7:52 AM</span>Asked Delta Haul for a corrected COI on L-2044.</div>
+<div style="display: flex; flex-direction: column; gap: 3px; font-size: 13px; line-height: 1.4"><span style="font-family: 'Overpass Mono', monospace; font-size: 11px; color: #5F666C">7:30 AM</span>Flagged L-2045: driver waiting 2 h. Detention drafted.</div>
+</div>
+</div>
+</div>
+</div>
+
+</section>
+<section style="max-width: 1200px; margin: 0 auto; padding: 112px 32px; display: flex; gap: 72px; flex-wrap: wrap; align-items: center">
+<div style="flex: 1 1 400px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+<h2 style="margin: 0; font-family: 'Young Serif', serif; font-size: 54px; line-height: 1.1; font-weight: 400; letter-spacing: -0.8px">Connect what you already use. Switch nothing.</h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.55; color: #5F666C">Every connector is included. Outlook connects with one sign-in, and the agent works from the inbox, load boards and phone you already have.</p>
+</div>
+<div role="group" aria-label="Connections" style="flex: 1 1 420px; min-width: 0; background: #FFFFFF; border: 1px solid #E6E3DA; border-radius: 20px; padding: 10px 22px; box-shadow: 0 20px 40px rgba(26,28,30,0.06)">
+<sc-for list="{{conns}}" as="c" hint-placeholder-count="7">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid #F0EDE5">
+<span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 17px; font-weight: 600">{{c.name}}</span><span style="font-size: 14px; color: #5F666C">{{c.what}}</span></span>
+<sc-if value="{{c.on}}" hint-placeholder-val="{{ true }}">
+<button type="button" role="switch" aria-checked="true" aria-label="{{c.name}}" onClick="{{c.toggle}}" style="width: 48px; height: 28px; border-radius: 999px; border: 0; background: #2E7D4F; position: relative; cursor: pointer; flex-shrink: 0"><span style="position: absolute; top: 3px; right: 3px; width: 22px; height: 22px; border-radius: 999px; background: #FFFFFF"></span></button>
+</sc-if>
+<sc-if value="{{c.off}}" hint-placeholder-val="{{ false }}">
+<button type="button" role="switch" aria-checked="false" aria-label="{{c.name}}" onClick="{{c.toggle}}" style="width: 48px; height: 28px; border-radius: 999px; border: 0; background: #C9C6BC; position: relative; cursor: pointer; flex-shrink: 0"><span style="position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 999px; background: #FFFFFF"></span></button>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section id="pricing" style="background: #ECE9E1">
+<div style="max-width: 1200px; margin: 0 auto; padding: 96px 32px; display: flex; gap: 56px; flex-wrap: wrap; align-items: flex-end; justify-content: space-between">
+<div style="flex: 1 1 520px; display: flex; flex-direction: column; gap: 14px">
+<h2 style="margin: 0; font-family: 'Young Serif', serif; font-size: 54px; line-height: 1.1; font-weight: 400; letter-spacing: -0.8px">From $500 a month</h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.55; color: #5F666C; max-width: 560px">Priced for a three-person shop. No implementation fee, every connector included, quoting the same day.</p>
+</div>
+<a href="#pricing" style="color: #1A1C1E; text-decoration: none; font-size: 16px; font-weight: 600; padding: 14px 22px; border-radius: 8px; border: 1.5px solid #1A1C1E">See the tiers</a>
+</div>
+</section>
+
+<section id="faq" style="max-width: 820px; margin: 0 auto; padding: 112px 32px; display: flex; flex-direction: column; gap: 40px">
+<h2 style="margin: 0; text-align: center; font-family: 'Young Serif', serif; font-size: 54px; line-height: 1.1; font-weight: 400; letter-spacing: -0.8px">Questions brokers ask</h2>
+<div style="display: flex; flex-direction: column; border-top: 1px solid #DCD8CC">
+<sc-for list="{{faqs}}" as="f" hint-placeholder-count="5">
+<div style="border-bottom: 1px solid #DCD8CC">
+<button type="button" onClick="{{f.toggle}}" aria-expanded="{{f.open}}" style="width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 16px; background: transparent; border: 0; padding: 22px 0; text-align: left; cursor: pointer; font-family: 'Hanken Grotesk', sans-serif; font-size: 19px; font-weight: 600; color: #1A1C1E; min-height: 44px">{{f.q}}<span aria-hidden="true" style="font-size: 24px; font-weight: 400; color: #5F666C">{{f.sign}}</span></button>
+<sc-if value="{{f.open}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 0; padding: 0 0 24px; font-size: 17px; line-height: 1.6; color: #3F4448; max-width: 680px">{{f.a}}</p>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section id="call" style="max-width: 1200px; margin: 0 auto; padding: 24px 32px 120px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 24px">
+<h2 style="margin: 0; font-family: 'Young Serif', serif; font-size: 60px; line-height: 1.08; font-weight: 400; letter-spacing: -1px; max-width: 820px">Turn quote requests into booked loads</h2>
+<p style="margin: 0; font-size: 19px; color: #5F666C">See it on your own loads in 20 minutes.</p>
+<form style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; width: 100%; max-width: 520px">
+<label for="cta-em" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Your work email</label>
+<input id="cta-em" type="email" placeholder="you@brokerage.com" style="flex: 1 1 240px; font-family: 'Hanken Grotesk', sans-serif; font-size: 17px; padding: 14px 16px; border-radius: 8px; border: 1.5px solid #C4C6C0; background: #FFFFFF; color: #1A1C1E"/>
+<button type="submit" style="background: #F5A300; color: #1A1C1E; border: 0; font-family: 'Hanken Grotesk', sans-serif; font-size: 16px; font-weight: 700; padding: 14px 22px; border-radius: 8px; cursor: pointer">Book a call</button>
+</form>
+</section>
+</main>
+
+<footer style="background: #1A1C1E; color: #9AA0A4; overflow: hidden">
+<div style="max-width: 1200px; margin: 0 auto; padding: 72px 32px 0; display: flex; flex-direction: column; gap: 48px">
+<div style="display: flex; gap: 48px; flex-wrap: wrap; justify-content: space-between">
+<div style="display: flex; flex-direction: column; gap: 8px; max-width: 260px"><span style="display: flex; align-items: center; gap: 10px; font-family: 'Young Serif', serif; font-size: 24px; color: #F7F5EF"><svg role="img" aria-label="Manifest logo" width="34" height="34" viewBox="0 0 100 100" style="flex-shrink: 0"><defs><linearGradient id="lgf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5FC3D0"></stop><stop offset="1" stop-color="#1F7385"></stop></linearGradient></defs><polygon points="50,9 85.5,29.5 85.5,70.5 50,91 14.5,70.5 14.5,29.5" fill="none" stroke="#2A8FA0" stroke-width="5.5" stroke-linejoin="round"></polygon><path d="M50 20 Q53.5 40 79 35 Q57 50 50 82 Q43 50 21 35 Q46.5 40 50 20 Z" fill="url(#lgf)"></path><path d="M50 20 Q53.5 40 79 35 Q57 50 50 82 Z" fill="#1F7385" opacity="0.35"></path></svg>Manifest</span><span style="font-size: 15px; line-height: 1.5">The back office for equipment brokers, by text. By Transpira Labs.</span></div>
+<div style="display: flex; gap: 64px; flex-wrap: wrap; font-size: 15px">
+<div style="display: flex; flex-direction: column; gap: 10px"><span style="color: #F7F5EF; font-weight: 600">Product</span><a href="#jobs" style="color: #9AA0A4; text-decoration: none">What it does</a><a href="#how" style="color: #9AA0A4; text-decoration: none">How it works</a><a href="#pricing" style="color: #9AA0A4; text-decoration: none">Pricing</a></div>
+<div style="display: flex; flex-direction: column; gap: 10px"><span style="color: #F7F5EF; font-weight: 600">Company</span><a href="#about" style="color: #9AA0A4; text-decoration: none">About</a><a href="#contact" style="color: #9AA0A4; text-decoration: none">Contact</a></div>
+<div style="display: flex; flex-direction: column; gap: 10px"><span style="color: #F7F5EF; font-weight: 600">Legal</span><a href="#privacy" style="color: #9AA0A4; text-decoration: none">Privacy</a><a href="#terms" style="color: #9AA0A4; text-decoration: none">Terms</a></div>
+</div>
+</div>
+<p style="margin: 0; font-size: 13px">© 2026 Classhopper Technologies Inc. · Backed by Fusen World</p>
+</div>
+<div aria-hidden="true" style="position: relative; margin-top: 32px; height: 230px">
+<div style="position: absolute; left: 0; right: 0; top: 112px; border-top: 4px dashed #F5A300; opacity: 0.55"></div>
+<p style="position: absolute; left: 0; right: 0; bottom: -64px; margin: 0; text-align: center; font-family: 'Young Serif', serif; font-size: 280px; line-height: 1; color: #2A2D31; letter-spacing: -6px; white-space: nowrap">Manifest</p>
+</div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":6400}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { tab: 0, paused: false, picks: {}, heroPick: null, step: 2, faq: 0, conns: { Gmail: true, Outlook: true, DAT: true, Truckstop: true, WhatsApp: true, Telegram: false, 'Your TMS': true } };
+}
+componentDidMount() {
+var self = this;
+this.timer = setInterval(function () { if (!self.state.paused) self.setState({ tab: (self.state.tab + 1) % 5 }); }, 5000);
+}
+componentWillUnmount() { clearInterval(this.timer); }
+renderVals() {
+var self = this;
+var A = function (t) { return { text: t, isAgent: true, isYou: false }; };
+var Y = function (t) { return { text: t, isAgent: false, isYou: true }; };
+var data = [
+{ id: 'quote', label: 'Quote', time: 'Today 8:06 AM', cap: 'Erin emails for a price. The agent prices it; you decide what goes out.',
+pre: [A('Erin wants a price: Kubota tractor, Macon → Raleigh, Thursday. Similar trips went for $1,950 to $2,050.'), A('I suggest $2,100. How do you want to answer?')],
+card: { id: 'L-2041 · DRAFT', title: 'Kubota tractor · Macon → Raleigh', sub: 'Draft $2,100 · waiting on you' },
+options: [
+{ key: 'A', label: 'Send $2,100', you: 'A', after: [A('Sent to Erin from your email. I asked for the unit weight too.')], card: { id: 'L-2041 · QUOTED', title: 'Kubota tractor · Macon → Raleigh', sub: 'Sell $2,100 · pickup Thursday' } },
+{ key: 'B', label: 'Make it $2,250', you: 'Make it 2250', after: [A('Done. Sent $2,250 to Erin from your email, with a question about the weight.')], card: { id: 'L-2041 · QUOTED', title: 'Kubota tractor · Macon → Raleigh', sub: 'Sell $2,250 · pickup Thursday' } },
+{ key: 'C', label: 'Ask the weight first', you: 'C', after: [A('Asked Erin for the weight and model year. I’ll price it when she answers and text you.')], card: { id: 'L-2041 · WAITING ON CUSTOMER', title: 'Kubota tractor · Macon → Raleigh', sub: 'Weight requested' } } ] },
+{ id: 'cover', label: 'Cover', time: 'Today 8:41 AM', cap: 'Erin says yes. Carriers text the agent, not you. You choose the truck.',
+pre: [A('Erin said yes. I posted the load with my own number, so carriers text me, not you.'), A('2 bids in. Bluegrass can pick up Thursday 9 AM. Delta Haul can pick up Friday.')],
+card: { id: 'L-2041 · FINDING A TRUCK', title: 'Kubota tractor · Macon → Raleigh', sub: '2 bids · posted to DAT and Truckstop' },
+options: [
+{ key: 'A', label: 'Book Bluegrass', you: 'A', after: [A('Booked Bluegrass for Thursday 9 AM. Rate con sent.')], card: { id: 'L-2041 · BOOKED', title: 'Kubota tractor · Macon → Raleigh', sub: 'Bluegrass · pickup Thu 9 AM' } },
+{ key: 'B', label: 'Book Delta Haul', you: 'B', after: [A('Booked Delta Haul for Friday. Want me to tell Erin pickup moves a day?'), Y('Yes'), A('Done. Erin’s fine with Friday.')], card: { id: 'L-2041 · BOOKED', title: 'Kubota tractor · Macon → Raleigh', sub: 'Delta Haul · pickup Friday' } },
+{ key: 'C', label: 'Wait for more bids', you: 'C', after: [A('I’ll keep it posted until noon and text you if a better bid comes in.')], card: { id: 'L-2041 · FINDING A TRUCK', title: 'Kubota tractor · Macon → Raleigh', sub: 'Posted until noon' } } ] },
+{ id: 'paperwork', label: 'Paperwork', time: 'Today 9:20 AM', cap: 'Ask about any load. The agent has already spotted the problem.',
+pre: [Y('Is the Bobcat paperwork done?'), A('4 of 5. Delta Haul’s COI lists the wrong certificate holder.')],
+card: { id: 'L-2044 · DOCS 4/5', title: 'Bobcat S650 · Tampa → Savannah', sub: 'Delta Haul · COI wrong holder' },
+options: [
+{ key: 'A', label: 'Ask them to fix it', you: 'A', after: [A('Asked Delta Haul for a corrected COI. I’ll text you when it’s in.')], card: { id: 'L-2044 · DOCS 4/5', title: 'Bobcat S650 · Tampa → Savannah', sub: 'Corrected COI requested' } },
+{ key: 'B', label: 'Hold the load', you: 'B', after: [A('Held. I won’t confirm pickup until the COI is fixed, and I’ve told Delta Haul why.')], card: { id: 'L-2044 · ON HOLD', title: 'Bobcat S650 · Tampa → Savannah', sub: 'Waiting on corrected COI' } } ] },
+{ id: 'track', label: 'Track', time: 'Today 7:30 AM', cap: 'A driver is stuck at the yard. The charge is drafted before you ask.',
+pre: [A('The driver on the CAT 305 has waited 2 hours in Valdosta. I drafted a detention charge.')],
+card: { id: 'L-2045 · DETENTION', title: 'CAT 305 excavator · Valdosta → Mobile', sub: 'Driver waiting 2 h' },
+options: [
+{ key: 'A', label: 'Send the charge', you: 'A', after: [A('Sent to the customer and logged on the card.')], card: { id: 'L-2045 · DETENTION BILLED', title: 'CAT 305 excavator · Valdosta → Mobile', sub: 'Detention sent to customer' } },
+{ key: 'B', label: 'Text the shipper first', you: 'B', after: [A('Texted the shipper’s dock asking when they’ll load. I’ll forward their answer.')], card: { id: 'L-2045 · DETENTION', title: 'CAT 305 excavator · Valdosta → Mobile', sub: 'Waiting on shipper' } },
+{ key: 'C', label: 'Wait another hour', you: 'C', after: [A('OK. I’ll check with the driver at 8:30 and text you then.')], card: { id: 'L-2045 · DETENTION', title: 'CAT 305 excavator · Valdosta → Mobile', sub: 'Check-in at 8:30' } } ] },
+{ id: 'paid', label: 'Get paid', time: 'Today 7:00 AM', cap: 'Money owed gets chased from your address, when you say so.',
+pre: [A('$750 is still owed on the Honda Odyssey. The invoice went out last week.')],
+card: { id: 'L-2036 · UNPAID', title: 'Honda Odyssey · Providence → Newark', sub: 'Invoice $750' },
+options: [
+{ key: 'A', label: 'Send a reminder', you: 'A', after: [A('Reminder sent from your address. I’ll check again Friday.')], card: { id: 'L-2036 · REMINDED', title: 'Honda Odyssey · Providence → Newark', sub: 'Invoice $750 · reminder sent' } },
+{ key: 'B', label: 'Wait until Friday', you: 'B', after: [A('OK. I’ll remind you Friday morning if it’s still open.')], card: { id: 'L-2036 · UNPAID', title: 'Honda Odyssey · Providence → Newark', sub: 'Follow-up Friday' } } ] }
+];
+
+var d = data[this.state.tab];
+var i = this.state.picks[d.id];
+var has = i != null;
+var o = has ? d.options[i] : null;
+var setPick = function (id, k) { var p = Object.assign({}, self.state.picks); p[id] = k; self.setState({ picks: p, paused: true }); };
+var heroOpts = [
+{ label: 'Yes, book them', you: 'Yes, book them', reply: 'Booked Bluegrass for Thursday 9 AM. Rate con sent.' },
+{ label: 'Wait for more bids', you: 'Wait for more bids', reply: 'OK. I\u2019ll keep it posted until noon and text you if a better bid comes in.' },
+{ label: 'Counter at $1,650', you: 'Counter at 1650', reply: 'Countered Bluegrass at $1,650. I\u2019ll text you their answer.' }
+];
+var hp = this.state.heroPick;
+var ids = ['quote', 'cover', 'paperwork', 'track', 'paid'];
+var cur = ids[this.state.tab];
+var steps = [
+{ title: 'Connect your inbox', body: 'Sign in with Gmail or Outlook and add your phone number. The agent links your load boards.', label: 'MONDAY, BEFORE 8 AM', lines: [{ t: '7:40', x: 'Outlook connected with one sign-in' }, { t: '7:41', x: 'DAT and Truckstop linked' }, { t: '7:42', x: 'Your phone added. Manifest is a contact in Messages.' }] },
+{ title: 'It reads and drafts', body: 'Every quote request, carrier text and document is read, priced and drafted, then filed on the board.', label: 'ERIN’S EMAIL', lines: [{ t: '8:05', x: 'Quote request from Erin read' }, { t: '8:06', x: 'Similar trips checked: $1,950 to $2,050' }, { t: '8:06', x: 'Draft ready: $2,100, with a question about weight' }] },
+{ title: 'You approve with one text', body: 'Anything with consequences comes to your phone first. Reply A to send, change it, or say no.', label: 'YOUR PART', lines: [{ t: '8:06', x: 'Texted you the draft' }, { t: '8:07', x: 'You replied A' }, { t: '8:07', x: 'Sent to Erin from your own address' }] },
+{ title: 'It follows through', body: 'It posts the load, talks to carriers on its own number, books the truck you pick and sends the paperwork.', label: 'AFTER ERIN SAYS YES', lines: [{ t: '8:41', x: 'Posted to DAT and Truckstop' }, { t: '9:10', x: 'You picked Bluegrass. Booked.' }, { t: '9:12', x: 'Rate con sent' }] },
+{ title: 'The board stays current', body: 'Every load moves from quote to paid on its own. Open it on any computer when you want the detail.', label: 'L-2041 ON THE BOARD', lines: [{ t: '9:12', x: 'Moved to Booked' }, { t: 'Thu', x: 'Picked up, tracking on time' }, { t: 'Fri', x: 'Delivered. Invoice drafted for your OK.' }] }
+];
+var faqs = [
+{ q: 'Does anything go out without me?', a: 'No. The agent drafts every email, text and load posting, and waits for your reply before anything reaches a customer or carrier.' },
+{ q: 'What do I need to install?', a: 'Nothing. The agent is a contact in your phone’s messages, and the board opens in any browser.' },
+{ q: 'Which email does it work with?', a: 'Gmail and Outlook. Outlook connects in one sign-in.' },
+{ q: 'Who do carriers talk to?', a: 'The agent. It posts loads with its own number, so carrier calls and texts go to it, not your phone.' },
+{ q: 'What does it cost?', a: 'From $500 a month, with every connector included and no implementation fee.' }
+];
+var what = { Gmail: 'Reads quote requests, sends as you', Outlook: 'Reads quote requests, sends as you', DAT: 'Posts loads, collects bids', Truckstop: 'Posts loads, collects bids', WhatsApp: 'Texts drivers and carriers', Telegram: 'Texts drivers and carriers', 'Your TMS': 'Keeps loads and invoices in sync' };
+return {
+tabs: data.map(function (x, n) { return { num: '0' + (n + 1), label: x.label, cap: x.cap, active: self.state.tab === n, inactive: self.state.tab !== n, pick: function () { self.setState({ tab: n, paused: true }); } }; }),
+time: d.time,
+messages: has ? d.pre.concat([Y(o.you)], o.after) : d.pre,
+card: has ? o.card : d.card,
+choosing: !has, picked: has,
+options: d.options.map(function (op, k) { return { key: op.key, label: op.label, pick: function () { setPick(d.id, k); } }; }),
+reset: function () { setPick(d.id, null); },
+heroOpts: heroOpts.map(function (o, k) { return { label: o.label, pick: function () { self.setState({ heroPick: k }); } }; }),
+heroChoosing: hp == null, heroPicked: hp != null,
+heroYou: hp == null ? '' : heroOpts[hp].you, heroReply: hp == null ? '' : heroOpts[hp].reply,
+heroReset: function () { self.setState({ heroPick: null }); },
+isQuote: cur === 'quote', isCover: cur === 'cover', isPaperwork: cur === 'paperwork', isTrack: cur === 'track', isPaid: cur === 'paid',
+not_isQuote: cur !== 'quote', not_isCover: cur !== 'cover', not_isPaperwork: cur !== 'paperwork', not_isTrack: cur !== 'track', not_isPaid: cur !== 'paid',
+pick0: function () { self.setState({ tab: 0, paused: true }); }, pick1: function () { self.setState({ tab: 1, paused: true }); }, pick2: function () { self.setState({ tab: 2, paused: true }); }, pick3: function () { self.setState({ tab: 3, paused: true }); }, pick4: function () { self.setState({ tab: 4, paused: true }); },
+steps: steps.map(function (s, n) { return { num: '0' + (n + 1), title: s.title, body: s.body, active: self.state.step === n, inactive: self.state.step !== n, pick: function () { self.setState({ step: n }); } }; }),
+panel: { label: steps[this.state.step].label, lines: steps[this.state.step].lines },
+conns: Object.keys(this.state.conns).map(function (k) { var on = self.state.conns[k]; return { name: k, what: what[k], on: on, off: !on, toggle: function () { var c = Object.assign({}, self.state.conns); c[k] = !on; self.setState({ conns: c }); } }; }),
+faqs: faqs.map(function (f, n) { var open = self.state.faq === n; return { q: f.q, a: f.a, open: open, sign: open ? '−' : '+', toggle: function () { self.setState({ faq: open ? -1 : n }); } }; })
+};
+}
+}
+</script>
+</body>
+</html>

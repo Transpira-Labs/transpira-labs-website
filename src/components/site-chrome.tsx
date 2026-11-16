@@ -16,7 +16,7 @@ export const BTN_GHOST =
 
 /* The four top-level tabs from the design. */
 const TABS = [
-  { to: "/", label: "Walkthrough" },
+  { to: "/walkthrough", label: "Walkthrough" },
   { to: "/pricing", label: "Pricing" },
   { to: "/about", label: "About" },
 ] as const;

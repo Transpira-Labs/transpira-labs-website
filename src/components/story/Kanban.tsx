@@ -296,7 +296,6 @@ export function Kanban() {
     <div style={{ position: "relative", minWidth: "0" }}>
       <div
         aria-live="polite"
-        aria-live="polite"
         style={{
           ...mono,
           display: "flex",

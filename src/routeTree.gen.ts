@@ -18,6 +18,7 @@ import { Route as MobiledemoRouteImport } from './routes/mobiledemo'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as WalkthroughRouteImport } from './routes/walkthrough'
 import { Route as CaseStudiesIndexRouteImport } from './routes/case-studies.index'
 import { Route as CaseStudiesSlugRouteImport } from './routes/case-studies.$slug'
 import { Route as CaseStudiesBenchceptionRouteImport } from './routes/case-studies.benchception'
@@ -69,6 +70,11 @@ const TermsRoute = TermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WalkthroughRoute = WalkthroughRouteImport.update({
+  id: '/walkthrough',
+  path: '/walkthrough',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CaseStudiesIndexRoute = CaseStudiesIndexRouteImport.update({
   id: '/case-studies/',
   path: '/case-studies/',
@@ -105,6 +111,7 @@ export interface FileRoutesByFullPath {
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/walkthrough': typeof WalkthroughRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/case-studies/benchception': typeof CaseStudiesBenchceptionRoute
   '/case-studies/build': typeof CaseStudiesBuildRoute
@@ -121,6 +128,7 @@ export interface FileRoutesByTo {
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/walkthrough': typeof WalkthroughRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/case-studies/benchception': typeof CaseStudiesBenchceptionRoute
   '/case-studies/build': typeof CaseStudiesBuildRoute
@@ -138,6 +146,7 @@ export interface FileRoutesById {
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/walkthrough': typeof WalkthroughRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/case-studies/benchception': typeof CaseStudiesBenchceptionRoute
   '/case-studies/build': typeof CaseStudiesBuildRoute
@@ -156,6 +165,7 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/privacy'
     | '/terms'
+    | '/walkthrough'
     | '/case-studies/$slug'
     | '/case-studies/benchception'
     | '/case-studies/build'
@@ -172,6 +182,7 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/privacy'
     | '/terms'
+    | '/walkthrough'
     | '/case-studies/$slug'
     | '/case-studies/benchception'
     | '/case-studies/build'
@@ -188,6 +199,7 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/privacy'
     | '/terms'
+    | '/walkthrough'
     | '/case-studies/$slug'
     | '/case-studies/benchception'
     | '/case-studies/build'
@@ -205,6 +217,7 @@ export interface RootRouteChildren {
   PricingRoute: typeof PricingRoute
   PrivacyRoute: typeof PrivacyRoute
   TermsRoute: typeof TermsRoute
+  WalkthroughRoute: typeof WalkthroughRoute
   CaseStudiesSlugRoute: typeof CaseStudiesSlugRoute
   CaseStudiesBenchceptionRoute: typeof CaseStudiesBenchceptionRoute
   CaseStudiesBuildRoute: typeof CaseStudiesBuildRoute
@@ -277,6 +290,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/walkthrough': {
+      id: '/walkthrough'
+      path: '/walkthrough'
+      fullPath: '/walkthrough'
+      preLoaderRoute: typeof WalkthroughRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/case-studies/': {
       id: '/case-studies/'
       path: '/case-studies'
@@ -325,6 +345,7 @@ const rootRouteChildren: RootRouteChildren = {
   PricingRoute: PricingRoute,
   PrivacyRoute: PrivacyRoute,
   TermsRoute: TermsRoute,
+  WalkthroughRoute: WalkthroughRoute,
   CaseStudiesSlugRoute: CaseStudiesSlugRoute,
   CaseStudiesBenchceptionRoute: CaseStudiesBenchceptionRoute,
   CaseStudiesBuildRoute: CaseStudiesBuildRoute,
