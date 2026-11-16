@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteNav, SiteFooter } from "@/components/site-chrome";
 import { StoryMarkup } from "@/components/story/StoryMarkup";
-import { ScrollCue } from "@/components/story/ScrollCue";
 import { FloatingCall } from "@/components/story/FloatingCall";
 import { useStoryVals } from "@/components/story/story-logic";
 
@@ -29,10 +28,9 @@ function Story() {
   const v = useStoryVals();
   return (
     <div className="ms-has-dock flex min-h-screen flex-col">
-      <SiteNav sticky={false} />
+      <SiteNav sticky="wide" />
       <main className="flex-1">
         <StoryMarkup v={v} />
-        <ScrollCue />
         <FloatingCall />
       </main>
       <SiteFooter />

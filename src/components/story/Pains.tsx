@@ -7,7 +7,7 @@ import { ChannelLogo } from "./ChannelLogo";
  */
 
 const mono: CSSProperties = {
-  fontFamily: "ui-monospace,Menlo,monospace",
+  fontFamily: "var(--font-mono)",
   fontSize: "10.5px",
   letterSpacing: ".08em",
   textTransform: "uppercase",
@@ -20,7 +20,7 @@ function Screen({ bg = "#fff", children }: { bg?: string; children: ReactNode })
     <div
       style={{
         height: "150px",
-        borderRadius: "12px",
+        borderRadius: "5px",
         background: bg,
         color: "#1c1c1e",
         overflow: "hidden",
@@ -288,31 +288,15 @@ export function Pains() {
           lineHeight: "1.05",
         }}
       >
-        Sound <span style={{ color: "#d2ad5e" }}>familiar?</span>
+        Sound familiar?
       </h2>
       <div className="ms-pain-grid" style={{ width: "100%", maxWidth: "1240px" }}>
         {PAINS.map((p) => (
-          <div
-            key={p.n}
-            className="ms-pain-card"
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "12px",
-              borderRadius: "14px",
-              border: "1px solid rgba(255,255,255,.12)",
-              background: "rgba(255,255,255,.03)",
-              padding: "16px",
-            }}
-          >
-            <div style={{ ...mono, color: "#d48a70" }}>
-              {p.n} · {p.stage}
-            </div>
-            <div style={{ fontSize: "22px", fontWeight: "600", letterSpacing: "-.02em" }}>
-              {p.title}
-            </div>
+          <div key={p.n} className="ms-pain-card">
+            <div className="ms-pain-stage">{p.stage}</div>
+            <div className="ms-pain-title">{p.title}</div>
             {p.art}
-            <div style={{ fontSize: "15px", fontWeight: "600", color: "#d2ad5e" }}>{p.cost}</div>
+            <div className="ms-pain-cost">{p.cost}</div>
           </div>
         ))}
       </div>

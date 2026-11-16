@@ -41,7 +41,8 @@ const GEAR: Thing[][] = [
 /* Deterministic noise, so the mess is the same mess on every visit. */
 const rand = (i: number, salt: number) => {
   const s = Math.sin(i * 12.9898 + salt * 78.233) * 43758.5453;
-  return s - Math.floor(s);
+  // Rounded so the server and the browser agree to the last digit they print.
+  return Math.round((s - Math.floor(s)) * 100) / 100;
 };
 
 function Glyph({ t }: { t: Thing }) {
@@ -133,7 +134,7 @@ function Glyph({ t }: { t: Thing }) {
           <div style={{ height: "6px", background: CLAY }} />
           <div
             style={{
-              fontFamily: "ui-monospace,Menlo,monospace",
+              fontFamily: "var(--font-mono)",
               fontSize: "9px",
               fontWeight: "700",
               color: CLAY,
@@ -193,11 +194,11 @@ export function TeamScene({ level, people }: { level: 0 | 1 | 2; people: string[
             className={level === 2 ? "ms-jiggle" : undefined}
             style={{
               position: "absolute",
-              left: `${left}%`,
-              top: `${top}%`,
-              transform: `translate(-50%,-50%) rotate(${rot}deg)`,
+              left: `${left.toFixed(1)}%`,
+              top: `${top.toFixed(1)}%`,
+              transform: `translate(-50%,-50%) rotate(${rot.toFixed(1)}deg)`,
               zIndex: t.kind === "person" ? 2 : 1,
-              animationDelay: `${rand(i, 7) * 1.5}s`,
+              animationDelay: `${(rand(i, 7) * 1.5).toFixed(2)}s`,
             }}
           >
             <Glyph t={t} />

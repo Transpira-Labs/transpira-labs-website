@@ -35,7 +35,7 @@ export function FloatingCall() {
         rel="noreferrer"
         data-ph-capture-attribute-cta="floating"
         tabIndex={hidden ? -1 : 0}
-        className="ms-cta ms-cta-live"
+        className="ms-cta"
       >
         <CalendarIcon />
         <span className="ms-cta-text">
@@ -58,7 +58,7 @@ export function InlineCall({ where }: { where: string }) {
       target="_blank"
       rel="noreferrer"
       data-ph-capture-attribute-cta={where}
-      className="ms-cta ms-cta-inline ms-cta-live"
+      className="ms-cta ms-cta-inline"
     >
       <CalendarIcon />
       <span className="ms-cta-text">
@@ -75,7 +75,6 @@ export function InlineCall({ where }: { where: string }) {
 function CalendarIcon() {
   return (
     <svg
-      className="ms-cta-cal"
       viewBox="0 0 24 24"
       width="22"
       height="22"

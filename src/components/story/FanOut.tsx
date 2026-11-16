@@ -214,7 +214,7 @@ function Bubble({
 }
 
 const mono: CSSProperties = {
-  fontFamily: "ui-monospace,Menlo,monospace",
+  fontFamily: "var(--font-mono)",
   fontSize: "10.5px",
   letterSpacing: ".08em",
   textTransform: "uppercase",
@@ -353,7 +353,7 @@ function LoadBoard() {
                   display: "flex",
                   flexDirection: "column",
                   gap: "1px",
-                  animation: `ms-popin .5s ${0.2 + n++ * 0.25}s cubic-bezier(.2,.9,.3,1.15) both`,
+                  animation: `ms-popin .5s ${0.2 + n++ * 0.25}s cubic-bezier(.16,1,.3,1) both`,
                 }}
               >
                 <span
@@ -492,7 +492,6 @@ export function FanOut() {
           borderRadius: "999px",
           border: "1px solid rgba(127,176,156,.55)",
           background: "rgba(47,111,94,.22)",
-          boxShadow: "0 0 50px rgba(127,176,156,.25)",
           padding: "5px 14px 5px 5px",
         }}
       >

@@ -182,8 +182,28 @@ export function Kanban() {
     setOver(null);
   };
 
+  // Keyboard: a focused card moves one stage left or right with the arrow keys.
+  const refocus = useRef<string | null>(null);
+  useEffect(() => {
+    if (!refocus.current) return;
+    document.querySelector<HTMLElement>(`[data-card="${refocus.current}"]`)?.focus();
+    refocus.current = null;
+  });
+  const onKey = (e: React.KeyboardEvent<HTMLElement>, id: string, from: number) => {
+    const to = e.key === "ArrowRight" ? from + 1 : e.key === "ArrowLeft" ? from - 1 : -1;
+    if (to < 0 || to >= STAGES.length) return;
+    e.preventDefault();
+    refocus.current = id;
+    setCols((prev) => {
+      const next = prev.map((col) => col.filter((x) => x !== id));
+      next[to].push(id);
+      return next;
+    });
+    setMoved(`${id} moved to ${STAGES[to]}`);
+  };
+
   const mono: CSSProperties = {
-    fontFamily: "ui-monospace,Menlo,monospace",
+    fontFamily: "var(--font-mono)",
     fontSize: "10.5px",
     letterSpacing: ".06em",
     textTransform: "uppercase",
@@ -220,7 +240,7 @@ export function Kanban() {
           )}
           <span
             style={{
-              fontFamily: "ui-monospace,Menlo,monospace",
+              fontFamily: "var(--font-mono)",
               fontSize: "11px",
               color: "#868e8b",
               whiteSpace: "nowrap",
@@ -276,6 +296,7 @@ export function Kanban() {
     <div style={{ position: "relative", minWidth: "0" }}>
       <div
         aria-live="polite"
+        aria-live="polite"
         style={{
           ...mono,
           display: "flex",
@@ -288,7 +309,7 @@ export function Kanban() {
           transition: "background .3s",
         }}
       >
-        <span style={{ fontSize: "13px" }}>{moved ? "✓" : "✋"}</span>
+        {moved && <span style={{ fontSize: "13px" }}>✓</span>}
         {moved ?? "Try it: drag a card to another stage"}
       </div>
       <div ref={scroller} style={{ overflowX: "auto", WebkitOverflowScrolling: "touch" }}>
@@ -341,6 +362,10 @@ export function Kanban() {
                       )}
                       <div
                         data-card={id}
+                        tabIndex={0}
+                        role="button"
+                        aria-label={`${id}, ${card.title}, in ${STAGES[ci]}. Left and right arrow keys move it to another stage.`}
+                        onKeyDown={(e) => onKey(e, id, ci)}
                         onPointerDown={(e) => onDown(e, id, ci)}
                         onPointerMove={onMove}
                         onPointerUp={onUp}

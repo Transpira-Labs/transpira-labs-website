@@ -81,6 +81,9 @@ const CHAOS: [string, string, string, string, string, string][] = [
   ["Gmail", "G", "#c5221f", "Erin Caldwell", "Never mind, we found a truck. Thanks anyway.", ""],
 ];
 
+/* Height of the pinned site nav, which the sticky scenes sit below on wide screens. */
+const NAV_H = 56;
+
 const DASH_STATS = (
   [
     ["Active loads", 7, "#1b2420"],
@@ -250,16 +253,23 @@ export function useStoryVals() {
   const mins = 5 + Math.round((chaosN / CHAOS.length) * 69);
   const sb = (i: number) => (!s.scFocus || s.scFocus === "b" + i ? 1 : 0.35);
 
-  /* Sticky phone story */
+  /* Sticky phone story: seven steps. 1-2 show the email and the pricing card,
+     3-5 the thread, 6 the thread beside the board, 7 the before/after ledger. */
   const n = s.scStep;
   const narrow = s.vw < 900;
-  const side = n === 8 || n === 9;
-  const ctx = n === 0 || n === 3 ? 0 : side ? 470 : n >= 7 ? 720 : 360;
-  const phoneOn = n < 7 || side;
-  const pS = n === 3 ? 1.06 : 1;
+  const side = n === 6;
+  const ledger = n === 7;
+  // On a narrow screen the scene shows one thing at a time, at a readable size:
+  // the context card while the thread is still empty, then the thread alone.
+  const ctxOnly = narrow && (n === 1 || n === 2);
+  const phoneOnly = narrow && n >= 3 && n <= 6;
+  const ctxFull = n === 0 || n === 3 ? 0 : side ? 470 : ledger ? 720 : 360;
+  const ctx = phoneOnly ? 0 : ledger && narrow ? Math.min(720, s.vw - 32) : ctxFull;
+  const phoneOn = !ledger && !ctxOnly;
+  const pS = n === 3 && !narrow ? 1.06 : 1;
   const textW = narrow ? 0 : Math.min(620, Math.round(s.vw * 0.44));
   const avail = (narrow ? s.vw : s.vw - textW) - 32;
-  const availH = (narrow ? s.vh * 0.6 : s.vh) - 40;
+  const availH = (narrow ? s.vh * 0.68 : s.vh - NAV_H) - 40;
   const need = ctx + (ctx && phoneOn ? 48 : 0) + (phoneOn ? 330 * pS : 0);
   const on = n >= 3 && !(n === 3 && s.scTyping);
   const so = (i: number) => (!s.scFocus || s.scFocus === "s" + i ? 1 : 0.35);
@@ -285,7 +295,8 @@ export function useStoryVals() {
 
     scCols: narrow ? "minmax(0,1fr)" : "minmax(0," + textW + "px) minmax(0,1fr)",
     scStageOrder: narrow ? 0 : 2,
-    scStageH: narrow ? "62vh" : "100vh",
+    scStageTop: narrow ? "0px" : NAV_H + "px",
+    scStageH: narrow ? "68vh" : `calc(100vh - ${NAV_H}px)`,
     scBlockH: narrow ? "75vh" : "100vh",
     scScale: Math.min(1, avail / need, availH / (phoneOn ? 690 * pS : 520)).toFixed(3),
     scGap: ctx && phoneOn ? "48px" : "0px",
@@ -296,19 +307,11 @@ export function useStoryVals() {
     sc2: n === 2,
     sc4: n === 4,
     sc5: n === 5,
-    sc6: n === 6,
-    sc7: n === 7,
-    sc10: n === 10,
-    sc11: n === 11,
+    scLedger: ledger,
     scBoardSide: side,
-    scBobRead: n === 8,
-    scBobBd: n === 8 ? "#007aff" : "#e3e7e6",
-    scBobRing: n === 8 ? "4px" : "0px",
-    scCatWrite: n === 9,
-    scCatBd: n === 9 ? "#2f6f5e" : "#e3e7e6",
-    scCatRing: n === 9 ? "4px" : "0px",
-    scCatMeta: n >= 9 ? "Detention billed · $150" : "Driver waiting 2 h",
-    scCatFg: n >= 9 ? "#2f6f5e" : "#b04a2d",
+    scBobRead: side,
+    scBobBd: side ? "#007aff" : "#e3e7e6",
+    scBobRing: side ? "4px" : "0px",
     scEmpty: n < 3,
     scTypingOn: n === 3 && s.scTyping,
     sp1: on,
@@ -317,8 +320,7 @@ export function useStoryVals() {
     spDelivered: n === 4,
     sp3: n >= 5,
     sp4: n >= 6,
-    sp5: n >= 8,
-    sp6: n >= 9,
+    sp5: n >= 6,
     scChoiceKey: s.scChoice || "A",
     scPrice: s.scChoice === "B" ? "$2,200" : "$2,100",
     scPickA: () => scPick("A"),
@@ -333,10 +335,6 @@ export function useStoryVals() {
     so5: so(5),
     so6: so(6),
     so7: so(7),
-    so8: so(8),
-    so9: so(9),
-    so10: so(10),
-    so11: so(11),
 
     rvCols: s.vw < 760 ? "minmax(0,1fr)" : "repeat(3,minmax(0,1fr))",
     ...reveal,

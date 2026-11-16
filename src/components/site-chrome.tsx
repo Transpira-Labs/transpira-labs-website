@@ -304,10 +304,11 @@ function Brand() {
 }
 
 /**
- * `sticky={false}` for pages with their own full-viewport sticky stages (the
- * homepage story), where a pinned nav would cover the top of the stage.
+ * `sticky="wide"` pins the nav on wide screens only. The homepage story uses it:
+ * its sticky scenes sit below the 56px bar there, and on phones the bar scrolls
+ * away so the scene keeps the whole screen.
  */
-export function SiteNav({ sticky = true }: { sticky?: boolean } = {}) {
+export function SiteNav({ sticky = true }: { sticky?: boolean | "wide" } = {}) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const [open, setOpen] = useState(false);
 
@@ -338,7 +339,7 @@ export function SiteNav({ sticky = true }: { sticky?: boolean } = {}) {
 
   return (
     <header
-      className={`${sticky ? "sticky top-0" : "relative"} z-40 border-b border-white/8 bg-[rgba(27,36,32,0.85)] backdrop-blur-[10px]`}
+      className={`${sticky === "wide" ? "relative min-[900px]:sticky min-[900px]:top-0" : sticky ? "sticky top-0" : "relative"} z-40 border-b border-white/8 bg-[rgba(27,36,32,0.85)] backdrop-blur-[10px]`}
     >
       <div className="mx-auto flex h-14 max-w-[1400px] items-center justify-between gap-4 px-4 sm:px-6">
         <Brand />
@@ -482,12 +483,12 @@ export function SiteFooter() {
             <a href="https://fusen.world/" target="_blank" rel="noreferrer" className={linkCls}>
               Fusen World
             </a>
-            <span className="mt-1 block text-[12px] text-ink-faint/80">
+            <span className="mt-1 block text-[12px] text-ink-faint">
               Transpira Labs is officially incorporated as Classhopper Technologies Inc.
             </span>
           </span>
         </span>
-        <span className="flex flex-wrap gap-x-[18px] gap-y-2">
+        <span className="site-footer-links flex flex-wrap gap-x-[18px]">
           <Link to="/case-studies" className={linkCls}>
             Research
           </Link>
