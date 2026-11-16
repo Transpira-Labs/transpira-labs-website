@@ -686,15 +686,13 @@ footer :focus-visible {
   max-width: 1320px;
   min-height: calc(100vh - 56px);
   margin: 0 auto;
-  padding: 48px clamp(24px, 6vw, 96px) 0;
-  overflow: hidden;
+  padding: 48px clamp(24px, 6vw, 96px);
 }
 .ms-hero-copy {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 28px;
-  padding-bottom: 48px;
 }
 .ms-hero-sub {
   margin: 0;
@@ -710,26 +708,40 @@ footer :focus-visible {
   align-items: center;
   gap: 20px 28px;
 }
+/* The whole phone, never cropped. It shrinks on short windows so it still
+   fits on the first screen. */
 .ms-hero-phone {
-  align-self: end;
   display: flex;
   justify-content: center;
-  height: 640px;
-  padding-top: 12px;
+  padding: 12px 0;
+}
+@media (max-height: 900px) {
+  .ms-hero-phone {
+    zoom: 0.9;
+  }
+}
+@media (max-height: 800px) {
+  .ms-hero-phone {
+    zoom: 0.78;
+  }
+}
+@media (max-height: 700px) {
+  .ms-hero-phone {
+    zoom: 0.66;
+  }
 }
 @media (max-width: 899px) {
   .ms-hero {
     grid-template-columns: minmax(0, 1fr);
     gap: 32px;
     min-height: 0;
-    padding: 36px 16px 0;
+    padding: 36px 16px 56px;
   }
   .ms-hero-copy {
     gap: 20px;
-    padding-bottom: 0;
   }
   .ms-hero-phone {
-    height: 430px;
+    zoom: 0.85;
   }
 }
 
