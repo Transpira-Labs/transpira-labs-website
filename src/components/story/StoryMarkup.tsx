@@ -2114,7 +2114,7 @@ export function StoryMarkup({ v }: { v: StoryVals }) {
         </div>
         <div className="ms-close-links">
           <Link className="ms-textlink" to="/pricing">
-            Starts at $500 a month.
+            $50 per user per month.
           </Link>
           <a className="ms-textlink" href={DEMO_URL} target="_blank" rel="noreferrer">
             Live demo

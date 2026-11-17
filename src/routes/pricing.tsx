@@ -16,13 +16,13 @@ export const Route = createFileRoute("/pricing")({
       {
         name: "description",
         content:
-          "Manifest starts at $500 a month, self-serve. Every connector included, no implementation fee, and a human approves every send.",
+          "Manifest is $50 per user per month. No onboarding fee, no implementation fee, every connector included, and a human approves every send.",
       },
       { property: "og:title", content: "Pricing | Manifest" },
       {
         property: "og:description",
         content:
-          "Starts at $500 a month. Self-serve. Every connector included, no implementation fee.",
+          "$50 per user per month. No onboarding fee. No implementation fee. Every connector included.",
       },
     ],
   }),
@@ -31,7 +31,7 @@ export const Route = createFileRoute("/pricing")({
 
 const INCLUDED = [
   "Every connector included, free. We found a way to build integrations in hours instead of months, and we pass that on.",
-  "No implementation or integration fee. Outlook connects in one sign-in.",
+  "No onboarding, implementation or integration fee. Outlook connects in one sign-in.",
   "A human approves every send. Nothing leaves the building without your click.",
 ];
 
@@ -44,12 +44,12 @@ function PricingPage() {
           eyebrow="Pricing"
           title={
             <>
-              Starts at $500 a month.
+              $50 per user per month.
               <br />
-              Self-serve.
+              No fees to start.
             </>
           }
-          body="A tiered subscription that grows as the agent takes on more of the workflow, at a price a three-person shop can buy. No sales cycle, no paid implementation: connect your systems and start quoting the same day."
+          body="One price per person on your team. No onboarding fee and no implementation fee: connect your systems and start quoting the same day."
         />
         <ul className="m-0 grid w-full max-w-[1000px] list-none grid-cols-[repeat(auto-fit,minmax(min(240px,100%),1fr))] gap-4 p-0">
           {INCLUDED.map((item) => (

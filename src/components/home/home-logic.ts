@@ -44,11 +44,11 @@ const STEPS = [
   },
   {
     title: "You approve with one text",
-    body: "Anything with consequences comes to your phone first. Reply A to send, change it, or say no.",
+    body: "Anything with consequences comes to your phone first. Reply yes to send, change it, or say no.",
     label: "YOUR PART",
     lines: [
       { t: "8:06", x: "Texted you the draft" },
-      { t: "8:07", x: "You replied A" },
+      { t: "8:07", x: "You replied yes" },
       { t: "8:07", x: "Sent to Erin from your own address" },
     ],
   },
@@ -92,9 +92,8 @@ const FAQS = [
     a: "The agent. It posts loads with its own number, so carrier calls and texts go to it, not your phone.",
   },
   {
-    // TODO(before launch): confirm the pricing copy.
     q: "What does it cost?",
-    a: "From $500 a month, with every connector included and no implementation fee.",
+    a: "$50 per user per month, with every connector included. No onboarding fee and no implementation fee.",
   },
 ];
 

@@ -171,7 +171,7 @@ export function OneLoad({ v }: { v: HomeVals }) {
                     fontSize: "14px",
                   }}
                 >
-                  {"A"}
+                  {"Yes"}
                 </span>
                 {"Your part: one reply"}
               </p>
@@ -739,7 +739,7 @@ export function OneLoad({ v }: { v: HomeVals }) {
                     fontSize: "14px",
                   }}
                 >
-                  {"A"}
+                  {"Yes"}
                 </span>
                 {"Your part: one reply to send it"}
               </p>

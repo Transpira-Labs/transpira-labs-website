@@ -59,13 +59,13 @@ export function HomeFooter() {
               >
                 {"How it works"}
               </a>
-              <Link
+              <a
                 className="mf-footlink"
-                to="/pricing"
+                href="#pricing"
                 style={{ color: "#9AA0A4", textDecoration: "none" }}
               >
                 {"Pricing"}
-              </Link>
+              </a>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
               <span style={{ color: "var(--mf-paper)", fontWeight: "600" }}>{"Company"}</span>

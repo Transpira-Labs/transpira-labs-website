@@ -1,9 +1,4 @@
 /* Ported from docs/homepage-handoff/design/homepage.dc.html. Values are the design's own; colours and fonts are the --mf-* tokens in styles.css. */
-/*
- * TODO(before launch): confirm the pricing copy. "See the tiers" goes to the
- * existing /pricing page, which has not been redesigned to these tokens.
- */
-import { Link } from "@tanstack/react-router";
 
 export function PricingBand() {
   return (
@@ -33,7 +28,7 @@ export function PricingBand() {
               letterSpacing: "-0.8px",
             }}
           >
-            {"From $500 a month"}
+            {"$50 per user per month"}
           </h2>
           <p
             style={{
@@ -45,13 +40,14 @@ export function PricingBand() {
             }}
           >
             {
-              "Priced for a three-person shop. No implementation fee, every connector included, quoting the same day."
+              "No onboarding fee. No implementation fee. Every connector included, quoting the same day."
             }
           </p>
         </div>
-        <Link
+        <a
           className="mf-btn"
-          to="/pricing"
+          href="#call"
+          data-ph-capture-attribute-cta="pricing"
           style={{
             color: "var(--mf-ink)",
             textDecoration: "none",
@@ -62,8 +58,8 @@ export function PricingBand() {
             border: "1.5px solid var(--mf-ink)",
           }}
         >
-          {"See the tiers"}
-        </Link>
+          {"Book a call"}
+        </a>
       </div>
     </section>
   );

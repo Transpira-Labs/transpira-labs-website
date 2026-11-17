@@ -38,7 +38,7 @@ export function Hero() {
           maxWidth: "980px",
         }}
       >
-        {"Quote, cover and get paid with a one-letter "}
+        {"Quote, cover and get paid with a one-word "}
         <span
           className="mf-a"
           style={{
@@ -46,8 +46,8 @@ export function Hero() {
             alignItems: "center",
             justifyContent: "center",
             verticalAlign: "middle",
-            width: "72px",
             height: "64px",
+            padding: "0 20px",
             margin: "0 4px",
             borderRadius: "22px 22px 6px 22px",
             background: "var(--mf-ink)",
@@ -57,7 +57,7 @@ export function Hero() {
             fontWeight: "700",
           }}
         >
-          {"A"}
+          {"Yes"}
         </span>
         {" text."}
       </h1>
@@ -511,7 +511,7 @@ export function Hero() {
                 lineHeight: "1.3",
               }}
             >
-              {"I suggest $2,100. Reply A to send."}
+              {"I suggest $2,100. Send it?"}
             </div>
             <div
               style={{
@@ -525,7 +525,7 @@ export function Hero() {
                 lineHeight: "1.3",
               }}
             >
-              {"A"}
+              {"Yes"}
             </div>
             <div
               style={{

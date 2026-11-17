@@ -416,7 +416,7 @@ export function Board() {
                 >
                   {"8:07 AM"}
                 </span>
-                {"You replied A. Quote sent to Erin."}
+                {"You replied yes. Quote sent to Erin."}
               </div>
               <div
                 style={{
