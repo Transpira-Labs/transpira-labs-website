@@ -1,5 +1,7 @@
 /* Ported from docs/homepage-handoff/design/homepage.dc.html. Values are the design's own; colours and fonts are the --mf-* tokens in styles.css. */
 
+import { CAL_URL } from "@/components/site-chrome";
+
 export function PricingBand() {
   return (
     <section id="pricing" style={{ background: "var(--mf-paper-deep)" }}>
@@ -46,7 +48,9 @@ export function PricingBand() {
         </div>
         <a
           className="mf-btn"
-          href="#call"
+          href={CAL_URL}
+          target="_blank"
+          rel="noreferrer"
           data-ph-capture-attribute-cta="pricing"
           style={{
             color: "var(--mf-ink)",

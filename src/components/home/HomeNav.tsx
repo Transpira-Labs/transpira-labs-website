@@ -1,5 +1,6 @@
 /* Ported from docs/homepage-handoff/design/homepage.dc.html. Values are the design's own; colours and fonts are the --mf-* tokens in styles.css. */
 import { ManifestMark } from "./ManifestMark";
+import { CAL_URL } from "@/components/site-chrome";
 
 export function HomeNav() {
   return (
@@ -88,7 +89,9 @@ export function HomeNav() {
           <a
             className="mf-btn"
             data-ph-capture-attribute-cta="nav"
-            href="#call"
+            href={CAL_URL}
+            target="_blank"
+            rel="noreferrer"
             style={{
               background: "var(--mf-ink)",
               color: "var(--mf-paper)",

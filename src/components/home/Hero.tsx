@@ -8,7 +8,7 @@
  * has no section. It opens the live demo for now; confirm the destination.
  */
 import { ManifestMark } from "./ManifestMark";
-import { DEMO_URL } from "@/components/site-chrome";
+import { CAL_URL, DEMO_URL } from "@/components/site-chrome";
 
 export function Hero() {
   return (
@@ -172,7 +172,9 @@ export function Hero() {
         <a
           className="mf-btn"
           data-ph-capture-attribute-cta="hero"
-          href="#call"
+          href={CAL_URL}
+          target="_blank"
+          rel="noreferrer"
           style={{
             background: "var(--mf-amber)",
             color: "var(--mf-ink)",
