@@ -19,6 +19,19 @@ const CONNECTIONS: [string, string][] = [
   ["Your phone", "Where you approve, by text"],
 ];
 
+// What the broker gets, in the words the walkthrough already used.
+const BENEFITS: [string, string][] = [
+  [
+    "A one-person brokerage with big-shop numbers.",
+    "Do the work of a 10-person shop and compete with the big guys, without hiring.",
+  ],
+  [
+    "Your people work loads, not admin.",
+    "The agent handles the admin. Your team sells and looks after customers.",
+  ],
+  ["Zero friction.", "Nothing to install. Nothing to switch."],
+];
+
 const PRICE_ROWS: [string, string][] = [
   ["Onboarding fee", "$0"],
   ["Implementation fee", "$0"],
@@ -100,6 +113,21 @@ export function HomePage() {
         </PhotoBand>
 
         <LoadStory />
+
+        <section className="mf-wrap mf-benefits">
+          <h2 className="mf-h2 mf-h2--xl">One phone. One agent. Any number of loads.</h2>
+          <ul>
+            {BENEFITS.map(([title, body]) => (
+              <li key={title}>
+                <h3 className="mf-h3">{title}</h3>
+                <p className="mf-muted">{body}</p>
+              </li>
+            ))}
+          </ul>
+          <a href={CAL_URL} target="_blank" rel="noreferrer" className="mf-btn mf-btn--lg">
+            Book a 20-minute call
+          </a>
+        </section>
 
         <div style={{ marginTop: "clamp(72px, 9vw, 120px)" }}>
           <PhotoBand src={warehouse} shade={0.66}>

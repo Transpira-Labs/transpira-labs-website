@@ -127,15 +127,20 @@ html:has(.mf-root) body {
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
+  box-shadow: 0 1px 2px rgba(1, 3, 4, 0.16);
   transition:
     background-color 0.15s ease,
+    box-shadow 0.15s ease,
     transform 0.15s ease;
 }
 .mf-btn:hover {
   background: #2c2e2f;
+  box-shadow: 0 2px 5px rgba(1, 3, 4, 0.2);
+  transform: translateY(-1px);
 }
 .mf-btn:active {
-  transform: scale(0.98);
+  box-shadow: 0 1px 1px rgba(1, 3, 4, 0.16);
+  transform: translateY(0) scale(0.98);
 }
 .mf-btn--lg {
   min-height: 48px;
@@ -198,6 +203,7 @@ html:has(.mf-root) body {
   gap: 30px;
 }
 .mf-nav-link {
+  position: relative;
   display: inline-flex;
   align-items: center;
   min-height: 44px;
@@ -205,11 +211,24 @@ html:has(.mf-root) body {
   font-size: 14px;
   font-weight: 600;
   text-decoration: none;
-  text-underline-offset: 6px;
 }
-.mf-nav-link:hover,
-.mf-nav-link[data-here="true"] {
-  text-decoration: underline;
+/* The underline draws in from the left on hover, and stays under the page you are on. */
+.mf-nav-link::after {
+  position: absolute;
+  right: 0;
+  bottom: 9px;
+  left: 0;
+  height: 1.5px;
+  background: currentColor;
+  content: "";
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.28s cubic-bezier(0.3, 0, 0.2, 1);
+}
+.mf-nav-link:hover::after,
+.mf-nav-link:focus-visible::after,
+.mf-nav-link[data-here="true"]::after {
+  transform: scaleX(1);
 }
 .mf-nav-end {
   display: flex;
@@ -382,10 +401,19 @@ html:has(.mf-root) body {
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.15s ease;
+  box-shadow: 0 1px 2px rgba(1, 3, 4, 0.08);
+  transition:
+    background-color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
 }
 .mf-chip:hover {
   background: var(--mf-wash);
+  box-shadow: 0 2px 5px rgba(1, 3, 4, 0.12);
+  transform: translateY(-1px);
+}
+.mf-chip:active {
+  transform: translateY(0) scale(0.98);
 }
 
 /* ---- One load, one thread: the pinned phone ---- */
@@ -548,6 +576,29 @@ html:has(.mf-root) body {
   font-weight: 500;
 }
 
+/* ---- Benefits: the promise restated, then what the broker gets ---- */
+
+.mf-benefits {
+  padding-top: clamp(72px, 9vw, 120px);
+}
+.mf-benefits .mf-h2 {
+  max-width: 760px;
+}
+.mf-benefits ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  gap: 32px 40px;
+  margin-block: clamp(40px, 5vw, 64px) clamp(32px, 4vw, 48px);
+}
+.mf-benefits li {
+  padding-top: 20px;
+  border-top: 1px solid var(--mf-ink);
+}
+.mf-benefits li p {
+  max-width: 340px;
+  margin-top: 10px;
+}
+
 /* ---- Approval band ---- */
 
 .mf-approve {
@@ -677,7 +728,9 @@ html:has(.mf-root) body {
   overflow: hidden;
   padding: clamp(32px, 5vw, 64px) clamp(20px, 4vw, 48px);
   border-radius: 12px;
-  background: var(--mf-sand);
+  background:
+    radial-gradient(90% 120% at 0% 0%, #fbe6bd 0%, rgba(251, 230, 189, 0) 62%),
+    radial-gradient(70% 100% at 100% 100%, #dcebe6 0%, rgba(220, 235, 230, 0) 60%), #f3f1e7;
 }
 .mf-board-top {
   display: flex;
@@ -807,6 +860,10 @@ html:has(.mf-root) body {
   margin-top: 14px;
   color: #b9baba;
   font-size: 12px;
+}
+.mf-form p a {
+  color: #ffffff;
+  text-underline-offset: 3px;
 }
 .mf-foot {
   display: flex;
@@ -1160,7 +1217,11 @@ html:has(.mf-root) body {
   font-weight: 500;
   letter-spacing: -0.03em;
 }
+.mf-lab-card:hover .mf-arrow {
+  transform: translateX(4px);
+}
 .mf-arrow {
+  transition: transform 0.2s ease;
   display: flex;
   flex: none;
   align-items: center;
@@ -1195,7 +1256,9 @@ html:has(.mf-root) body {
   margin-top: clamp(28px, 4vw, 48px);
   padding: clamp(20px, 4vw, 48px);
   border-radius: 12px;
-  background: var(--mf-sand);
+  background:
+    radial-gradient(90% 120% at 0% 0%, #fbe6bd 0%, rgba(251, 230, 189, 0) 62%),
+    radial-gradient(70% 100% at 100% 100%, #dcebe6 0%, rgba(220, 235, 230, 0) 60%), #f3f1e7;
 }
 .mf-flow-panel .mf-flow {
   margin-top: 0;
@@ -1211,11 +1274,11 @@ html:has(.mf-root) body {
   align-items: center;
   gap: 12px;
   overflow: hidden;
-  padding: 0 16px;
-  border: 1px solid transparent;
-  border-radius: 16px;
+  padding: 0 14px;
+  border: 1px solid rgba(1, 3, 4, 0.12);
+  border-radius: 10px;
   background: #ffffff;
-  box-shadow: 0 2px 24px rgba(1, 3, 4, 0.07);
+  box-shadow: 0 1px 2px rgba(1, 3, 4, 0.05);
   transition: border-color 0.25s ease;
 }
 .mf-flow-src[data-on="true"] {
@@ -1226,10 +1289,11 @@ html:has(.mf-root) body {
   flex: none;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: var(--mf-wash);
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(1, 3, 4, 0.1);
+  border-radius: 8px;
+  background: #f7f7f7;
   transition: background-color 0.25s ease;
 }
 .mf-flow-src[data-on="true"] .mf-flow-icon {
@@ -1308,35 +1372,59 @@ html:has(.mf-root) body {
     transform: translateY(100%);
   }
 }
+/* A plain window: a hairline border, a title bar with a rule under it, and a grey inset for the content. */
 .mf-flow-board {
   min-width: 0;
-  padding: 18px;
-  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(1, 3, 4, 0.12);
+  border-radius: 10px;
   background: #ffffff;
-  box-shadow: 0 10px 40px rgba(1, 3, 4, 0.12);
+  box-shadow: 0 1px 2px rgba(1, 3, 4, 0.05);
 }
 .mf-flow-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 44px;
-  margin-bottom: 8px;
-  font-size: 14px;
+  gap: 12px;
+  min-height: 56px;
+  padding: 0 10px 0 18px;
+  border-bottom: 1px solid rgba(1, 3, 4, 0.1);
+  font-size: 15px;
 }
-.mf-flow-bar strong {
+.mf-flow-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #0b7f86;
+}
+.mf-flow-title strong {
+  color: var(--mf-ink);
   font-weight: 600;
 }
 .mf-flow-pause {
-  min-height: 44px;
-  padding: 0 4px;
-  border: 0;
-  background: transparent;
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1px solid rgba(1, 3, 4, 0.14);
+  border-radius: 7px;
+  background: #ffffff;
   color: var(--mf-ink);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
-  text-decoration: underline;
-  text-underline-offset: 4px;
   cursor: pointer;
+  box-shadow: 0 1px 2px rgba(1, 3, 4, 0.08);
+  transition: background-color 0.15s ease;
+}
+.mf-flow-pause:hover {
+  background: #f7f7f7;
+}
+.mf-flow-body {
+  padding: 16px 18px 14px;
+}
+.mf-flow-inset {
+  padding: 14px;
+  border: 1px solid rgba(1, 3, 4, 0.1);
+  border-radius: 6px;
+  background: #f7f7f7;
 }
 .mf-flow-cols {
   display: grid;
@@ -1389,6 +1477,7 @@ html:has(.mf-root) body {
 }
 .mf-flow-col {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   align-content: start;
   gap: 8px;
   min-height: 62px;
@@ -1398,7 +1487,8 @@ html:has(.mf-root) body {
   align-items: center;
   min-height: 62px;
   padding: 10px 12px;
-  border-radius: 10px;
+  border: 1px solid rgba(1, 3, 4, 0.06);
+  border-radius: 6px;
   background: var(--c-soft, var(--mf-wash));
   font-size: 12px;
   line-height: 1.3;
@@ -1423,7 +1513,7 @@ html:has(.mf-root) body {
   height: 76px;
   background: var(--c);
   color: var(--c-on);
-  box-shadow: 0 6px 18px rgba(1, 3, 4, 0.18);
+  box-shadow: 0 2px 6px rgba(1, 3, 4, 0.16);
   opacity: 0;
   transform: translateX(calc(var(--col, 0) * (100% + 8px)));
   transition:
@@ -1503,8 +1593,14 @@ html:has(.mf-root) body {
     top: -7px;
     left: 0;
   }
-  .mf-flow-board {
-    padding: 12px;
+  .mf-flow-body {
+    padding: 10px;
+  }
+  .mf-flow-inset {
+    padding: 8px;
+  }
+  .mf-flow-bar {
+    padding-left: 12px;
   }
   .mf-flow-cols {
     gap: 4px;
@@ -1553,6 +1649,7 @@ html:has(.mf-root) body {
     border-top: 1px solid var(--mf-line);
   }
   .mf-menu .mf-nav-link {
+    align-self: flex-start;
     min-height: 48px;
     font-size: 16px;
   }

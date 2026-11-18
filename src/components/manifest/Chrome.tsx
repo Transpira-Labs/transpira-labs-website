@@ -164,7 +164,9 @@ export function BookForm() {
           Book a call
         </button>
       </div>
-      <p>Opens our booking page with your email filled in.</p>
+      <p>
+        Your email is only passed to our booking page. <Link to="/privacy">Privacy policy</Link>
+      </p>
     </form>
   );
 }
