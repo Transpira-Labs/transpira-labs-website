@@ -1,9 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import floor from "@/assets/supply-floor.jpg";
 import adiKrish from "@/assets/adi-krish.png";
 import fusenWorldLogo from "@/assets/fusen-world.jpeg";
-import { CAL_URL } from "@/components/site-chrome";
-import { Arrow, Footer, Nav, PhotoBand } from "./Chrome";
+import { Arrow, Closing, Footer, Nav } from "./Chrome";
 
 const TEAM: { name: string; role: string; photo?: string; initials: string; bullets: string[] }[] =
   [
@@ -46,24 +44,22 @@ export function AboutPage() {
     <div className="mf-root">
       <Nav current="about" />
       <main>
-        <PhotoBand src={floor} shade={0.55}>
-          <div className="mf-page-hero">
-            <p className="mf-kicker">Transpira Labs</p>
-            <h1 className="mf-h1">AI that is actually useful for everyone.</h1>
-            <p className="mf-lede">
-              We're a research lab ensuring that AI is useful for everyone, not just a select few.
-              Manifest, our text agent, is where that work meets freight brokers.
-            </p>
-          </div>
-        </PhotoBand>
+        <section className="mf-wrap mf-page-hero">
+          <p className="mf-kicker">Transpira Labs</p>
+          <h1 className="mf-h1">AI that is actually useful for everyone.</h1>
+          <p className="mf-lede">
+            We're a research lab ensuring that AI is useful for everyone, not just a select few.
+            Manifest, our text agent, is where that work meets freight brokers.
+          </p>
+        </section>
 
-        <section className="mf-wrap mf-section">
+        <section className="mf-wrap mf-gap">
           <h2 className="mf-h2">The team</h2>
-          <div className="mf-team">
+          <ul className="mf-cols">
             {TEAM.map((m) => (
-              <div key={m.name} className="mf-person">
+              <li key={m.name} className="mf-person">
                 {m.photo ? (
-                  <img src={m.photo} alt={m.name} width={88} height={88} className="mf-avatar" />
+                  <img src={m.photo} alt="" width={72} height={72} className="mf-avatar" />
                 ) : (
                   <div className="mf-avatar" aria-hidden="true">
                     {m.initials}
@@ -76,63 +72,52 @@ export function AboutPage() {
                     <li key={b}>{b}</li>
                   ))}
                 </ul>
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </section>
 
-        <section className="mf-wrap">
+        <section className="mf-wrap mf-gap">
           <div className="mf-backed">
-            <h2 className="mf-h2">Backed by Fusen World</h2>
+            <h2 className="mf-h3">Backed by Fusen World</h2>
             <a href="https://fusen.world/" target="_blank" rel="noreferrer">
               <img src={fusenWorldLogo} alt="Fusen World" />
             </a>
           </div>
         </section>
+
+        <section className="mf-wrap mf-gap" style={{ paddingBottom: "clamp(80px, 10vw, 136px)" }}>
+          <h2 className="mf-h2 mf-section-title">More from the lab</h2>
+          <ul className="mf-links">
+            <li>
+              <Link to="/case-studies">
+                <strong className="mf-h3">Our research</strong>
+                <span>Case studies and SupChain-Bench</span>
+                <Arrow />
+              </Link>
+            </li>
+            <li>
+              <Link to="/environments">
+                <strong className="mf-h3">Environments</strong>
+                <span>
+                  Shipped to frontier AI labs; the same technology powers our newer products
+                </span>
+                <Arrow />
+              </Link>
+            </li>
+            <li>
+              <Link to="/contact">
+                <strong className="mf-h3">Contact</strong>
+                <span>Email us or book a call</span>
+                <Arrow />
+              </Link>
+            </li>
+          </ul>
+        </section>
       </main>
 
-      <div className="mf-dark">
-        <section className="mf-wrap mf-lab">
-          <h2 className="mf-h2">More from the lab</h2>
-          <div className="mf-lab-grid">
-            <Link to="/case-studies" className="mf-lab-card">
-              <span>Case studies and SupChain-Bench</span>
-              <span>
-                Our research
-                <span className="mf-arrow">
-                  <Arrow />
-                </span>
-              </span>
-            </Link>
-            <Link to="/environments" className="mf-lab-card">
-              <span>
-                Shipped to frontier AI labs; the same technology powers our newer products
-              </span>
-              <span>
-                Environments
-                <span className="mf-arrow">
-                  <Arrow />
-                </span>
-              </span>
-            </Link>
-            <a
-              href={CAL_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="mf-lab-card mf-lab-card--amber"
-            >
-              <span>20 minutes with Adi</span>
-              <span>
-                Book a call
-                <span className="mf-arrow">
-                  <Arrow />
-                </span>
-              </span>
-            </a>
-          </div>
-        </section>
-        <Footer />
-      </div>
+      <Closing />
+      <Footer />
     </div>
   );
 }

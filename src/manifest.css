@@ -1,40 +1,49 @@
 /*
- * The Manifest pages: home, walkthrough and about. Everything is scoped to
- * .mf-root so the older dark pages (pricing, contact, case studies) keep
- * their own look. Black on white, one accent, Geist throughout.
+ * The Manifest pages: home, walkthrough, about, contact and the legal pages.
+ * Everything is scoped to .mf-root so the research pages keep their own look.
+ *
+ * The idea: the product is a text thread, so the thread is the one loud thing.
+ * Everything around it is black type on white, set in Overpass, the open
+ * typeface drawn from US highway signs. Amber is the only accent, used where
+ * the broker acts. Texts are set in the phone's own system font, so they read
+ * as real messages and not as page copy.
+ *
+ * Shapes are kept to a short list: 18px for message bubbles, 12px for panels
+ * and windows, 6px for small things inside a window, and a full pill for
+ * buttons. There are two shadows: the small one under buttons, and the
+ * faint one under a window.
  */
 
 .mf-root {
-  --mf-ink: #010304;
-  --mf-ink-2: #4d4f4f;
-  --mf-ink-3: #9a9b9c;
-  --mf-line: rgba(1, 3, 4, 0.12);
-  --mf-wash: #f3f3f3;
+  --mf-ink: #000000;
+  --mf-ink-2: #55585a;
+  --mf-ink-3: #8b8e90;
+  --mf-line: rgba(0, 0, 0, 0.14);
+  --mf-wash: #f2f2f2;
   --mf-sand: #e9e9df;
   --mf-amber: #f5a300;
   --mf-ok: #0e7a32;
-  --mf-night: #010304;
-  --mf-night-2: #1a1b1c;
-  --mf-night-3: #262829;
-  --mf-on-night: #ffffff;
-  --mf-on-night-2: #c4c5c5;
   --mf-nav-h: 64px;
+  --mf-font: "Overpass Variable", "Helvetica Neue", Arial, sans-serif;
+  --mf-font-msg: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  /* The colours a message thread is drawn in. A panel that is not white resets them. */
+  --im-ground: #ffffff;
+  --im-them: #e9e9eb;
   /* The pinned phone never runs past the bottom of a short window. */
-  --mf-phone-h: min(650px, calc(100svh - var(--mf-nav-h) - 48px));
+  --mf-phone-h: min(640px, calc(100svh - var(--mf-nav-h) - 48px));
 
   min-height: 100vh;
   background: #ffffff;
   color: var(--mf-ink);
-  font-family: "Geist Variable", "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--mf-font);
   font-size: 16px;
-  line-height: 1.4;
-  letter-spacing: -0.01em;
+  line-height: 1.5;
 }
 
 html:has(.mf-root),
 html:has(.mf-root) body {
   background: #ffffff;
-  color: #010304;
+  color: #000000;
 }
 
 .mf-root ::selection {
@@ -65,49 +74,47 @@ html:has(.mf-root) body {
   padding-inline: max(24px, env(safe-area-inset-left, 0px))
     max(24px, env(safe-area-inset-right, 0px));
 }
+/* The space between one section and the next. */
+.mf-gap {
+  padding-top: clamp(80px, 10vw, 136px);
+}
 
-/* ---- Type ---- */
+/* ---- Type: 14, 16, 18, 21, then the headings ---- */
 
 .mf-h1 {
-  font-size: clamp(40px, 5.4vw, 72px);
-  line-height: 1.04;
-  font-weight: 500;
+  font-size: clamp(44px, 6.4vw, 92px);
+  line-height: 0.98;
+  font-weight: 800;
   letter-spacing: -0.035em;
   text-wrap: balance;
 }
 .mf-h2 {
-  font-size: clamp(30px, 3.4vw, 42px);
-  line-height: 1.1;
-  font-weight: 500;
-  letter-spacing: -0.035em;
+  font-size: clamp(30px, 3.8vw, 50px);
+  line-height: 1.04;
+  font-weight: 800;
+  letter-spacing: -0.03em;
   text-wrap: balance;
 }
-.mf-h2--xl {
-  font-size: clamp(36px, 5vw, 64px);
-  line-height: 1.05;
-}
 .mf-h3 {
-  font-size: 22px;
+  font-size: 21px;
   line-height: 1.2;
-  font-weight: 500;
-  letter-spacing: -0.02em;
+  font-weight: 700;
+  letter-spacing: -0.015em;
 }
 .mf-lede {
-  font-size: 18px;
-  line-height: 1.45;
-}
-.mf-sub {
-  font-size: clamp(18px, 1.8vw, 22px);
-  line-height: 1.3;
-  font-weight: 500;
-  letter-spacing: -0.02em;
+  font-size: clamp(18px, 1.6vw, 21px);
+  line-height: 1.4;
 }
 .mf-muted {
   color: var(--mf-ink-2);
 }
 .mf-small {
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 14px;
+}
+.mf-kicker {
+  margin-bottom: 18px;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 /* ---- Buttons ---- */
@@ -116,35 +123,31 @@ html:has(.mf-root) body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 44px;
-  padding: 0 20px;
+  min-height: 46px;
+  padding: 2px 22px 0;
   border: 1px solid var(--mf-ink);
   border-radius: 999px;
   background: var(--mf-ink);
   color: #ffffff;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 700;
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
-  box-shadow: 0 1px 2px rgba(1, 3, 4, 0.16);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16);
   transition:
     background-color 0.15s ease,
     box-shadow 0.15s ease,
     transform 0.15s ease;
 }
 .mf-btn:hover {
-  background: #2c2e2f;
-  box-shadow: 0 2px 5px rgba(1, 3, 4, 0.2);
+  background: #2b2b2b;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   transform: translateY(-1px);
 }
 .mf-btn:active {
-  box-shadow: 0 1px 1px rgba(1, 3, 4, 0.16);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.16);
   transform: translateY(0) scale(0.98);
-}
-.mf-btn--lg {
-  min-height: 48px;
-  padding: 0 24px;
 }
 .mf-btn--light {
   border-color: #ffffff;
@@ -162,12 +165,6 @@ html:has(.mf-root) body {
 .mf-btn--amber:hover {
   background: #ffb41f;
 }
-.mf-btn--block {
-  display: flex;
-  width: 100%;
-  border-radius: 8px;
-  min-height: 50px;
-}
 
 /* ---- Nav ---- */
 
@@ -175,21 +172,10 @@ html:has(.mf-root) body {
   position: sticky;
   top: 0;
   z-index: 30;
-  background: rgba(255, 255, 255, 0.88);
+  border-bottom: 1px solid var(--mf-line);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  transition: background-color 0.25s ease;
-}
-/* Over the homepage's full-window photo the bar is clear and its text is white. */
-.mf-nav[data-clear="true"] {
-  background: transparent;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-}
-.mf-nav[data-clear="true"] .mf-brand,
-.mf-nav[data-clear="true"] .mf-nav-link,
-.mf-nav[data-clear="true"] .mf-menu-btn {
-  color: #ffffff;
 }
 .mf-nav-in {
   display: flex;
@@ -203,10 +189,11 @@ html:has(.mf-root) body {
   align-items: center;
   gap: 9px;
   min-height: 44px;
+  padding-top: 2px;
   color: var(--mf-ink);
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
   text-decoration: none;
 }
 .mf-nav-links {
@@ -218,9 +205,12 @@ html:has(.mf-root) body {
   position: relative;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  min-width: 44px;
   min-height: 44px;
+  padding-top: 2px;
   color: var(--mf-ink);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   text-decoration: none;
 }
@@ -230,7 +220,7 @@ html:has(.mf-root) body {
   right: 0;
   bottom: 9px;
   left: 0;
-  height: 1.5px;
+  height: 2px;
   background: currentColor;
   content: "";
   transform: scaleX(0);
@@ -251,11 +241,11 @@ html:has(.mf-root) body {
   display: none;
   align-items: center;
   min-height: 44px;
-  padding: 0 4px;
+  padding: 2px 4px 0;
   border: 0;
   background: transparent;
   color: var(--mf-ink);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   cursor: pointer;
 }
@@ -263,170 +253,23 @@ html:has(.mf-root) body {
   display: none;
 }
 
-/* ---- Photo bands: the hero and the dark sections ---- */
+/* ---- Message bubbles: one style for every thread on the site ---- */
 
-.mf-band {
-  position: relative;
-  overflow: hidden;
-  background: var(--mf-night);
-  color: #ffffff;
-}
-.mf-band-img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.mf-band-shade {
-  position: absolute;
-  inset: 0;
-  background: rgba(1, 3, 4, var(--mf-shade, 0.6));
-}
-.mf-band-in {
-  position: relative;
-}
-
-/* The homepage hero fills the whole first screen, and its photo runs up behind the nav. */
-.mf-hero {
-  display: flex;
-  align-items: center;
-  min-height: 100svh;
-  margin-top: calc(-1 * var(--mf-nav-h));
-}
-.mf-hero .mf-band-in {
-  width: 100%;
-}
-/* A little darker at the very top, so the nav's white text reads against the sky. */
-.mf-hero .mf-band-shade {
-  background: linear-gradient(to bottom, rgba(1, 3, 4, 0.58) 0, rgba(1, 3, 4, 0.38) 180px);
-}
-.mf-hero-in {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 48px 64px;
-  padding-block: calc(var(--mf-nav-h) + 40px) 64px;
-}
-.mf-hero-copy {
-  flex: 1 1 520px;
-  min-width: 0;
-}
-.mf-hero-copy .mf-lede {
-  max-width: 520px;
-  margin-top: 22px;
-  font-weight: 500;
-}
-.mf-hero-copy .mf-btn {
-  margin-top: 30px;
-}
-.mf-page-hero {
-  padding-block: clamp(84px, 11vw, 130px) clamp(80px, 10vw, 120px);
-}
-.mf-page-hero .mf-h1 {
-  max-width: 860px;
-}
-.mf-page-hero .mf-lede {
-  max-width: 580px;
-  margin-top: 24px;
-  font-weight: 500;
-}
-.mf-kicker {
-  margin-bottom: 18px;
-  font-size: 14px;
-  font-weight: 500;
-}
-.mf-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 30px;
-}
-
-/* ---- Message bubbles, used by every thread on the site ---- */
-
-.mf-b {
-  align-self: flex-start;
-  max-width: 86%;
-  padding: 10px 14px;
-  border-radius: 18px;
-  background: var(--mf-wash);
-  color: var(--mf-ink);
-  font-size: 14px;
-  line-height: 1.35;
-  overflow-wrap: anywhere;
-}
-.mf-b--me {
-  align-self: flex-end;
-  background: var(--mf-ink);
-  color: #ffffff;
-  font-weight: 600;
-}
-.mf-b--night {
-  background: var(--mf-night-3);
-  color: #ffffff;
-}
-.mf-b--amber {
-  align-self: flex-end;
-  background: var(--mf-amber);
-  color: var(--mf-ink);
-  font-weight: 600;
-}
-.mf-b--white {
-  background: #ffffff;
-  box-shadow: 0 10px 40px rgba(1, 3, 4, 0.12);
-}
-
-/* ---- Hero thread card ---- */
-
-.mf-tc {
-  flex: 0 1 400px;
-  min-width: min(280px, 100%);
-  padding: 20px 14px 14px;
-  border-radius: 16px;
-  background: #ffffff;
-  color: var(--mf-ink);
-}
-.mf-tc-head {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-inline: 10px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--mf-line);
-}
-.mf-tc-head h2 {
-  font-size: 16px;
-  font-weight: 600;
-}
-.mf-tc-thread {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: 3px;
-  height: 320px;
-  overflow: hidden;
-  padding: 16px 16px 14px;
-  /* Older messages fade out under the header instead of being cut off. */
-  mask-image: linear-gradient(to bottom, transparent 0, #000 36px);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 36px);
-}
-/* Bubbles drawn like Messages, with the visitor's side in black. */
 .mf-im {
   position: relative;
-  max-width: 78%;
-  padding: 8px 13px;
-  border-radius: 18px;
-  font-size: 15px;
-  line-height: 1.3;
-  overflow-wrap: anywhere;
-  animation: mf-im-in 0.34s cubic-bezier(0.2, 0.9, 0.3, 1.25) both;
-}
-.mf-im--them {
   align-self: flex-start;
-  background: #e9e9eb;
+  max-width: 80%;
+  padding: 9px 14px;
+  border-radius: 18px;
+  background: var(--im-them);
   color: var(--mf-ink);
+  font-family: var(--mf-font-msg);
+  font-size: 16px;
+  line-height: 1.32;
+  overflow-wrap: anywhere;
   transform-origin: 0 100%;
+  /* Keeps the tail, which sits behind the bubble, in front of whatever the thread is on. */
+  isolation: isolate;
 }
 .mf-im--me {
   align-self: flex-end;
@@ -437,7 +280,7 @@ html:has(.mf-root) body {
 .mf-im[data-gap] {
   margin-top: 8px;
 }
-/* The tail: a curl in the bubble's colour, trimmed by a white one beside it. Only the last bubble of a run has one. */
+/* The tail: a curl in the bubble's colour, trimmed by one in the ground's colour. Only the last bubble of a run has one. */
 .mf-im[data-tail]::before,
 .mf-im[data-tail]::after {
   position: absolute;
@@ -452,7 +295,7 @@ html:has(.mf-root) body {
 }
 .mf-im[data-tail]::after {
   width: 26px;
-  background: #ffffff;
+  background: var(--im-ground);
 }
 .mf-im--me[data-tail]::before {
   right: -7px;
@@ -462,13 +305,17 @@ html:has(.mf-root) body {
   right: -26px;
   border-bottom-left-radius: 10px;
 }
-.mf-im--them[data-tail]::before {
+.mf-im:not(.mf-im--me)[data-tail]::before {
   left: -7px;
   border-bottom-right-radius: 16px 14px;
 }
-.mf-im--them[data-tail]::after {
+.mf-im:not(.mf-im--me)[data-tail]::after {
   left: -26px;
   border-bottom-right-radius: 10px;
+}
+/* A bubble that has just arrived. Threads that are only pictures of a conversation leave this off. */
+.mf-im--in {
+  animation: mf-im-in 0.34s cubic-bezier(0.2, 0.9, 0.3, 1.25) both;
 }
 @keyframes mf-im-in {
   from {
@@ -484,16 +331,25 @@ html:has(.mf-root) body {
   align-self: flex-end;
   margin: 2px 2px 0 0;
   color: #6e6e73;
-  font-size: 11px;
+  font-family: var(--mf-font-msg);
+  font-size: 12px;
   font-weight: 500;
   animation: mf-status-in 0.3s 0.25s ease both;
+}
+@keyframes mf-status-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 /* The agent is typing: three dots that rise in turn. */
 .mf-im--typing {
   display: flex;
   align-items: center;
   gap: 4px;
-  padding: 13px 14px;
+  padding: 14px 15px;
 }
 .mf-im--typing i {
   width: 7px;
@@ -520,66 +376,141 @@ html:has(.mf-root) body {
     transform: translateY(-3px);
   }
 }
-.mf-chip:disabled {
-  opacity: 0.45;
+/* A reply not yet sent: the outline of a bubble. Pressing one sends it. */
+.mf-reply {
+  display: inline-flex;
+  align-items: center;
+  min-height: 46px;
+  padding: 0 18px;
+  border: 1.5px solid var(--mf-ink);
+  border-radius: 18px;
+  background: transparent;
+  color: var(--mf-ink);
+  font-family: var(--mf-font-msg);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+button.mf-reply:hover {
+  background: var(--mf-ink);
+  color: #ffffff;
+}
+button.mf-reply:active {
+  transform: scale(0.96);
+}
+button.mf-reply:disabled {
+  opacity: 0.35;
   cursor: default;
   pointer-events: none;
 }
-.mf-tc-label {
-  margin: 0 8px 8px;
-}
-.mf-tc-replies {
+.mf-replies {
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
-  gap: 6px;
-  /* Always room for two rows of replies, so the card never changes height. */
-  height: 94px;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* ---- Home hero: the headline, and a thread you can answer ---- */
+
+.mf-hero {
+  display: grid;
+  align-items: center;
+  min-height: calc(100svh - var(--mf-nav-h));
+}
+.mf-hero-in {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(40px, 6vw, 104px);
+  padding-block: 48px 64px;
+}
+.mf-hero-copy .mf-lede {
+  max-width: 30em;
+  margin-top: 26px;
+}
+.mf-hero-copy .mf-btn {
+  margin-top: 32px;
+}
+.mf-tc {
+  justify-self: end;
+  width: 100%;
+  max-width: 470px;
+}
+.mf-tc-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--mf-line);
+}
+.mf-tc-head h2 {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+/* The lines under a contact's name are the phone's own, so they take its font. */
+.mf-tc-head p,
+.mf-phone-head span span,
+.mf-sheet .mf-small {
+  font-family: var(--mf-font-msg);
+}
+.mf-tc-thread {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 3px;
+  height: 370px;
+  overflow: hidden;
+  padding: 38px 10px 14px;
+  /* Older messages fade out under the header instead of being cut off. */
+  mask-image: linear-gradient(to bottom, transparent 0, #000 36px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 36px);
+}
+/* The hero's thread is the one loud thing on the page, so its texts are set a size up. */
+.mf-tc .mf-im,
+.mf-tc .mf-reply {
+  font-size: 18px;
+}
+.mf-tc .mf-reply {
+  min-height: 50px;
+  padding-inline: 20px;
+}
+.mf-tc-time {
+  flex: none;
+  align-self: center;
+  margin-bottom: auto;
+  color: #6e6e73;
+  font-family: var(--mf-font-msg);
+  font-size: 12px;
+  font-weight: 500;
+}
+.mf-tc .mf-replies {
+  /* Always room for two rows of replies, so the thread never changes height. */
+  height: 108px;
   padding-inline: 4px;
-  margin-bottom: 12px;
-}
-.mf-chip {
-  min-height: 44px;
-  padding: 0 18px;
-  border: 1px solid rgba(1, 3, 4, 0.22);
-  border-radius: 999px;
-  background: #ffffff;
-  color: var(--mf-ink);
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 1px 2px rgba(1, 3, 4, 0.08);
-  transition:
-    background-color 0.15s ease,
-    box-shadow 0.15s ease,
-    transform 0.15s ease;
-}
-.mf-chip:hover {
-  background: var(--mf-wash);
-  box-shadow: 0 2px 5px rgba(1, 3, 4, 0.12);
-  transform: translateY(-1px);
-}
-.mf-chip:active {
-  transform: translateY(0) scale(0.98);
 }
 
 /* ---- One load, one thread: the pinned phone ---- */
 
 .mf-story-head {
-  padding-top: clamp(80px, 10vw, 120px);
   text-align: center;
 }
 .mf-story-head .mf-h2 {
-  max-width: 640px;
+  max-width: 15em;
   margin-inline: auto;
 }
-.mf-story-head .mf-sub {
-  max-width: 560px;
-  margin: 22px auto 0;
+.mf-story-head .mf-lede {
+  max-width: 30em;
+  margin: 20px auto 0;
 }
 .mf-track {
-  height: calc(var(--mf-phone-h) + 2100px);
-  margin-top: clamp(56px, 7vw, 90px);
+  height: calc(var(--mf-phone-h) + 1750px);
+  margin-top: clamp(48px, 6vw, 80px);
 }
 .mf-story {
   position: sticky;
@@ -594,7 +525,7 @@ html:has(.mf-root) body {
 .mf-stops {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
   justify-self: end;
   width: 100%;
   max-width: 300px;
@@ -607,8 +538,8 @@ html:has(.mf-root) body {
   padding-block: 6px;
   color: var(--mf-ink-3);
   font-size: 26px;
-  font-weight: 500;
-  line-height: 1.15;
+  font-weight: 800;
+  line-height: 1.1;
   letter-spacing: -0.03em;
   transition:
     color 0.3s ease,
@@ -616,12 +547,15 @@ html:has(.mf-root) body {
 }
 .mf-stops li[data-on="true"] {
   color: var(--mf-ink);
-  font-size: 42px;
+  font-size: 44px;
 }
 .mf-stops li span:last-child {
+  color: var(--mf-ink-2);
   font-size: 14px;
-  letter-spacing: -0.01em;
+  font-weight: 600;
+  letter-spacing: 0;
 }
+/* A phone in outline: a black body around a white screen, so the texts look as they do everywhere else. */
 .mf-phone {
   position: relative;
   justify-self: center;
@@ -629,47 +563,36 @@ html:has(.mf-root) body {
   max-width: 100%;
   height: var(--mf-phone-h);
   overflow: hidden;
-  border-radius: 52px;
-  background: var(--mf-night);
-  color: #ffffff;
+  border: 10px solid var(--mf-ink);
+  border-radius: 46px;
+  background: #ffffff;
 }
 .mf-phone-head {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin: 26px 16px 0;
-  padding: 6px 8px 18px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  margin: 18px 14px 0;
+  padding: 0 6px 14px;
+  border-bottom: 1px solid var(--mf-line);
+  font-size: 14px;
+  line-height: 1.25;
 }
 .mf-phone-head strong {
   display: block;
-  font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
 }
 .mf-phone-head span span {
   display: block;
-  color: #b9baba;
-  font-size: 12px;
-  font-weight: 500;
-}
-.mf-mark-disc {
-  display: flex;
-  flex: none;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: #ffffff;
+  color: var(--mf-ink-2);
 }
 .mf-layer {
   position: absolute;
   /* Fills the screen under the phone's header, with the thread centred in it. */
-  inset: 110px 20px 23px;
+  inset: 84px 18px 18px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 10px;
+  gap: 3px;
   opacity: 0;
   transform: translateY(14px);
   transition:
@@ -680,9 +603,9 @@ html:has(.mf-root) body {
   opacity: 1;
   transform: none;
 }
-.mf-layer .mf-b {
-  max-width: 84%;
-  padding: 11px 14px;
+.mf-layer .mf-im {
+  max-width: 86%;
+  font-size: 15px;
 }
 .mf-splash {
   position: absolute;
@@ -698,9 +621,13 @@ html:has(.mf-root) body {
 .mf-splash[data-on="true"] {
   opacity: 1;
 }
-.mf-splash .mf-mark-disc {
-  width: 108px;
-  height: 108px;
+.mf-disc {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #ffffff;
 }
 .mf-behind {
   width: 100%;
@@ -708,119 +635,72 @@ html:has(.mf-root) body {
 }
 .mf-behind h3 {
   margin-bottom: 14px;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
 }
 .mf-behind li {
   display: flex;
   gap: 16px;
   padding-block: 13px;
   border-top: 1px solid var(--mf-line);
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.4;
 }
 .mf-behind li span:first-child {
   flex: none;
   width: 38px;
   color: var(--mf-ink-2);
-  font-weight: 500;
-}
-
-/* ---- Benefits: the promise restated, then what the broker gets ---- */
-
-.mf-benefits {
-  padding-top: clamp(72px, 9vw, 120px);
-}
-.mf-benefits .mf-h2 {
-  max-width: 760px;
-}
-.mf-benefits ul {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
-  gap: 32px 40px;
-  margin-block: clamp(40px, 5vw, 64px) clamp(32px, 4vw, 48px);
-}
-.mf-benefits li {
-  padding-top: 20px;
-  border-top: 1px solid var(--mf-ink);
-}
-.mf-benefits li p {
-  max-width: 340px;
-  margin-top: 10px;
-}
-
-/* ---- Approval band ---- */
-
-.mf-approve {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 48px 80px;
-  padding-block: clamp(88px, 11vw, 140px);
-}
-.mf-approve-copy {
-  flex: 1 1 360px;
-  min-width: 0;
-  max-width: 520px;
-}
-.mf-approve-copy .mf-lede {
-  max-width: 440px;
-  margin-top: 20px;
-  color: #e6e6e6;
-}
-.mf-approve-thread {
-  display: flex;
-  flex: 0 1 360px;
-  flex-direction: column;
-  gap: 10px;
-  min-width: min(260px, 100%);
-}
-.mf-answers {
-  display: flex;
-  flex-wrap: wrap;
-  align-self: flex-end;
-  justify-content: flex-end;
-  gap: 6px;
-}
-.mf-answers span {
-  padding: 10px 18px;
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  border-radius: 999px;
-  font-size: 14px;
   font-weight: 600;
 }
-.mf-answers span:first-child {
-  border-color: var(--mf-amber);
-  background: var(--mf-amber);
-  color: var(--mf-ink);
+/* On a narrow screen the side lists go, and the phone carries a short version at its foot. */
+.mf-phone-foot {
+  display: none;
 }
 
-/* ---- Two-column sections with a ruled list ---- */
+/* ---- Ruled columns: benefits, the team ---- */
+
+.mf-cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  gap: 36px 40px;
+  margin-top: clamp(36px, 5vw, 60px);
+}
+.mf-cols > li {
+  padding-top: 20px;
+  border-top: 2px solid var(--mf-ink);
+}
+.mf-cols > li > p {
+  max-width: 21em;
+  margin-top: 10px;
+}
+.mf-after {
+  margin-top: clamp(32px, 4vw, 48px);
+}
+
+/* ---- Two columns: a statement on the left, the detail on the right ---- */
 
 .mf-split {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
   gap: 48px 96px;
-  padding-top: clamp(88px, 10vw, 130px);
 }
-.mf-split--end {
-  align-items: flex-end;
+.mf-split--mid {
+  align-items: center;
 }
 .mf-split > :first-child {
   flex: 1 1 340px;
   min-width: 0;
 }
 .mf-split > :last-child {
-  flex: 1.2 1 420px;
+  flex: 1.15 1 400px;
   min-width: 0;
 }
 .mf-split .mf-h2 {
-  max-width: 460px;
+  max-width: 11em;
 }
 .mf-split .mf-lede {
-  max-width: 420px;
+  max-width: 24em;
   margin-top: 20px;
 }
 .mf-split .mf-btn {
@@ -831,52 +711,46 @@ html:has(.mf-root) body {
   align-items: baseline;
   justify-content: space-between;
   gap: 24px;
-  padding-block: 18px;
+  padding-block: 17px 15px;
   border-top: 1px solid var(--mf-line);
 }
 .mf-rows > li:first-child {
-  border-top-color: var(--mf-ink);
+  border-top: 2px solid var(--mf-ink);
 }
 .mf-rows > li:last-child {
   border-bottom: 1px solid var(--mf-line);
 }
 .mf-rows strong {
-  font-size: clamp(18px, 1.8vw, 22px);
-  font-weight: 500;
-  letter-spacing: -0.02em;
+  font-size: clamp(18px, 1.7vw, 21px);
+  font-weight: 700;
+  letter-spacing: -0.015em;
 }
 .mf-rows span {
   color: var(--mf-ink-2);
-  font-size: 14px;
   text-align: right;
 }
-.mf-rows--price strong,
-.mf-rows--price span {
+.mf-rows--even span {
   color: var(--mf-ink);
-  font-size: 18px;
-  font-weight: 500;
-  letter-spacing: -0.01em;
+  font-size: clamp(18px, 1.7vw, 21px);
+  font-weight: 700;
 }
-.mf-price {
-  margin-top: 14px;
-  font-size: clamp(72px, 10vw, 136px);
-  line-height: 0.95;
-  font-weight: 500;
-  letter-spacing: -0.05em;
+/* The thread beside "Nothing goes out without you": a picture of the moment, not a live one. */
+.mf-still {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 420px;
+  margin-left: auto;
 }
-.mf-price-label {
-  font-size: 18px;
-  font-weight: 500;
+.mf-still > p:last-child {
+  align-self: flex-end;
 }
 
 /* ---- Board ---- */
 
-.mf-board {
-  padding-top: clamp(88px, 10vw, 130px);
-}
 .mf-board-in {
   overflow: hidden;
-  padding: clamp(32px, 5vw, 64px) clamp(20px, 4vw, 48px);
+  padding: clamp(28px, 5vw, 64px) clamp(18px, 4vw, 48px);
   border-radius: 12px;
   background:
     radial-gradient(90% 120% at 0% 0%, #fbe6bd 0%, rgba(251, 230, 189, 0) 62%),
@@ -890,9 +764,7 @@ html:has(.mf-root) body {
   gap: 20px 64px;
 }
 .mf-board-top p {
-  max-width: 460px;
-  color: #3a3c3d;
-  line-height: 1.45;
+  max-width: 28em;
 }
 
 /* ---- FAQ ---- */
@@ -1019,7 +891,7 @@ html:has(.mf-root) body {
 /* ---- Closing and footer ---- */
 
 .mf-dark {
-  background: var(--mf-night);
+  background: var(--mf-ink);
   color: #ffffff;
 }
 .mf-close {
@@ -1028,33 +900,32 @@ html:has(.mf-root) body {
   align-items: flex-end;
   justify-content: space-between;
   gap: 40px 64px;
-  padding-block: clamp(80px, 10vw, 120px) clamp(72px, 9vw, 110px);
+  padding-block: clamp(80px, 10vw, 128px) clamp(64px, 8vw, 104px);
 }
 .mf-close .mf-h2 {
   flex: 1 1 420px;
-  max-width: 640px;
+  max-width: 12em;
 }
-.mf-close--center {
+.mf-close--stack {
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  align-items: flex-start;
+  gap: 22px;
 }
-.mf-close--center .mf-h2 {
+.mf-close--stack .mf-h2 {
   flex: none;
 }
-.mf-close--center .mf-lede {
-  max-width: 540px;
-  color: #d0d0d0;
+.mf-close--stack .mf-lede {
+  max-width: 28em;
+  color: #d6d6d6;
 }
 .mf-form {
-  flex: 0 1 400px;
+  flex: 0 1 420px;
   min-width: min(260px, 100%);
 }
 .mf-form label {
   display: block;
-  margin-bottom: 16px;
-  font-size: 14px;
-  font-weight: 600;
+  margin-bottom: 12px;
+  font-weight: 700;
 }
 .mf-field {
   display: flex;
@@ -1062,7 +933,7 @@ html:has(.mf-root) body {
   gap: 6px;
   padding: 4px 4px 4px 22px;
   border-radius: 999px;
-  background: #1f2021;
+  background: #1f1f1f;
 }
 .mf-field input {
   flex: 1;
@@ -1072,17 +943,19 @@ html:has(.mf-root) body {
   background: transparent;
   color: #ffffff;
   font-size: 16px;
-  font-weight: 500;
 }
 .mf-field input::placeholder {
   color: #b9baba;
 }
 .mf-form p {
-  margin-top: 14px;
+  margin-top: 6px;
   color: #b9baba;
-  font-size: 12px;
+  font-size: 14px;
 }
 .mf-form p a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   color: #ffffff;
   text-underline-offset: 3px;
 }
@@ -1093,11 +966,7 @@ html:has(.mf-root) body {
   justify-content: space-between;
   gap: 20px 40px;
   padding-block: 28px 56px;
-  border-top: 1px solid rgba(255, 255, 255, 0.14);
-}
-.mf-foot .mf-mark-disc {
-  width: 44px;
-  height: 44px;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
 }
 .mf-foot nav {
   display: flex;
@@ -1107,10 +976,10 @@ html:has(.mf-root) body {
 .mf-foot a {
   display: inline-flex;
   align-items: center;
+  min-width: 44px;
   min-height: 44px;
-  color: var(--mf-on-night-2);
-  font-size: 14px;
-  font-weight: 500;
+  color: #c9c9c9;
+  font-size: 15px;
   text-decoration: none;
 }
 .mf-foot a:hover {
@@ -1118,50 +987,60 @@ html:has(.mf-root) body {
 }
 .mf-foot p {
   color: #b9baba;
-  font-size: 12px;
+  font-size: 14px;
 }
 
-/* ---- Walkthrough ---- */
+/* ---- Inner pages: a headline, then the page ---- */
 
-.mf-section {
-  padding-top: clamp(80px, 9vw, 110px);
+.mf-page-hero {
+  padding-block: clamp(72px, 10vw, 136px) 0;
 }
-.mf-section > .mf-h2 {
-  max-width: 620px;
-  margin-bottom: 48px;
+.mf-page-hero .mf-h1 {
+  max-width: 11em;
 }
-.mf-cards {
+.mf-page-hero .mf-lede {
+  max-width: 30em;
+  margin-top: 26px;
+}
+.mf-page-hero .mf-btn {
+  margin-top: 32px;
+}
+.mf-section-title {
+  max-width: 14em;
+  margin-bottom: clamp(28px, 4vw, 44px);
+}
+
+/* A list of moments, each with its time. Used where the order is the point. */
+.mf-timeline > li {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(270px, 100%), 1fr));
-  gap: 12px;
+  grid-template-columns: 9.5em minmax(0, 1fr);
+  gap: 8px 32px;
+  padding-block: 24px;
+  border-top: 1px solid var(--mf-line);
 }
-.mf-soft {
-  padding: 26px;
-  border-radius: 16px;
-  box-shadow: 0 2px 24px rgba(1, 3, 4, 0.07);
+.mf-timeline > li:first-child {
+  border-top: 2px solid var(--mf-ink);
 }
-.mf-soft .mf-pill {
-  margin-bottom: 40px;
+.mf-timeline > li:last-child {
+  border-bottom: 1px solid var(--mf-line);
 }
-.mf-soft p:last-child {
-  margin-top: 12px;
-}
-.mf-pill {
-  display: inline-block;
-  padding: 8px 12px;
-  border-radius: 999px;
-  background: var(--mf-wash);
-  font-size: 12px;
+.mf-timeline time,
+.mf-when {
+  color: var(--mf-ink-2);
   font-weight: 600;
+}
+.mf-timeline p {
+  max-width: 34em;
+  margin-top: 6px;
 }
 .mf-compare {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
   gap: 12px;
-  margin-top: 12px;
+  margin-top: clamp(28px, 4vw, 44px);
 }
 .mf-compare > div {
-  padding: 36px 32px;
+  padding: clamp(24px, 3vw, 36px);
   border-radius: 12px;
   background: var(--mf-sand);
 }
@@ -1169,110 +1048,91 @@ html:has(.mf-root) body {
   background: var(--mf-amber);
 }
 .mf-compare h3 {
-  margin-bottom: 28px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
 }
-.mf-figs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 24px 56px;
+.mf-compare p {
+  max-width: 17em;
+  margin-top: 14px;
+  font-size: clamp(21px, 2.2vw, 28px);
+  line-height: 1.18;
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
-.mf-fig strong {
-  display: block;
-  font-size: clamp(40px, 5vw, 56px);
-  line-height: 1.1;
-  font-weight: 500;
-  letter-spacing: -0.035em;
-}
-.mf-fig span {
-  display: block;
-  margin-top: 8px;
-  font-size: 18px;
-  font-weight: 500;
-}
-.mf-compare > div > p {
-  margin-top: 32px;
-}
+
 .mf-steps {
   display: flex;
   flex-direction: column;
-  gap: clamp(72px, 9vw, 120px);
-  max-width: 1048px;
-  padding-top: clamp(96px, 11vw, 140px);
+  gap: clamp(64px, 8vw, 104px);
 }
 .mf-step {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 40px 70px;
+  gap: 32px 72px;
 }
 .mf-step-copy {
   flex: 1 1 300px;
   min-width: 0;
 }
-.mf-step-copy .mf-pill {
-  margin-bottom: 14px;
+.mf-step-copy .mf-h3 {
+  margin-top: 6px;
 }
 .mf-step-copy p {
-  max-width: 340px;
+  max-width: 22em;
   margin-top: 12px;
 }
 .mf-step-copy p + p {
-  margin-top: 20px;
-  font-weight: 500;
+  font-weight: 700;
 }
 .mf-panel {
+  --im-ground: var(--mf-sand);
+  --im-them: #ffffff;
   display: flex;
   flex: 1.5 1 380px;
   justify-content: center;
   min-width: 0;
-  padding: clamp(32px, 5vw, 56px) clamp(18px, 3vw, 32px);
+  padding: clamp(28px, 5vw, 56px) clamp(18px, 3vw, 32px);
   border-radius: 12px;
   background: var(--mf-sand);
 }
 .mf-panel--amber {
+  --im-ground: var(--mf-amber);
   background: var(--mf-amber);
 }
-.mf-panel--night {
-  background: var(--mf-night);
-}
+/* A window: a hairline border and the faint shadow. The one box style on the site. */
 .mf-sheet {
   width: 100%;
-  max-width: 360px;
-  padding: 22px;
-  border-radius: 16px;
+  max-width: 380px;
+  padding: 20px 22px;
+  border: 1px solid var(--mf-line);
+  border-radius: 12px;
   background: #ffffff;
-  box-shadow: 0 10px 40px rgba(1, 3, 4, 0.12);
-  font-size: 14px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  font-size: 15px;
 }
 .mf-sheet h4 {
-  margin: 0;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
 }
 .mf-sheet-body {
   margin-top: 14px;
   padding-top: 14px;
   border-top: 1px solid var(--mf-line);
-  line-height: 1.45;
 }
 .mf-sheet-rows li {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding-block: 11px;
+  padding-block: 10px;
   border-top: 1px solid var(--mf-line);
-}
-.mf-sheet-rows li:first-child {
-  border-top: 0;
 }
 .mf-sheet-rows li span:first-child {
   color: var(--mf-ink-2);
 }
 .mf-sheet-rows li span:last-child {
-  font-weight: 500;
+  font-weight: 700;
 }
 .mf-total {
   display: flex;
@@ -1280,40 +1140,26 @@ html:has(.mf-root) body {
   justify-content: space-between;
   gap: 12px;
   margin-top: 12px;
-  padding: 14px 16px;
-  border: 1px solid rgba(1, 3, 4, 0.1);
-  border-radius: 8px;
-  background: #f6f6f6;
-  font-weight: 500;
+  padding: 12px 14px;
+  border: 1px solid var(--mf-line);
+  border-radius: 6px;
+  background: #f7f7f7;
+  font-weight: 600;
 }
 .mf-total strong {
-  font-size: 32px;
-  font-weight: 500;
-  letter-spacing: -0.03em;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
 .mf-panel-thread {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 3px;
   width: 100%;
-  max-width: 360px;
+  max-width: 380px;
 }
-.mf-panel-thread .mf-b {
-  max-width: 88%;
-  padding: 13px 16px;
-}
-.mf-turn {
-  display: flex;
-  align-self: flex-end;
-  gap: 8px;
-  margin-top: 6px;
-}
-.mf-btn--ink-line {
-  background: transparent;
-  color: var(--mf-ink);
-}
-.mf-btn--ink-line:hover {
-  background: rgba(1, 3, 4, 0.08);
+.mf-panel-thread .mf-replies {
+  margin-top: 12px;
 }
 .mf-link-btn {
   align-self: flex-end;
@@ -1323,126 +1169,74 @@ html:has(.mf-root) body {
   border: 0;
   background: transparent;
   color: var(--mf-ink);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 4px;
   cursor: pointer;
 }
-.mf-board-dark {
-  padding-top: clamp(80px, 9vw, 110px);
-}
-.mf-board-dark .mf-board-top p {
-  max-width: 520px;
-  color: #d0d0d0;
-}
 
 /* ---- About ---- */
 
-.mf-team {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
-  gap: 16px;
-}
-.mf-person {
-  padding: 28px;
-  border-radius: 16px;
-  box-shadow: 0 2px 24px rgba(1, 3, 4, 0.07);
-}
 .mf-avatar {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 88px;
-  height: 88px;
+  width: 72px;
+  height: 72px;
+  margin-bottom: 18px;
   border-radius: 50%;
   background: var(--mf-sand);
   object-fit: cover;
-  font-size: 26px;
-  font-weight: 500;
+  font-size: 21px;
+  font-weight: 800;
 }
-.mf-person h3 {
-  margin-top: 22px;
+.mf-person .mf-h3 + p {
+  margin-top: 2px;
 }
-.mf-person h3 + p {
-  margin: 4px 0 18px;
-  font-size: 14px;
-  font-weight: 500;
+.mf-person ul {
+  margin-top: 16px;
 }
-.mf-person li {
-  padding-block: 11px;
+.mf-person ul li {
+  padding-block: 10px;
   border-top: 1px solid var(--mf-line);
-  font-size: 14px;
+  font-size: 15px;
 }
 .mf-backed {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 32px;
-  margin-block: clamp(80px, 9vw, 120px);
-  padding: clamp(32px, 5vw, 56px) clamp(24px, 4vw, 40px);
-  border-radius: 12px;
-  background: var(--mf-sand);
-}
-.mf-backed a {
-  display: block;
-  padding: 18px 26px;
-  border-radius: 16px;
-  background: #ffffff;
-  box-shadow: 0 10px 40px rgba(1, 3, 4, 0.12);
+  gap: 24px 48px;
+  padding-block: clamp(28px, 4vw, 44px);
+  border-block: 1px solid var(--mf-line);
 }
 .mf-backed img {
   display: block;
   width: auto;
-  height: 64px;
+  height: 56px;
 }
-.mf-lab {
-  padding-block: clamp(72px, 9vw, 100px) clamp(80px, 9vw, 110px);
-}
-.mf-lab .mf-h2 {
-  margin-bottom: 48px;
-}
-.mf-lab-grid {
+/* A list of places to go next: a name, a line about it, and an arrow that leans on hover. */
+.mf-links > li > a {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
-  gap: 20px;
-}
-.mf-lab-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 40px;
-  min-height: 240px;
-  padding: 24px;
-  border-radius: 12px;
-  background: var(--mf-night-2);
-  color: #ffffff;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr) auto;
+  align-items: center;
+  gap: 8px 32px;
+  padding-block: 18px;
+  border-top: 1px solid var(--mf-line);
+  color: var(--mf-ink);
   text-decoration: none;
-  transition: background-color 0.15s ease;
 }
-.mf-lab-card:hover {
-  background: #242627;
+.mf-links > li:first-child > a {
+  border-top: 2px solid var(--mf-ink);
 }
-.mf-lab-card > span:first-child {
-  color: #d0d0d0;
-  line-height: 1.4;
+.mf-links > li:last-child > a {
+  border-bottom: 1px solid var(--mf-line);
 }
-.mf-lab-card > span:last-child {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 16px;
-  font-size: 26px;
-  line-height: 1.1;
-  font-weight: 500;
-  letter-spacing: -0.03em;
-}
-.mf-lab-card:hover .mf-arrow {
-  transform: translateX(4px);
+.mf-links a > span:nth-child(2) {
+  color: var(--mf-ink-2);
 }
 .mf-arrow {
-  transition: transform 0.2s ease;
   display: flex;
   flex: none;
   align-items: center;
@@ -1450,18 +1244,51 @@ html:has(.mf-root) body {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: #4d4f4f;
-}
-.mf-lab-card--amber,
-.mf-lab-card--amber:hover {
-  background: var(--mf-amber);
-  color: var(--mf-ink);
-}
-.mf-lab-card--amber > span:first-child {
-  color: var(--mf-ink);
-}
-.mf-lab-card--amber .mf-arrow {
   background: var(--mf-ink);
+  transition: transform 0.2s ease;
+}
+.mf-links a:hover .mf-arrow {
+  transform: translateX(4px);
+}
+
+/* ---- Long text: the privacy policy and the terms ---- */
+
+.mf-prose {
+  max-width: 44em;
+  padding-block: clamp(56px, 8vw, 104px) clamp(72px, 9vw, 120px);
+  font-size: 17px;
+  line-height: 1.6;
+}
+.mf-prose h1 {
+  margin-bottom: 10px;
+}
+.mf-prose > p:first-of-type {
+  margin-bottom: 40px;
+  color: var(--mf-ink-2);
+  font-size: 15px;
+}
+.mf-prose h2 {
+  margin: 44px 0 12px;
+  font-size: 21px;
+  line-height: 1.25;
+  font-weight: 700;
+}
+.mf-prose p + p,
+.mf-prose p + ul,
+.mf-prose ul + p {
+  margin-top: 14px;
+}
+.mf-prose ul {
+  padding-left: 1.2em;
+  list-style: disc;
+}
+.mf-prose li + li {
+  margin-top: 8px;
+}
+.mf-prose a {
+  color: var(--mf-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 /* ---- The board diagram: sources on the left, wires, the board on the right ---- */
@@ -1623,7 +1450,7 @@ html:has(.mf-root) body {
   font-weight: 600;
 }
 .mf-flow-pause {
-  min-height: 36px;
+  min-height: 44px;
   padding: 0 14px;
   border: 1px solid rgba(1, 3, 4, 0.14);
   border-radius: 7px;
@@ -1827,7 +1654,7 @@ html:has(.mf-root) body {
     gap: 4px;
   }
   .mf-flow-col-name {
-    font-size: 11px;
+    font-size: 12px;
     white-space: nowrap;
   }
   /* No room for the dot beside "On the road"; the coloured rule carries the colour. */
@@ -1836,12 +1663,12 @@ html:has(.mf-root) body {
   }
   .mf-flow-card {
     padding: 8px 6px;
-    font-size: 11px;
+    font-size: 12px;
     overflow-wrap: break-word;
     hyphens: auto;
   }
   .mf-flow-card strong {
-    font-size: 11px;
+    font-size: 12px;
   }
   .mf-flow-lane,
   .mf-flow-card--live {
@@ -1856,8 +1683,7 @@ html:has(.mf-root) body {
 /* ---- Narrower screens ---- */
 
 @media (max-width: 940px) {
-  .mf-nav-links,
-  .mf-nav-end .mf-nav-link {
+  .mf-nav-links {
     display: none;
   }
   .mf-menu-btn {
@@ -1872,7 +1698,14 @@ html:has(.mf-root) body {
   .mf-menu .mf-nav-link {
     align-self: flex-start;
     min-height: 48px;
-    font-size: 16px;
+    font-size: 18px;
+  }
+  .mf-hero-in {
+    grid-template-columns: minmax(0, 1fr);
+    padding-block: 40px 48px;
+  }
+  .mf-tc {
+    justify-self: start;
   }
   .mf-story {
     grid-template-columns: minmax(0, 1fr);
@@ -1881,21 +1714,61 @@ html:has(.mf-root) body {
   .mf-behind {
     display: none;
   }
+  /* The side list moves inside the phone: the thread sits above it. */
+  .mf-layer {
+    bottom: 132px;
+  }
+  .mf-phone-foot {
+    position: absolute;
+    inset: auto 18px 16px;
+    display: block;
+    height: 104px;
+    overflow: hidden;
+    padding-top: 10px;
+    border-top: 1px solid var(--mf-line);
+    font-size: 13px;
+    line-height: 1.35;
+  }
+  .mf-phone-foot li {
+    display: flex;
+    gap: 10px;
+    padding-block: 3px;
+  }
+  .mf-phone-foot li span:first-child {
+    flex: none;
+    width: 32px;
+    color: var(--mf-ink-2);
+    font-weight: 600;
+  }
+  .mf-still {
+    margin-left: 0;
+  }
 }
 
-@media (max-width: 560px) {
-  .mf-hero-in {
-    padding-block: calc(var(--mf-nav-h) + 32px) 48px;
-  }
+@media (max-width: 620px) {
   .mf-rows > li {
     flex-direction: column;
-    gap: 4px;
+    gap: 2px;
   }
   .mf-rows span {
     text-align: left;
   }
-  .mf-rows--price > li {
+  .mf-rows--even > li {
     flex-direction: row;
+  }
+  .mf-timeline > li {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .mf-links > li > a {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .mf-links a > span:nth-child(2) {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .mf-links .mf-arrow {
+    grid-row: 1 / span 2;
+    grid-column: 2;
   }
   .mf-faq-a {
     padding-right: 0;
@@ -1911,7 +1784,7 @@ html:has(.mf-root) body {
   .mf-root *::after {
     transition-duration: 0.01ms !important;
   }
-  .mf-im,
+  .mf-im--in,
   .mf-im-status,
   .mf-im--typing i {
     animation: none;

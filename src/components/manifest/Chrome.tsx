@@ -1,30 +1,54 @@
-import { useEffect, useState, type FormEvent, type ReactNode } from "react";
+import { useState, type FormEvent, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
-import logo from "@/assets/transpira-logo.png";
+import mark from "@/assets/manifest-mark.png";
 import { CAL_URL } from "@/components/site-chrome";
 
-type Page = "home" | "walkthrough" | "about";
+type Page = "home" | "walkthrough" | "about" | "other";
 
 /* The real mark, sized by its box. Decorative wherever the name sits beside it. */
 export function Mark({ size, alt = "" }: { size: number; alt?: string }) {
-  return <img src={logo} alt={alt} width={size} height={size} style={{ display: "block" }} />;
+  return <img src={mark} alt={alt} width={size} height={size} style={{ display: "block" }} />;
 }
 
-export function Arrow({ stroke = "#ffffff" }: { stroke?: string }) {
+/* The mark on a white disc, for a contact's picture in a thread. */
+export function Avatar({ size }: { size: number }) {
   return (
-    <svg
-      aria-hidden="true"
-      width="18"
-      height="18"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke={stroke}
-      strokeWidth="2.2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
+    <span className="mf-disc" style={{ width: size, height: size }}>
+      <Mark size={Math.round(size * 0.72)} />
+    </span>
+  );
+}
+
+export function Arrow() {
+  return (
+    <span className="mf-arrow" aria-hidden="true">
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="#ffffff"
+        strokeWidth="2.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M9 5l7 7-7 7" />
+      </svg>
+    </span>
+  );
+}
+
+/* The one call to action on the site. It has one name everywhere. */
+export function BookCall({ light = false }: { light?: boolean }) {
+  return (
+    <a
+      href={CAL_URL}
+      target="_blank"
+      rel="noreferrer"
+      className={light ? "mf-btn mf-btn--light" : "mf-btn"}
     >
-      <path d="M9 5l7 7-7 7" />
-    </svg>
+      Book a call
+    </a>
   );
 }
 
@@ -55,42 +79,21 @@ function NavLinks({ current, onPick }: { current: Page; onPick?: () => void }) {
   );
 }
 
-/*
- * `overPhoto` is for a page whose first screen is a full-window photo that
- * runs up behind the nav. There the nav starts clear, with white text, and
- * turns into the usual white bar once the photo has scrolled away.
- */
-export function Nav({ current, overPhoto = false }: { current: Page; overPhoto?: boolean }) {
+export function Nav({ current }: { current: Page }) {
   const [open, setOpen] = useState(false);
-  const [onPhoto, setOnPhoto] = useState(overPhoto);
-
-  useEffect(() => {
-    if (!overPhoto) return;
-    const check = () => setOnPhoto(window.scrollY < window.innerHeight - 80);
-    check();
-    window.addEventListener("scroll", check, { passive: true });
-    window.addEventListener("resize", check);
-    return () => {
-      window.removeEventListener("scroll", check);
-      window.removeEventListener("resize", check);
-    };
-  }, [overPhoto]);
-
   return (
-    <header className="mf-nav" data-clear={onPhoto && !open}>
+    <header className="mf-nav">
       <div className="mf-wrap">
         <div className="mf-nav-in">
           <Link to="/" className="mf-brand">
             <Mark size={30} />
-            MANIFEST
+            Manifest
           </Link>
           <nav aria-label="Main" className="mf-nav-links">
             <NavLinks current={current} />
           </nav>
           <div className="mf-nav-end">
-            <a href={CAL_URL} target="_blank" rel="noreferrer" className="mf-btn">
-              Book a call
-            </a>
+            <BookCall />
             <button
               type="button"
               className="mf-menu-btn"
@@ -112,53 +115,27 @@ export function Nav({ current, overPhoto = false }: { current: Page; overPhoto?:
 
 export function Footer({ note }: { note?: string }) {
   return (
-    <footer className="mf-wrap">
-      <div className="mf-foot">
-        <span className="mf-mark-disc">
-          <Mark size={32} alt="Manifest" />
-        </span>
-        <nav aria-label="Footer">
-          <Link to="/walkthrough">Walkthrough</Link>
-          <Link to="/about">About</Link>
-          <Link to="/contact">Contact</Link>
-          <Link to="/privacy">Privacy</Link>
-          <Link to="/terms">Terms</Link>
-        </nav>
-        <p>© 2026 Transpira Labs.{note ? ` ${note}` : ""}</p>
+    <footer className="mf-dark">
+      <div className="mf-wrap">
+        <div className="mf-foot">
+          <Avatar size={44} />
+          <nav aria-label="Footer">
+            <Link to="/">Home</Link>
+            <Link to="/walkthrough">Walkthrough</Link>
+            <Link to="/about">About</Link>
+            <Link to="/contact">Contact</Link>
+            <Link to="/privacy">Privacy</Link>
+            <Link to="/terms">Terms</Link>
+          </nav>
+          <p>© 2026 Transpira Labs.{note ? ` ${note}` : ""}</p>
+        </div>
       </div>
     </footer>
   );
 }
 
-/* A full-width photo with a dark shade over it and content on top. */
-export function PhotoBand({
-  src,
-  shade,
-  position,
-  className,
-  children,
-}: {
-  src: string;
-  shade: number;
-  position?: string;
-  className?: string;
-  children: ReactNode;
-}) {
-  return (
-    <section className={className ? `mf-band mf-dark ${className}` : "mf-band mf-dark"}>
-      <img src={src} alt="" className="mf-band-img" style={{ objectPosition: position }} />
-      <div
-        aria-hidden="true"
-        className="mf-band-shade"
-        style={{ ["--mf-shade" as string]: shade }}
-      />
-      <div className="mf-band-in mf-wrap">{children}</div>
-    </section>
-  );
-}
-
 /* The closing email field. It opens the booking page with the address filled in. */
-export function BookForm() {
+function BookForm() {
   const [email, setEmail] = useState("");
   const submit = (e: FormEvent) => {
     e.preventDefault();
@@ -171,13 +148,13 @@ export function BookForm() {
   };
   return (
     <form className="mf-form" onSubmit={submit}>
-      <label htmlFor="mf-email">Book a 20-minute call</label>
+      <label htmlFor="mf-email">Your email</label>
       <div className="mf-field">
         <input
           id="mf-email"
           type="email"
           autoComplete="email"
-          placeholder="Email address"
+          placeholder="you@yourbrokerage.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -189,5 +166,41 @@ export function BookForm() {
         Your email is only passed to our booking page. <Link to="/privacy">Privacy policy</Link>
       </p>
     </form>
+  );
+}
+
+/* The last thing on a page before the footer: the promise once more, and the form. */
+export function Closing({ children }: { children?: ReactNode }) {
+  return (
+    <section className="mf-dark">
+      <div className="mf-wrap">
+        <div className="mf-close">
+          <h2 className="mf-h2">{children ?? "Your next quote could be a one‑word text."}</h2>
+          <BookForm />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* A still picture of a thread: [mine, text] pairs drawn as bubbles, with tails on the last of each run. */
+export function Bubbles({ msgs }: { msgs: [boolean, string][] }) {
+  return (
+    <>
+      {msgs.map(([me, text], n) => {
+        const next = msgs[n + 1];
+        const prev = msgs[n - 1];
+        return (
+          <p
+            key={text}
+            className={me ? "mf-im mf-im--me" : "mf-im"}
+            data-tail={!next || next[0] !== me || undefined}
+            data-gap={(prev && prev[0] !== me) || undefined}
+          >
+            {text}
+          </p>
+        );
+      })}
+    </>
   );
 }

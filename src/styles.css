@@ -3,7 +3,6 @@
 @import "tw-animate-css";
 @import "@fontsource-variable/overpass";
 @import "@fontsource-variable/overpass-mono";
-@import "@fontsource-variable/geist";
 @import "./manifest.css";
 
 @custom-variant dark (&:is(.dark *));

@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import { Mark } from "./Chrome";
+import { Avatar, Bubbles } from "./Chrome";
 
 /*
  * TODO(before launch): the times and figures here are illustrative. Confirm
  * them against the real product.
  *
- * One entry per stop of the load: the texts in the thread ([mine, text]) and
- * what the agent did behind them ([time, what]).
+ * The hero's thread ends with the quote going out. This picks up from there:
+ * one entry per stop of the load after Erin says yes, with the texts in the
+ * thread ([mine, text]) and what the agent did behind them ([time, what]).
  */
 const STOPS: {
   label: string;
@@ -15,31 +16,14 @@ const STOPS: {
   lines: [string, string][];
 }[] = [
   {
-    label: "Quote",
-    when: "Mon 8:07",
-    msgs: [
-      [
-        false,
-        "Erin wants a Kubota tractor moved Macon to Raleigh on Thursday. Similar trips ran $1,950 to $2,050. I suggest $2,100. Send it?",
-      ],
-      [true, "Yes"],
-      [false, "Sent to Erin from your address."],
-    ],
-    lines: [
-      ["8:05", "Quote request from Erin read"],
-      ["8:06", "Similar trips checked: $1,950 to $2,050"],
-      ["8:07", "Sent to Erin from your own address"],
-    ],
-  },
-  {
     label: "Cover",
     when: "Mon 9:10",
     msgs: [
       [
         false,
-        "Erin said yes. I posted the load to DAT and Truckstop. Bluegrass bid $1,750. Book them?",
+        "Erin said yes. Two carriers bid on it: Bluegrass at $1,750, picking up Thursday, and Delta Haul at $1,600, picking up Friday. Who do you want to book?",
       ],
-      [true, "Yes"],
+      [true, "Bluegrass"],
       [false, "Booked."],
     ],
     lines: [
@@ -81,19 +65,19 @@ const STOPS: {
   },
 ];
 
-const BEFORE: [string, string][] = [["8:05", "Erin emails for a price on moving a tractor."]];
+const BEFORE: [string, string][] = [["8:07", "Your yes sent the quote to Erin."]];
 
 /*
  * The phone pins while the page scrolls past it. It arrives as a plain amber
  * block with the mark (stage 0), then shows the thread for each stop of the
- * load in turn (stages 1 to 5). The stop names sit to its left and what the
- * agent did sits to its right; both drop away on narrow screens, where the
- * phone's own header names the stop.
+ * load in turn. The stop names sit to its left and what the agent did sits to
+ * its right; on a narrow screen both go, and the phone carries the agent's
+ * steps at its foot.
  */
 export function LoadStory() {
   const track = useRef<HTMLDivElement>(null);
   const pin = useRef<HTMLDivElement>(null);
-  // Starts on the quote, so the page reads sensibly before any script runs.
+  // Starts on the first stop, so the page reads sensibly before any script runs.
   const [stage, setStage] = useState(1);
 
   useEffect(() => {
@@ -122,13 +106,14 @@ export function LoadStory() {
   }, []);
 
   const cur = stage > 0 ? STOPS[stage - 1] : null;
+  const lines = cur ? cur.lines : BEFORE;
 
   return (
-    <section id="agent" className="mf-wrap">
+    <section id="agent" className="mf-wrap mf-gap">
       <div className="mf-story-head">
-        <h2 className="mf-h2">One load, start to finish, in one thread</h2>
-        <p className="mf-sub">
-          Erin's tractor, from her email on Monday to the invoice on Friday. Scroll to follow it.
+        <h2 className="mf-h2">After your yes, the same thread runs the load</h2>
+        <p className="mf-lede mf-muted">
+          Erin's tractor, from her yes on Monday to the invoice on Friday. Scroll to follow it.
         </p>
       </div>
 
@@ -145,9 +130,7 @@ export function LoadStory() {
 
           <div className="mf-phone">
             <div className="mf-phone-head">
-              <span className="mf-mark-disc">
-                <Mark size={26} />
-              </span>
+              <Avatar size={36} />
               <span>
                 <strong>Manifest</strong>
                 <span>{cur ? `${cur.label} · ${cur.when}` : "Text message"}</span>
@@ -155,24 +138,26 @@ export function LoadStory() {
             </div>
             {STOPS.map((s, n) => (
               <div key={s.label} className="mf-layer" data-on={stage === n + 1}>
-                {s.msgs.map(([me, text]) => (
-                  <p key={text} className={me ? "mf-b mf-b--amber" : "mf-b mf-b--night"}>
-                    {text}
-                  </p>
-                ))}
+                <Bubbles msgs={s.msgs} />
               </div>
             ))}
+            <ul className="mf-phone-foot" aria-hidden="true">
+              {lines.map(([t, x]) => (
+                <li key={x}>
+                  <span>{t}</span>
+                  <span>{x}</span>
+                </li>
+              ))}
+            </ul>
             <div className="mf-splash" aria-hidden="true" data-on={stage === 0}>
-              <span className="mf-mark-disc">
-                <Mark size={78} />
-              </span>
+              <Avatar size={108} />
             </div>
           </div>
 
           <div className="mf-behind" aria-live="polite">
-            <h3>{cur ? "Behind this text" : "Monday, 8:05 AM"}</h3>
+            <h3>{cur ? "Behind this text" : "Monday, 8:07 AM"}</h3>
             <ul>
-              {(cur ? cur.lines : BEFORE).map(([t, x]) => (
+              {lines.map(([t, x]) => (
                 <li key={x}>
                   <span>{t}</span>
                   <span>{x}</span>
