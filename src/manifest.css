@@ -675,7 +675,7 @@ html:has(.mf-root) body {
 }
 .mf-board-in {
   overflow: hidden;
-  padding: clamp(32px, 5vw, 64px) clamp(20px, 4vw, 48px) 0;
+  padding: clamp(32px, 5vw, 64px) clamp(20px, 4vw, 48px);
   border-radius: 12px;
   background: var(--mf-sand);
 }
@@ -690,14 +690,6 @@ html:has(.mf-root) body {
   max-width: 460px;
   color: #3a3c3d;
   line-height: 1.45;
-}
-.mf-board-img {
-  display: block;
-  width: 100%;
-  height: auto;
-  margin-top: clamp(28px, 4vw, 48px);
-  border-radius: 12px 12px 0 0;
-  box-shadow: 0 10px 40px rgba(1, 3, 4, 0.16);
 }
 
 /* ---- FAQ ---- */
@@ -1066,11 +1058,6 @@ html:has(.mf-root) body {
   max-width: 520px;
   color: #d0d0d0;
 }
-.mf-board-dark .mf-board-img {
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 12px;
-  box-shadow: none;
-}
 
 /* ---- About ---- */
 
@@ -1193,6 +1180,290 @@ html:has(.mf-root) body {
 }
 .mf-lab-card--amber .mf-arrow {
   background: var(--mf-ink);
+}
+
+/* ---- The board diagram: sources on the left, wires, the board on the right ---- */
+
+.mf-flow {
+  display: grid;
+  grid-template-columns: minmax(200px, 260px) clamp(48px, 7vw, 104px) minmax(0, 1fr);
+  align-items: center;
+  margin-top: clamp(28px, 4vw, 48px);
+  color: var(--mf-ink);
+}
+.mf-flow-panel {
+  margin-top: clamp(28px, 4vw, 48px);
+  padding: clamp(20px, 4vw, 48px);
+  border-radius: 12px;
+  background: var(--mf-sand);
+}
+.mf-flow-panel .mf-flow {
+  margin-top: 0;
+}
+.mf-flow-sources,
+.mf-flow-wires {
+  display: grid;
+  grid-template-rows: 88px 88px;
+  gap: 16px;
+}
+.mf-flow-src {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  overflow: hidden;
+  padding: 0 16px;
+  border: 1px solid transparent;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 2px 24px rgba(1, 3, 4, 0.07);
+  transition: border-color 0.25s ease;
+}
+.mf-flow-src[data-on="true"] {
+  border-color: var(--mf-ink);
+}
+.mf-flow-icon {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--mf-wash);
+  transition: background-color 0.25s ease;
+}
+.mf-flow-src[data-on="true"] .mf-flow-icon {
+  background: var(--mf-amber);
+}
+.mf-flow-src strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+}
+.mf-flow-src span span {
+  display: block;
+  margin-top: 2px;
+  color: var(--mf-ink-2);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+.mf-flow-wire {
+  position: relative;
+  align-self: center;
+  height: 2px;
+  background: repeating-linear-gradient(90deg, rgba(1, 3, 4, 0.32) 0 6px, transparent 6px 12px);
+}
+.mf-flow-packet {
+  position: absolute;
+  inset: -6px 0 auto;
+  height: 14px;
+  animation: mf-packet-across 0.9s cubic-bezier(0.3, 0, 0.2, 1) forwards;
+}
+.mf-flow-packet::before {
+  position: absolute;
+  top: 0;
+  left: -7px;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--mf-ink);
+  border-radius: 50%;
+  background: var(--mf-amber);
+  content: "";
+}
+@keyframes mf-packet-across {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+@keyframes mf-packet-down {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+.mf-flow-board {
+  min-width: 0;
+  padding: 18px;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 10px 40px rgba(1, 3, 4, 0.12);
+}
+.mf-flow-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 44px;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+.mf-flow-bar strong {
+  font-weight: 600;
+}
+.mf-flow-pause {
+  min-height: 44px;
+  padding: 0 4px;
+  border: 0;
+  background: transparent;
+  color: var(--mf-ink);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+.mf-flow-cols {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+.mf-flow-col-name {
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--mf-line);
+  color: var(--mf-ink-2);
+  font-size: 12px;
+  font-weight: 600;
+}
+.mf-flow-lane {
+  position: relative;
+  height: 76px;
+  margin-block: 8px;
+}
+.mf-flow-col {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  min-height: 62px;
+}
+.mf-flow-card {
+  display: flex;
+  align-items: center;
+  min-height: 62px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--mf-wash);
+  font-size: 12px;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+.mf-flow-card strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+}
+.mf-flow-card span {
+  display: block;
+  margin-top: 2px;
+  color: var(--mf-ink-2);
+  font-weight: 500;
+}
+.mf-flow-card--live {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc((100% - 24px) / 4);
+  height: 76px;
+  background: var(--mf-ink);
+  color: #ffffff;
+  opacity: 0;
+  transform: translateX(calc(var(--col, 0) * (100% + 8px)));
+  transition:
+    transform 0.6s cubic-bezier(0.3, 0, 0.2, 1),
+    opacity 0.3s ease;
+}
+.mf-flow-card--live[data-shown="true"] {
+  opacity: 1;
+}
+/* Hidden between loops: it fades out where it is, then returns to the first column unseen. */
+.mf-flow-card--live:not([data-shown="true"]) {
+  transition:
+    opacity 0.3s ease,
+    transform 0s 0.3s;
+}
+.mf-flow-card--live span {
+  color: #d0d0d0;
+}
+.mf-flow-status {
+  animation: mf-status-in 0.35s ease both;
+}
+@keyframes mf-status-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.mf-flow-caption {
+  margin-top: 14px;
+  color: var(--mf-ink-2);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+@media (max-width: 760px) {
+  .mf-flow {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .mf-flow-sources,
+  .mf-flow-wires {
+    grid-template-rows: none;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .mf-flow-src {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 14px;
+  }
+  .mf-flow-wire {
+    justify-self: center;
+    width: 2px;
+    height: 44px;
+    background: repeating-linear-gradient(180deg, rgba(1, 3, 4, 0.32) 0 6px, transparent 6px 12px);
+  }
+  .mf-flow-packet {
+    inset: 0 auto 0 -6px;
+    width: 14px;
+    height: auto;
+    animation-name: mf-packet-down;
+  }
+  .mf-flow-packet::before {
+    top: -7px;
+    left: 0;
+  }
+  .mf-flow-board {
+    padding: 12px;
+  }
+  .mf-flow-cols {
+    gap: 4px;
+  }
+  .mf-flow-col-name {
+    font-size: 11px;
+  }
+  .mf-flow-card {
+    padding: 8px 6px;
+    font-size: 11px;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+  .mf-flow-card strong {
+    font-size: 11px;
+  }
+  .mf-flow-lane,
+  .mf-flow-card--live {
+    height: 108px;
+  }
+  .mf-flow-card--live {
+    width: calc((100% - 12px) / 4);
+    transform: translateX(calc(var(--col, 0) * (100% + 4px)));
+  }
 }
 
 /* ---- Narrower screens ---- */

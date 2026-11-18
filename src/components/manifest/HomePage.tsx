@@ -1,9 +1,9 @@
 import { useState } from "react";
 import heroPhoto from "@/assets/mountains-2000.jpg";
 import warehouse from "@/assets/warehouse-aisle.jpg";
-import board from "@/assets/manifest-dashboard.png";
 import { CAL_URL } from "@/components/site-chrome";
 import { BookForm, Footer, Nav, PhotoBand } from "./Chrome";
+import { BoardFlow } from "./BoardFlow";
 import { HeroThread } from "./HeroThread";
 import { LoadStory } from "./LoadStory";
 
@@ -160,12 +160,7 @@ export function HomePage() {
                 computer when you want the detail.
               </p>
             </div>
-            <img
-              src={board}
-              alt="The Manifest board, with loads in columns from quote to paid"
-              className="mf-board-img"
-              loading="lazy"
-            />
+            <BoardFlow />
           </div>
         </section>
 

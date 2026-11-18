@@ -1,7 +1,7 @@
 import { useState, type ReactNode } from "react";
 import warehouse from "@/assets/warehouse-aisle.jpg";
-import board from "@/assets/manifest-dashboard.png";
 import { CAL_URL } from "@/components/site-chrome";
+import { BoardFlow } from "./BoardFlow";
 import { Footer, Nav, PhotoBand } from "./Chrome";
 
 /*
@@ -277,12 +277,9 @@ export function WalkthroughPage() {
               quote to paid, and the agent moves each card as the texts come in.
             </p>
           </div>
-          <img
-            src={board}
-            alt="The Manifest board, with loads in columns from quote to paid"
-            className="mf-board-img"
-            loading="lazy"
-          />
+          <div className="mf-flow-panel">
+            <BoardFlow />
+          </div>
         </section>
 
         <section className="mf-wrap">
