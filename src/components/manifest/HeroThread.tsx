@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CAL_URL } from "@/components/site-chrome";
 import { Mark } from "./Chrome";
 
@@ -41,24 +41,63 @@ const FLOW: Reply[][] = [
 
 const START: Msg[] = [{ me: false, text: OPENING }];
 
-/* The hero's card: a short thread with the agent that the visitor can answer. */
+const READ_MS = 550; // a beat before the agent starts typing
+const TYPE_MS = 1050; // how long the three dots show before each reply
+
+/*
+ * The hero's card: a short thread with the agent that the visitor can answer.
+ * It is drawn like a Messages thread, with the visitor's bubbles in black.
+ * A reply pops in as it is sent, then the agent shows it is typing before each
+ * answer arrives.
+ */
 export function HeroThread() {
   const [step, setStep] = useState(0);
   const [log, setLog] = useState<Msg[]>(START);
+  const [typing, setTyping] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const timers = useRef<number[]>([]);
+
+  useEffect(() => () => timers.current.forEach((t) => window.clearTimeout(t)), []);
 
   const pick = (r: Reply) => {
+    if (busy) return;
     if (!r.say) {
       setStep(0);
       setLog(START);
       return;
     }
-    setLog([...log, { me: true, text: r.label }, ...r.say.map((text) => ({ me: false, text }))]);
-    setStep(r.next);
+    const replies = r.say;
+    setLog((l) => [...l, { me: true, text: r.label }]);
+
+    // People who ask for less motion get the answers at once, with no typing dots.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setLog((l) => [...l, ...replies.map((text) => ({ me: false, text }))]);
+      setStep(r.next);
+      return;
+    }
+
+    setBusy(true);
+    let at = READ_MS;
+    const later = (fn: () => void) => timers.current.push(window.setTimeout(fn, at));
+    replies.forEach((text, n) => {
+      later(() => setTyping(true));
+      at += TYPE_MS;
+      later(() => {
+        setTyping(false);
+        setLog((l) => [...l, { me: false, text }]);
+        if (n === replies.length - 1) {
+          setStep(r.next);
+          setBusy(false);
+        }
+      });
+      at += 400;
+    });
   };
 
-  // Only the newest few messages show, the way a phone pins a thread to its latest.
-  const shown = log.slice(-4);
+  // Only the newest messages show, the way a phone keeps a thread pinned to its latest.
+  const shown = log.slice(-6);
   const first = log.length - shown.length;
+  const sentLast = log[log.length - 1].me;
 
   return (
     <div className="mf-tc">
@@ -70,16 +109,45 @@ export function HeroThread() {
         </div>
       </div>
       <div className="mf-tc-thread" aria-live="polite">
-        {shown.map((m, n) => (
-          <p key={first + n} className={m.me ? "mf-b mf-b--me" : "mf-b"}>
-            {m.text}
+        {shown.map((m, n) => {
+          const next = shown[n + 1];
+          const prev = shown[n - 1];
+          return (
+            <p
+              key={first + n}
+              className={m.me ? "mf-im mf-im--me" : "mf-im mf-im--them"}
+              data-tail={(next ? next.me !== m.me : !(typing && !m.me)) || undefined}
+              data-gap={(prev && prev.me !== m.me) || undefined}
+            >
+              {m.text}
+            </p>
+          );
+        })}
+        {sentLast ? <span className="mf-im-status">Delivered</span> : null}
+        {typing ? (
+          <p
+            className="mf-im mf-im--them mf-im--typing"
+            data-tail
+            data-gap={sentLast || undefined}
+            role="status"
+            aria-label="Manifest is typing"
+          >
+            <i />
+            <i />
+            <i />
           </p>
-        ))}
+        ) : null}
       </div>
       <p className="mf-tc-label mf-small mf-muted">Your reply:</p>
       <div className="mf-tc-replies">
         {FLOW[step].map((r) => (
-          <button key={r.label} type="button" className="mf-chip" onClick={() => pick(r)}>
+          <button
+            key={r.label}
+            type="button"
+            className="mf-chip"
+            disabled={busy}
+            onClick={() => pick(r)}
+          >
             {r.label}
           </button>
         ))}
