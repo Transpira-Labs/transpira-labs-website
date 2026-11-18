@@ -1203,8 +1203,8 @@ html:has(.mf-root) body {
 .mf-flow-sources,
 .mf-flow-wires {
   display: grid;
-  grid-template-rows: 88px 88px;
-  gap: 16px;
+  grid-template-rows: repeat(3, 88px);
+  gap: 14px;
 }
 .mf-flow-src {
   display: flex;
@@ -1270,6 +1270,27 @@ html:has(.mf-root) body {
   border-radius: 50%;
   background: var(--mf-amber);
   content: "";
+}
+/* What the agent sends travels the other way, from the board out, as a black dot. */
+.mf-flow-packet[data-out="true"] {
+  animation-direction: reverse;
+}
+.mf-flow-packet[data-out="true"]::before {
+  background: var(--mf-ink);
+}
+.mf-flow-key {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 0 6px 0 0;
+  border: 2px solid var(--mf-ink);
+  border-radius: 50%;
+  background: var(--mf-amber);
+  vertical-align: -1px;
+}
+.mf-flow-key[data-out="true"] {
+  margin-left: 16px;
+  background: var(--mf-ink);
 }
 @keyframes mf-packet-across {
   from {
@@ -1413,14 +1434,23 @@ html:has(.mf-root) body {
   .mf-flow-sources,
   .mf-flow-wires {
     grid-template-rows: none;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
   }
   .mf-flow-src {
     flex-direction: column;
     align-items: flex-start;
+    justify-content: flex-start;
     gap: 8px;
-    padding: 14px;
+    min-height: 148px;
+    padding: 12px 10px;
+  }
+  .mf-flow-src strong {
+    font-size: 13px;
+  }
+  .mf-flow-icon {
+    width: 36px;
+    height: 36px;
   }
   .mf-flow-wire {
     justify-self: center;

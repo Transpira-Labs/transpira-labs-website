@@ -1,24 +1,59 @@
 import { useEffect, useRef, useState } from "react";
 
 /*
- * A diagram of how the board fills itself: an email source and a text source
- * on one side, the board on the other. Each event lights its source, sends a
- * packet down the wire, and lands on the board, where one load's card picks
- * up a new status or moves a column. It loops while it is on screen.
+ * A diagram of how the board fills itself. Three channels sit on one side:
+ * the broker's inbox, the broker's texts, and the load boards. The board sits
+ * on the other. Each event sends a packet down one wire: amber when something
+ * comes in, black when the agent sends something out. One load's card picks up
+ * a new status or moves a column as each one lands. It loops while on screen.
  *
- * TODO(before launch): the load, carrier and prices are illustrative, the same
- * ones the rest of the site uses.
+ * TODO(before launch): the load, carriers and prices are illustrative, the
+ * same ones the rest of the site uses.
  */
-type Source = "email" | "text";
+type Channel = "email" | "text" | "boards";
 
-// Each event: where it comes from, what it says, and the card's column and status once it lands.
-const EVENTS: { from: Source; says: string; col: number; status: string }[] = [
-  { from: "email", says: "Erin Caldwell asks for a quote", col: 0, status: "New request" },
-  { from: "text", says: "You reply yes to $2,100", col: 0, status: "Quote sent · $2,100" },
-  { from: "email", says: "Erin says yes", col: 1, status: "Posted to DAT and Truckstop" },
-  { from: "text", says: "You pick Bluegrass", col: 1, status: "Bluegrass booked" },
-  { from: "text", says: "Driver: picked up", col: 2, status: "Picked up · on time" },
-  { from: "text", says: "You reply yes to the invoice", col: 3, status: "Invoice sent" },
+// Each event: its channel, whether it comes in or goes out, what the channel
+// shows, and the card's column and status once it has happened.
+const EVENTS: { via: Channel; out?: boolean; says: string; col: number; status: string }[] = [
+  { via: "email", says: "Erin asks for a quote", col: 0, status: "New request" },
+  {
+    via: "text",
+    out: true,
+    says: "Agent: $2,100. Send it?",
+    col: 0,
+    status: "Waiting on your yes",
+  },
+  { via: "text", says: "You: Yes", col: 0, status: "Approved" },
+  { via: "email", out: true, says: "Quote sent to Erin", col: 0, status: "Quote sent · $2,100" },
+  { via: "email", says: "Erin says yes", col: 1, status: "Won. Needs a truck" },
+  {
+    via: "boards",
+    out: true,
+    says: "Posted on DAT and Truckstop",
+    col: 1,
+    status: "Posted for carriers",
+  },
+  { via: "boards", says: "Bluegrass bids $1,750", col: 1, status: "1 bid in" },
+  { via: "boards", says: "Delta Haul bids, Friday pickup", col: 1, status: "2 bids in" },
+  { via: "text", out: true, says: "Agent: Book Bluegrass?", col: 1, status: "Waiting on your yes" },
+  { via: "text", says: "You: Yes", col: 1, status: "Bluegrass booked" },
+  { via: "email", out: true, says: "Rate con sent to Bluegrass", col: 1, status: "Rate con sent" },
+  { via: "text", says: "Driver: picked up", col: 2, status: "Picked up · on time" },
+  { via: "text", says: "Driver: delivered", col: 2, status: "Delivered" },
+  { via: "text", says: "You: Yes to the invoice", col: 3, status: "Invoice approved" },
+  {
+    via: "email",
+    out: true,
+    says: "Invoice sent to Erin",
+    col: 3,
+    status: "Invoice sent · $2,100",
+  },
+];
+
+const CHANNELS: { id: Channel; name: string; idle: string }[] = [
+  { id: "email", name: "Your inbox", idle: "Quote requests in, quotes and paperwork out" },
+  { id: "text", name: "Your texts", idle: "The agent asks, you answer" },
+  { id: "boards", name: "Load boards", idle: "DAT and Truckstop: posts out, bids in" },
 ];
 
 const COLUMNS = ["Quote", "Covering", "On the road", "Paid"];
@@ -30,45 +65,39 @@ const OTHERS: [number, string, string][] = [
   [2, "CAT 305", "Valdosta → Mobile"],
 ];
 
-const STEP_MS = 2400; // one event
-const TRAVEL_MS = 900; // the packet's trip down the wire
+const STEP_MS = 2000; // one event
+const TRAVEL_MS = 850; // the packet's trip down the wire
 const LAST = EVENTS.length - 1;
 
-function EmailIcon() {
+function Icon({ of }: { of: Channel }) {
+  const line = { stroke: "currentColor", strokeWidth: 1.7, strokeLinecap: "round" as const };
   return (
     <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none">
-      <rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" strokeWidth="1.7" />
-      <path
-        d="m4 7.5 8 6 8-6"
-        stroke="currentColor"
-        strokeWidth="1.7"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function PhoneIcon() {
-  return (
-    <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none">
-      <rect
-        x="6.5"
-        y="2.5"
-        width="11"
-        height="19"
-        rx="2.6"
-        stroke="currentColor"
-        strokeWidth="1.7"
-      />
-      <path d="M10.5 18.5h3" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+      {of === "email" ? (
+        <>
+          <rect x="3" y="5" width="18" height="14" rx="2.5" {...line} />
+          <path d="m4 7.5 8 6 8-6" strokeLinejoin="round" {...line} />
+        </>
+      ) : of === "text" ? (
+        <>
+          <rect x="6.5" y="2.5" width="11" height="19" rx="2.6" {...line} />
+          <path d="M10.5 18.5h3" {...line} />
+        </>
+      ) : (
+        <>
+          <path d="M2.5 7h10.5v9.5H2.5z" strokeLinejoin="round" {...line} />
+          <path d="M13 10h4l4 3.2v3.3h-8z" strokeLinejoin="round" {...line} />
+          <circle cx="7" cy="17.5" r="1.8" {...line} />
+          <circle cx="17" cy="17.5" r="1.8" {...line} />
+        </>
+      )}
     </svg>
   );
 }
 
 export function BoardFlow() {
   const root = useRef<HTMLDivElement>(null);
-  // `fired` is the event whose packet has left; `landed` is the last one to reach the board.
+  // `fired` is the event whose packet has left; `landed` is the last one that has arrived.
   const [fired, setFired] = useState(LAST);
   const [landed, setLanded] = useState(LAST);
   const [running, setRunning] = useState(false);
@@ -109,39 +138,44 @@ export function BoardFlow() {
     };
   }, [running, paused]);
 
-  const inFlight = !still && fired !== landed ? EVENTS[fired] : null;
-  const at = landed >= 0 ? EVENTS[landed] : null;
-  // Each source shows the last thing it sent.
-  const lastFrom = (from: Source) => {
-    for (let n = Math.max(fired, 0); n >= 0; n--)
-      if (EVENTS[n].from === from) return EVENTS[n].says;
-    return from === "email" ? "Watching your inbox" : "Watching your texts";
+  const now = EVENTS[fired];
+  const inFlight = !still && fired !== landed ? now : null;
+  // Something the agent sends shows on the card as it leaves; something coming in shows once it lands.
+  const cardAt = now.out && landed >= 0 ? fired : landed;
+  const card = cardAt >= 0 ? EVENTS[cardAt] : null;
+  // A channel shows what last came through it. An outgoing message shows there once it arrives.
+  const lastVia = (via: Channel, idle: string) => {
+    for (let n = fired; n >= 0; n--) {
+      const e = EVENTS[n];
+      if (e.via !== via) continue;
+      if (e.out && n === fired && fired !== landed) continue;
+      return e.says;
+    }
+    return idle;
   };
 
   return (
     <div ref={root} className="mf-flow">
       <div className="mf-flow-sources">
-        {(["email", "text"] as const).map((from) => (
-          <div key={from} className="mf-flow-src" data-on={EVENTS[fired]?.from === from && !still}>
-            <span className="mf-flow-icon">{from === "email" ? <EmailIcon /> : <PhoneIcon />}</span>
+        {CHANNELS.map((c) => (
+          <div key={c.id} className="mf-flow-src" data-on={!still && now.via === c.id}>
+            <span className="mf-flow-icon">
+              <Icon of={c.id} />
+            </span>
             <span>
-              <strong>{from === "email" ? "Your inbox" : "Your texts"}</strong>
-              <span>
-                {still
-                  ? from === "email"
-                    ? "Quote requests and replies"
-                    : "Your yes, and drivers' updates"
-                  : lastFrom(from)}
-              </span>
+              <strong>{c.name}</strong>
+              <span>{still ? c.idle : lastVia(c.id, c.idle)}</span>
             </span>
           </div>
         ))}
       </div>
 
       <div className="mf-flow-wires" aria-hidden="true">
-        {(["email", "text"] as const).map((from) => (
-          <span key={from} className="mf-flow-wire">
-            {inFlight?.from === from ? <span key={fired} className="mf-flow-packet" /> : null}
+        {CHANNELS.map((c) => (
+          <span key={c.id} className="mf-flow-wire">
+            {inFlight?.via === c.id ? (
+              <span key={fired} className="mf-flow-packet" data-out={Boolean(inFlight.out)} />
+            ) : null}
           </span>
         ))}
       </div>
@@ -165,13 +199,13 @@ export function BoardFlow() {
         <div className="mf-flow-lane">
           <div
             className="mf-flow-card mf-flow-card--live"
-            data-shown={at !== null}
-            style={{ ["--col" as string]: at ? at.col : 0 }}
+            data-shown={card !== null}
+            style={{ ["--col" as string]: card ? card.col : 0 }}
           >
             <div>
               <strong>Kubota tractor</strong>
-              <span key={landed} className="mf-flow-status">
-                {at ? at.status : ""}
+              <span key={cardAt} className="mf-flow-status">
+                {card ? card.status : ""}
               </span>
             </div>
           </div>
@@ -191,7 +225,8 @@ export function BoardFlow() {
           ))}
         </div>
         <p className="mf-flow-caption">
-          One load, moved across the board by two emails and four texts.
+          <span className="mf-flow-key" data-out="false" /> Coming in
+          <span className="mf-flow-key" data-out="true" /> Sent by the agent
         </p>
       </div>
     </div>
