@@ -381,6 +381,9 @@ html:has(.mf-root) body {
   height: 320px;
   overflow: hidden;
   padding: 16px 16px 14px;
+  /* Older messages fade out under the header instead of being cut off. */
+  mask-image: linear-gradient(to bottom, transparent 0, #000 36px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 36px);
 }
 /* Bubbles drawn like Messages, with the visitor's side in black. */
 .mf-im {
@@ -502,7 +505,10 @@ html:has(.mf-root) body {
 .mf-tc-replies {
   display: flex;
   flex-wrap: wrap;
+  align-content: flex-start;
   gap: 6px;
+  /* Always room for two rows of replies, so the card never changes height. */
+  height: 94px;
   padding-inline: 4px;
   margin-bottom: 12px;
 }

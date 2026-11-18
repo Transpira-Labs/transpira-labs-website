@@ -55,6 +55,8 @@ export function HeroThread() {
   const [log, setLog] = useState<Msg[]>(START);
   const [typing, setTyping] = useState(false);
   const [busy, setBusy] = useState(false);
+  // Replies already sent, as "step:label", so a question cannot be asked twice.
+  const [used, setUsed] = useState<string[]>([]);
   const timers = useRef<number[]>([]);
 
   useEffect(() => () => timers.current.forEach((t) => window.clearTimeout(t)), []);
@@ -64,9 +66,11 @@ export function HeroThread() {
     if (!r.say) {
       setStep(0);
       setLog(START);
+      setUsed([]);
       return;
     }
     const replies = r.say;
+    setUsed((u) => [...u, `${step}:${r.label}`]);
     setLog((l) => [...l, { me: true, text: r.label }]);
 
     // People who ask for less motion get the answers at once, with no typing dots.
@@ -140,17 +144,19 @@ export function HeroThread() {
       </div>
       <p className="mf-tc-label mf-small mf-muted">Your reply:</p>
       <div className="mf-tc-replies">
-        {FLOW[step].map((r) => (
-          <button
-            key={r.label}
-            type="button"
-            className="mf-chip"
-            disabled={busy}
-            onClick={() => pick(r)}
-          >
-            {r.label}
-          </button>
-        ))}
+        {FLOW[step]
+          .filter((r) => !used.includes(`${step}:${r.label}`))
+          .map((r) => (
+            <button
+              key={r.label}
+              type="button"
+              className="mf-chip"
+              disabled={busy}
+              onClick={() => pick(r)}
+            >
+              {r.label}
+            </button>
+          ))}
       </div>
       <a href={CAL_URL} target="_blank" rel="noreferrer" className="mf-btn mf-btn--block">
         Book a call to try it
