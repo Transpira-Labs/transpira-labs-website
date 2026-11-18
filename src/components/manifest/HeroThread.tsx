@@ -12,30 +12,52 @@ type Reply = { label: string; say: string[] | null; next: number };
  */
 const OPENING =
   "Erin wants a Kubota tractor moved Macon to Raleigh on Thursday. Similar trips ran $1,950 to $2,050. I suggest $2,100. Send it?";
-const BID = "Erin said yes. Bluegrass bid $1,750. Book them?";
+const BIDS =
+  "Erin said yes. Two carriers bid on it: Bluegrass at $1,750, picking up Thursday, and Delta Haul at $1,600, picking up Friday. Who do you want to book?";
+const OWED: Reply = { label: "Who owes me?", say: ["$750 is owed on L-2036."], next: 2 };
+const RESTART: Reply = { label: "Start over", say: null, next: 0 };
 
 // Each step lists the replies on offer: what the agent says back and the step that follows.
 const FLOW: Reply[][] = [
   [
-    { label: "Yes", say: ["Sent to Erin at $2,100, from your address.", BID], next: 1 },
+    { label: "Yes", say: ["Sent to Erin at $2,100, from your address.", BIDS], next: 1 },
     {
       label: "Make it $2,200",
-      say: ["Sent to Erin at $2,200, from your address.", BID],
+      say: ["Sent to Erin at $2,200, from your address.", BIDS],
       next: 1,
     },
   ],
   [
-    { label: "Yes", say: ["Booked. Rate con sent. The load is on your board."], next: 2 },
-    { label: "Who else bid?", say: ["Delta Haul, with a Friday pickup."], next: 1 },
+    {
+      label: "Bluegrass",
+      say: ["Bluegrass is booked. Rate con sent. The load is on your board."],
+      next: 2,
+    },
+    {
+      label: "Delta Haul",
+      say: ["Delta Haul is booked for Friday. Rate con sent. The load is on your board."],
+      next: 3,
+    },
   ],
+  // After booking Bluegrass.
   [
     {
       label: "Where is the truck?",
       say: ["Picked up Thursday 9:04. Tracking on time."],
       next: 2,
     },
-    { label: "Who owes me?", say: ["$750 is owed on L-2036."], next: 2 },
-    { label: "Start over", say: null, next: 0 },
+    OWED,
+    RESTART,
+  ],
+  // After booking Delta Haul.
+  [
+    {
+      label: "Where is the truck?",
+      say: ["Pickup is set for Friday. I will text you when it is loaded."],
+      next: 3,
+    },
+    { ...OWED, next: 3 },
+    RESTART,
   ],
 ];
 
