@@ -1343,12 +1343,44 @@ html:has(.mf-root) body {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 8px;
 }
+/* Each column has its own colour: a solid for its heading rule and the moving card, a tint for the cards at rest. */
+.mf-flow [data-col="0"] {
+  --c: #f5a300;
+  --c-soft: #fdefcf;
+  --c-on: #010304;
+}
+.mf-flow [data-col="1"] {
+  --c: #2456d6;
+  --c-soft: #e2eafc;
+  --c-on: #ffffff;
+}
+.mf-flow [data-col="2"] {
+  --c: #0b7f86;
+  --c-soft: #d9f0f0;
+  --c-on: #ffffff;
+}
+.mf-flow [data-col="3"] {
+  --c: #0e7a32;
+  --c-soft: #dcf1e2;
+  --c-on: #ffffff;
+}
 .mf-flow-col-name {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   padding-bottom: 8px;
-  border-bottom: 1px solid var(--mf-line);
-  color: var(--mf-ink-2);
+  border-bottom: 3px solid var(--c);
+  color: var(--mf-ink);
   font-size: 12px;
   font-weight: 600;
+}
+.mf-flow-col-name::before {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--c);
+  content: "";
 }
 .mf-flow-lane {
   position: relative;
@@ -1367,7 +1399,7 @@ html:has(.mf-root) body {
   min-height: 62px;
   padding: 10px 12px;
   border-radius: 10px;
-  background: var(--mf-wash);
+  background: var(--c-soft, var(--mf-wash));
   font-size: 12px;
   line-height: 1.3;
   overflow-wrap: anywhere;
@@ -1380,7 +1412,7 @@ html:has(.mf-root) body {
 .mf-flow-card span {
   display: block;
   margin-top: 2px;
-  color: var(--mf-ink-2);
+  color: #3a3c3d;
   font-weight: 500;
 }
 .mf-flow-card--live {
@@ -1389,12 +1421,15 @@ html:has(.mf-root) body {
   left: 0;
   width: calc((100% - 24px) / 4);
   height: 76px;
-  background: var(--mf-ink);
-  color: #ffffff;
+  background: var(--c);
+  color: var(--c-on);
+  box-shadow: 0 6px 18px rgba(1, 3, 4, 0.18);
   opacity: 0;
   transform: translateX(calc(var(--col, 0) * (100% + 8px)));
   transition:
     transform 0.6s cubic-bezier(0.3, 0, 0.2, 1),
+    background-color 0.6s ease,
+    color 0.6s ease,
     opacity 0.3s ease;
 }
 .mf-flow-card--live[data-shown="true"] {
@@ -1407,7 +1442,7 @@ html:has(.mf-root) body {
     transform 0s 0.3s;
 }
 .mf-flow-card--live span {
-  color: #d0d0d0;
+  color: inherit;
 }
 .mf-flow-status {
   animation: mf-status-in 0.35s ease both;
@@ -1476,6 +1511,11 @@ html:has(.mf-root) body {
   }
   .mf-flow-col-name {
     font-size: 11px;
+    white-space: nowrap;
+  }
+  /* No room for the dot beside "On the road"; the coloured rule carries the colour. */
+  .mf-flow-col-name::before {
+    display: none;
   }
   .mf-flow-card {
     padding: 8px 6px;

@@ -190,8 +190,8 @@ export function BoardFlow() {
           )}
         </div>
         <div className="mf-flow-cols">
-          {COLUMNS.map((c) => (
-            <span key={c} className="mf-flow-col-name">
+          {COLUMNS.map((c, n) => (
+            <span key={c} className="mf-flow-col-name" data-col={n}>
               {c}
             </span>
           ))}
@@ -200,6 +200,7 @@ export function BoardFlow() {
           <div
             className="mf-flow-card mf-flow-card--live"
             data-shown={card !== null}
+            data-col={card ? card.col : 0}
             style={{ ["--col" as string]: card ? card.col : 0 }}
           >
             <div>
@@ -212,7 +213,7 @@ export function BoardFlow() {
         </div>
         <div className="mf-flow-cols">
           {COLUMNS.map((c, n) => (
-            <div key={c} className="mf-flow-col">
+            <div key={c} className="mf-flow-col" data-col={n}>
               {OTHERS.filter(([col]) => col === n).map(([, load, who]) => (
                 <div key={load} className="mf-flow-card">
                   <div>
