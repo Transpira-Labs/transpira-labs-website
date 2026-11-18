@@ -777,22 +777,93 @@ html:has(.mf-root) body {
   text-align: left;
   cursor: pointer;
 }
+/* The question eases right on hover, and its sign darkens. */
+.mf-faq-q > span:first-child {
+  transition: transform 0.25s cubic-bezier(0.3, 0, 0.2, 1);
+}
+.mf-faq-q:hover > span:first-child {
+  transform: translateX(6px);
+}
+/* A plus drawn from two bars. Opening turns the upright bar flat, so it becomes a minus, and fills the disc. */
 .mf-faq-sign {
-  display: flex;
+  position: relative;
   flex: none;
-  align-items: center;
-  justify-content: center;
   width: 32px;
   height: 32px;
   border-radius: 50%;
   background: var(--mf-wash);
-  font-size: 18px;
-  font-weight: 400;
+  transition:
+    background-color 0.25s ease,
+    transform 0.35s cubic-bezier(0.3, 0, 0.2, 1);
+}
+.mf-faq-sign::before,
+.mf-faq-sign::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 1.5px;
+  margin: -0.75px 0 0 -6px;
+  border-radius: 1px;
+  background: var(--mf-ink);
+  content: "";
+  transition:
+    transform 0.35s cubic-bezier(0.3, 0, 0.2, 1),
+    background-color 0.25s ease;
+}
+.mf-faq-sign::after {
+  transform: rotate(90deg);
+}
+.mf-faq-q:hover .mf-faq-sign {
+  background: #e4e4e4;
+}
+.mf-faq-q[aria-expanded="true"] .mf-faq-sign {
+  background: var(--mf-ink);
+  transform: rotate(180deg);
+}
+.mf-faq-q[aria-expanded="true"] .mf-faq-sign::before,
+.mf-faq-q[aria-expanded="true"] .mf-faq-sign::after {
+  background: #ffffff;
+}
+.mf-faq-q[aria-expanded="true"] .mf-faq-sign::after {
+  transform: rotate(0deg);
+}
+/* The answer opens by growing its row from nothing, so it works at any length. */
+.mf-faq-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition:
+    grid-template-rows 0.35s cubic-bezier(0.3, 0, 0.2, 1),
+    visibility 0s 0.35s;
+}
+.mf-faq-panel[data-open="true"] {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition:
+    grid-template-rows 0.35s cubic-bezier(0.3, 0, 0.2, 1),
+    visibility 0s;
 }
 .mf-faq-a {
-  padding: 0 56px 24px 0;
+  min-height: 0;
+  overflow: hidden;
+  padding-right: 56px;
   color: var(--mf-ink-2);
   line-height: 1.5;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition:
+    opacity 0.25s ease,
+    transform 0.35s cubic-bezier(0.3, 0, 0.2, 1);
+}
+.mf-faq-a::after {
+  display: block;
+  height: 24px;
+  content: "";
+}
+.mf-faq-panel[data-open="true"] .mf-faq-a {
+  opacity: 1;
+  transform: none;
 }
 
 /* ---- Closing and footer ---- */

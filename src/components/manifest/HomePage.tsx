@@ -76,14 +76,17 @@ function Faq() {
                 onClick={() => setOpen(open === n ? -1 : n)}
               >
                 <span>{q}</span>
-                <span className="mf-faq-sign" aria-hidden="true">
-                  {open === n ? "−" : "+"}
-                </span>
+                <span className="mf-faq-sign" aria-hidden="true" />
               </button>
             </h3>
-            <p id={`mf-faq-${n}`} className="mf-faq-a" hidden={open !== n}>
-              {a}
-            </p>
+            <div
+              id={`mf-faq-${n}`}
+              className="mf-faq-panel"
+              data-open={open === n}
+              aria-hidden={open !== n}
+            >
+              <p className="mf-faq-a">{a}</p>
+            </div>
           </div>
         ))}
       </div>
