@@ -1,13 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import {
-  SiteNav,
-  SiteFooter,
-  PageIntro,
-  BTN_PRIMARY,
-  BTN_GHOST,
-  CAL_URL,
-  DEMO_URL,
-} from "@/components/site-chrome";
+import { SiteNav, SiteFooter, PageIntro, BTN_PRIMARY, CAL_URL } from "@/components/site-chrome";
 
 export const Route = createFileRoute("/pricing")({
   head: () => ({
@@ -67,9 +59,6 @@ function PricingPage() {
         <div className="flex flex-wrap justify-center gap-3">
           <a href={CAL_URL} target="_blank" rel="noreferrer" className={BTN_PRIMARY}>
             Book a call
-          </a>
-          <a href={DEMO_URL} target="_blank" rel="noreferrer" className={BTN_GHOST}>
-            Try the demo
           </a>
         </div>
       </main>

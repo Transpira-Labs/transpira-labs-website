@@ -1,7 +1,7 @@
 import { useState, type ReactNode } from "react";
 import warehouse from "@/assets/warehouse-aisle.jpg";
 import board from "@/assets/manifest-dashboard.png";
-import { CAL_URL, DEMO_URL } from "@/components/site-chrome";
+import { CAL_URL } from "@/components/site-chrome";
 import { Footer, Nav, PhotoBand } from "./Chrome";
 
 /*
@@ -111,9 +111,6 @@ export function WalkthroughPage() {
                 className="mf-btn mf-btn--lg mf-btn--light"
               >
                 Book a 20-minute call
-              </a>
-              <a href={DEMO_URL} className="mf-btn mf-btn--lg mf-btn--line">
-                Live demo
               </a>
             </div>
           </div>

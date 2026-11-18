@@ -149,14 +149,6 @@ html:has(.mf-root) body {
 .mf-btn--light:hover {
   background: #e6e6e6;
 }
-.mf-btn--line {
-  border-color: rgba(255, 255, 255, 0.7);
-  background: transparent;
-  color: #ffffff;
-}
-.mf-btn--line:hover {
-  background: rgba(255, 255, 255, 0.14);
-}
 .mf-btn--amber {
   border-color: var(--mf-amber);
   background: var(--mf-amber);

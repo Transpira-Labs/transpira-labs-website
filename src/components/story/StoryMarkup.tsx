@@ -13,7 +13,6 @@ import { InlineCall } from "./FloatingCall";
 import { TeamScene } from "./TeamScene";
 import { StoryPhone, type PhoneVals } from "./StoryPhone";
 import { Link } from "@tanstack/react-router";
-import { DEMO_URL } from "@/components/site-chrome";
 
 /* The "more loads meant more people" columns: loads a week and the team it takes. */
 const ROLES = {
@@ -100,9 +99,6 @@ export function StoryMarkup({ v }: { v: StoryVals }) {
           </p>
           <div className="ms-hero-actions">
             <InlineCall where="hero" />
-            <a className="ms-textlink" href={DEMO_URL} target="_blank" rel="noreferrer">
-              Live demo
-            </a>
           </div>
         </div>
         {/* The thread at the moment it asks. Tapping a reply jumps into the story at that point. */}
@@ -2116,9 +2112,6 @@ export function StoryMarkup({ v }: { v: StoryVals }) {
           <Link className="ms-textlink" to="/pricing">
             $50 per user per month.
           </Link>
-          <a className="ms-textlink" href={DEMO_URL} target="_blank" rel="noreferrer">
-            Live demo
-          </a>
         </div>
       </section>
     </div>

@@ -1,7 +1,7 @@
 import { useState, type FormEvent, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import logo from "@/assets/transpira-logo.png";
-import { CAL_URL, DEMO_URL } from "@/components/site-chrome";
+import { CAL_URL } from "@/components/site-chrome";
 
 type Page = "home" | "walkthrough" | "about";
 
@@ -48,12 +48,7 @@ function NavLinks({ current, onPick }: { current: Page; onPick?: () => void }) {
       >
         Walkthrough
       </Link>
-      <Link
-        to="/about"
-        className="mf-nav-link"
-        data-here={current === "about"}
-        onClick={onPick}
-      >
+      <Link to="/about" className="mf-nav-link" data-here={current === "about"} onClick={onPick}>
         About
       </Link>
     </>
@@ -74,9 +69,6 @@ export function Nav({ current }: { current: Page }) {
             <NavLinks current={current} />
           </nav>
           <div className="mf-nav-end">
-            <a href={DEMO_URL} className="mf-nav-link">
-              Live demo
-            </a>
             <a href={CAL_URL} target="_blank" rel="noreferrer" className="mf-btn">
               Book a call
             </a>
@@ -93,9 +85,6 @@ export function Nav({ current }: { current: Page }) {
         </div>
         <nav id="mf-menu" aria-label="Menu" className="mf-menu" data-open={open}>
           <NavLinks current={current} onPick={() => setOpen(false)} />
-          <a href={DEMO_URL} className="mf-nav-link">
-            Live demo
-          </a>
         </nav>
       </div>
     </header>
@@ -112,7 +101,6 @@ export function Footer({ note }: { note?: string }) {
         <nav aria-label="Footer">
           <Link to="/walkthrough">Walkthrough</Link>
           <Link to="/about">About</Link>
-          <a href={DEMO_URL}>Live demo</a>
           <Link to="/contact">Contact</Link>
           <Link to="/privacy">Privacy</Link>
           <Link to="/terms">Terms</Link>

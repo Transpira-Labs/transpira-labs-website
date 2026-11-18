@@ -7,7 +7,6 @@ import {
   Reveal,
   CONTACT_EMAIL,
   CAL_URL,
-  DEMO_URL,
 } from "@/components/site-chrome";
 
 export const Route = createFileRoute("/contact")({
@@ -96,19 +95,10 @@ function ContactPage() {
               <div>
                 <h2 className="font-display text-xl tracking-tight text-foreground">Prefer to explore on your own first?</h2>
                 <p className="mt-2 max-w-xl text-sm text-muted-foreground leading-relaxed">
-                  Try the demo, or read our research on
-                  supply-chain agents.
+                  Read our research on supply-chain agents.
                 </p>
               </div>
               <div className="flex flex-wrap items-center gap-3 shrink-0">
-                <a
-                  href={DEMO_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded-full px-5 py-2.5 bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
-                >
-                  Try our Demo
-                </a>
                 <Link
                   to="/case-studies"
                   className="rounded-full px-5 py-2.5 border border-border text-sm font-medium text-foreground hover:bg-secondary transition-colors"

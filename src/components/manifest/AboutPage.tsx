@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import floor from "@/assets/supply-floor.jpg";
 import adiKrish from "@/assets/adi-krish.png";
 import fusenWorldLogo from "@/assets/fusen-world.jpeg";
-import { CAL_URL, DEMO_URL } from "@/components/site-chrome";
+import { CAL_URL } from "@/components/site-chrome";
 import { Arrow, Footer, Nav, PhotoBand } from "./Chrome";
 
 const TEAM: { name: string; role: string; photo?: string; initials: string; bullets: string[] }[] =
@@ -115,15 +115,6 @@ export function AboutPage() {
                 </span>
               </span>
             </Link>
-            <a href={DEMO_URL} className="mf-lab-card">
-              <span>quoting.transpiralabs.com</span>
-              <span>
-                Live demo
-                <span className="mf-arrow">
-                  <Arrow />
-                </span>
-              </span>
-            </a>
             <a
               href={CAL_URL}
               target="_blank"
