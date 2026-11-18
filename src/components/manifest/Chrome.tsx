@@ -1,4 +1,4 @@
-import { useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useState, type FormEvent, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import logo from "@/assets/transpira-logo.png";
 import { CAL_URL } from "@/components/site-chrome";
@@ -55,10 +55,29 @@ function NavLinks({ current, onPick }: { current: Page; onPick?: () => void }) {
   );
 }
 
-export function Nav({ current }: { current: Page }) {
+/*
+ * `overPhoto` is for a page whose first screen is a full-window photo that
+ * runs up behind the nav. There the nav starts clear, with white text, and
+ * turns into the usual white bar once the photo has scrolled away.
+ */
+export function Nav({ current, overPhoto = false }: { current: Page; overPhoto?: boolean }) {
   const [open, setOpen] = useState(false);
+  const [onPhoto, setOnPhoto] = useState(overPhoto);
+
+  useEffect(() => {
+    if (!overPhoto) return;
+    const check = () => setOnPhoto(window.scrollY < window.innerHeight - 80);
+    check();
+    window.addEventListener("scroll", check, { passive: true });
+    window.addEventListener("resize", check);
+    return () => {
+      window.removeEventListener("scroll", check);
+      window.removeEventListener("resize", check);
+    };
+  }, [overPhoto]);
+
   return (
-    <header className="mf-nav">
+    <header className="mf-nav" data-clear={onPhoto && !open}>
       <div className="mf-wrap">
         <div className="mf-nav-in">
           <Link to="/" className="mf-brand">
@@ -116,15 +135,17 @@ export function PhotoBand({
   src,
   shade,
   position,
+  className,
   children,
 }: {
   src: string;
   shade: number;
   position?: string;
+  className?: string;
   children: ReactNode;
 }) {
   return (
-    <section className="mf-band mf-dark">
+    <section className={className ? `mf-band mf-dark ${className}` : "mf-band mf-dark"}>
       <img src={src} alt="" className="mf-band-img" style={{ objectPosition: position }} />
       <div
         aria-hidden="true"

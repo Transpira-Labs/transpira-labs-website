@@ -97,9 +97,9 @@ function Faq() {
 export function HomePage() {
   return (
     <div className="mf-root">
-      <Nav current="home" />
+      <Nav current="home" overPhoto />
       <main>
-        <PhotoBand src={heroPhoto} shade={0.38} position="50% 30%">
+        <PhotoBand src={heroPhoto} shade={0.38} position="50% 30%" className="mf-hero">
           <div className="mf-hero-in">
             <div className="mf-hero-copy">
               <h1 className="mf-h1">Quote, cover and get paid with a one-word text.</h1>

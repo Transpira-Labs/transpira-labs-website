@@ -178,6 +178,18 @@ html:has(.mf-root) body {
   background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
+  transition: background-color 0.25s ease;
+}
+/* Over the homepage's full-window photo the bar is clear and its text is white. */
+.mf-nav[data-clear="true"] {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+.mf-nav[data-clear="true"] .mf-brand,
+.mf-nav[data-clear="true"] .mf-nav-link,
+.mf-nav[data-clear="true"] .mf-menu-btn {
+  color: #ffffff;
 }
 .mf-nav-in {
   display: flex;
@@ -275,12 +287,26 @@ html:has(.mf-root) body {
   position: relative;
 }
 
+/* The homepage hero fills the whole first screen, and its photo runs up behind the nav. */
+.mf-hero {
+  display: flex;
+  align-items: center;
+  min-height: 100svh;
+  margin-top: calc(-1 * var(--mf-nav-h));
+}
+.mf-hero .mf-band-in {
+  width: 100%;
+}
+/* A little darker at the very top, so the nav's white text reads against the sky. */
+.mf-hero .mf-band-shade {
+  background: linear-gradient(to bottom, rgba(1, 3, 4, 0.58) 0, rgba(1, 3, 4, 0.38) 180px);
+}
 .mf-hero-in {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 48px 64px;
-  padding-block: 84px 88px;
+  padding-block: calc(var(--mf-nav-h) + 40px) 64px;
 }
 .mf-hero-copy {
   flex: 1 1 520px;
@@ -557,7 +583,8 @@ html:has(.mf-root) body {
 }
 .mf-story {
   position: sticky;
-  top: calc(var(--mf-nav-h) + 20px);
+  /* Pinned in the middle of the space under the nav, never closer to it than 20px. */
+  top: max(calc(var(--mf-nav-h) + 20px), calc((100svh + var(--mf-nav-h) - var(--mf-phone-h)) / 2));
   display: grid;
   grid-template-columns: minmax(0, 1fr) 320px minmax(0, 1fr);
   align-items: center;
@@ -637,9 +664,11 @@ html:has(.mf-root) body {
 }
 .mf-layer {
   position: absolute;
-  inset: 118px 20px auto;
+  /* Fills the screen under the phone's header, with the thread centred in it. */
+  inset: 110px 20px 23px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 10px;
   opacity: 0;
   transform: translateY(14px);
@@ -1856,7 +1885,7 @@ html:has(.mf-root) body {
 
 @media (max-width: 560px) {
   .mf-hero-in {
-    padding-block: 56px 48px;
+    padding-block: calc(var(--mf-nav-h) + 32px) 48px;
   }
   .mf-rows > li {
     flex-direction: column;
