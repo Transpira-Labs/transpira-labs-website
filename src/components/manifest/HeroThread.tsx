@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { CAL_URL } from "@/components/site-chrome";
 import { Mark } from "./Chrome";
 
 type Msg = { me: boolean; text: string };
@@ -134,14 +135,13 @@ export function HeroThread() {
         </div>
       </div>
       <div className="mf-tc-thread" aria-live="polite">
-        <span className="mf-tc-time">Today 8:06 AM</span>
         {shown.map((m, n) => {
           const next = shown[n + 1];
           const prev = shown[n - 1];
           return (
             <p
               key={first + n}
-              className={m.me ? "mf-im mf-im--in mf-im--me" : "mf-im mf-im--in"}
+              className={m.me ? "mf-im mf-im--me" : "mf-im mf-im--them"}
               data-tail={(next ? next.me !== m.me : !(typing && !m.me)) || undefined}
               data-gap={(prev && prev.me !== m.me) || undefined}
             >
@@ -152,7 +152,7 @@ export function HeroThread() {
         {sentLast ? <span className="mf-im-status">Delivered</span> : null}
         {typing ? (
           <p
-            className="mf-im mf-im--in mf-im--typing"
+            className="mf-im mf-im--them mf-im--typing"
             data-tail
             data-gap={sentLast || undefined}
             role="status"
@@ -164,14 +164,15 @@ export function HeroThread() {
           </p>
         ) : null}
       </div>
-      <div className="mf-replies" role="group" aria-label="Your reply">
+      <p className="mf-tc-label mf-small mf-muted">Your reply:</p>
+      <div className="mf-tc-replies">
         {FLOW[step]
           .filter((r) => !used.includes(`${step}:${r.label}`))
           .map((r) => (
             <button
               key={r.label}
               type="button"
-              className="mf-reply"
+              className="mf-chip"
               disabled={busy}
               onClick={() => pick(r)}
             >
@@ -179,6 +180,9 @@ export function HeroThread() {
             </button>
           ))}
       </div>
+      <a href={CAL_URL} target="_blank" rel="noreferrer" className="mf-btn mf-btn--block">
+        Book a call
+      </a>
     </div>
   );
 }

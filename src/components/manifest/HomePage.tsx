@@ -1,10 +1,25 @@
 import { useState } from "react";
-import { BookCall, Bubbles, Closing, Footer, Nav } from "./Chrome";
+import heroPhoto from "@/assets/mountains-2000.jpg";
+import warehouse from "@/assets/warehouse-aisle.jpg";
+import { CAL_URL } from "@/components/site-chrome";
+import { BookForm, Bubbles, Footer, Nav, PhotoBand } from "./Chrome";
 import { BoardFlow } from "./BoardFlow";
 import { HeroThread } from "./HeroThread";
 import { LoadStory } from "./LoadStory";
 
-// What the broker gets, in the words the old walkthrough already used.
+/*
+ * TODO(before launch): confirm which integrations exist today, and that a
+ * first quote really goes out the same day.
+ */
+const CONNECTIONS: [string, string][] = [
+  ["Gmail and Outlook", "Reads quote requests, sends as you"],
+  ["DAT and Truckstop", "Posts loads, collects bids"],
+  ["WhatsApp", "Texts drivers and carriers"],
+  ["Your TMS", "Keeps loads and invoices in sync"],
+  ["Your phone", "Where you approve, by text"],
+];
+
+// What the broker gets, in the words the walkthrough already used.
 const BENEFITS: [string, string][] = [
   [
     "A one-person brokerage with big-shop numbers.",
@@ -18,18 +33,6 @@ const BENEFITS: [string, string][] = [
     "Nothing to install. Nothing to switch.",
     "It works inside the inbox, load boards and phone your brokerage already runs on.",
   ],
-];
-
-/*
- * TODO(before launch): confirm which integrations exist today, and that a
- * first quote really goes out the same day.
- */
-const CONNECTIONS: [string, string][] = [
-  ["Gmail and Outlook", "Reads quote requests, sends as you"],
-  ["DAT and Truckstop", "Posts loads, collects bids"],
-  ["WhatsApp", "Texts drivers and carriers"],
-  ["Your TMS", "Keeps loads and invoices in sync"],
-  ["Your phone", "Where you approve, by text"],
 ];
 
 const PRICE_ROWS: [string, string][] = [
@@ -97,27 +100,29 @@ function Faq() {
 export function HomePage() {
   return (
     <div className="mf-root">
-      <Nav current="home" />
+      <Nav current="home" overPhoto />
       <main>
-        <section className="mf-wrap mf-hero">
+        <PhotoBand src={heroPhoto} shade={0.38} position="50% 30%" className="mf-hero">
           <div className="mf-hero-in">
             <div className="mf-hero-copy">
-              <h1 className="mf-h1">Quote, cover and get paid with a one‑word text.</h1>
+              <h1 className="mf-h1">Quote, cover and get paid with a one-word text.</h1>
               <p className="mf-lede">
                 Manifest is a text agent for freight brokers. It reads the request, prices the load
                 and drafts the reply. You text back yes.
               </p>
-              <BookCall />
+              <a href={CAL_URL} target="_blank" rel="noreferrer" className="mf-btn mf-btn--lg">
+                Book a call
+              </a>
             </div>
             <HeroThread />
           </div>
-        </section>
+        </PhotoBand>
 
         <LoadStory />
 
-        <section className="mf-wrap mf-gap">
-          <h2 className="mf-h2">One phone. One agent. Any number of loads.</h2>
-          <ul className="mf-cols">
+        <section className="mf-wrap mf-benefits">
+          <h2 className="mf-h2 mf-h2--xl">One phone. One agent. Any number of loads.</h2>
+          <ul>
             {BENEFITS.map(([title, body]) => (
               <li key={title}>
                 <h3 className="mf-h3">{title}</h3>
@@ -125,40 +130,45 @@ export function HomePage() {
               </li>
             ))}
           </ul>
-          <div className="mf-after">
-            <BookCall />
-          </div>
+          <a href={CAL_URL} target="_blank" rel="noreferrer" className="mf-btn mf-btn--lg">
+            Book a call
+          </a>
         </section>
 
-        <section className="mf-wrap mf-gap">
-          <div className="mf-split mf-split--mid">
-            <div>
-              <h2 className="mf-h2">Nothing goes out without you.</h2>
-              <p className="mf-lede mf-muted">
-                The agent drafts every email, text and load posting, then waits for your reply
-                before anything reaches a customer or carrier.
-              </p>
-            </div>
-            <div className="mf-still">
-              <Bubbles
-                msgs={[
-                  [
-                    false,
-                    "Draft for Erin is ready: $2,100, with a question about weight. Send it?",
-                  ],
-                ]}
-              />
-              <div className="mf-replies" aria-hidden="true">
-                <span className="mf-reply">Yes</span>
-                <span className="mf-reply">Change it</span>
-                <span className="mf-reply">No</span>
+        <div style={{ marginTop: "clamp(72px, 9vw, 120px)" }}>
+          <PhotoBand src={warehouse} shade={0.66}>
+            <div className="mf-approve">
+              <div className="mf-approve-copy">
+                <h2 className="mf-h2 mf-h2--xl">Nothing goes out without you.</h2>
+                <p className="mf-lede">
+                  The agent drafts every email, text and load posting, then waits for your reply
+                  before anything reaches a customer or carrier.
+                </p>
               </div>
-              <p className="mf-small mf-muted">Reply yes to send, change it, or say no.</p>
+              <div className="mf-approve-thread">
+                <Bubbles
+                  tails={false}
+                  msgs={[
+                    [
+                      false,
+                      "Draft for Erin is ready: $2,100, with a question about weight. Send it?",
+                    ],
+                  ]}
+                />
+                <div className="mf-answers" aria-hidden="true">
+                  <span>Yes</span>
+                  <span>Change it</span>
+                  <span>No</span>
+                </div>
+                <p className="mf-small" style={{ alignSelf: "flex-end", color: "#e6e6e6" }}>
+                  Reply yes to send, change it, or say no.
+                </p>
+              </div>
             </div>
-          </div>
-        </section>
+          </PhotoBand>
+        </div>
 
-        <section id="how" className="mf-wrap mf-gap">
+        <section id="how" className="mf-wrap">
           <div className="mf-split">
             <div>
               <h2 className="mf-h2">Connect your inbox once.</h2>
@@ -166,6 +176,9 @@ export function HomePage() {
                 Sign in with Gmail or Outlook and add your phone number. The agent links your load
                 boards and shows up as a contact in Messages.
               </p>
+              <a href={CAL_URL} target="_blank" rel="noreferrer" className="mf-btn">
+                Book a call
+              </a>
             </div>
             <ul className="mf-rows">
               {CONNECTIONS.map(([name, what]) => (
@@ -178,7 +191,7 @@ export function HomePage() {
           </div>
         </section>
 
-        <section className="mf-wrap mf-gap">
+        <section className="mf-wrap mf-board">
           <div className="mf-board-in">
             <div className="mf-board-top">
               <h2 className="mf-h2">The board stays current</h2>
@@ -191,29 +204,43 @@ export function HomePage() {
           </div>
         </section>
 
-        <section id="pricing" className="mf-wrap mf-gap">
-          <div className="mf-split">
+        <section id="pricing" className="mf-wrap">
+          <div className="mf-split mf-split--end">
             <div>
-              <h2 className="mf-h2">$50 per user, per month.</h2>
-              <p className="mf-lede mf-muted">That is the whole price list.</p>
-              <BookCall />
+              <h2 className="mf-price-label">Pricing</h2>
+              <p className="mf-price">$50</p>
+              <p className="mf-sub" style={{ marginTop: 14 }}>
+                per user, per month
+              </p>
             </div>
-            <ul className="mf-rows mf-rows--even">
-              {PRICE_ROWS.map(([k, v]) => (
-                <li key={k}>
-                  <strong>{k}</strong>
-                  <span>{v}</span>
-                </li>
-              ))}
-            </ul>
+            <div>
+              <ul className="mf-rows mf-rows--price">
+                {PRICE_ROWS.map(([k, v]) => (
+                  <li key={k}>
+                    <strong>{k}</strong>
+                    <span>{v}</span>
+                  </li>
+                ))}
+              </ul>
+              <a href={CAL_URL} target="_blank" rel="noreferrer" className="mf-btn">
+                Book a call
+              </a>
+            </div>
           </div>
         </section>
 
         <Faq />
       </main>
 
-      <Closing />
-      <Footer note="Times and figures are illustrative." />
+      <div className="mf-dark">
+        <section className="mf-wrap">
+          <div className="mf-close">
+            <h2 className="mf-h2 mf-h2--xl">Your next quote could be a one‑word text.</h2>
+            <BookForm />
+          </div>
+        </section>
+        <Footer note="Times and figures are illustrative." />
+      </div>
     </div>
   );
 }

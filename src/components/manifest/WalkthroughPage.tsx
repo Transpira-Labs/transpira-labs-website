@@ -1,6 +1,8 @@
 import { useState, type ReactNode } from "react";
-import { BookCall, Bubbles, Footer, Nav } from "./Chrome";
+import warehouse from "@/assets/warehouse-aisle.jpg";
+import { CAL_URL } from "@/components/site-chrome";
 import { BoardFlow } from "./BoardFlow";
+import { Bubbles, Footer, Nav, PhotoBand } from "./Chrome";
 
 /*
  * TODO(before launch): the times and figures on this page are illustrative,
@@ -30,25 +32,25 @@ function Step({
   title,
   body,
   note,
-  amber,
+  tone,
   children,
 }: {
   when: string;
   title: string;
   body: string;
   note?: string;
-  amber?: boolean;
+  tone?: "amber" | "night";
   children: ReactNode;
 }) {
   return (
     <div className="mf-step">
       <div className="mf-step-copy">
-        <span className="mf-when">{when}</span>
+        <span className="mf-pill">{when}</span>
         <h3 className="mf-h3">{title}</h3>
         <p className="mf-muted">{body}</p>
         {note ? <p>{note}</p> : null}
       </div>
-      <div className={amber ? "mf-panel mf-panel--amber" : "mf-panel"}>{children}</div>
+      <div className={tone ? `mf-panel mf-panel--${tone}` : "mf-panel"}>{children}</div>
     </div>
   );
 }
@@ -61,15 +63,19 @@ function YourTurn() {
     "Erin Caldwell wants a Kubota tractor moved Macon to Raleigh on Thursday. I suggest $2,100. Send it?",
   ];
   return (
-    <div className="mf-panel-thread" aria-live="polite" style={{ minHeight: 236 }}>
+    <div className="mf-panel-thread" aria-live="polite" style={{ minHeight: 250 }}>
       {answer === null ? (
         <>
           <Bubbles msgs={[ask]} />
-          <div className="mf-replies" role="group" aria-label="Your reply">
-            <button type="button" className="mf-reply" onClick={() => setAnswer("No")}>
+          <div className="mf-turn">
+            <button
+              type="button"
+              className="mf-btn mf-btn--ink-line"
+              onClick={() => setAnswer("No")}
+            >
               No
             </button>
-            <button type="button" className="mf-reply" onClick={() => setAnswer("Yes")}>
+            <button type="button" className="mf-btn" onClick={() => setAnswer("Yes")}>
               Yes
             </button>
           </div>
@@ -102,181 +108,219 @@ export function WalkthroughPage() {
     <div className="mf-root">
       <Nav current="walkthrough" />
       <main>
-        <section className="mf-wrap mf-page-hero">
-          <p className="mf-kicker">The text agent, one load at a time</p>
-          <h1 className="mf-h1">A broker's Monday morning.</h1>
-          <p className="mf-lede">
-            Manifest reads the email, prices the load, posts it for carriers and only texts you when
-            it needs you. You approve with one text.
-          </p>
-          <BookCall />
-        </section>
+        <PhotoBand src={warehouse} shade={0.6}>
+          <div className="mf-page-hero">
+            <p className="mf-kicker">The text agent, one load at a time</p>
+            <h1 className="mf-h1">A broker's Monday morning.</h1>
+            <p className="mf-lede">
+              Manifest reads the email, prices the load, posts it for carriers and only texts you
+              when it needs you. You approve with one text.
+            </p>
+            <div className="mf-actions">
+              <a
+                href={CAL_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="mf-btn mf-btn--lg mf-btn--light"
+              >
+                Book a call
+              </a>
+            </div>
+          </div>
+        </PhotoBand>
 
-        <section className="mf-wrap mf-gap">
-          <h2 className="mf-h2 mf-section-title">Before: one quote takes a day</h2>
-          <ol className="mf-timeline">
+        <section className="mf-wrap mf-section">
+          <h2 className="mf-h2">Before: one quote takes a day</h2>
+          <div className="mf-cards">
             {BEFORE.map(([when, title, body]) => (
-              <li key={when}>
-                <time>{when}</time>
-                <div>
-                  <h3 className="mf-h3">{title}</h3>
-                  <p className="mf-muted">{body}</p>
-                </div>
-              </li>
+              <div key={when} className="mf-soft">
+                <span className="mf-pill">{when}</span>
+                <h3 className="mf-h3">{title}</h3>
+                <p className="mf-muted">{body}</p>
+              </div>
             ))}
-          </ol>
+          </div>
           <div className="mf-compare">
             <div>
               <h3>Before</h3>
-              <p>A day to send one quote. Quote lost.</p>
+              <div className="mf-fig">
+                <strong>1 day</strong>
+                <span>to send one quote</span>
+              </div>
+              <p>Quote lost.</p>
             </div>
             <div>
               <h3>With Manifest</h3>
-              <p>One text from you, two minutes from email to quote sent. Load won and posted.</p>
+              <div className="mf-figs">
+                <div className="mf-fig">
+                  <strong>1 text</strong>
+                  <span>from you</span>
+                </div>
+                <div className="mf-fig">
+                  <strong>2 min</strong>
+                  <span>from email to quote sent</span>
+                </div>
+              </div>
+              <p>Load won and posted.</p>
             </div>
           </div>
         </section>
 
-        <section className="mf-wrap mf-gap">
-          <h2 className="mf-h2 mf-section-title">The same morning, with the text agent</h2>
-          <div className="mf-steps">
-            <Step
-              when="8:05 AM"
-              title="A customer emails for a price."
-              body="Erin needs a tractor moved Thursday. Normally this sits in the inbox until you have time to work out a number."
-            >
-              <div className="mf-sheet">
-                <p className="mf-small mf-muted">Email to you</p>
-                <h4 style={{ marginTop: 8 }}>Erin Caldwell</h4>
-                <p className="mf-small mf-muted">Caldwell Equipment · 8:05 AM</p>
-                <p className="mf-sheet-body">
-                  Hi, can you move a Kubota tractor from Macon, GA to Raleigh, NC on Thursday? What
-                  would it cost?
-                </p>
-              </div>
-            </Step>
+        <section className="mf-wrap mf-steps">
+          <h2 className="mf-h2" style={{ maxWidth: 620 }}>
+            The same morning, with the text agent
+          </h2>
 
-            <Step
-              when="Seconds later"
-              title="The agent works out the price."
-              body="It reads what similar trips cost and suggests $2,100."
-            >
-              <div className="mf-sheet">
-                <h4>The agent checks past trips</h4>
-                <ul className="mf-sheet-rows" style={{ marginTop: 10 }}>
-                  <li>
-                    <span>Similar trips</span>
-                    <span>$1,950 to $2,050</span>
-                  </li>
-                </ul>
-                <div className="mf-total">
-                  <span>Suggested price for Erin</span>
-                  <strong>$2,100</strong>
-                </div>
-              </div>
-            </Step>
-
-            <Step
-              when="8:06 AM"
-              title="Then it texts you."
-              body="A normal text. You answer with one word."
-              note="Your turn. You're the broker: pick a reply."
-              amber
-            >
-              <YourTurn />
-            </Step>
-
-            <Step
-              when="8:07 AM"
-              title="One text, and the quote goes out."
-              body="The agent emails Erin from your address. To her, it reads like you wrote it."
-              note="Nothing reaches a customer or carrier until you approve."
-            >
-              <div className="mf-sheet">
-                <p className="mf-small mf-muted">Sent from your email</p>
-                <h4 style={{ marginTop: 8 }}>Sam · to Erin Caldwell</h4>
-                <p className="mf-small mf-muted">8:07 AM · sent by the agent</p>
-                <div className="mf-total">
-                  <span>Kubota tractor, Macon to Raleigh, Thursday</span>
-                  <strong>$2,100</strong>
-                </div>
-              </div>
-            </Step>
-
-            <Step
-              when="8:41 AM"
-              title="Erin says yes. The agent finds a truck."
-              body="It posts the load with its own number, so carriers text the agent and your phone stays quiet."
-            >
-              <div className="mf-sheet">
-                <h4>Posted for carriers</h4>
-                <ul className="mf-sheet-rows" style={{ marginTop: 10 }}>
-                  <li>
-                    <span>Load</span>
-                    <span>Kubota tractor</span>
-                  </li>
-                  <li>
-                    <span>Lane</span>
-                    <span>Macon to Raleigh</span>
-                  </li>
-                  <li>
-                    <span>Pickup</span>
-                    <span>Thursday</span>
-                  </li>
-                  <li>
-                    <span>Carriers text</span>
-                    <span>The agent</span>
-                  </li>
-                </ul>
-              </div>
-            </Step>
-
-            <Step
-              when="Any time"
-              title="Need something? Just text it."
-              body="The agent answers from the board: paperwork, prices, who owes what, where a truck is. Before, finding this meant digging through email, spam and a spreadsheet."
-            >
-              <div className="mf-panel-thread">
-                <Bubbles
-                  msgs={[
-                    [true, "Where's the Kubota?"],
-                    [false, "On the road with Ridgeline. On time for 4 PM."],
-                    [true, "Who owes me?"],
-                    [false, "$750 is owed on L-2036."],
-                  ]}
-                />
-              </div>
-            </Step>
-          </div>
-        </section>
-
-        <section className="mf-wrap mf-gap">
-          <div className="mf-board-in">
-            <div className="mf-board-top">
-              <h2 className="mf-h2">The board.</h2>
-              <p>
-                Open it on any computer for the detailed work. Every load on one board, from first
-                quote to paid, and the agent moves each card as the texts come in.
+          <Step
+            when="8:05 AM"
+            title="A customer emails for a price."
+            body="Erin needs a tractor moved Thursday. Normally this sits in the inbox until you have time to work out a number."
+          >
+            <div className="mf-sheet">
+              <p className="mf-small mf-muted">Email to you</p>
+              <h4 style={{ marginTop: 10 }}>Erin Caldwell</h4>
+              <p className="mf-small mf-muted">Caldwell Equipment · 8:05 AM</p>
+              <p className="mf-sheet-body">
+                Hi, can you move a Kubota tractor from Macon, GA to Raleigh, NC on Thursday? What
+                would it cost?
               </p>
             </div>
-            <BoardFlow />
-          </div>
+          </Step>
+
+          <Step
+            when="Seconds later"
+            title="The agent works out the price."
+            body="It reads what similar trips cost and suggests $2,100."
+          >
+            <div className="mf-sheet">
+              <h4 style={{ marginBottom: 6 }}>The agent checks past trips</h4>
+              <ul className="mf-sheet-rows">
+                <li>
+                  <span>Similar trips</span>
+                  <span>$1,950 to $2,050</span>
+                </li>
+              </ul>
+              <div className="mf-total">
+                <span>Suggested price for Erin</span>
+                <strong style={{ color: "var(--mf-ok)" }}>$2,100</strong>
+              </div>
+            </div>
+          </Step>
+
+          <Step
+            when="8:06 AM"
+            title="Then it texts you."
+            body="A normal text. You answer with one word."
+            note="Your turn. You're the broker: pick a reply."
+            tone="amber"
+          >
+            <YourTurn />
+          </Step>
+
+          <Step
+            when="8:07 AM"
+            title="One text, and the quote goes out."
+            body="The agent emails Erin from your address. To her, it reads like you wrote it."
+            note="Nothing reaches a customer or carrier until you approve."
+          >
+            <div className="mf-sheet">
+              <p className="mf-small mf-muted">Sent from your email</p>
+              <h4 style={{ marginTop: 10 }}>Sam · to Erin Caldwell</h4>
+              <p className="mf-small mf-muted">8:07 AM · sent by the agent</p>
+              <div className="mf-total">
+                <span>Kubota tractor, Macon to Raleigh, Thursday</span>
+                <strong style={{ fontSize: 26 }}>$2,100</strong>
+              </div>
+            </div>
+          </Step>
+
+          <Step
+            when="8:41 AM · Covering"
+            title="Erin says yes. The agent finds a truck."
+            body="It posts the load with its own number, so carriers text the agent and your phone stays quiet."
+          >
+            <div className="mf-sheet">
+              <h4>Posted for carriers</h4>
+              <p className="mf-small" style={{ margin: "4px 0 6px", color: "var(--mf-ok)" }}>
+                Erin said yes
+              </p>
+              <ul className="mf-sheet-rows">
+                <li>
+                  <span>Load</span>
+                  <span>Kubota tractor</span>
+                </li>
+                <li>
+                  <span>Lane</span>
+                  <span>Macon → Raleigh</span>
+                </li>
+                <li>
+                  <span>Pickup</span>
+                  <span>Thursday</span>
+                </li>
+                <li>
+                  <span>Carriers text</span>
+                  <span>The agent</span>
+                </li>
+              </ul>
+            </div>
+          </Step>
+
+          <Step
+            when="Any time"
+            title="Need something? Just text it."
+            body="The agent answers from the board: paperwork, prices, who owes what, where a truck is. Before, finding this meant digging through email, spam and a spreadsheet."
+            tone="night"
+          >
+            <div className="mf-panel-thread">
+              <Bubbles
+                msgs={[
+                  [true, "Where's the Kubota?"],
+                  [false, "On the road with Ridgeline. On time for 4 PM."],
+                  [true, "Who owes me?"],
+                  [false, "$750 is owed on L-2036."],
+                ]}
+              />
+            </div>
+          </Step>
         </section>
       </main>
 
-      <section className="mf-dark" style={{ marginTop: "clamp(80px, 10vw, 136px)" }}>
-        <div className="mf-wrap">
-          <div className="mf-close mf-close--stack">
-            <h2 className="mf-h2">Your part was one text.</h2>
+      <div className="mf-dark" style={{ marginTop: "clamp(80px, 9vw, 110px)" }}>
+        <section className="mf-wrap mf-board-dark">
+          <div className="mf-board-top">
+            <h2 className="mf-h2">The board.</h2>
+            <p>
+              Open it on any computer for the detailed work. Every load on one board, from first
+              quote to paid, and the agent moves each card as the texts come in.
+            </p>
+          </div>
+          <div className="mf-flow-panel">
+            <BoardFlow />
+          </div>
+        </section>
+
+        <section className="mf-wrap">
+          <div className="mf-close mf-close--center">
+            <h2 className="mf-h2 mf-h2--xl">Your part was one text.</h2>
             <p className="mf-lede">
               The agent did the reading, the pricing, the emailing and the posting. You made the
-              decision. It costs $50 per user per month, with no onboarding or implementation fee.
+              decision.
             </p>
-            <BookCall light />
+            <p className="mf-sub">
+              $50 per user per month. No onboarding fee. No implementation fee.
+            </p>
+            <a
+              href={CAL_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="mf-btn mf-btn--lg mf-btn--light"
+            >
+              Book a call
+            </a>
           </div>
-        </div>
-      </section>
-      <Footer note="Times and figures are illustrative." />
+        </section>
+        <Footer note="Times and figures are illustrative." />
+      </div>
     </div>
   );
 }

@@ -1,8 +1,68 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
+import { SiteNav, SiteFooter, PageIntro, BTN_PRIMARY, CAL_URL } from "@/components/site-chrome";
 
-/* Pricing lives on the homepage now. Old links to /pricing land on that section. */
 export const Route = createFileRoute("/pricing")({
-  beforeLoad: () => {
-    throw redirect({ to: "/", hash: "pricing" });
-  },
+  head: () => ({
+    meta: [
+      { title: "Pricing | Manifest" },
+      {
+        name: "description",
+        content:
+          "Manifest is $50 per user per month. No onboarding fee, no implementation fee, every connector included, and a human approves every send.",
+      },
+      { property: "og:title", content: "Pricing | Manifest" },
+      {
+        property: "og:description",
+        content:
+          "$50 per user per month. No onboarding fee. No implementation fee. Every connector included.",
+      },
+    ],
+  }),
+  component: PricingPage,
 });
+
+const INCLUDED = [
+  "Every connector included, free. We found a way to build integrations in hours instead of months, and we pass that on.",
+  "No onboarding, implementation or integration fee. Outlook connects in one sign-in.",
+  "A human approves every send. Nothing leaves the building without your click.",
+];
+
+function PricingPage() {
+  return (
+    <div className="flex min-h-screen flex-col">
+      <SiteNav />
+      <main className="flex flex-1 flex-col items-center gap-10 px-4 py-[clamp(64px,12vw,120px)] sm:px-6 rise-fast">
+        <PageIntro
+          eyebrow="Pricing"
+          title={
+            <>
+              $50 per user per month.
+              <br />
+              No fees to start.
+            </>
+          }
+          body="One price per person on your team. No onboarding fee and no implementation fee: connect your systems and start quoting the same day."
+        />
+        <ul className="m-0 grid w-full max-w-[1000px] list-none grid-cols-[repeat(auto-fit,minmax(min(240px,100%),1fr))] gap-4 p-0">
+          {INCLUDED.map((item) => (
+            <li
+              key={item}
+              className="flex items-start gap-3.5 rounded-xl border border-white/15 p-6 text-base leading-[1.45] text-fog-bright"
+            >
+              <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-forest text-[11px] font-bold text-white">
+                ✓
+              </span>
+              {item}
+            </li>
+          ))}
+        </ul>
+        <div className="flex flex-wrap justify-center gap-3">
+          <a href={CAL_URL} target="_blank" rel="noreferrer" className={BTN_PRIMARY}>
+            Book a call
+          </a>
+        </div>
+      </main>
+      <SiteFooter />
+    </div>
+  );
+}
