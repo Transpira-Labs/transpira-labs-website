@@ -21,7 +21,7 @@ export function Pricing() {
     <section id="pricing" className="mf-wrap mf-pricing">
       <div className="mf-pricing-in">
         <div className="mf-pricing-copy">
-          <h2 className="mf-h2 mf-h2--xl">
+          <h2 className="mf-h2">
             One price, <span>nothing on top</span>
           </h2>
           <div>

@@ -1186,16 +1186,13 @@ html:has(.mf-root) body {
 .mf-pricing-in {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 48px;
-  padding: clamp(28px, 6vw, 88px);
-  border-radius: 24px;
-  background: #f6f6f4;
+  gap: 40px;
 }
 .mf-pricing-copy {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 48px;
+  gap: 40px;
 }
 /* The second half of the heading steps back, so the first half reads as the claim. */
 .mf-pricing-copy .mf-h2 span {
@@ -1216,12 +1213,13 @@ html:has(.mf-root) body {
   margin-top: 16px;
   padding: 0 16px;
   border-radius: 999px;
+  border: 1px solid rgba(1, 3, 4, 0.14);
   background: #ffffff;
   color: var(--mf-ink);
   font-size: 14px;
   font-weight: 600;
   text-decoration: none;
-  box-shadow: 0 1px 2px rgba(1, 3, 4, 0.08);
+  box-shadow: 0 1px 2px rgba(1, 3, 4, 0.05);
   transition:
     box-shadow 0.15s ease,
     transform 0.15s ease;
@@ -1232,22 +1230,24 @@ html:has(.mf-root) body {
 }
 .mf-plan {
   position: relative;
-  padding: clamp(40px, 4vw, 56px) clamp(22px, 2.6vw, 32px) clamp(24px, 2.6vw, 32px);
+  padding: 38px clamp(20px, 2.2vw, 28px) clamp(20px, 2.2vw, 26px);
   border: 1px solid rgba(1, 3, 4, 0.14);
   border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(1, 3, 4, 0.05);
 }
 /* A label that sits on the card's top edge. */
 .mf-plan-tab {
   position: absolute;
   top: 0;
   left: clamp(22px, 2.6vw, 32px);
-  padding: 8px 14px;
+  padding: 6px 12px;
   border-radius: 8px;
-  background: #ffffff;
-  font-size: 14px;
-  font-weight: 500;
+  background: var(--mf-ink);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
   transform: translateY(-50%);
-  box-shadow: 0 1px 2px rgba(1, 3, 4, 0.08);
 }
 .mf-plan-price {
   display: flex;
@@ -1263,7 +1263,7 @@ html:has(.mf-root) body {
 .mf-plan-price strong {
   display: block;
   margin-bottom: 8px;
-  font-size: clamp(44px, 5vw, 60px);
+  font-size: clamp(40px, 4vw, 48px);
   line-height: 1;
   font-weight: 500;
   letter-spacing: -0.04em;
@@ -1283,11 +1283,11 @@ html:has(.mf-root) body {
 .mf-plan-btn {
   display: flex;
   width: 100%;
-  min-height: 52px;
-  margin-top: clamp(36px, 5vw, 72px);
+  min-height: 48px;
+  margin-top: 24px;
 }
 .mf-plan h3 {
-  margin-top: 36px;
+  margin-top: 24px;
   font-size: 16px;
   font-weight: 600;
 }
@@ -1313,7 +1313,7 @@ html:has(.mf-root) body {
 }
 @media (min-width: 900px) {
   .mf-pricing-in {
-    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 400px);
     gap: clamp(48px, 8vw, 140px);
   }
 }
