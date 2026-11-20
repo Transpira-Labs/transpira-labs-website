@@ -734,26 +734,176 @@ html:has(.mf-root) body {
   margin-top: 10px;
 }
 
-/* ---- The problem: three moments of a morning, each with its time ---- */
+/* ---- The problem, as a road: the section pins and scrolling carries you sideways past five stops ---- */
 
-.mf-moments > li {
-  display: grid;
-  grid-template-columns: 3.4em minmax(0, 1fr);
-  gap: 20px;
-  padding-block: 18px;
-  border-top: 1px solid var(--mf-line);
-  font-size: clamp(16px, 1.5vw, 18px);
-  line-height: 1.4;
+.mf-road-track {
+  /* The window's height, plus the scrolling it takes to travel the road. */
+  height: calc(100svh + 2800px);
 }
-.mf-moments > li:first-child {
-  border-top-color: var(--mf-ink);
+.mf-road {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100svh;
+  overflow: hidden;
+  padding-top: var(--mf-nav-h);
 }
-.mf-moments > li:last-child {
-  border-bottom: 1px solid var(--mf-line);
+.mf-road-head {
+  width: 100%;
+  padding-top: clamp(20px, 4.5vh, 56px);
 }
-.mf-moments span:first-child {
-  color: var(--mf-ink-2);
-  font-weight: 600;
+.mf-road-head .mf-lede {
+  max-width: 30em;
+  margin-top: 12px;
+  color: #d0d0d0;
+}
+.mf-road-strip {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: clamp(48px, 9vw, 160px);
+  min-height: 0;
+  /* Lines the first stop up with the heading above it. */
+  padding-inline: max(24px, calc((100vw - 1172px) / 2));
+  will-change: transform;
+}
+.mf-pain {
+  flex: none;
+  width: min(500px, 78vw);
+}
+.mf-pain-stage {
+  color: #b9baba;
+  font-size: 18px;
+  font-weight: 500;
+}
+.mf-pain-title {
+  margin-top: 4px;
+  font-size: clamp(40px, 5.2vw, 72px);
+  line-height: 1.04;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+}
+/* The pictures were drawn small for a row of five. Here each has the stage to itself. */
+.mf-pain-art {
+  margin-block: clamp(16px, 3vh, 28px);
+  zoom: 1.5;
+}
+.mf-pain-cost {
+  color: var(--mf-amber);
+  font-size: clamp(20px, 2vw, 26px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+.mf-road-foot {
+  width: 100%;
+  padding-block: 8px clamp(20px, 4vh, 40px);
+}
+/* The road itself: a line with a mark at each stop, and a truck that keeps pace with the scroll. */
+.mf-road-line {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin-inline: 17px;
+  padding-top: 34px;
+  border-top: 2px solid rgba(255, 255, 255, 0.28);
+}
+.mf-road-line li:not(.mf-road-truck) {
+  position: relative;
+  width: 0;
+  color: #9a9b9c;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+.mf-road-line li:not(.mf-road-truck) span {
+  position: absolute;
+  top: -22px;
+  left: 0;
+  transform: translateX(-50%);
+}
+.mf-road-line li:first-child span {
+  transform: translateX(-17px);
+}
+.mf-road-line li:nth-last-child(2) span {
+  transform: translateX(calc(-100% + 17px));
+}
+.mf-road-line li:not(.mf-road-truck)::before {
+  position: absolute;
+  top: -41px;
+  left: -6px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  background: var(--mf-night);
+  content: "";
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+}
+.mf-road-line li[data-past="true"]::before {
+  border-color: #ffffff;
+  background: #ffffff;
+}
+.mf-road-line li[data-on="true"] {
+  color: #ffffff;
+}
+.mf-road-line li[data-on="true"]::before {
+  border-color: var(--mf-amber);
+  background: var(--mf-amber);
+}
+.mf-road-truck {
+  position: absolute;
+  top: -62px;
+  left: calc(var(--p, 0) * 100%);
+  display: flex;
+  color: var(--mf-amber);
+  transform: translateX(-50%);
+}
+
+@media (max-height: 760px) {
+  .mf-pain-art {
+    zoom: 1.15;
+  }
+  .mf-road-head .mf-lede {
+    display: none;
+  }
+  .mf-pain-title {
+    font-size: clamp(34px, 4.4vw, 52px);
+  }
+}
+@media (max-width: 620px) {
+  .mf-pain-art {
+    zoom: 1.2;
+  }
+  .mf-road-line li:not(.mf-road-truck) span {
+    display: none;
+  }
+  .mf-road-line li[data-on="true"] span {
+    display: block;
+  }
+}
+/* Without motion there is no pin and no travel: the five stops are listed down the page. */
+@media (prefers-reduced-motion: reduce) {
+  .mf-road-track {
+    height: auto;
+  }
+  .mf-road {
+    position: static;
+    height: auto;
+    padding-block: clamp(64px, 9vw, 110px);
+  }
+  .mf-road-strip {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 64px;
+    margin-top: 48px;
+  }
+  .mf-road-foot {
+    display: none;
+  }
 }
 
 /* ---- Approval band ---- */

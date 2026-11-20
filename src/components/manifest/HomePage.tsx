@@ -6,6 +6,7 @@ import { BookForm, Bubbles, Footer, Nav, PhotoBand } from "./Chrome";
 import { BoardFlow } from "./BoardFlow";
 import { HeroThread } from "./HeroThread";
 import { LoadStory } from "./LoadStory";
+import { ProblemRoad } from "./ProblemRoad";
 
 /*
  * TODO(before launch): confirm which integrations exist today, and that a
@@ -36,15 +37,9 @@ const BENEFITS: [string, string][] = [
 ];
 
 /*
- * TODO(before launch): these times are illustrative, the same ones the
- * walkthrough uses. "In minutes, not a day" in the hero rests on them too.
+ * TODO(before launch): "in minutes, not a day" in the hero rests on the
+ * walkthrough's illustrative two-minute figure. Confirm it.
  */
-const BEFORE: [string, string][] = [
-  ["8:05", "Erin emails for a price. It lands in an inbox with 1,400 others."],
-  ["8:20", "Carriers call, drivers text and a customer wants an update, all at once."],
-  ["9:14", "Her quote still isn't written. By tomorrow she books with someone else."],
-];
-
 const PRICE_ROWS: [string, string][] = [
   ["Onboarding fee", "$0"],
   ["Implementation fee", "$0"],
@@ -128,41 +123,9 @@ export function HomePage() {
           </div>
         </PhotoBand>
 
-        <section className="mf-wrap">
-          <div className="mf-split">
-            <div>
-              <h2 className="mf-h2">Before: one quote takes a day</h2>
-              <p className="mf-lede mf-muted">
-                By the time the number is worked out, the customer has booked with someone else.
-              </p>
-            </div>
-            <ol className="mf-moments">
-              {BEFORE.map(([when, what]) => (
-                <li key={when}>
-                  <span>{when}</span>
-                  <span>{what}</span>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
+        <ProblemRoad />
 
         <LoadStory />
-
-        <section className="mf-wrap mf-benefits">
-          <h2 className="mf-h2 mf-h2--xl">One phone. One agent. Any number of loads.</h2>
-          <ul>
-            {BENEFITS.map(([title, body]) => (
-              <li key={title}>
-                <h3 className="mf-h3">{title}</h3>
-                <p className="mf-muted">{body}</p>
-              </li>
-            ))}
-          </ul>
-          <a href={CAL_URL} target="_blank" rel="noreferrer" className="mf-btn mf-btn--lg">
-            Book a call
-          </a>
-        </section>
 
         <div style={{ marginTop: "clamp(72px, 9vw, 120px)" }}>
           <PhotoBand src={warehouse} shade={0.66}>
@@ -231,6 +194,21 @@ export function HomePage() {
             </div>
             <BoardFlow />
           </div>
+        </section>
+
+        <section className="mf-wrap mf-benefits">
+          <h2 className="mf-h2 mf-h2--xl">One phone. One agent. Any number of loads.</h2>
+          <ul>
+            {BENEFITS.map(([title, body]) => (
+              <li key={title}>
+                <h3 className="mf-h3">{title}</h3>
+                <p className="mf-muted">{body}</p>
+              </li>
+            ))}
+          </ul>
+          <a href={CAL_URL} target="_blank" rel="noreferrer" className="mf-btn mf-btn--lg">
+            Book a call
+          </a>
         </section>
 
         <section id="pricing" className="mf-wrap">
