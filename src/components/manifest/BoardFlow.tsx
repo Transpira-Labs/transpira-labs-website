@@ -155,97 +155,99 @@ export function BoardFlow() {
   };
 
   return (
-    <div ref={root} className="mf-flow">
-      <div className="mf-flow-sources">
-        {CHANNELS.map((c) => (
-          <div key={c.id} className="mf-flow-src" data-on={!still && now.via === c.id}>
-            <span className="mf-flow-icon">
-              <Icon of={c.id} />
-            </span>
-            <span>
-              <strong>{c.name}</strong>
-              <span>{still ? c.idle : lastVia(c.id, c.idle)}</span>
-            </span>
-          </div>
-        ))}
-      </div>
-
-      <div className="mf-flow-wires" aria-hidden="true">
-        {CHANNELS.map((c) => (
-          <span key={c.id} className="mf-flow-wire">
-            {inFlight?.via === c.id ? (
-              <span key={fired} className="mf-flow-packet" data-out={Boolean(inFlight.out)} />
-            ) : null}
-          </span>
-        ))}
-      </div>
-
-      <div className="mf-flow-board">
-        <div className="mf-flow-bar">
-          <span className="mf-flow-title">
-            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none">
-              <rect
-                x="3.5"
-                y="4"
-                width="17"
-                height="16"
-                rx="2.5"
-                stroke="currentColor"
-                strokeWidth="1.8"
-              />
-              <path d="M9.5 4v16M15 4v9" stroke="currentColor" strokeWidth="1.8" />
-            </svg>
-            <strong>Manifest board</strong>
-          </span>
-          {still ? null : (
-            <button type="button" className="mf-flow-pause" onClick={() => setPaused(!paused)}>
-              {paused ? "Play" : "Pause"}
-            </button>
-          )}
-        </div>
-        <div className="mf-flow-body">
-          <div className="mf-flow-inset">
-            <div className="mf-flow-cols">
-              {COLUMNS.map((c, n) => (
-                <span key={c} className="mf-flow-col-name" data-col={n}>
-                  {c}
-                </span>
-              ))}
+    <div className="mf-flow-box">
+      <div ref={root} className="mf-flow">
+        <div className="mf-flow-sources">
+          {CHANNELS.map((c) => (
+            <div key={c.id} className="mf-flow-src" data-on={!still && now.via === c.id}>
+              <span className="mf-flow-icon">
+                <Icon of={c.id} />
+              </span>
+              <span>
+                <strong>{c.name}</strong>
+                <span>{still ? c.idle : lastVia(c.id, c.idle)}</span>
+              </span>
             </div>
-            <div className="mf-flow-lane">
-              <div
-                className="mf-flow-card mf-flow-card--live"
-                data-shown={card !== null}
-                data-col={card ? card.col : 0}
-                style={{ ["--col" as string]: card ? card.col : 0 }}
-              >
-                <div>
-                  <strong>Kubota tractor</strong>
-                  <span key={cardAt} className="mf-flow-status">
-                    {card ? card.status : ""}
+          ))}
+        </div>
+
+        <div className="mf-flow-wires" aria-hidden="true">
+          {CHANNELS.map((c) => (
+            <span key={c.id} className="mf-flow-wire">
+              {inFlight?.via === c.id ? (
+                <span key={fired} className="mf-flow-packet" data-out={Boolean(inFlight.out)} />
+              ) : null}
+            </span>
+          ))}
+        </div>
+
+        <div className="mf-flow-board">
+          <div className="mf-flow-bar">
+            <span className="mf-flow-title">
+              <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <rect
+                  x="3.5"
+                  y="4"
+                  width="17"
+                  height="16"
+                  rx="2.5"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                />
+                <path d="M9.5 4v16M15 4v9" stroke="currentColor" strokeWidth="1.8" />
+              </svg>
+              <strong>Manifest board</strong>
+            </span>
+            {still ? null : (
+              <button type="button" className="mf-flow-pause" onClick={() => setPaused(!paused)}>
+                {paused ? "Play" : "Pause"}
+              </button>
+            )}
+          </div>
+          <div className="mf-flow-body">
+            <div className="mf-flow-inset">
+              <div className="mf-flow-cols">
+                {COLUMNS.map((c, n) => (
+                  <span key={c} className="mf-flow-col-name" data-col={n}>
+                    {c}
                   </span>
+                ))}
+              </div>
+              <div className="mf-flow-lane">
+                <div
+                  className="mf-flow-card mf-flow-card--live"
+                  data-shown={card !== null}
+                  data-col={card ? card.col : 0}
+                  style={{ ["--col" as string]: card ? card.col : 0 }}
+                >
+                  <div>
+                    <strong>Kubota tractor</strong>
+                    <span key={cardAt} className="mf-flow-status">
+                      {card ? card.status : ""}
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="mf-flow-cols">
-              {COLUMNS.map((c, n) => (
-                <div key={c} className="mf-flow-col" data-col={n}>
-                  {OTHERS.filter(([col]) => col === n).map(([, load, who]) => (
-                    <div key={load} className="mf-flow-card">
-                      <div>
-                        <strong>{load}</strong>
-                        <span>{who}</span>
+              <div className="mf-flow-cols">
+                {COLUMNS.map((c, n) => (
+                  <div key={c} className="mf-flow-col" data-col={n}>
+                    {OTHERS.filter(([col]) => col === n).map(([, load, who]) => (
+                      <div key={load} className="mf-flow-card">
+                        <div>
+                          <strong>{load}</strong>
+                          <span>{who}</span>
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              ))}
+                    ))}
+                  </div>
+                ))}
+              </div>
             </div>
+            <p className="mf-flow-caption">
+              <span className="mf-flow-key" data-out="false" /> Coming in
+              <span className="mf-flow-key" data-out="true" /> Sent by the agent
+            </p>
           </div>
-          <p className="mf-flow-caption">
-            <span className="mf-flow-key" data-out="false" /> Coming in
-            <span className="mf-flow-key" data-out="true" /> Sent by the agent
-          </p>
         </div>
       </div>
     </div>
