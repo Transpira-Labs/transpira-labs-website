@@ -9,7 +9,7 @@ import { FitQuestions } from "@/components/manifest/FitQuestions";
  */
 export const Route = createFileRoute("/lab/fit")({
   head: () => ({
-    meta: [{ title: "Three questions, prototype" }, { name: "robots", content: "noindex" }],
+    meta: [{ title: "Two questions, prototype" }, { name: "robots", content: "noindex" }],
   }),
   component: Lab,
 });

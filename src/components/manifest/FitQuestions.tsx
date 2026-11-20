@@ -1,9 +1,8 @@
 import { useEffect, useRef, type ReactNode } from "react";
-import { BoardFlow } from "./BoardFlow";
 import { Bubbles } from "./Chrome";
 
 /*
- * What a broker still wants to know after the demo, as three numbered
+ * What a broker still wants to know after the demo, as two numbered
  * questions. Each has its answer on the left, which stays in view, and the
  * thing that proves it on the right. This one section replaces four that each
  * made one of these points on its own.
@@ -103,16 +102,6 @@ export function FitQuestions() {
               </li>
             ))}
           </ul>
-        </Row>
-
-        <Row
-          n="03"
-          question="Where do I see everything?"
-          answer="On the board. Every load moves from quote to paid on its own, as the texts come in. Open it on any computer when you want the detail."
-        >
-          <div className="mf-fit-panel mf-fit-board">
-            <BoardFlow />
-          </div>
         </Row>
       </ol>
     </section>

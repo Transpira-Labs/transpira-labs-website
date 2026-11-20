@@ -992,7 +992,7 @@ html:has(.mf-root) body {
   }
 }
 
-/* ---- Three questions: the answer on the left stays put, the proof on the right scrolls past ---- */
+/* ---- Two questions: the answer on the left stays put, the proof on the right scrolls past ---- */
 
 .mf-fit {
   padding-top: clamp(88px, 10vw, 130px);
@@ -1087,15 +1087,6 @@ html:has(.mf-root) body {
   border-color: var(--mf-ink);
   background: var(--mf-ink);
   color: #ffffff;
-}
-.mf-fit-board {
-  padding: clamp(14px, 2.4vw, 28px);
-  background:
-    radial-gradient(90% 120% at 0% 0%, #fbe6bd 0%, rgba(251, 230, 189, 0) 62%),
-    radial-gradient(70% 100% at 100% 100%, #dcebe6 0%, rgba(220, 235, 230, 0) 60%), #f3f1e7;
-}
-.mf-fit-board .mf-flow {
-  margin-top: 0;
 }
 /* Once the script is running, each row starts low and faded and rises when it comes into view. */
 .mf-fit-list[data-live="true"] .mf-fit-row > * {
