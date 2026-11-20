@@ -245,7 +245,7 @@ function bubble(bg: string, fg: string, side: "flex-start" | "flex-end"): CSSPro
   };
 }
 
-export const PAINS: { n: string; stage: string; title: string; art: ReactNode; cost: string }[] = [
+const PAINS: { n: string; stage: string; title: string; art: ReactNode; cost: string }[] = [
   { n: "01", stage: "Quoting", title: "The quote.", art: <Quote />, cost: "Too slow. Load lost." },
   {
     n: "02",

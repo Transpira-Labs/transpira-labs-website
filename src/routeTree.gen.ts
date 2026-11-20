@@ -24,7 +24,6 @@ import { Route as CaseStudiesSlugRouteImport } from './routes/case-studies.$slug
 import { Route as CaseStudiesBenchceptionRouteImport } from './routes/case-studies.benchception'
 import { Route as CaseStudiesBuildRouteImport } from './routes/case-studies.build'
 import { Route as CaseStudiesScBenchRouteImport } from './routes/case-studies.sc-bench'
-import { Route as LabProblemRouteImport } from './routes/lab.problem'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -101,11 +100,6 @@ const CaseStudiesScBenchRoute = CaseStudiesScBenchRouteImport.update({
   path: '/case-studies/sc-bench',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LabProblemRoute = LabProblemRouteImport.update({
-  id: '/lab/problem',
-  path: '/lab/problem',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -122,7 +116,6 @@ export interface FileRoutesByFullPath {
   '/case-studies/benchception': typeof CaseStudiesBenchceptionRoute
   '/case-studies/build': typeof CaseStudiesBuildRoute
   '/case-studies/sc-bench': typeof CaseStudiesScBenchRoute
-  '/lab/problem': typeof LabProblemRoute
   '/case-studies/': typeof CaseStudiesIndexRoute
 }
 export interface FileRoutesByTo {
@@ -140,7 +133,6 @@ export interface FileRoutesByTo {
   '/case-studies/benchception': typeof CaseStudiesBenchceptionRoute
   '/case-studies/build': typeof CaseStudiesBuildRoute
   '/case-studies/sc-bench': typeof CaseStudiesScBenchRoute
-  '/lab/problem': typeof LabProblemRoute
   '/case-studies': typeof CaseStudiesIndexRoute
 }
 export interface FileRoutesById {
@@ -159,7 +151,6 @@ export interface FileRoutesById {
   '/case-studies/benchception': typeof CaseStudiesBenchceptionRoute
   '/case-studies/build': typeof CaseStudiesBuildRoute
   '/case-studies/sc-bench': typeof CaseStudiesScBenchRoute
-  '/lab/problem': typeof LabProblemRoute
   '/case-studies/': typeof CaseStudiesIndexRoute
 }
 export interface FileRouteTypes {
@@ -179,7 +170,6 @@ export interface FileRouteTypes {
     | '/case-studies/benchception'
     | '/case-studies/build'
     | '/case-studies/sc-bench'
-    | '/lab/problem'
     | '/case-studies/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -197,7 +187,6 @@ export interface FileRouteTypes {
     | '/case-studies/benchception'
     | '/case-studies/build'
     | '/case-studies/sc-bench'
-    | '/lab/problem'
     | '/case-studies'
   id:
     | '__root__'
@@ -215,7 +204,6 @@ export interface FileRouteTypes {
     | '/case-studies/benchception'
     | '/case-studies/build'
     | '/case-studies/sc-bench'
-    | '/lab/problem'
     | '/case-studies/'
   fileRoutesById: FileRoutesById
 }
@@ -234,7 +222,6 @@ export interface RootRouteChildren {
   CaseStudiesBenchceptionRoute: typeof CaseStudiesBenchceptionRoute
   CaseStudiesBuildRoute: typeof CaseStudiesBuildRoute
   CaseStudiesScBenchRoute: typeof CaseStudiesScBenchRoute
-  LabProblemRoute: typeof LabProblemRoute
   CaseStudiesIndexRoute: typeof CaseStudiesIndexRoute
 }
 
@@ -345,13 +332,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CaseStudiesScBenchRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/lab/problem': {
-      id: '/lab/problem'
-      path: '/lab/problem'
-      fullPath: '/lab/problem'
-      preLoaderRoute: typeof LabProblemRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -370,7 +350,6 @@ const rootRouteChildren: RootRouteChildren = {
   CaseStudiesBenchceptionRoute: CaseStudiesBenchceptionRoute,
   CaseStudiesBuildRoute: CaseStudiesBuildRoute,
   CaseStudiesScBenchRoute: CaseStudiesScBenchRoute,
-  LabProblemRoute: LabProblemRoute,
   CaseStudiesIndexRoute: CaseStudiesIndexRoute,
 }
 export const routeTree = rootRouteImport

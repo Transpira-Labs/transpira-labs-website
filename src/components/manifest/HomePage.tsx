@@ -6,7 +6,7 @@ import { BookForm, Bubbles, Footer, Nav, PhotoBand } from "./Chrome";
 import { BoardFlow } from "./BoardFlow";
 import { HeroThread } from "./HeroThread";
 import { LoadStory } from "./LoadStory";
-import { ProblemRoad } from "./ProblemRoad";
+import { ProblemJourney } from "./ProblemJourney";
 
 /*
  * TODO(before launch): confirm which integrations exist today, and that a
@@ -123,7 +123,7 @@ export function HomePage() {
           </div>
         </PhotoBand>
 
-        <ProblemRoad />
+        <ProblemJourney />
 
         <LoadStory />
 
