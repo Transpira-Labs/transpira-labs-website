@@ -4,8 +4,7 @@ import { Bubbles } from "./Chrome";
 /*
  * What a broker still wants to know after the demo, as two numbered
  * questions. Each has its answer on the left, which stays in view, and the
- * thing that proves it on the right. This one section replaces four that each
- * made one of these points on its own.
+ * thing that proves it on the right.
  *
  * TODO(before launch): confirm which integrations exist today.
  */

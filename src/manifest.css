@@ -417,9 +417,6 @@ html:has(.mf-root) body {
   --im-ground: var(--mf-amber);
   --im-them: #ffffff;
 }
-.mf-approve-thread {
-  --im-them: #ffffff;
-}
 .mf-im[data-gap] {
   margin-top: 8px;
 }
@@ -709,29 +706,6 @@ html:has(.mf-root) body {
   width: 38px;
   color: var(--mf-ink-2);
   font-weight: 500;
-}
-
-/* ---- Benefits: the promise restated, then what the broker gets ---- */
-
-.mf-benefits {
-  padding-top: clamp(72px, 9vw, 120px);
-}
-.mf-benefits .mf-h2 {
-  max-width: 760px;
-}
-.mf-benefits ul {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
-  gap: 32px 40px;
-  margin-block: clamp(40px, 5vw, 64px) clamp(32px, 4vw, 48px);
-}
-.mf-benefits li {
-  padding-top: 20px;
-  border-top: 1px solid var(--mf-ink);
-}
-.mf-benefits li p {
-  max-width: 340px;
-  margin-top: 10px;
 }
 
 /* ---- The problem as a journey: a pinned scene, a camera on a road, and a list that follows it ---- */
@@ -1116,53 +1090,6 @@ html:has(.mf-root) body {
   }
 }
 
-/* ---- Approval band ---- */
-
-.mf-approve {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 48px 80px;
-  padding-block: clamp(88px, 11vw, 140px);
-}
-.mf-approve-copy {
-  flex: 1 1 360px;
-  min-width: 0;
-  max-width: 520px;
-}
-.mf-approve-copy .mf-lede {
-  max-width: 440px;
-  margin-top: 20px;
-  color: #e6e6e6;
-}
-.mf-approve-thread {
-  display: flex;
-  flex: 0 1 360px;
-  flex-direction: column;
-  gap: 10px;
-  min-width: min(260px, 100%);
-}
-.mf-answers {
-  display: flex;
-  flex-wrap: wrap;
-  align-self: flex-end;
-  justify-content: flex-end;
-  gap: 6px;
-}
-.mf-answers span {
-  padding: 10px 18px;
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  border-radius: 999px;
-  font-size: 14px;
-  font-weight: 600;
-}
-.mf-answers span:first-child {
-  border-color: var(--mf-amber);
-  background: var(--mf-amber);
-  color: var(--mf-ink);
-}
-
 /* ---- Two-column sections with a ruled list ---- */
 
 .mf-split {
@@ -1238,17 +1165,6 @@ html:has(.mf-root) body {
 
 /* ---- Board ---- */
 
-.mf-board {
-  padding-top: clamp(88px, 10vw, 130px);
-}
-.mf-board-in {
-  overflow: hidden;
-  padding: clamp(32px, 5vw, 64px) clamp(20px, 4vw, 48px);
-  border-radius: 12px;
-  background:
-    radial-gradient(90% 120% at 0% 0%, #fbe6bd 0%, rgba(251, 230, 189, 0) 62%),
-    radial-gradient(70% 100% at 100% 100%, #dcebe6 0%, rgba(220, 235, 230, 0) 60%), #f3f1e7;
-}
 .mf-board-top {
   display: flex;
   flex-wrap: wrap;

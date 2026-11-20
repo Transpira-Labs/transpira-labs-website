@@ -1,46 +1,18 @@
 import { useState } from "react";
 import heroPhoto from "@/assets/mountains-2000.jpg";
-import warehouse from "@/assets/warehouse-aisle.jpg";
 import { CAL_URL } from "@/components/site-chrome";
-import { BookForm, Bubbles, Footer, Nav, PhotoBand } from "./Chrome";
-import { BoardFlow } from "./BoardFlow";
+import { BookForm, Footer, Nav, PhotoBand } from "./Chrome";
+import { FitQuestions } from "./FitQuestions";
 import { HeroThread } from "./HeroThread";
 import { LoadStory } from "./LoadStory";
 import { ProblemJourney } from "./ProblemJourney";
 import { SolutionColumns } from "./SolutionColumns";
 
 /*
- * TODO(before launch): confirm which integrations exist today, and that a
- * first quote really goes out the same day.
- */
-const CONNECTIONS: [string, string][] = [
-  ["Gmail and Outlook", "Reads quote requests, sends as you"],
-  ["DAT and Truckstop", "Posts loads, collects bids"],
-  ["WhatsApp", "Texts drivers and carriers"],
-  ["Your TMS", "Keeps loads and invoices in sync"],
-  ["Your phone", "Where you approve, by text"],
-];
-
-// What the broker gets, in the words the walkthrough already used.
-const BENEFITS: [string, string][] = [
-  [
-    "A one-person brokerage with big-shop numbers.",
-    "Do the work of a 10-person shop and compete with the big guys, without hiring.",
-  ],
-  [
-    "Your people work loads, not admin.",
-    "The agent handles the admin. Your team sells and looks after customers.",
-  ],
-  [
-    "Nothing to install. Nothing to switch.",
-    "It works inside the inbox, load boards and phone your brokerage already runs on.",
-  ],
-];
-
-/*
  * TODO(before launch): "in minutes, not a day" in the hero rests on the
  * walkthrough's illustrative two-minute figure. Confirm it.
  */
+// TODO(before launch): confirm that a first quote really goes out the same day.
 const PRICE_ROWS: [string, string][] = [
   ["Onboarding fee", "$0"],
   ["Implementation fee", "$0"],
@@ -49,14 +21,6 @@ const PRICE_ROWS: [string, string][] = [
 ];
 
 const FAQS: [string, string][] = [
-  [
-    "Does anything go out without me?",
-    "No. The agent drafts every email, text and load posting, and waits for your reply before anything reaches a customer or carrier.",
-  ],
-  [
-    "What do I need to install?",
-    "Nothing. The agent is a contact in your phone’s messages, and the board opens in any browser.",
-  ],
   ["Which email does it work with?", "Gmail and Outlook. Outlook connects in one sign-in."],
   [
     "Who do carriers talk to?",
@@ -130,89 +94,7 @@ export function HomePage() {
 
         <LoadStory />
 
-        <div style={{ marginTop: "clamp(72px, 9vw, 120px)" }}>
-          <PhotoBand src={warehouse} shade={0.66}>
-            <div className="mf-approve">
-              <div className="mf-approve-copy">
-                <h2 className="mf-h2 mf-h2--xl">Nothing goes out without you.</h2>
-                <p className="mf-lede">
-                  The agent drafts every email, text and load posting, then waits for your reply
-                  before anything reaches a customer or carrier.
-                </p>
-              </div>
-              <div className="mf-approve-thread">
-                <Bubbles
-                  tails={false}
-                  msgs={[
-                    [
-                      false,
-                      "Draft for Erin is ready: $2,100, with a question about weight. Send it?",
-                    ],
-                  ]}
-                />
-                <div className="mf-answers" aria-hidden="true">
-                  <span>Yes</span>
-                  <span>Change it</span>
-                  <span>No</span>
-                </div>
-                <p className="mf-small" style={{ alignSelf: "flex-end", color: "#e6e6e6" }}>
-                  Reply yes to send, change it, or say no.
-                </p>
-              </div>
-            </div>
-          </PhotoBand>
-        </div>
-
-        <section id="how" className="mf-wrap">
-          <div className="mf-split">
-            <div>
-              <h2 className="mf-h2">Connect your inbox once.</h2>
-              <p className="mf-lede mf-muted">
-                Sign in with Gmail or Outlook and add your phone number. The agent links your load
-                boards and shows up as a contact in Messages.
-              </p>
-              <a href={CAL_URL} target="_blank" rel="noreferrer" className="mf-btn">
-                Book a call
-              </a>
-            </div>
-            <ul className="mf-rows">
-              {CONNECTIONS.map(([name, what]) => (
-                <li key={name}>
-                  <strong>{name}</strong>
-                  <span>{what}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
-        <section className="mf-wrap mf-board">
-          <div className="mf-board-in">
-            <div className="mf-board-top">
-              <h2 className="mf-h2">The board stays current</h2>
-              <p>
-                Every load moves from quote to paid on its own, as the texts come in. Open it on any
-                computer when you want the detail.
-              </p>
-            </div>
-            <BoardFlow />
-          </div>
-        </section>
-
-        <section className="mf-wrap mf-benefits">
-          <h2 className="mf-h2 mf-h2--xl">One phone. One agent. Any number of loads.</h2>
-          <ul>
-            {BENEFITS.map(([title, body]) => (
-              <li key={title}>
-                <h3 className="mf-h3">{title}</h3>
-                <p className="mf-muted">{body}</p>
-              </li>
-            ))}
-          </ul>
-          <a href={CAL_URL} target="_blank" rel="noreferrer" className="mf-btn mf-btn--lg">
-            Book a call
-          </a>
-        </section>
+        <FitQuestions />
 
         <section id="pricing" className="mf-wrap">
           <div className="mf-split mf-split--end">
