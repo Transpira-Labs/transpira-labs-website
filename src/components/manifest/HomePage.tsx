@@ -35,6 +35,16 @@ const BENEFITS: [string, string][] = [
   ],
 ];
 
+/*
+ * TODO(before launch): these times are illustrative, the same ones the
+ * walkthrough uses. "In minutes, not a day" in the hero rests on them too.
+ */
+const BEFORE: [string, string][] = [
+  ["8:05", "Erin emails for a price. It lands in an inbox with 1,400 others."],
+  ["8:20", "Carriers call, drivers text and a customer wants an update, all at once."],
+  ["9:14", "Her quote still isn't written. By tomorrow she books with someone else."],
+];
+
 const PRICE_ROWS: [string, string][] = [
   ["Onboarding fee", "$0"],
   ["Implementation fee", "$0"],
@@ -107,8 +117,8 @@ export function HomePage() {
             <div className="mf-hero-copy">
               <h1 className="mf-h1">Quote, cover and get paid with a one-word text.</h1>
               <p className="mf-lede">
-                Manifest is a text agent for freight brokers. It reads the request, prices the load
-                and drafts the reply. You text back yes.
+                Manifest is a text agent for freight brokers. It answers quote requests in minutes,
+                not a day, and nothing goes out until you text back yes.
               </p>
               <a href={CAL_URL} target="_blank" rel="noreferrer" className="mf-btn mf-btn--lg">
                 Book a call
@@ -117,6 +127,25 @@ export function HomePage() {
             <HeroThread />
           </div>
         </PhotoBand>
+
+        <section className="mf-wrap">
+          <div className="mf-split">
+            <div>
+              <h2 className="mf-h2">Before: one quote takes a day</h2>
+              <p className="mf-lede mf-muted">
+                By the time the number is worked out, the customer has booked with someone else.
+              </p>
+            </div>
+            <ol className="mf-moments">
+              {BEFORE.map(([when, what]) => (
+                <li key={when}>
+                  <span>{when}</span>
+                  <span>{what}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
 
         <LoadStory />
 

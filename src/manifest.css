@@ -734,6 +734,28 @@ html:has(.mf-root) body {
   margin-top: 10px;
 }
 
+/* ---- The problem: three moments of a morning, each with its time ---- */
+
+.mf-moments > li {
+  display: grid;
+  grid-template-columns: 3.4em minmax(0, 1fr);
+  gap: 20px;
+  padding-block: 18px;
+  border-top: 1px solid var(--mf-line);
+  font-size: clamp(16px, 1.5vw, 18px);
+  line-height: 1.4;
+}
+.mf-moments > li:first-child {
+  border-top-color: var(--mf-ink);
+}
+.mf-moments > li:last-child {
+  border-bottom: 1px solid var(--mf-line);
+}
+.mf-moments span:first-child {
+  color: var(--mf-ink-2);
+  font-weight: 600;
+}
+
 /* ---- Approval band ---- */
 
 .mf-approve {

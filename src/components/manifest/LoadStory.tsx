@@ -126,7 +126,7 @@ export function LoadStory() {
   return (
     <section id="agent" className="mf-wrap">
       <div className="mf-story-head">
-        <h2 className="mf-h2">One load, start to finish, in one thread</h2>
+        <h2 className="mf-h2">The same morning, with the text agent</h2>
         <p className="mf-sub">
           Erin's tractor, from her email on Monday to the invoice on Friday. Scroll to follow it.
         </p>
