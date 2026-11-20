@@ -846,6 +846,190 @@ html:has(.mf-root) body {
   }
 }
 
+/* ---- The problem as a journey: a pinned scene, a camera on a road, and a list that follows it ---- */
+
+.mf-journey-track {
+  /* The window's height, plus the scrolling it takes to make the trip. */
+  height: calc(100svh + 3600px);
+}
+.mf-journey {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+}
+/* The picture keeps to the right of the stage, so it never runs under the words. Its left edge fades out. */
+.mf-journey-canvas {
+  position: absolute;
+  inset: var(--mf-nav-h) 0 0 32%;
+  width: 68%;
+  height: calc(100% - var(--mf-nav-h));
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  mask-image: linear-gradient(to right, transparent 0, #000 16%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 16%);
+}
+.mf-journey[data-ready="true"] .mf-journey-canvas {
+  opacity: 1;
+}
+.mf-journey-in {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding-block: calc(var(--mf-nav-h) + clamp(16px, 4vh, 44px)) clamp(20px, 5vh, 56px);
+  pointer-events: none;
+}
+/* The list: every stop is always there, and the one the camera is at opens. */
+.mf-journey-list {
+  width: min(430px, 100%);
+}
+.mf-journey-list > li {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+  padding-block: 5px;
+}
+.mf-journey-n {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  transition:
+    background-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+.mf-journey-list h3 {
+  padding-block: 11px;
+  font-size: 15px;
+  line-height: 1.45;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition:
+    font-size 0.35s cubic-bezier(0.3, 0, 0.2, 1),
+    padding 0.35s cubic-bezier(0.3, 0, 0.2, 1);
+}
+.mf-journey-more {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.45s cubic-bezier(0.3, 0, 0.2, 1);
+}
+.mf-journey-more > div {
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.mf-journey-more p {
+  color: var(--mf-ink-2);
+  font-size: 16px;
+  line-height: 1.45;
+}
+.mf-journey-more .mf-journey-cost {
+  margin-top: 10px;
+  padding-bottom: 10px;
+  color: var(--mf-ink);
+  font-weight: 600;
+}
+.mf-journey-list > li[data-on="true"] .mf-journey-n {
+  background: var(--mf-amber);
+  box-shadow: 0 1px 2px rgba(1, 3, 4, 0.16);
+}
+.mf-journey-list > li[data-on="true"] h3 {
+  padding-block: 6px 10px;
+  font-size: clamp(24px, 2.4vw, 30px);
+  line-height: 1.15;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+}
+.mf-journey-list > li[data-on="true"] .mf-journey-more {
+  grid-template-rows: 1fr;
+}
+.mf-journey-list > li[data-on="true"] .mf-journey-more > div {
+  opacity: 1;
+}
+/* The line beside the open one. It fills as you scroll through that stop. */
+.mf-journey-list > li {
+  position: relative;
+}
+.mf-journey-list > li::before,
+.mf-journey-list > li::after {
+  position: absolute;
+  top: 60px;
+  bottom: 12px;
+  left: 21px;
+  width: 2px;
+  background: rgba(1, 3, 4, 0.16);
+  content: "";
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.mf-journey-list > li::after {
+  background: var(--mf-ink);
+  transform: scaleY(var(--fill, 0));
+  transform-origin: top;
+}
+.mf-journey-list > li[data-on="true"]::before,
+.mf-journey-list > li[data-on="true"]::after {
+  opacity: 1;
+}
+
+@media (max-width: 900px) {
+  /* On a narrow screen the picture takes the top of the stage and the words sit under it. */
+  .mf-journey-canvas {
+    inset: calc(var(--mf-nav-h) + 64px) 0 auto 0;
+    width: 100%;
+    height: 46%;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+  .mf-journey-list {
+    width: 100%;
+    min-height: 190px;
+  }
+  .mf-journey-list > li {
+    padding-block: 0;
+  }
+  /* On a phone only the open stop shows; the rest would cover the picture. */
+  .mf-journey-list > li:not([data-on="true"]) {
+    display: none;
+  }
+}
+/* No 3D, or less motion asked for: no pin, and every stop is open. */
+.mf-journey-track[data-flat="true"] {
+  height: auto;
+}
+.mf-journey-track[data-flat="true"] .mf-journey {
+  position: static;
+  height: auto;
+}
+.mf-journey-track[data-flat="true"] .mf-journey-canvas {
+  display: none;
+}
+.mf-journey-track[data-flat="true"] .mf-journey-in {
+  gap: 40px;
+  padding-block: clamp(72px, 9vw, 120px);
+}
+.mf-journey-track[data-flat="true"] .mf-journey-list > li:not([data-on="true"]) {
+  display: grid;
+}
+.mf-journey-track[data-flat="true"] .mf-journey-list > li::after {
+  transform: none;
+}
+.mf-lab-note {
+  padding-block: clamp(72px, 12vh, 140px);
+}
+.mf-lab-note .mf-sub {
+  margin-top: 16px;
+}
+
 /* ---- Approval band ---- */
 
 .mf-approve {
