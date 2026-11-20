@@ -912,6 +912,86 @@ html:has(.mf-root) body {
   transform: none;
 }
 
+/* ---- The solution: a heading and five ruled columns that rise into place as you scroll ---- */
+
+.mf-sol {
+  padding-block: clamp(72px, 9vw, 120px) clamp(40px, 6vw, 72px);
+}
+.mf-sol .mf-h2 {
+  max-width: 13em;
+}
+.mf-sol-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 40px;
+  margin-top: clamp(40px, 6vh, 88px);
+}
+.mf-sol-col {
+  padding-left: 22px;
+  border-left: 1px solid var(--mf-line);
+}
+.mf-sol-art {
+  display: flex;
+  align-items: flex-end;
+  height: 104px;
+  margin-bottom: clamp(24px, 4vh, 44px);
+}
+.mf-sol-icon {
+  display: block;
+  width: auto;
+  max-height: 104px;
+  overflow: visible;
+}
+.mf-sol-col h3 {
+  font-size: clamp(20px, 1.7vw, 23px);
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+}
+.mf-sol-col p {
+  max-width: 24em;
+  margin-top: 12px;
+  color: var(--mf-ink-2);
+  font-size: clamp(15px, 1.2vw, 17px);
+  line-height: 1.45;
+}
+/* Once the script is running, each column's content starts low and faded, and --in (0 to 1) brings it up. */
+.mf-sol-track[data-live="true"] .mf-sol-col > div {
+  opacity: var(--in, 0);
+  transform: translateY(calc((1 - var(--in, 0)) * 80px));
+}
+@media (max-width: 999px) {
+  .mf-sol-track[data-live="true"] .mf-sol-col > div {
+    transition:
+      opacity 0.6s ease,
+      transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+}
+@media (min-width: 1000px) {
+  .mf-sol-track[data-live="true"] {
+    /* The window's height, plus the scrolling over which the five columns arrive. */
+    height: calc(100svh + 1700px);
+  }
+  .mf-sol-track[data-live="true"] .mf-sol {
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    height: 100svh;
+    padding-block: var(--mf-nav-h) 0;
+  }
+  .mf-sol > .mf-wrap {
+    width: 100%;
+  }
+  .mf-sol-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0;
+  }
+  .mf-sol-col {
+    padding-right: 20px;
+  }
+}
+
 /* ---- Approval band ---- */
 
 .mf-approve {

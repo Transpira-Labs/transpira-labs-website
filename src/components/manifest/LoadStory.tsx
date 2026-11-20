@@ -126,10 +126,9 @@ export function LoadStory() {
   return (
     <section id="agent" className="mf-wrap">
       <div className="mf-story-head">
-        <h2 className="mf-h2">One agent handles all five. You text back yes.</h2>
+        <h2 className="mf-h2">Follow one load through it</h2>
         <p className="mf-sub">
-          Manifest reads the email, prices the load, posts it for carriers, sends the paperwork and
-          drafts the invoice. Scroll to follow one load through it.
+          Erin's tractor, from her email on Monday to the invoice on Friday. Scroll to follow it.
         </p>
       </div>
 

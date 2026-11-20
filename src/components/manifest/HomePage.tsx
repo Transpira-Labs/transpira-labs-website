@@ -7,6 +7,7 @@ import { BoardFlow } from "./BoardFlow";
 import { HeroThread } from "./HeroThread";
 import { LoadStory } from "./LoadStory";
 import { ProblemJourney } from "./ProblemJourney";
+import { SolutionColumns } from "./SolutionColumns";
 
 /*
  * TODO(before launch): confirm which integrations exist today, and that a
@@ -124,6 +125,8 @@ export function HomePage() {
         </PhotoBand>
 
         <ProblemJourney />
+
+        <SolutionColumns />
 
         <LoadStory />
 
