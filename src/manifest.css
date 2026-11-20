@@ -1090,36 +1090,8 @@ html:has(.mf-root) body {
   }
 }
 
-/* ---- Two-column sections with a ruled list ---- */
+/* ---- A ruled list: a name on the left, a line about it on the right ---- */
 
-.mf-split {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  gap: 48px 96px;
-  padding-top: clamp(88px, 10vw, 130px);
-}
-.mf-split--end {
-  align-items: flex-end;
-}
-.mf-split > :first-child {
-  flex: 1 1 340px;
-  min-width: 0;
-}
-.mf-split > :last-child {
-  flex: 1.2 1 420px;
-  min-width: 0;
-}
-.mf-split .mf-h2 {
-  max-width: 460px;
-}
-.mf-split .mf-lede {
-  max-width: 420px;
-  margin-top: 20px;
-}
-.mf-split .mf-btn {
-  margin-top: 28px;
-}
 .mf-rows > li {
   display: flex;
   align-items: baseline;
@@ -1143,24 +1115,6 @@ html:has(.mf-root) body {
   color: var(--mf-ink-2);
   font-size: 14px;
   text-align: right;
-}
-.mf-rows--price strong,
-.mf-rows--price span {
-  color: var(--mf-ink);
-  font-size: 18px;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-}
-.mf-price {
-  margin-top: 14px;
-  font-size: clamp(72px, 10vw, 136px);
-  line-height: 0.95;
-  font-weight: 500;
-  letter-spacing: -0.05em;
-}
-.mf-price-label {
-  font-size: 18px;
-  font-weight: 500;
 }
 
 /* ---- Board ---- */
@@ -2323,9 +2277,6 @@ html:has(.mf-root) body {
   }
   .mf-rows span {
     text-align: left;
-  }
-  .mf-rows--price > li {
-    flex-direction: row;
   }
   .mf-faq-a {
     padding-right: 0;

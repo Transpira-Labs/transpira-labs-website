@@ -5,6 +5,7 @@ import { BookForm, Footer, Nav, PhotoBand } from "./Chrome";
 import { FitQuestions } from "./FitQuestions";
 import { HeroThread } from "./HeroThread";
 import { LoadStory } from "./LoadStory";
+import { Pricing } from "./Pricing";
 import { ProblemJourney } from "./ProblemJourney";
 import { SolutionColumns } from "./SolutionColumns";
 
@@ -12,14 +13,6 @@ import { SolutionColumns } from "./SolutionColumns";
  * TODO(before launch): "in minutes, not a day" in the hero rests on the
  * walkthrough's illustrative two-minute figure. Confirm it.
  */
-// TODO(before launch): confirm that a first quote really goes out the same day.
-const PRICE_ROWS: [string, string][] = [
-  ["Onboarding fee", "$0"],
-  ["Implementation fee", "$0"],
-  ["Every connector", "Included"],
-  ["First quote", "The same day"],
-];
-
 const FAQS: [string, string][] = [
   ["Which email does it work with?", "Gmail and Outlook. Outlook connects in one sign-in."],
   [
@@ -96,30 +89,7 @@ export function HomePage() {
 
         <FitQuestions />
 
-        <section id="pricing" className="mf-wrap">
-          <div className="mf-split mf-split--end">
-            <div>
-              <h2 className="mf-price-label">Pricing</h2>
-              <p className="mf-price">$50</p>
-              <p className="mf-sub" style={{ marginTop: 14 }}>
-                per user, per month
-              </p>
-            </div>
-            <div>
-              <ul className="mf-rows mf-rows--price">
-                {PRICE_ROWS.map(([k, v]) => (
-                  <li key={k}>
-                    <strong>{k}</strong>
-                    <span>{v}</span>
-                  </li>
-                ))}
-              </ul>
-              <a href={CAL_URL} target="_blank" rel="noreferrer" className="mf-btn">
-                Book a call
-              </a>
-            </div>
-          </div>
-        </section>
+        <Pricing />
 
         <Faq />
       </main>
