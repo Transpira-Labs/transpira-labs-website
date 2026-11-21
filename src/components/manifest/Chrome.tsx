@@ -31,12 +31,6 @@ export function Arrow({ stroke = "#ffffff" }: { stroke?: string }) {
 function NavLinks({ current, onPick }: { current: Page; onPick?: () => void }) {
   return (
     <>
-      <Link to="/" hash="agent" className="mf-nav-link" onClick={onPick}>
-        Text agent
-      </Link>
-      <Link to="/" hash="how" className="mf-nav-link" onClick={onPick}>
-        How it works
-      </Link>
       <Link to="/" hash="pricing" className="mf-nav-link" onClick={onPick}>
         Pricing
       </Link>
@@ -81,7 +75,7 @@ export function Nav({ current, overPhoto = false }: { current: Page; overPhoto?:
       <div className="mf-wrap">
         <div className="mf-nav-in">
           <Link to="/" className="mf-brand">
-            <Mark size={30} />
+            <Mark size={26} />
             MANIFEST
           </Link>
           <nav aria-label="Main" className="mf-nav-links">

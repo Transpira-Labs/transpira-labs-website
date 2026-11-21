@@ -204,15 +204,17 @@ html:has(.mf-root) body {
   gap: 9px;
   min-height: 44px;
   color: var(--mf-ink);
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-decoration: none;
 }
+/* Three links, set quietly beside the button rather than across the middle. */
 .mf-nav-links {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 28px;
+  margin-left: auto;
 }
 .mf-nav-link {
   position: relative;
@@ -221,7 +223,7 @@ html:has(.mf-root) body {
   min-height: 44px;
   color: var(--mf-ink);
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   text-decoration: none;
 }
 /* The underline draws in from the left on hover, and stays under the page you are on. */
@@ -230,7 +232,7 @@ html:has(.mf-root) body {
   right: 0;
   bottom: 9px;
   left: 0;
-  height: 1.5px;
+  height: 1px;
   background: currentColor;
   content: "";
   transform: scaleX(0);
@@ -246,6 +248,11 @@ html:has(.mf-root) body {
   display: flex;
   align-items: center;
   gap: 18px;
+}
+.mf-nav-end .mf-btn {
+  min-height: 36px;
+  padding: 0 16px;
+  font-weight: 500;
 }
 .mf-menu-btn {
   display: none;
