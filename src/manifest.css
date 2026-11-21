@@ -301,6 +301,13 @@ html:has(.mf-root) body {
 .mf-hero .mf-band-shade {
   background: linear-gradient(to bottom, rgba(1, 3, 4, 0.58) 0, rgba(1, 3, 4, 0.38) 180px);
 }
+/* A lighter tint: the photo keeps its daylight, and the words carry a soft shadow instead. */
+.mf-hero--light .mf-band-shade {
+  background: linear-gradient(to bottom, rgba(1, 3, 4, 0.4) 0, rgba(1, 3, 4, 0.14) 200px);
+}
+.mf-hero--light .mf-hero-copy {
+  text-shadow: 0 1px 24px rgba(1, 3, 4, 0.55);
+}
 .mf-hero-in {
   display: flex;
   flex-wrap: wrap;
@@ -1604,150 +1611,169 @@ html:has(.mf-root) body {
 
 /* ---- About ---- */
 
-/* One founder, so no card: the portrait and name on the left, the record as ruled rows across the rest. */
-.mf-team {
-  display: grid;
-  gap: 40px;
+/* ---- About: a manifest sheet. One statement, then ruled rows with a name column ---- */
+
+.mf-ab {
+  padding-bottom: clamp(88px, 11vw, 150px);
 }
-.mf-person {
+.mf-ab-top {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 32px clamp(40px, 7vw, 120px);
+  gap: 0 40px;
+  padding-block: clamp(72px, 11vw, 150px) clamp(56px, 7vw, 96px);
 }
-.mf-person-id {
-  display: flex;
-  align-items: center;
-  gap: 24px;
+.mf-ab-top h1 {
+  font-size: clamp(44px, 8.6vw, 124px);
+  line-height: 0.98;
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
 }
-.mf-avatar {
+.mf-ab-lede {
+  max-width: 30em;
+  margin-top: clamp(32px, 5vw, 64px);
+  font-size: clamp(18px, 1.7vw, 22px);
+  line-height: 1.35;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+.mf-ab-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 28px 40px;
+  padding-block: clamp(36px, 4.6vw, 64px);
+  border-top: 1px solid var(--mf-ink);
+}
+.mf-ab-row > h2 {
+  font-size: 17px;
+  line-height: 1.3;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.mf-ab-person {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 28px clamp(28px, 4vw, 56px);
+}
+.mf-ab-person img,
+.mf-ab-initials {
   display: flex;
-  flex: none;
   align-items: center;
   justify-content: center;
-  width: clamp(104px, 13vw, 168px);
+  width: clamp(120px, 15vw, 200px);
   height: auto;
   aspect-ratio: 1;
-  border-radius: 12px;
+  border-radius: 4px;
   background: var(--mf-sand);
   object-fit: cover;
-  font-size: 26px;
+  font-size: 40px;
   font-weight: 500;
 }
-.mf-person h3 {
-  font-size: clamp(28px, 3vw, 40px);
-  line-height: 1.1;
+.mf-ab-person h3 {
+  font-size: clamp(32px, 4.2vw, 56px);
+  line-height: 1;
   font-weight: 500;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
 }
-.mf-person h3 + p {
-  margin-top: 8px;
+.mf-ab-person h3 + p {
+  margin-top: 10px;
   font-size: 17px;
   font-weight: 500;
 }
-.mf-person li {
-  padding-block: clamp(16px, 2vw, 24px);
+.mf-ab-person ul {
+  margin-top: clamp(24px, 3vw, 40px);
+}
+.mf-ab-person li {
+  padding-block: 14px;
   border-top: 1px solid var(--mf-line);
-  font-size: clamp(17px, 1.6vw, 21px);
-  line-height: 1.3;
-  letter-spacing: -0.02em;
+  font-size: clamp(16px, 1.4vw, 19px);
+  line-height: 1.35;
 }
-.mf-person li:last-child {
-  border-bottom: 1px solid var(--mf-line);
-}
-@media (min-width: 860px) {
-  .mf-person {
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    align-items: center;
-  }
-}
-.mf-backed {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 32px;
-  margin-block: clamp(80px, 9vw, 120px);
-  padding: clamp(32px, 5vw, 56px) clamp(24px, 4vw, 40px);
-  border-radius: 12px;
-  background: var(--mf-sand);
-}
-.mf-backed a {
+.mf-ab-backer {
   display: block;
-  padding: 18px 26px;
-  border-radius: 16px;
-  background: #ffffff;
-  box-shadow: 0 10px 40px rgba(1, 3, 4, 0.12);
+  justify-self: start;
 }
-.mf-backed img {
+.mf-ab-backer img {
   display: block;
   width: auto;
-  height: 64px;
+  height: clamp(56px, 6vw, 76px);
 }
-.mf-lab {
-  padding-block: clamp(72px, 9vw, 100px) clamp(80px, 9vw, 110px);
+/* Each link is a row: its name large, what it is beside it, and an arrow that fills on hover. */
+.mf-ab-more {
+  margin-block: -18px;
 }
-.mf-lab .mf-h2 {
-  margin-bottom: 48px;
-}
-.mf-lab-grid {
+.mf-ab-more a {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
-  gap: 20px;
-}
-.mf-lab-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 40px;
-  min-height: 240px;
-  padding: 24px;
-  border-radius: 12px;
-  background: var(--mf-night-2);
-  color: #ffffff;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 6px 24px;
+  padding-block: 18px;
+  color: var(--mf-ink);
   text-decoration: none;
-  transition: background-color 0.15s ease;
 }
-.mf-lab-card:hover {
-  background: #242627;
+.mf-ab-more li + li a {
+  border-top: 1px solid var(--mf-line);
 }
-.mf-lab-card > span:first-child {
-  color: #d0d0d0;
+.mf-ab-more a > span:first-child {
+  font-size: clamp(26px, 3.2vw, 44px);
+  line-height: 1.05;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  transition: transform 0.3s cubic-bezier(0.3, 0, 0.2, 1);
+}
+.mf-ab-more a > span:nth-child(2) {
+  grid-column: 1;
+  max-width: 26em;
+  color: var(--mf-ink-2);
   line-height: 1.4;
 }
-.mf-lab-card > span:last-child {
+.mf-ab-go {
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 16px;
-  font-size: 26px;
-  line-height: 1.1;
-  font-weight: 500;
-  letter-spacing: -0.03em;
-}
-.mf-lab-card:hover .mf-arrow {
-  transform: translateX(4px);
-}
-.mf-arrow {
-  transition: transform 0.2s ease;
-  display: flex;
-  flex: none;
+  grid-column: 2;
+  grid-row: 1 / span 2;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--mf-ink);
   border-radius: 50%;
-  background: #4d4f4f;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
-.mf-lab-card--amber,
-.mf-lab-card--amber:hover {
+.mf-ab-more a:hover > span:first-child {
+  transform: translateX(10px);
+}
+.mf-ab-more a:hover .mf-ab-go {
   background: var(--mf-amber);
-  color: var(--mf-ink);
 }
-.mf-lab-card--amber > span:first-child {
-  color: var(--mf-ink);
-}
-.mf-lab-card--amber .mf-arrow {
-  background: var(--mf-ink);
+@media (min-width: 900px) {
+  .mf-ab-top {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+  }
+  .mf-ab-top > * {
+    grid-column: 1 / -1;
+  }
+  .mf-ab-top .mf-ab-lede {
+    grid-column: 2;
+  }
+  .mf-ab-row {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+  }
+  .mf-ab-person {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+  }
+  .mf-ab-more a {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr) auto;
+  }
+  .mf-ab-more a > span:nth-child(2) {
+    grid-column: 2;
+  }
+  .mf-ab-go {
+    grid-column: 3;
+    grid-row: 1;
+  }
 }
 
 /* ---- The board diagram: sources on the left, wires, the board on the right ---- */
