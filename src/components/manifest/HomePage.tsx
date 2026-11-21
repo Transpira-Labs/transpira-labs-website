@@ -1,4 +1,3 @@
-import { useState } from "react";
 import heroPhoto from "@/assets/mountains-2000.jpg";
 import { CAL_URL } from "@/components/site-chrome";
 import { BookForm, Footer, Nav, PhotoBand } from "./Chrome";
@@ -13,59 +12,18 @@ import { SolutionColumns } from "./SolutionColumns";
  * TODO(before launch): "in minutes, not a day" in the hero rests on the
  * walkthrough's illustrative two-minute figure. Confirm it.
  */
-const FAQS: [string, string][] = [
-  ["Which email does it work with?", "Gmail and Outlook. Outlook connects in one sign-in."],
-  [
-    "Who do carriers talk to?",
-    "The agent. It posts loads with its own number, so carrier calls and texts go to it, not your phone.",
-  ],
-  [
-    "What does it cost?",
-    "$50 per user per month, with every connector included. No onboarding fee and no implementation fee.",
-  ],
-];
 
-function Faq() {
-  const [open, setOpen] = useState(0);
-  return (
-    <section className="mf-wrap">
-      <div className="mf-faq">
-        <h2 className="mf-h2">Questions brokers ask</h2>
-        {FAQS.map(([q, a], n) => (
-          <div key={q} className="mf-faq-item">
-            <h3>
-              <button
-                type="button"
-                className="mf-faq-q"
-                aria-expanded={open === n}
-                aria-controls={`mf-faq-${n}`}
-                onClick={() => setOpen(open === n ? -1 : n)}
-              >
-                <span>{q}</span>
-                <span className="mf-faq-sign" aria-hidden="true" />
-              </button>
-            </h3>
-            <div
-              id={`mf-faq-${n}`}
-              className="mf-faq-panel"
-              data-open={open === n}
-              aria-hidden={open !== n}
-            >
-              <p className="mf-faq-a">{a}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-export function HomePage() {
+export function HomePage({ photo }: { photo?: { src: string; position: string } }) {
   return (
     <div className="mf-root">
       <Nav current="home" overPhoto />
       <main>
-        <PhotoBand src={heroPhoto} shade={0.38} position="50% 30%" className="mf-hero">
+        <PhotoBand
+          src={photo?.src ?? heroPhoto}
+          shade={0.38}
+          position={photo?.position ?? "50% 30%"}
+          className="mf-hero"
+        >
           <div className="mf-hero-in">
             <div className="mf-hero-copy">
               <h1 className="mf-h1">Quote, cover and get paid with a one-word text.</h1>
@@ -90,8 +48,6 @@ export function HomePage() {
         <FitQuestions />
 
         <Pricing />
-
-        <Faq />
       </main>
 
       <div className="mf-dark">
