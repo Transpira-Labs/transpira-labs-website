@@ -41,15 +41,25 @@ export function AboutPage() {
           <div className="mf-team">
             {TEAM.map((m) => (
               <div key={m.name} className="mf-person">
-                {m.photo ? (
-                  <img src={m.photo} alt={m.name} width={88} height={88} className="mf-avatar" />
-                ) : (
-                  <div className="mf-avatar" aria-hidden="true">
-                    {m.initials}
+                <div className="mf-person-id">
+                  {m.photo ? (
+                    <img
+                      src={m.photo}
+                      alt={m.name}
+                      width={168}
+                      height={168}
+                      className="mf-avatar"
+                    />
+                  ) : (
+                    <div className="mf-avatar" aria-hidden="true">
+                      {m.initials}
+                    </div>
+                  )}
+                  <div>
+                    <h3>{m.name}</h3>
+                    <p className="mf-muted">{m.role}</p>
                   </div>
-                )}
-                <h3 className="mf-h3">{m.name}</h3>
-                <p className="mf-muted">{m.role}</p>
+                </div>
                 <ul>
                   {m.bullets.map((b) => (
                     <li key={b}>{b}</li>

@@ -13,12 +13,17 @@ import { SolutionColumns } from "./SolutionColumns";
  * walkthrough's illustrative two-minute figure. Confirm it.
  */
 
-export function HomePage() {
+export function HomePage({ photo }: { photo?: { src: string; position: string } }) {
   return (
     <div className="mf-root">
       <Nav current="home" overPhoto />
       <main>
-        <PhotoBand src={heroPhoto} shade={0.38} position="50% 70%" className="mf-hero">
+        <PhotoBand
+          src={photo?.src ?? heroPhoto}
+          shade={0.38}
+          position={photo?.position ?? "50% 70%"}
+          className="mf-hero"
+        >
           <div className="mf-hero-in">
             <div className="mf-hero-copy">
               <h1 className="mf-h1">Quote, cover and get paid with a one-word text.</h1>
