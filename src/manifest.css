@@ -911,6 +911,10 @@ html:has(.mf-root) body {
   padding-left: 22px;
   border-left: 1px solid var(--mf-line);
 }
+.mf-sol-sub {
+  margin-top: 16px;
+  color: var(--mf-ink-2);
+}
 .mf-sol-art {
   display: flex;
   align-items: flex-end;

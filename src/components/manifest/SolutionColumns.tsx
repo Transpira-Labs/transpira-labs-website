@@ -29,9 +29,6 @@ function Solid({ d, fill = "#ffffff" }: { d: string; fill?: string }) {
   );
 }
 
-const PHONE =
-  "M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z";
-
 const ITEMS: { title: string; body: string; art: ReactNode }[] = [
   {
     title: "Quotes in minutes",
@@ -48,14 +45,19 @@ const ITEMS: { title: string; body: string; art: ReactNode }[] = [
     ),
   },
   {
-    title: "Carriers call it, not you",
-    body: "It posts the load under its own number and collects the bids. You pick the truck.",
-    // A ringing phone.
+    title: "It finds the truck",
+    body: "It posts the load on the load boards, replies to the carriers who answer and collects their bids. You pick the truck.",
+    // A truck.
     art: (
-      <g transform="translate(4 6) scale(2.6)" strokeWidth={2.5 / 2.6}>
-        <Solid d={PHONE} fill={AMBER} />
-        <path d="M15.05 5A5 5 0 0 1 19 8.95M15.05 1A9 9 0 0 1 23 8.94" fill="none" />
-      </g>
+      <>
+        <Solid d="M4 18h40v12h14l10 11v11H4Z" />
+        <path d="M4 18h40v34H4Z" fill={AMBER} />
+        <path d="M51 35h6l5 6H51Z" fill={AMBER} />
+        <circle cx="17" cy="54" r="7" fill={INK} />
+        <circle cx="55" cy="54" r="7" fill={INK} />
+        <circle cx="17" cy="54" r="2" fill="#ffffff" stroke="none" />
+        <circle cx="55" cy="54" r="2" fill="#ffffff" stroke="none" />
+      </>
     ),
   },
   {
@@ -192,6 +194,7 @@ export function SolutionColumns() {
           <h2 id="mf-sol-title" className="mf-h2 mf-h2--xl">
             One agent handles all five. You text back yes.
           </h2>
+          <p className="mf-sub mf-sol-sub">Nothing happens without your approval.</p>
           <ul className="mf-sol-grid">
             {ITEMS.map((item) => (
               <li key={item.title} className="mf-sol-col">
