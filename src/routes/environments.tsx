@@ -1,8 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { PaperPage } from "@/components/manifest/Chrome";
 import {
-  SiteNav,
-  SolidBackground,
-  SiteFooter,
   Reveal,
   FeatureRow,
   PLATFORM_URL,
@@ -68,10 +66,7 @@ const EFFORTS = [
 
 function EnvironmentsPage() {
   return (
-    <>
-      <SolidBackground />
-      <main className="relative z-10">
-        <SiteNav />
+    <PaperPage>
         <section className="px-6 pt-16 pb-24">
           <div className="mx-auto max-w-6xl">
             <div className="eyebrow">Environments</div>
@@ -130,9 +125,6 @@ function EnvironmentsPage() {
             ))}
           </div>
         </section>
-
-        <SiteFooter />
-      </main>
-    </>
+    </PaperPage>
   );
 }

@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { SiteNav, SolidBackground, SiteFooter } from "@/components/site-chrome";
+import { PaperPage } from "@/components/manifest/Chrome";
 
 export const Route = createFileRoute("/case-studies/")({
   head: () => ({
@@ -74,10 +74,7 @@ function CaseStudiesIndex() {
     </>
   );
   return (
-    <>
-      <SolidBackground />
-      <main className="relative z-10">
-        <SiteNav />
+    <PaperPage>
         <section className="px-6 pt-16 pb-16">
           <div className="mx-auto max-w-7xl">
             <div className="eyebrow">Research</div>
@@ -119,9 +116,6 @@ function CaseStudiesIndex() {
             )}
           </div>
         </section>
-
-        <SiteFooter />
-      </main>
-    </>
+    </PaperPage>
   );
 }

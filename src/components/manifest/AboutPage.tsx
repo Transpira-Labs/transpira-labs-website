@@ -18,27 +18,6 @@ const TEAM: { name: string; role: string; photo?: string; initials: string; bull
         "CS @ Georgia Tech.",
       ],
     },
-    {
-      name: "Rishith Auluka",
-      role: "Founding Engineer",
-      initials: "RA",
-      bullets: [
-        "Ex-Meta AI agents team.",
-        "Manufacturing plant consultant.",
-        "Top 300 competitive programmer in the US.",
-        "CS @ UGA.",
-      ],
-    },
-    {
-      name: "Saketh Koona",
-      role: "Supply Chain Intern",
-      initials: "SK",
-      bullets: [
-        "Industrial Engineering graduate, from the #1 program in the country at Georgia Tech.",
-        "Head of ML research @ SipLab, Georgia Tech.",
-        "YC Hackathon grand prize winner.",
-      ],
-    },
   ];
 
 export function AboutPage() {

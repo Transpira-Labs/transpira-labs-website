@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { PaperPage } from "@/components/manifest/Chrome";
 import { useState } from "react";
-import { SiteNav, SolidBackground, SiteFooter } from "@/components/site-chrome";
 
 export const Route = createFileRoute("/case-studies/benchception")({
   head: () => ({
@@ -76,10 +76,7 @@ function BenchceptionPage() {
   });
 
   return (
-    <>
-      <SolidBackground />
-      <main className="relative z-10 text-foreground">
-        <SiteNav />
+    <PaperPage>
 
         {/* HERO / SPLIT ----------------------------------------------------- */}
         <section className="mx-auto max-w-[1280px] px-6 pb-2 pt-14 sm:px-8">
@@ -453,10 +450,7 @@ function BenchceptionPage() {
             </span>
           </div>
         </div>
-
-        <SiteFooter />
-      </main>
-    </>
+    </PaperPage>
   );
 }
 

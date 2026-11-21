@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { SiteNav, SolidBackground, SiteFooter, BUILD_URL } from "@/components/site-chrome";
+import { PaperPage } from "@/components/manifest/Chrome";
+import { BUILD_URL } from "@/components/site-chrome";
 import buildCanvas from "@/assets/build-canvas.png";
 import buildRunTrain from "@/assets/build-run-train.png";
 
@@ -83,10 +84,7 @@ const BLOCKS = [
 
 function BuildCaseStudy() {
   return (
-    <>
-      <SolidBackground />
-      <main className="relative z-10 text-foreground">
-        <SiteNav />
+    <PaperPage>
 
         <article className="mx-auto max-w-[64rem] px-6 pt-14 pb-20 sm:px-8">
           <Link to="/case-studies" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition">
@@ -261,9 +259,6 @@ function BuildCaseStudy() {
             </div>
           </section>
         </article>
-
-        <SiteFooter />
-      </main>
-    </>
+    </PaperPage>
   );
 }

@@ -1610,6 +1610,7 @@ html:has(.mf-root) body {
   gap: 16px;
 }
 .mf-person {
+  max-width: 420px;
   padding: 28px;
   border-radius: 16px;
   box-shadow: 0 2px 24px rgba(1, 3, 4, 0.07);
@@ -2179,4 +2180,83 @@ html:has(.mf-root) body {
   .mf-im--typing i {
     animation: none;
   }
+}
+
+/* ---- The older research pages, re-pointed at this look ---- */
+
+.mf-root--bare {
+  display: contents;
+}
+.mf-paper {
+  --background: #ffffff;
+  --foreground: #010304;
+  --card: #ffffff;
+  --card-foreground: #010304;
+  --popover: #ffffff;
+  --popover-foreground: #010304;
+  --primary: #010304;
+  --primary-foreground: #ffffff;
+  --secondary: #f3f3f3;
+  --secondary-foreground: #010304;
+  --muted: #f3f3f3;
+  --muted-foreground: #4d4f4f;
+  --accent: #f5a300;
+  --accent-foreground: #010304;
+  --border: rgba(1, 3, 4, 0.12);
+  --input: rgba(1, 3, 4, 0.2);
+  --ring: rgba(1, 3, 4, 0.4);
+  --radius-xl: 10px;
+  --radius-2xl: 12px;
+
+  min-height: 100vh;
+  background: #ffffff;
+  color: #010304;
+  font-family: "Geist Variable", "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: -0.01em;
+}
+.mf-paper ::selection {
+  background: #f5a300;
+  color: #010304;
+}
+.mf-paper .font-display {
+  font-family: inherit;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+/* Figures line up in columns without a second typeface; only real code keeps a mono face. */
+.mf-paper .font-mono {
+  font-family: inherit;
+  font-variant-numeric: tabular-nums;
+}
+.mf-paper code,
+.mf-paper pre,
+.mf-paper pre .font-mono {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+}
+.mf-paper .eyebrow {
+  color: #4d4f4f;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-transform: none;
+}
+.mf-paper .uppercase {
+  letter-spacing: 0;
+  text-transform: none;
+}
+/* Amber is a fill here. As text on white it is too faint, so text takes a darker cut of it. */
+.mf-paper .text-accent,
+.mf-paper .hover\:text-accent:hover,
+.mf-paper .group:hover .group-hover\:text-accent {
+  color: #8f5a00;
+}
+.mf-paper .soft-shadow,
+.mf-paper .shadow-sm {
+  box-shadow: 0 1px 2px rgba(1, 3, 4, 0.05);
+}
+/* Page columns line up with the nav's. */
+.mf-paper .max-w-6xl,
+.mf-paper .max-w-7xl {
+  max-width: 1172px;
 }

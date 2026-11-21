@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { SiteNav, SolidBackground, SiteFooter } from "@/components/site-chrome";
+import { PaperPage } from "@/components/manifest/Chrome";
 
 export const Route = createFileRoute("/case-studies/$slug")({
   head: ({ params }) => ({
@@ -16,27 +16,21 @@ export const Route = createFileRoute("/case-studies/$slug")({
   },
   component: CaseStudyPage,
   notFoundComponent: () => (
-    <>
-      <SolidBackground />
-      <main className="relative z-10">
-        <SiteNav />
+    <PaperPage>
         <section className="px-6 pt-44 pb-32 text-center">
           <h1 className="font-display text-4xl text-foreground">Case study not found</h1>
           <Link to="/case-studies" className="mt-6 inline-block text-accent hover:underline">← All Case Studies</Link>
         </section>
-        <SiteFooter />
-      </main>
-    </>
+    </PaperPage>
   ),
   errorComponent: ({ error, reset }) => (
-    <>
-      <SiteNav />
+    <PaperPage>
       <section className="px-6 pt-44 pb-32 text-center">
         <h1 className="font-display text-4xl text-foreground">Something went wrong</h1>
         <p className="mt-4 text-muted-foreground">{error.message}</p>
         <button onClick={() => reset()} className="mt-6 rounded-full px-5 py-2 bg-primary text-primary-foreground text-sm">Try again</button>
       </section>
-    </>
+    </PaperPage>
   ),
 });
 
@@ -52,10 +46,7 @@ function P({ children }: { children: React.ReactNode }) {
 
 function CaseStudyPage() {
   return (
-    <>
-      <SolidBackground />
-      <main className="relative z-10">
-        <SiteNav />
+    <PaperPage>
 
         <article className="px-6 pt-16 pb-24">
           <div className="mx-auto max-w-5xl">
@@ -257,9 +248,6 @@ function CaseStudyPage() {
             </div>
           </div>
         </article>
-
-        <SiteFooter />
-      </main>
-    </>
+    </PaperPage>
   );
 }

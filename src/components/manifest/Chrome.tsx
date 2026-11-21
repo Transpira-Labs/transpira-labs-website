@@ -218,3 +218,26 @@ export function Bubbles({ msgs, tails = true }: { msgs: [boolean, string][]; tai
     </>
   );
 }
+
+/*
+ * The older research pages (case studies, environments) in the new look.
+ * Their own markup is untouched: .mf-paper re-points the colours and type
+ * those pages already use, and the new nav and footer go around them. The
+ * nav and footer sit in .mf-root wrappers that take no box of their own, so
+ * the nav still sticks to the whole page.
+ */
+export function PaperPage({ children }: { children: ReactNode }) {
+  return (
+    <div className="mf-paper">
+      <div className="mf-root mf-root--bare">
+        <Nav current="about" />
+      </div>
+      <main>{children}</main>
+      <div className="mf-root mf-root--bare">
+        <div className="mf-dark">
+          <Footer />
+        </div>
+      </div>
+    </div>
+  );
+}
